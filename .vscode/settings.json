@@ -9,15 +9,7 @@
             "vmArgs": []
         },
         {
-            "name": "modules-template testing",
-            "vmArgs": ["--add-opens", "calc.ui/ui=ALL-UNNAMED", "--add-exports", "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"]
-        },
-        {
-            "name": "javafx-template testing",
-            "vmArgs": ["--add-opens", "app/app=ALL-UNNAMED", "--add-exports", "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"]
-        },
-        {
-            "name": "packages-template testing",
+            "name": "gr2303 testing",
             "vmArgs": ["--add-opens", "app/core=ALL-UNNAMED", "--add-opens", "app/ui=ALL-UNNAMED", "--add-exports", "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"]
         }
 
