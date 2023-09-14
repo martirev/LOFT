@@ -27,7 +27,7 @@ public class WorkoutTest {
     public void testAddExercise() {
         workout.addExercise(exercise1);
         workout.addExercise(exercise2);
-        assertEquals(0, workout.getTotalWeight()); 
+        assertEquals(0, workout.getTotalWeight());
 
         Set benchSet1 = new Set(10, 150);
         Set benchSet2 = new Set(8, 130);
