@@ -21,12 +21,12 @@
             "type": "java",
             "name": "gr2303 App",
             "request": "launch",
-            "mainClass": "app/ui.App",
+            "mainClass": "ui/ui.App",
             "vmArgs": [
                 "--add-opens",
-                "app/core=ALL-UNNAMED",
+                "core/core=ALL-UNNAMED",
                 "--add-opens",
-                "app/ui=ALL-UNNAMED",
+                "ui/ui=ALL-UNNAMED",
                 "--add-exports",
                 "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"
             ],
