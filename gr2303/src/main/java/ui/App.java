@@ -2,9 +2,9 @@ package ui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ui.controllers.HomeScreenController;
 
 import java.io.IOException;
 
@@ -15,9 +15,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("App.fxml"));
-        Parent parent = fxmlLoader.load();
-        stage.setScene(new Scene(parent));
+        stage.setTitle("Light Weight");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+        fxmlLoader.setController(new HomeScreenController());
+
+        stage.setScene(new Scene(fxmlLoader.load()));
+
         stage.show();
     }
 
