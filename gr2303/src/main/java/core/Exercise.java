@@ -32,4 +32,8 @@ public class Exercise {
         return totalWeight;
     }
 
+    public int getLocalPr() {
+        return sets.stream().mapToInt(s -> s.getWeight()).max().getAsInt();
+    }
+
 }
