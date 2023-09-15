@@ -10,11 +10,20 @@ public class Workout {
     private int totalWeight = 0;
     private LocalDate date;
 
+
+    public Workout() {
+        this.date = LocalDate.now();
+    }
+
+    public Workout(LocalDate date) {
+        this.date = date;
+    }
+
     public void addExercise(Exercise exercise) {
         exercises.add(exercise);
         totalWeight += exercise.getTotalWeight();
-        this.date = LocalDate.now();
     }
+
 
     public List<Exercise> getExercises() {
         return new ArrayList<Exercise>(exercises);

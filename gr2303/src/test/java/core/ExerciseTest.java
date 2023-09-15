@@ -60,4 +60,17 @@ public class ExerciseTest {
         exercise.getSets().clear();
         assertEquals(3, exercise.getSets().size());
     }
+
+    @Test
+    public void testGetLocalPr() {
+        Set set1 = new Set(8, 100);
+        Set set2 = new Set(6, 90);
+        Set set3 = new Set(6, 70);
+
+        exercise.addSet(set1);
+        exercise.addSet(set2);
+        exercise.addSet(set3);
+
+        assertEquals(100, exercise.getLocalPr());
+    }
 }
