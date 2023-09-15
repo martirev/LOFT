@@ -9,8 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #EFEFEF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #EFEFEF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#db4c40" height="130.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="1366.0" />
       <Text fill="#fafafa" layoutX="581.0" layoutY="84.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="New Workout">
@@ -35,5 +34,12 @@
             <Font name="Roboto" size="20.0" />
          </font>
       </Button>
+      <ListView layoutX="100.0" layoutY="270.0" minHeight="450.0" minWidth="400.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #ed8152;" />
+      <Button layoutX="650.0" layoutY="650.0" minHeight="60.0" minWidth="150.0" mnemonicParsing="false" onAction="#handleFinishPress" style="-fx-background-color: #ed8152;" text="Finish workout" textFill="#fafafa">
+         <font>
+            <Font name="Roboto" size="20.0" />
+         </font>
+      </Button>
+      <ListView fx:id="dropdownMenu" layoutX="100.0" layoutY="250.0" minHeight="450.0" minWidth="400.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: #ed8152;" visible="false" />
    </children>
 </AnchorPane>
