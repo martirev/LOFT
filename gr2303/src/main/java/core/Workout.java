@@ -7,9 +7,7 @@ import java.time.LocalDate;
 public class Workout {
 
     private List<Exercise> exercises = new ArrayList<Exercise>();
-    private int totalWeight = 0;
     private LocalDate date;
-
 
     public Workout() {
         this.date = LocalDate.now();
@@ -21,22 +19,18 @@ public class Workout {
 
     public void addExercise(Exercise exercise) {
         exercises.add(exercise);
-        totalWeight += exercise.getTotalWeight();
     }
-
 
     public List<Exercise> getExercises() {
         return new ArrayList<Exercise>(exercises);
     }
 
     public int getTotalWeight() {
-        return totalWeight;
+        return exercises.stream().mapToInt(Exercise::getTotalWeight).sum();
     }
 
     public LocalDate getDate() {
         return date;
     }
-
-    
 
 }

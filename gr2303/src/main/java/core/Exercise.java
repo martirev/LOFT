@@ -1,6 +1,7 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Exercise {
@@ -10,6 +11,11 @@ public class Exercise {
 
     public Exercise(String name) {
         this.name = name;
+    }
+
+    public Exercise(String name, Set... sets) {
+        this.name = name;
+        this.sets = new ArrayList<Set>(Arrays.asList(sets));
     }
 
     public void addSet(Set set) {
@@ -34,6 +40,11 @@ public class Exercise {
 
     public int getLocalPr() {
         return sets.stream().mapToInt(s -> s.getWeight()).max().getAsInt();
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 
 }
