@@ -24,9 +24,7 @@ public class WorkoutTest {
     }
 
     @Test
-    public void testAddExercise() {
-        workout.addExercise(exercise1);
-        workout.addExercise(exercise2);
+    public void testAddExercise() {;
         assertEquals(0, workout.getTotalWeight());
 
         Set benchSet1 = new Set(10, 150);
@@ -72,5 +70,21 @@ public class WorkoutTest {
         exercises.clear();
 
         assertTrue(workout.getExercises().containsAll(Arrays.asList(exercise1, exercise2)));
+    }
+
+    @Test
+    public void testgetTotalWeight() {
+        Set squatSet1 = new Set(10, 200);
+        Set squatSet2 = new Set(8, 180);
+        Set squatSet3 = new Set(6, 160);
+        Set squatSet4 = new Set(4, 140);
+
+        exercise2.addSet(squatSet1);
+        exercise2.addSet(squatSet2);
+        exercise2.addSet(squatSet3);
+        exercise2.addSet(squatSet4);
+        workout.addExercise(exercise2);
+        assertEquals(4960, workout.getTotalWeight());
+
     }
 }
