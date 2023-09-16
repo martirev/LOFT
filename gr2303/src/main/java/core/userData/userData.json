@@ -1,0 +1,22 @@
+{
+    "User":{
+        "name":"admin",
+        "workouts":[
+            {
+                "exercises":[
+                    {
+                        "name":"Bench press",
+                        "sets":[
+                            {
+                                "reps":10,
+                                "weight":100
+                            }
+                        ]
+                    }
+                ],
+                "totalWeight":100,
+                "date":"2017-01-01"
+            }
+        ]
+    }
+}
