@@ -182,7 +182,6 @@ public class ReadAndWrite {
        
         readAndWrite.writeDataToFile(workout1);
         readAndWrite.writeDataToFile(workout2);
-
     //tests for readDataFromFile
         ReadAndWrite readAndWrite2 = new ReadAndWrite();
         User user2 = (User) readAndWrite2.parseJSONArrayToObjects();
