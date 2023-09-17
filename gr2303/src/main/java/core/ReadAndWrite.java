@@ -65,7 +65,7 @@ public class ReadAndWrite {
     //Writes the workout to the file, the code is made with the assumption that there is only one user,
     //but it can be easily changed to support multiple users.
     public void writeDataToFile(Workout workout) {
-        JSONArray exsistingData = readDataFormFile();
+        JSONArray exsistingData = readDataFromFile();
         JSONArray users = new JSONArray();
         
         JSONObject user = new JSONObject();
@@ -143,7 +143,7 @@ public class ReadAndWrite {
         return (ArrayList<User>) userClasses;
     }
 
-    private JSONArray readDataFormFile() {
+    private JSONArray readDataFromFile() {
         try (FileReader reader = new FileReader("gr2303/src/main/java/core/userData/userData.json")){
             Object obj = parser.parse(reader);
             JSONArray users = (JSONArray) obj;
@@ -159,8 +159,8 @@ public class ReadAndWrite {
     }
 
     //Returns the user class from the file
-    public Object parseJSONArrayToObjects() {
-        JSONArray users = readDataFormFile();
+    public User returnUserClassFromFile() {
+        JSONArray users = readDataFromFile();
         ArrayList<User> user = this.classReconstructor(users);
         User userClass = user.get(0);
         return userClass;
@@ -186,7 +186,7 @@ public class ReadAndWrite {
         readAndWrite.writeDataToFile(workout2);
     //tests for readDataFromFile
         ReadAndWrite readAndWrite2 = new ReadAndWrite();
-        User user2 = (User) readAndWrite2.parseJSONArrayToObjects();
+        User user2 = readAndWrite2.returnUserClassFromFile();
         System.out.println(user2.getName());
         System.out.println(user2.getNumberOfWorkouts());
         System.out.println(user2.getWorkouts().get(0).getTotalWeight());
