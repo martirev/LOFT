@@ -10,7 +10,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReadAndWrite {
     
@@ -30,7 +32,7 @@ public class ReadAndWrite {
         int i = 0;
         for (Set set : list) {
             JSONObject setJson = new JSONObject();
-            setJson.put("setNumber", i++);
+            setJson.put("setNumber", ++i);
             setJson.put("weight", set.getWeight());
             setJson.put("reps", set.getReps());
             setsArray.add(setJson);
