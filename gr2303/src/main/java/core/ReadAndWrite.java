@@ -13,87 +13,77 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class ReadAndWrite {
-
-    //write attributes
-    private JSONObject user = new JSONObject();
-    private JSONObject workoutJson = new JSONObject();
-    private JSONObject exercisesJson = new JSONObject();
-    private JSONObject setsJson = new JSONObject();
-
-    private JSONArray users = new JSONArray();
-    private JSONArray setsJsonArray = new JSONArray();
-    private JSONArray exercisesJsonArray = new JSONArray();
-    private JSONArray workoutsJsonArray = new JSONArray();
     
-    private String dummyName = "dummyName";
+    private static String dummyName = "dummyName";
 
-    //read attributes
+    //Private read attributes
     private JSONParser parser = new JSONParser();
+
+    private Collection<User> userClasses = new ArrayList<User>();
+    private Collection<Workout> workoutsClasses = new ArrayList<Workout>();
+    private Collection<Exercise> exercisesClasses = new ArrayList<Exercise>();
+    private Collection<Set> setsClasses = new ArrayList<Set>();
     
     //write methods
-    private void setSetsJsonArray(List<Set> list) {
+    private JSONArray setSetsJsonArray(List<Set> list) {
+        JSONArray setsArray = new JSONArray();
         int i = 0;
         for (Set set : list) {
-            setsJson.put("setNumber", i++);
-            setsJson.put("weight", set.getWeight());
-            setsJson.put("reps", set.getReps());
-            setsJsonArray.add(setsJson);
+            JSONObject setJson = new JSONObject();
+            setJson.put("setNumber", i++);
+            setJson.put("weight", set.getWeight());
+            setJson.put("reps", set.getReps());
+            setsArray.add(setJson);
         }
+        return setsArray;
     }
 
-    private void setExercisesJsonArray(List<Exercise> list) {
+    private JSONArray setExercisesJsonArray(List<Exercise> list) {
+        JSONArray exercisesArray = new JSONArray();
         for (Exercise exercise : list) {
-            exercisesJson.put("exerciseName", exercise.getName());
-            exercisesJson.put("sets", setsJsonArray);
-            exercisesJson.put("totalWeight", exercise.getTotalWeight());
-            exercisesJson.put("localPr", exercise.getLocalPr());
-            exercisesJsonArray.add(exercisesJson);
+            JSONObject exerciseJson = new JSONObject();
+            exerciseJson.put("exerciseName", exercise.getName());
+            exerciseJson.put("sets", setSetsJsonArray(exercise.getSets()));
+            exerciseJson.put("totalWeight", exercise.getTotalWeight());
+            exerciseJson.put("localPr", exercise.getLocalPr());
+            exercisesArray.add(exerciseJson);
         }
+        return exercisesArray;
     }
 
-    private void setWorkoutsJsonArray(Workout... workouts) {
-        int i = 0;
-        for (Workout workout : workouts) {
-            workoutJson.put("workoutNumber", i++);
-            workoutJson.put("exercises", exercisesJsonArray);
-            workoutJson.put("totalWeight", workout.getTotalWeight());
-            workoutJson.put("date", workout.getDate().toString());
-            workoutsJsonArray.add(workoutJson);
-        }
-    }
-
-    //read methods
-    private Object parseUsersObject(JSONObject user) {
-        JSONArray workoutObject = (JSONArray) user.get("workouts");
-        JSONArray exerciseObject = (JSONArray) workoutObject.get("exercises");
-        JSONArray setObject = (JSONArray) exerciseObject.get("sets");
-
-        Set set = new Set((int) setObject.get("weight"), (int) setObject.get("reps"));
+    private JSONObject formatWorkoutClassToJson(Workout workout) {
+        JSONObject workoutJson = new JSONObject();
+        workoutJson.put("exercises", setExercisesJsonArray(workout.getExercises()));
+        workoutJson.put("totalWeight", workout.getTotalWeight());
+        workoutJson.put("date", workout.getDate().toString());
         
-        Exercise exercise = new Exercise((String) exerciseObject.get("exerciseName"));
-        exercise.addSet(set);
-
-        Workout workout = new Workout();
-        workout.addExercise(exercise);
-
-        User userToGet = new User((String) user.get("name"));
-        userToGet.addWorkout(workout);
-
-        return userToGet;
+        return workoutJson;
     }
 
-    //write method to use
-    public void writeDataToFile(Workout... workouts) {
-        user.put("name", dummyName);
-        for (Workout workout : workouts) {
-            for (Exercise exercise : workout.getExercises()) {
-                setSetsJsonArray(exercise.getSets());
-            }
-            setExercisesJsonArray(workout.getExercises());
-            setWorkoutsJsonArray(workout);   
+    //Writes the workout to the file, the code is made with the assumption that there is only one user,
+    //but it can be easily changed to support multiple users.
+    public void writeDataToFile(Workout workout) {
+        JSONArray exsistingData = readDataFormFile();
+        JSONArray users = new JSONArray();
+        
+        JSONObject user = new JSONObject();
+
+        //Setting up user
+        if (exsistingData == null) {
+            user.put("name", dummyName);
+            user.put("workouts", new JSONArray());
+        } else {
+            JSONObject userDummy = (JSONObject) exsistingData.get(0);
+            user = userDummy;
         }
-        user.put("workouts", workoutsJsonArray);
+
+        //Adding to user
+        JSONObject workoutInJSONFormat = this.formatWorkoutClassToJson(workout);
+        JSONArray workoutsJsonArray = (JSONArray) user.get("workouts");
+        workoutsJsonArray.add(workoutInJSONFormat);
+
         users.add(user);
+
         try (FileWriter file = new FileWriter("gr2303/src/main/java/core/userData/userData.json")) {    
             file.write(users.toJSONString()); 
             file.flush();
@@ -102,51 +92,110 @@ public class ReadAndWrite {
         }
     }
 
-    //read method to use
-    public Object readDataFromFile(String name) {
-        try (FileReader reader = new FileReader("gr2303/src/main/java/core/userData/userData.json")) {
+    //private read methods
+    private ArrayList<User> classReconstructor(JSONArray users) {
+        for (Object userObject : users) {
+            JSONObject user = (JSONObject) userObject;
+            String name = (String) user.get("name");
             
+            JSONArray workouts = (JSONArray) user.get("workouts");
+            for (Object workoutObject : workouts) {
+                JSONObject workout = (JSONObject) workoutObject;
+                LocalDate date = LocalDate.parse((String) workout.get("date"));
+
+                JSONArray exercises = (JSONArray) workout.get("exercises");
+                for (Object exerciseObject : exercises) {
+                    JSONObject exercise = (JSONObject) exerciseObject;
+                    String exerciseName = (String) exercise.get("exerciseName");
+
+                    JSONArray sets = (JSONArray) exercise.get("sets");
+                    for (Object setObject : sets) {
+                        JSONObject set = (JSONObject) setObject;
+                        int weight = ((Long) set.get("weight")).intValue();
+                        int reps = ((Long) set.get("reps")).intValue();
+
+                        Set newSet = new Set(weight, reps);
+                        setsClasses.add(newSet);
+                    }
+                    int exerciseLocalPr = ((Long) exercise.get("localPr")).intValue();
+                    int exerciseTotalWeight = ((Long) exercise.get("totalWeight")).intValue();
+
+                    Exercise newExercise = new Exercise(exerciseName);
+                    for (Set set : setsClasses) {
+                        newExercise.addSet(set);
+                    }
+                    exercisesClasses.add(newExercise);
+                }
+                Workout newWorkout = new Workout(date);
+                for (Exercise exercise : exercisesClasses) {
+                    newWorkout.addExercise(exercise);
+                }
+                workoutsClasses.add(newWorkout);
+            }
+            User newUser = new User(name);
+            for (Workout workout : workoutsClasses) {
+                newUser.addWorkout(workout);
+            }
+            userClasses.add(newUser);
+        }
+        return (ArrayList<User>) userClasses;
+    }
+
+    private JSONArray readDataFormFile() {
+        try (FileReader reader = new FileReader("gr2303/src/main/java/core/userData/userData.json")){
             Object obj = parser.parse(reader);
             JSONArray users = (JSONArray) obj;
-
-            for (Object userObj : users) {
-                JSONObject user = (JSONObject) userObj;
-
-                if (user.get("name").equals(name)) {
-                    return parseUsersObject(user);
-                }
-            }
-        }
-        catch (FileNotFoundException e) {
-                e.printStackTrace();
-        }catch (IOException e) {
+            return users;
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e){
             e.printStackTrace();
         }
-        
         return null;
+    }
+
+    //Returns the user class from the file
+    public Object parseJSONArrayToObjects() {
+        JSONArray users = readDataFormFile();
+        ArrayList<User> user = this.classReconstructor(users);
+        User userClass = user.get(0);
+        return userClass;
     }
 
     //quick test
    public static void main(String[] args) {
     //tests for writeDataToFile
-    /*
         ReadAndWrite readAndWrite = new ReadAndWrite();
-        Workout workout = new Workout();
-        Exercise exercise = new Exercise("Bench Press");
+        Workout workout1 = new Workout();
+        Exercise exercise1 = new Exercise("Bench Press");
         Set set = new Set(100, 10);
+        Workout workout2 = new Workout();
+        Exercise exercise2 = new Exercise("Squat");
+        Set set2 = new Set(200, 10);
 
-        exercise.addSet(set);
-        workout.addExercise(exercise);
+        exercise1.addSet(set);
+        workout1.addExercise(exercise1);
+        exercise2.addSet(set2);
+        workout2.addExercise(exercise2);
        
-        readAndWrite.writeDataToFile(workout);
-     */
+        readAndWrite.writeDataToFile(workout1);
+        readAndWrite.writeDataToFile(workout2);
+
     //tests for readDataFromFile
-        ReadAndWrite readAndWrite = new ReadAndWrite();
-        User user = (User) readAndWrite.readDataFromFile("dummyName");
-        System.out.println(user.getName());
-        System.out.println(user.getNumberOfWorkouts());
-        System.out.println(user.getWorkouts());
+        ReadAndWrite readAndWrite2 = new ReadAndWrite();
+        User user2 = (User) readAndWrite2.parseJSONArrayToObjects();
+        System.out.println(user2.getName());
+        System.out.println(user2.getNumberOfWorkouts());
+        System.out.println(user2.getWorkouts().get(0).getTotalWeight());
+        System.out.println(user2.getWorkouts().get(0).getDate());
+        System.out.println(user2.getWorkouts().get(0).getExercises().get(0).getName());
+
+        System.out.println(user2.getWorkouts().get(1).getTotalWeight());
+        System.out.println(user2.getWorkouts().get(1).getDate());
+        System.out.println(user2.getWorkouts().get(1).getExercises().get(0).getName());
+
+        System.out.println(user2.getWorkouts().get(0).getExercises().get(0).getSets().get(0).getWeight());
     }
 }

@@ -8,7 +8,7 @@ public class User {
 
     //Fields
     private String name;
-    private Collection<Workout> workouts;
+    private ArrayList<Workout> workouts = new ArrayList<Workout>();
 
     //Constructor
     public User(String name) {
@@ -25,7 +25,7 @@ public class User {
         return workouts.size();
     }
 
-    public Collection<Workout> getWorkouts() {
+    public ArrayList<Workout> getWorkouts() {
         return workouts;
     }
 

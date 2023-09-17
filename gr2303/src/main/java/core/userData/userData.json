@@ -17,8 +17,25 @@
             "totalWeight": 1000
           }
         ],
-        "workoutNumber": 0,
         "totalWeight": 1000
+      },
+      {
+        "date": "2023-09-17",
+        "exercises": [
+          {
+            "exerciseName": "Squat",
+            "sets": [
+              {
+                "reps": 200,
+                "weight": 10,
+                "setNumber": 0
+              }
+            ],
+            "localPr": 10,
+            "totalWeight": 2000
+          }
+        ],
+        "totalWeight": 2000
       }
     ],
     "name": "dummyName"
