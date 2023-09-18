@@ -2,7 +2,7 @@
   {
     "workouts": [
       {
-        "date": "2023-09-17",
+        "date": "2023-09-18",
         "exercises": [
           {
             "exerciseName": "Bench Press",
@@ -10,17 +10,14 @@
               {
                 "reps": 100,
                 "weight": 10,
-                "setNumber": 0
+                "setNumber": 1
               }
-            ],
-            "localPr": 10,
-            "totalWeight": 1000
+            ]
           }
-        ],
-        "totalWeight": 1000
+        ]
       },
       {
-        "date": "2023-09-17",
+        "date": "2023-09-18",
         "exercises": [
           {
             "exerciseName": "Squat",
@@ -28,14 +25,11 @@
               {
                 "reps": 200,
                 "weight": 10,
-                "setNumber": 0
+                "setNumber": 1
               }
-            ],
-            "localPr": 10,
-            "totalWeight": 2000
+            ]
           }
-        ],
-        "totalWeight": 2000
+        ]
       }
     ],
     "name": "dummyName"
