@@ -1,0 +1,37 @@
+[
+  {
+    "workouts": [
+      {
+        "date": "2023-09-18",
+        "exercises": [
+          {
+            "exerciseName": "Bench Press",
+            "sets": [
+              {
+                "reps": 100,
+                "weight": 10,
+                "setNumber": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "date": "2023-09-18",
+        "exercises": [
+          {
+            "exerciseName": "Squat",
+            "sets": [
+              {
+                "reps": 200,
+                "weight": 10,
+                "setNumber": 1
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "name": "dummyName"
+  }
+]
