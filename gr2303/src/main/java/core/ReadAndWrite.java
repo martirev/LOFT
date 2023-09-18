@@ -20,6 +20,9 @@ public class ReadAndWrite {
     //Dummy name for the user, the implementation of the user class is made with the assumption that there is only one user.
     private static String dummyName = "dummyName";
 
+    private static String fileLocation = System.getProperty("user.home") + System.getProperty("file.separator")
+            + "loftUserData.json";
+
     //Private read attributes
     private JSONParser parser = new JSONParser();
     private Collection<User> userClasses = new ArrayList<User>();
@@ -84,7 +87,7 @@ public class ReadAndWrite {
      *  The type safty of the casts should be guarranteed in the way we are using the type Object.
     */
     
-        try (FileWriter file = new FileWriter("gr2303/src/main/java/core/userData/userData.json")) {    
+        try (FileWriter file = new FileWriter(fileLocation)) {    
             file.write(users.toJSONString()); 
             file.flush();
         } catch (IOException e) {
@@ -139,7 +142,7 @@ public class ReadAndWrite {
     }
 
     private JSONArray readDataFromFile() {
-        try (FileReader reader = new FileReader("gr2303/src/main/java/core/userData/userData.json")){
+        try (FileReader reader = new FileReader(fileLocation)){
             if (reader.ready()) {
                 Object obj = parser.parse(reader);
                 JSONArray users = (JSONArray) obj;
@@ -148,7 +151,8 @@ public class ReadAndWrite {
                 //The file can be empty this is not an error, it just means that there is no data to read.
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            // If it is not found, it will be created at a later point, so this is fine
+            return null;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e){
@@ -160,6 +164,9 @@ public class ReadAndWrite {
     //Returns the user class from the file
     public User returnUserClassFromFile() {
         JSONArray users = readDataFromFile();
+        if (users == null) {
+            return new User(dummyName);
+        }
         ArrayList<User> user = this.classReconstructor(users);
         User userClass = user.get(0);
         return userClass;

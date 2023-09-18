@@ -13,6 +13,12 @@ public abstract class SceneSwitcher implements Initializable {
     @FXML
     protected AnchorPane baseAnchor;
 
+    /**
+     * @param fxmlFilename The name of the FXML file to load, which lives inside
+     *                     resources/ui/. For example, "WorkoutScreen.fxml".
+     * @param controller   An instance of the controller class for the FXML file.
+     *                     For example, "new WorkoutScreenController()".
+     */
     protected void insertPane(String fxmlFilename, SceneSwitcher controller) {
         try {
             baseAnchor.getChildren().clear();

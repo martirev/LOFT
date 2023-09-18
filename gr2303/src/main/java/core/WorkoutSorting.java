@@ -2,6 +2,7 @@ package core;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,4 +51,9 @@ public class WorkoutSorting {
         return sameExersices.get(name).stream().mapToInt(e -> e.getLocalPr()).max().getAsInt();
     }
 
+    public Collection<String> searchForExercises(String name) {
+        return sameExersices.keySet().stream()
+                .filter(n -> n.toLowerCase().contains(name.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 }
