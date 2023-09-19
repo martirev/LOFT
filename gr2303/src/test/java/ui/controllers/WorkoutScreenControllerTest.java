@@ -119,9 +119,11 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
         assertTrue(rootChildren.size() == 1);
         assertTrue(rootChildren.get(0).getId().equals("baseAnchor"));
 
-        // Check that we are at the homepage by checking that the text "LØFT" is present
+        // Check that we are at the homepage by checking that the text "LØFT" is present (it is split into two Text nodes)
         assertTrue(((Parent) rootChildren.get(0)).getChildrenUnmodifiable().stream()
-                .anyMatch(x -> x instanceof Text && ((Text) x).getText().equals("LØFT")));
+                .anyMatch(x -> x instanceof Text && ((Text) x).getText().equals("LØ")));
+        assertTrue(((Parent) rootChildren.get(0)).getChildrenUnmodifiable().stream()
+                .anyMatch(x -> x instanceof Text && ((Text) x).getText().equals("FT")));
     }
 
     private void deleteTestfile() {
