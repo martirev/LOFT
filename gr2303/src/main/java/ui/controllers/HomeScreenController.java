@@ -11,12 +11,10 @@ public class HomeScreenController extends SceneSwitcher {
      */
     @FXML
     private void handleWorkoutPress() {
-        System.out.println("Workout Pressed");
         insertPane("WorkoutScreen.fxml");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Home Screen Initialized");
     }
 }

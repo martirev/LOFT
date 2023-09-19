@@ -65,7 +65,6 @@ public class WorkoutScreenController extends SceneSwitcher {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Workout Screen Initialized");
         User user = readAndWrite.returnUserClassFromFile();
 
         WorkoutSorting workoutSorting = new WorkoutSorting(user.getWorkouts());
@@ -171,7 +170,6 @@ public class WorkoutScreenController extends SceneSwitcher {
      */
     @FXML
     private void handleReturnPress() {
-        System.out.println("Home Pressed");
         insertPane("HomeScreen.fxml");
     }
 
@@ -180,7 +178,6 @@ public class WorkoutScreenController extends SceneSwitcher {
      */
     @FXML
     private void handleFinishPress() {
-        System.out.println("Finish Pressed");
         readAndWrite.writeWorkoutToUser(workout);
         insertPane("HomeScreen.fxml");
     }
