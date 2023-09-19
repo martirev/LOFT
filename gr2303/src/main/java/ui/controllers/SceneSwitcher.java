@@ -33,7 +33,7 @@ public abstract class SceneSwitcher implements Initializable {
                 }
                 break;
             default:
-                System.out.println("Error: Invalid FXML filename");
+                System.err.println("Error: Invalid FXML filename");
                 System.exit(1);
         }
         try {
@@ -46,7 +46,7 @@ public abstract class SceneSwitcher implements Initializable {
             Parent parent = loader.load();
             baseAnchor.getChildren().add(parent);
         } catch (IOException e) {
-            System.out.println("Problem with loading: " + fxmlFilename);
+            System.err.println("Problem with loading: " + fxmlFilename);
             System.exit(1);
         }
     }

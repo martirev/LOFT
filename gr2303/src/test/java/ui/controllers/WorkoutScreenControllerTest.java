@@ -130,7 +130,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
         try {
             Files.delete(Path.of(testFileLocation));
         } catch (IOException e) {
-            System.out.println("Error deleting file");
+            System.err.println("Error deleting file");
         }
     }
 
