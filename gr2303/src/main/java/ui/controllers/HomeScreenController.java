@@ -12,7 +12,7 @@ public class HomeScreenController extends SceneSwitcher {
     @FXML
     private void handleWorkoutPress() {
         System.out.println("Workout Pressed");
-        insertPane("WorkoutScreen.fxml", new WorkoutScreenController());
+        insertPane("WorkoutScreen.fxml");
     }
 
     @Override

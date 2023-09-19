@@ -49,10 +49,24 @@ public class WorkoutScreenController extends SceneSwitcher {
 
     private Workout workout;
 
+    private ReadAndWrite readAndWrite;
+
+    public WorkoutScreenController() {
+        readAndWrite = new ReadAndWrite();
+    }
+
+    public WorkoutScreenController(String location) {
+        readAndWrite = new ReadAndWrite(location);
+    }
+
+    public Workout getWorkout() {
+        return workout;
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("Workout Screen Initialized");
-        User user = (new ReadAndWrite()).returnUserClassFromFile();
+        User user = readAndWrite.returnUserClassFromFile();
 
         WorkoutSorting workoutSorting = new WorkoutSorting(user.getWorkouts());
 
@@ -158,7 +172,7 @@ public class WorkoutScreenController extends SceneSwitcher {
     @FXML
     private void handleReturnPress() {
         System.out.println("Home Pressed");
-        insertPane("HomeScreen.fxml", new HomeScreenController());
+        insertPane("HomeScreen.fxml");
     }
 
     /**
@@ -167,9 +181,8 @@ public class WorkoutScreenController extends SceneSwitcher {
     @FXML
     private void handleFinishPress() {
         System.out.println("Finish Pressed");
-        ReadAndWrite readAndWrite = new ReadAndWrite();
         readAndWrite.writeWorkoutToUser(workout);
-        insertPane("HomeScreen.fxml", new HomeScreenController());
+        insertPane("HomeScreen.fxml");
     }
 
     /**
@@ -251,5 +264,6 @@ public class WorkoutScreenController extends SceneSwitcher {
         selectedExercise = null;
         setField.setText("");
         exerciseSettings.setVisible(false);
+        searchBar.setText("");
     }
 }

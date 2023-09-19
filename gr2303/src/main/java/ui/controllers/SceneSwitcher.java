@@ -13,13 +13,29 @@ public abstract class SceneSwitcher implements Initializable {
     @FXML
     protected AnchorPane baseAnchor;
 
+    protected SceneSwitcher controller;
+    protected static String testFileLocation;
+
     /**
      * @param fxmlFilename The name of the FXML file to load, which lives inside
      *                     resources/ui/. For example, "WorkoutScreen.fxml".
-     * @param controller   An instance of the controller class for the FXML file.
-     *                     For example, "new WorkoutScreenController()".
      */
-    protected void insertPane(String fxmlFilename, SceneSwitcher controller) {
+    protected void insertPane(String fxmlFilename) {
+        switch (fxmlFilename) {
+            case "HomeScreen.fxml":
+                controller = new HomeScreenController();
+                break;
+            case "WorkoutScreen.fxml":
+                if (testFileLocation != null && !testFileLocation.isEmpty()) {
+                    controller = new WorkoutScreenController(testFileLocation);
+                } else {
+                    controller = new WorkoutScreenController();
+                }
+                break;
+            default:
+                System.out.println("Error: Invalid FXML filename");
+                System.exit(1);
+        }
         try {
             baseAnchor.getChildren().clear();
             URL url = getClass().getResource("/ui/" + fxmlFilename);
