@@ -20,15 +20,24 @@ public class ReadAndWrite {
     //Dummy name for the user, the implementation of the user class is made with the assumption that there is only one user.
     private static String dummyName = "dummyName";
 
-    private static String fileLocation = System.getProperty("user.home") + System.getProperty("file.separator")
-            + "loftUserData.json";
-
+    private static String fileFolderLocation = System.getProperty("user.home") + System.getProperty("file.separator");
+    
     //Private read attributes
     private JSONParser parser = new JSONParser();
     private Collection<User> userClasses = new ArrayList<User>();
     private Collection<Workout> workoutsClasses = new ArrayList<Workout>();
     private Collection<Exercise> exercisesClasses = new ArrayList<Exercise>();
     private Collection<Set> setsClasses = new ArrayList<Set>();
+    private String fileLocation;
+
+    
+    public ReadAndWrite() {
+        this(fileFolderLocation + "userData.json");
+    }
+    
+    public ReadAndWrite(String location) {
+        this.fileLocation = location;
+    }
     
     //Private write methods
     private ArrayList<HashMap<String, Object>> setSetsJsonArray(List<Set> list) {
