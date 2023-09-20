@@ -16,6 +16,28 @@ public class Workout {
         this.date = LocalDate.now();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Workout other = (Workout) obj;
+        if (exercises == null) {
+            if (other.exercises != null)
+                return false;
+        } else if (!exercises.equals(other.exercises))
+            return false;
+        if (date == null) {
+            if (other.date != null)
+                return false;
+        } else if (!date.equals(other.date))
+            return false;
+        return true;
+    }
+
     /**
      * Constructor for a workout that lets you specify the date
      * 

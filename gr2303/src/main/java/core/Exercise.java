@@ -6,6 +6,28 @@ import java.util.List;
 
 public class Exercise {
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Exercise other = (Exercise) obj;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (sets == null) {
+            if (other.sets != null)
+                return false;
+        } else if (!sets.equals(other.sets))
+            return false;
+        return true;
+    }
+
     private String name;
     private List<Set> sets = new ArrayList<Set>();
 
