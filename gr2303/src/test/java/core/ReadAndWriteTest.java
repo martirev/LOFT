@@ -1,5 +1,6 @@
 package core;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -75,6 +76,7 @@ public class ReadAndWriteTest {
     @Test
     public void writeAndReadToFormFileTest() {
         readAndWrite = new ReadAndWrite(testFileLocation);
+        deleteTestfile();
         readAndWrite.writeWorkoutToUser(workout1);
         readAndWrite.writeWorkoutToUser(workout2);
         for (int i = 0; i < user.getNumberOfWorkouts(); i++) {
@@ -86,7 +88,9 @@ public class ReadAndWriteTest {
 
     private void deleteTestfile() {
         try {
-            Files.delete(Path.of(testFileLocation));
+            if ((new File(testFileLocation)).exists()) {
+                Files.delete(Path.of(testFileLocation));
+            }
         } catch (IOException e) {
             System.err.println("Error deleting file");
         }
