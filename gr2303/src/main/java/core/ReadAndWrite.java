@@ -98,23 +98,4 @@ public class ReadAndWrite {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        // local tests
-
-        ReadAndWrite readAndWrite = new ReadAndWrite();
-        User user = new User();
-        Workout workout = new Workout();
-        Exercise exercise = new Exercise("test");
-        Set set1 = new Set(10, 10);
-        Set set2 = new Set(10, 10);
-
-        exercise.addSet(set1);
-        exercise.addSet(set2);
-
-        workout.addExercise(exercise);
-        user.addWorkout(workout);
-
-        readAndWrite.writeWorkoutToUser(user.getWorkouts().get(0));
-    }
 }
