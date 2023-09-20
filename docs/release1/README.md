@@ -17,5 +17,5 @@ At the start of the project, we sat down and wrote a contract about how we were 
 - Frontend - 1 person worked on this.
 - Reading and writing to JSON - 1 person worked on this.
 
-## Will Change in a Later Version
-We are currently using the package-template but will change to the module-template in the next release. This way, we will not only be using different packages, but different modules as well, to make sure our code is easier to scale. For the next release, we will change our file reading and writing logic from using a JSON parsing library (GSON) to writing our own JSON parser.
+### Will Change in Later Versions
+We are currently using the package-template but will change to the module-template in the next release. This way, we will not only be using different packages, but different modules as well, to make sure our code is easier to scale. For the next release, we will change our file reading and writing logic from using a JSON parsing library (GSON) to writing our own JSON parser. We will also have the option to store data to multiple people. Currently only the person "dummyName" can register workouts.

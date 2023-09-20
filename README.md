@@ -19,6 +19,7 @@ To check the code coverage, run `mvn jacoco:report`. This will generate a report
 - **JUnit 5.10.0**: Used to test the code in the project.
 - **TestFX 4.0.16-alpha**: Used to test the UI of the App.
 - **JaCoCo 0.8.7**: Used for generating code coverage reports.
+- **Gson 2.10**: Used to parse our JSON-files.
 
 ## Directory Structure
 The project's directory structure is organized as follows:
