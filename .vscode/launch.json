@@ -6,13 +6,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "ReadAndWrite",
-            "request": "launch",
-            "mainClass": "ui/core.ReadAndWrite",
-            "projectName": "gr2303"
-        },
-        {
-            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "ui/ui.App",
