@@ -70,7 +70,6 @@ public class ReadAndWriteTest {
     public void constructorTest2() {
         readAndWrite = new ReadAndWrite(testFileLocation);
         assertInstanceOf(User.class, readAndWrite.returnUserClassFromFile(), "ReadAndWrite is not an instance of User");
-        deleteTestfile();
     }
 
     @Test
