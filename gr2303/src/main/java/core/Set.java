@@ -17,22 +17,6 @@ public class Set {
         this.weight = weight;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Set other = (Set) obj;
-        if (reps != other.reps)
-            return false;
-        if (weight != other.weight)
-            return false;
-        return true;
-    }
-
     /**
      * A method to get the number of repetitions in the set
      * 
@@ -51,4 +35,25 @@ public class Set {
         return weight;
     }
 
+    /**
+     * A method to check if two sets are equal
+     * 
+     * @param obj the object to compare to
+     * @return boolean true if the sets are equal, false if not
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Set other = (Set) obj;
+        if (reps != other.getReps())
+            return false;
+        if (weight != other.getWeight())
+            return false;
+        return true;
+    }
 }

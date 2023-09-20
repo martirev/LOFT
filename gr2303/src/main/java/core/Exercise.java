@@ -6,28 +6,6 @@ import java.util.List;
 
 public class Exercise {
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Exercise other = (Exercise) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (sets == null) {
-            if (other.sets != null)
-                return false;
-        } else if (!sets.equals(other.sets))
-            return false;
-        return true;
-    }
-
     private String name;
     private List<Set> sets = new ArrayList<Set>();
 
@@ -112,4 +90,31 @@ public class Exercise {
         return getName();
     }
 
+    /**
+     * A method to check if two exercises are equal
+     * 
+     * @param obj the object to compare to
+     * @return boolean true if the exercises are equal, false if not
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Exercise other = (Exercise) obj;
+        if (name == null) {
+            if (other.getName() != null)
+                return false;
+        } else if (!name.equals(other.getName()))
+            return false;
+        if (sets == null) {
+            if (other.getSets() != null)
+                return false;
+        } else if (!sets.equals(other.getSets()))
+            return false;
+        return true;
+    }
 }

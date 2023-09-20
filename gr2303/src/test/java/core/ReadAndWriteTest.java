@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -75,9 +74,10 @@ public class ReadAndWriteTest {
     }
 
     @Test
-    public void writeToFileTest() {
+    public void writeAndReadToFormFileTest() {
         readAndWrite = new ReadAndWrite(testFileLocation);
         readAndWrite.writeWorkoutToUser(workout1);
+        readAndWrite.writeWorkoutToUser(workout2);
         for (int i = 0; i < user.getNumberOfWorkouts(); i++) {
             assertTrue(user.getWorkouts().get(i).equals(readAndWrite.returnUserClassFromFile().getWorkouts().get(i)), "Workouts are not equal");
 
@@ -85,7 +85,7 @@ public class ReadAndWriteTest {
         deleteTestfile();
     }
 
-     private void deleteTestfile() {
+    private void deleteTestfile() {
         try {
             Files.delete(Path.of(testFileLocation));
         } catch (IOException e) {
