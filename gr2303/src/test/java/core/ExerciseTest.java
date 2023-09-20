@@ -73,4 +73,15 @@ public class ExerciseTest {
 
         assertEquals(100, exercise.getLocalPr());
     }
+
+    @Test
+    public void testConstructorWithSets() {
+        Set set1 = new Set(8, 100);
+        Set set2 = new Set(6, 100);
+        Set set3 = new Set(6, 100);
+
+        Exercise exercise = new Exercise("Bench Press", set1, set2, set3);
+
+        assertEquals(3, exercise.getSets().size());
+    }
 }
