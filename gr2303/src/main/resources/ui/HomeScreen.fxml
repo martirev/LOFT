@@ -93,5 +93,15 @@
             <Font name="Roboto" size="50.0" />
          </font>
       </Text>
+      <Text fill="#d7d7d7" layoutX="569.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not implemented yet" wrappingWidth="216.2646484375">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
+      <Text fill="#d7d7d7" layoutX="992.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not implemented yet" wrappingWidth="216.2646484375">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -4,7 +4,7 @@
 
 In the first release, we have focused on developing the WorkoutScreen and the logic of adding exercises and keeping track of them even after the app is closed. This is done by storing every exercise completed to a JSON file. This way, next time the user opens the app, the exercises that already completed will show up as options when creating a new workout.
 
-![Homescreen](https://imgur.com/6lGwpWR.png)
+![Homescreen](https://i.imgur.com/Oeq3156.png)
 
 ### HomeScreen
 
@@ -26,7 +26,7 @@ At the start of the project, we sat down and wrote a contract about how we were 
 
 ### Will Change in Later Versions
 
-We are currently using the package-template but will change to the module-template in the next release. This way, we will not only be using different packages, but different modules as well, to make sure our code is easier to scale. For the next release, we will change our file reading and writing logic from using a JSON parsing library (GSON) to writing our own JSON parser. We will also have the option to store data to multiple people. Currently only the person "dummyName" can register workouts.
+We are currently using the package-template but will change to the module-template in the next release. This way, we will not only be using different packages, but different modules as well, to make sure our code is easier to scale. We will also have the option to store data to multiple people. Currently only the person "dummyName" can register workouts. We will also implement "Journal" and "Highscore" functionalities to make it possible to view earlier exercises and personal bests.
 
 ### Example Data
 

@@ -14,7 +14,7 @@ Then, run the following command to build the project `mvn install`. This will ru
 To check the code coverage, run `mvn jacoco:report`. This will generate a report in the target/site/jacoco folder. Open the index.html file to view the report.
 
 ## Requirements
-- **Java 17.0.5**: This project is built using Java 17.0.5.
+- **Java 17**: This project is built using Java 17.
 - **Maven 3.8.7**: The project is managed with Maven.
 - **JUnit 5.10.0**: Used to test the code in the project.
 - **TestFX 4.0.16-alpha**: Used to test the UI of the App.
