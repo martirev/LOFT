@@ -51,18 +51,53 @@ public class WorkoutScreenController extends SceneSwitcher {
 
     private ReadAndWrite readAndWrite;
 
+    /**
+     * Creates a new WorkoutScreenController with the default location of the
+     * save-file
+     */
     public WorkoutScreenController() {
         readAndWrite = new ReadAndWrite();
     }
 
+    /**
+     * Creates a new WorkoutScreenController with the specified location of the
+     * save-file
+     * 
+     * @param location the location of the file to read and write to
+     */
     public WorkoutScreenController(String location) {
         readAndWrite = new ReadAndWrite(location);
     }
 
+    /**
+     * Returns the workout being created
+     * 
+     * @return the workout being created
+     */
     public Workout getWorkout() {
         return workout;
     }
 
+    /**
+     * <p>
+     * Called to initialize a controller after its root element has been completely
+     * processed.
+     * </p>
+     * 
+     * <p>
+     * The user and its workouts is loaded from file and the search bar is set up to
+     * search for exercises. The field used to specify number of sets is set up to
+     * listen for changes. The current workout is initialized.
+     * </p>
+     * 
+     * @param location  The location used to resolve relative paths for the root
+     *                  object, or
+     *                  null if the location is not known.
+     * 
+     * @param resources The resources used to localize the root object, or null if
+     *                  the root
+     *                  object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         User user = readAndWrite.returnUserClassFromFile();

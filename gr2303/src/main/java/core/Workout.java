@@ -66,7 +66,7 @@ public class Workout {
      * 
      * @param obj the object to compare to
      * @return boolean true if the workouts are equal, false if not
-     */    
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

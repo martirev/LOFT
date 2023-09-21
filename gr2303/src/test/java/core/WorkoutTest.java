@@ -24,7 +24,7 @@ public class WorkoutTest {
     }
 
     @Test
-    public void testAddExercise() {;
+    public void testAddExercise() {
         assertEquals(0, workout.getTotalWeight());
 
         Set benchSet1 = new Set(10, 150);
@@ -85,6 +85,5 @@ public class WorkoutTest {
         exercise2.addSet(squatSet4);
         workout.addExercise(exercise2);
         assertEquals(4960, workout.getTotalWeight());
-
     }
 }
