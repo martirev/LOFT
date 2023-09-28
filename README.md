@@ -2,16 +2,18 @@
 
 ## Overview
 
-This project is structured following a package template to ensure a clean and organized codebase. The main codebase for the project is located in the [gr2303/src/main/java/core](gr2303/src/main/java/core) directory, while the app is launched from [gr2303/src/main/java/ui/App.java](gr2303/src/main/java/ui/App.java).
+This project is structured following a module template to ensure a clean and organized codebase. The main codebase for the project is located in the [gr2303/core/src/main/java/core](gr2303/core/src/main/java/core) directory, while the app is launched from [gr2303/ui/src/main/java/ui/App.java](gr2303/ui/src/main/java/ui/App.java).
 
 
 ## Building and Running the App
 
-This project uses maven to build and run the app. To start, make sure you are in the project directory, the same directory as the pom.xml file. Run `cd gr2303` if you are in the root directory (the same directory as this README file).
+This project uses Maven to build and run the app. To start, make sure you are in the [project directory](gr2303/), the same directory as README.md, pom.xml, core/ and ui/. Run `cd gr2303` if you are in the root directory (the same directory as this README file).
 
-Then, run the following command to build the project `mvn install`. This will run all tests, including UI-tests, and build the project. To run the app, run `mvn javafx:run`. This will start the app.
+Then, run the following command to build the project: `mvn install`. This will run all tests, including UI tests, and build the project. To run the app go to the UI module (`cd ui`), and from there run `mvn javafx:run`. This will start the app.
 
-To check the code coverage, run `mvn jacoco:report`. This will generate a report in the target/site/jacoco folder. Open the index.html file to view the report.
+To test the app, run `mvn test` from the [project directory](gr2303). Make sure the source code is compiled first with `mvn compile`. The command `mvn install` will do both these two in one, among some other things. Doing `mvn test` will run all tests, including UI tests. To only run tests for a specific module, go to that module in the terminal and run `mvn test` from there.
+
+To check the code coverage, run `mvn jacoco:report` from the [project directory](gr2303). This will generate a report for all modules. These can be viewed by opening the index.html file in each respective target/site/jacoco folder.
 
 ## Requirements
 - **Java 17**: This project is built using Java 17.
@@ -25,23 +27,30 @@ To check the code coverage, run `mvn jacoco:report`. This will generate a report
 The project's directory structure is organized as follows:
 
 - gr2303
-  - src
-    - main
-      - java
-        - core
-          - Here goes the main codebase for the project. Things like Exercise-, Set-, Workout-classes, etc. should be located here.
-        - ui
-          - Here is the code for the user interface. The App.java file is located here, which is the entry point for the application.
-          - controller
-            - This is where all controllers to different screens are located. For example, the WorkoutScreenController is located here.
-      - resources
-        - ui
-          - This is where all the fxml-files are located. These files are used to define the user interface.
-    - test
-      - java
-        - core
-          - This is where all the tests for the core package are located.
-        - ui
-          - controller
-            - This is where all the tests for the controllers are located.
+  - core
+    - src
+      - main
+        - java
+          - core
+            - Here goes the main codebase for the project. Things like Exercise-, Set-, Workout-classes, etc. should be located here.
+      - test
+        - java
+          - core
+            - This is where all the tests for the core package are located.
+  - ui
+    - src
+      - main
+        - java
+          - ui
+            - Here is the code for the user interface. The App.java file is located here, which is the entry point for the application.
+            - controller
+              - This is where all controllers to different screens are located. For example, the WorkoutScreenController is located here.
+        - resources
+          - ui
+            - This is where all the fxml-files are located. These files are used to define the user interface.
+      - test
+        - java
+          - ui
+            - controller
+              - This is where all the tests for the controllers are located.
 
