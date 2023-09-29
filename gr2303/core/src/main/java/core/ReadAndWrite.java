@@ -1,35 +1,32 @@
 package core;
 
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is a class for reading and writing to the loftUserData file stored in
  * the users home directory.
  * The two methods writeWorkoutToUser and returnUserClassFromFile are of most
  * interest.
- * The file is stored in json format. Using the UserAdapter class we can
- * reconstruct classes form the
- * json file, and write classes in json format.
- * 
+ * The file is stored in json format. Using the Gson library we can parse the
+ * classes from/to json.
  */
 public class ReadAndWrite {
     /**
      * For the first version of the application we will only have one user. However,
      * we have structured
      * the code in a way that it is easy to add multiple users in the future.
-     * To parse the classes from/to json we are reconstructing/deconstructing the
-     * attributes through the
-     * UserAdapter class using the gson library.
      */
     private static String fileFolderLocation = System.getProperty("user.home") + System.getProperty("file.separator");
-    private UserAdapter userAdapter = new UserAdapter();
     private String fileLocation;
 
     /**
@@ -43,9 +40,9 @@ public class ReadAndWrite {
     /**
      * The constructor for the ReadAndWrite class. It will use the file location
      * specified in the parameter.
-     * Used fofr the tests
+     * Used for the tests
      * 
-     * @param location String
+     * @param location The location of the file
      */
     public ReadAndWrite(String location) {
         this.fileLocation = location;
@@ -55,47 +52,55 @@ public class ReadAndWrite {
      * The method to be used for writing a workout class to the userData file in
      * json format.
      * 
-     * @param workout
+     * @param workout The workout to add to the current user
      */
     public void writeWorkoutToUser(Workout workout) {
-        User existingData = returnUserClassFromFile();
-        User user;
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<User> users = getUsers();
 
-        if (existingData == null) {
-            user = new User();
-        } else {
-            user = existingData;
+        if (users.size() == 0) {
+            users.add(new User());
         }
-        user.addWorkout(workout);
+
+        users.get(0).addWorkout(workout);
 
         try (Writer file = new FileWriter(fileLocation)) {
-            JsonWriter jsonWriter = new JsonWriter(file);
-            userAdapter.write(jsonWriter, user);
+            gson.toJson(new UsersHolder(users), file);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Writing to file failed");
         }
     }
 
     /**
-     * The method to be used for reading the userData file in json format.
+     * Gets users from the userData file in json format. If no file exists, it will
+     * return an empty list.
      * 
-     * @return User class
+     * @return List of users
+     */
+    private List<User> getUsers() {
+        List<User> users = new ArrayList<User>();
+        try {
+            String text = new String(Files.readAllBytes(Paths.get(fileLocation)), StandardCharsets.UTF_8);
+            Gson gson = new Gson();
+            users = gson.fromJson(text, UsersHolder.class).getUsers();
+        } catch (IOException e) {
+            // It is fine if no file exists. We will create a new one.
+        }
+        return users;
+    }
+
+    /**
+     * The method to be used for reading the userData file in json format. If no
+     * file or user exists, it will return a new User.
+     * 
+     * @return The user data from the file
      */
     public User returnUserClassFromFile() {
-        try (Reader reader = new FileReader(fileLocation)) {
-            if (reader.ready()) {
-                JsonReader jsonReader = new JsonReader(reader);
-                User user = userAdapter.read(jsonReader);
-                return user;
-            } else {
-                return null;
-            }
-        } catch (FileNotFoundException e) {
-            // If it is not found, it will be created at a later point, so this is fine.
+        List<User> users = getUsers();
+
+        if (users.size() == 0) {
             return new User();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return null;
+        return users.get(0);
     }
 }
