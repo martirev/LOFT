@@ -7,13 +7,13 @@ import java.time.LocalDate;
 public class Workout {
 
     private List<Exercise> exercises = new ArrayList<Exercise>();
-    private LocalDate date;
+    private String date;
 
     /**
      * Constructor for a workout that sets the date to today
      */
     public Workout() {
-        this.date = LocalDate.now();
+        this.date = LocalDate.now().toString();
     }
 
     /**
@@ -22,7 +22,7 @@ public class Workout {
      * @param date the date of the workout
      */
     public Workout(LocalDate date) {
-        this.date = date;
+        this.date = date.toString();
     }
 
     /**
@@ -58,7 +58,7 @@ public class Workout {
      * @return the date of the workout
      */
     public LocalDate getDate() {
-        return date;
+        return LocalDate.parse(date);
     }
 
     /**
@@ -81,10 +81,10 @@ public class Workout {
                 return false;
         } else if (!exercises.equals(other.getExercises()))
             return false;
-        if (date == null) {
+        if (getDate() == null) {
             if (other.getDate() != null)
                 return false;
-        } else if (!date.equals(other.getDate()))
+        } else if (!getDate().equals(other.getDate()))
             return false;
         return true;
     }

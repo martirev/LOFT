@@ -81,9 +81,9 @@ public class ReadAndWriteTest {
         deleteTestfile();
         readAndWrite.writeWorkoutToUser(workout1);
         readAndWrite.writeWorkoutToUser(workout2);
+        User fileUser = readAndWrite.returnUserClassFromFile();
         for (int i = 0; i < user.getNumberOfWorkouts(); i++) {
-            assertTrue(user.getWorkouts().get(i).equals(readAndWrite.returnUserClassFromFile().getWorkouts().get(i)),
-                    "Workouts are not equal");
+            assertTrue(user.getWorkouts().get(i).equals(fileUser.getWorkouts().get(i)), "Workouts are not equal");
         }
         deleteTestfile();
     }
