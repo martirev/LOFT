@@ -4,7 +4,6 @@
 
 This project is structured following a module template to ensure a clean and organized codebase. The main codebase for the project is located in the [gr2303/core/src/main/java/core](gr2303/core/src/main/java/core) directory, while the app is launched from [gr2303/ui/src/main/java/ui/App.java](gr2303/ui/src/main/java/ui/App.java).
 
-
 ## Building and Running the App
 
 This project uses Maven to build and run the app. To start, make sure you are in the [project directory](gr2303/), the same directory as README.md, pom.xml, core/ and ui/. Run `cd gr2303` if you are in the root directory (the same directory as this README file).
@@ -15,15 +14,20 @@ To test the app, run `mvn test` from the [project directory](gr2303). Make sure 
 
 To check the code coverage, run `mvn jacoco:report` from the [project directory](gr2303). This will generate a report for all modules. These can be viewed by opening the index.html file in each respective target/site/jacoco folder.
 
+To check for possible bugsm run `mvn spotbugs:check` from the [project directory](gr2303). This will run the SpotBugs tool and check for possible bugs in the code. The results are printed to the terminal.
+
 ## Requirements
+
 - **Java 17**: This project is built using Java 17.
 - **Maven 3.8.7**: The project is managed with Maven.
 - **JUnit 5.10.0**: Used to test the code in the project.
 - **TestFX 4.0.16-alpha**: Used to test the UI of the App.
 - **JaCoCo 0.8.7**: Used for generating code coverage reports.
 - **Gson 2.10**: Used to parse our JSON-files.
+- **SpotBugs 4.7.3**: Used to check for possible bugs in the code.
 
 ## Directory Structure
+
 The project's directory structure is organized as follows:
 
 - gr2303
@@ -53,4 +57,3 @@ The project's directory structure is organized as follows:
           - ui
             - controller
               - This is where all the tests for the controllers are located.
-
