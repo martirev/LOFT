@@ -39,7 +39,7 @@ public class User {
      * @return workouts in an ArrayList
      */
     public ArrayList<Workout> getWorkouts() {
-        return workouts;
+        return new ArrayList<>(workouts);
     }
 
     /**

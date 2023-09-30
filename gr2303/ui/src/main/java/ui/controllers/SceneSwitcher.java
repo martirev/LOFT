@@ -14,7 +14,18 @@ public abstract class SceneSwitcher implements Initializable {
     protected AnchorPane baseAnchor;
 
     protected SceneSwitcher controller;
-    protected static String testFileLocation;
+    static String fileLocation;
+
+    /**
+     * Sets the location of the save-file. This location will be used for all
+     * objects extending SceneSwitcher. This method is package-private so few
+     * classes can modify the location.
+     * 
+     * @param fileLocation The location of the save-file.
+     */
+    static void setFileLocation(String fileLocation) {
+        SceneSwitcher.fileLocation = fileLocation;
+    }
 
     /**
      * @param fxmlFilename The name of the FXML file to load, which lives inside
@@ -26,19 +37,18 @@ public abstract class SceneSwitcher implements Initializable {
                 controller = new HomeScreenController();
                 break;
             case "WorkoutScreen.fxml":
-                if (testFileLocation != null && !testFileLocation.isEmpty()) {
-                    controller = new WorkoutScreenController(testFileLocation);
+                if (fileLocation != null && !fileLocation.isEmpty()) {
+                    controller = new WorkoutScreenController(fileLocation);
                 } else {
                     controller = new WorkoutScreenController();
                 }
                 break;
             default:
                 System.err.println("Error: Invalid FXML filename");
-                System.exit(1);
         }
         try {
             baseAnchor.getChildren().clear();
-            URL url = getClass().getResource("/ui/" + fxmlFilename);
+            URL url = SceneSwitcher.class.getResource("/ui/" + fxmlFilename);
 
             FXMLLoader loader = new FXMLLoader(url);
             loader.setController(controller);
@@ -47,7 +57,7 @@ public abstract class SceneSwitcher implements Initializable {
             baseAnchor.getChildren().add(parent);
         } catch (IOException e) {
             System.err.println("Problem with loading: " + fxmlFilename);
-            System.exit(1);
+            e.printStackTrace();
         }
     }
 }

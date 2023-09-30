@@ -91,6 +91,20 @@ public class Exercise {
     }
 
     /**
+     * A method to get the hashcode of the exercise
+     * 
+     * @return the hashcode of the exercise
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((sets == null) ? 0 : sets.hashCode());
+        return result;
+    }
+
+    /**
      * A method to check if two exercises are equal
      * 
      * @param obj the object to compare to

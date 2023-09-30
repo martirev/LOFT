@@ -64,7 +64,7 @@ public class ReadAndWrite {
 
         users.get(0).addWorkout(workout);
 
-        try (Writer file = new FileWriter(fileLocation)) {
+        try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
             gson.toJson(new UsersHolder(users), file);
         } catch (IOException e) {
             System.err.println("Writing to file failed");
