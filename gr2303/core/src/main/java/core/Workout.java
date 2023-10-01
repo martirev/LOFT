@@ -62,6 +62,20 @@ public class Workout {
     }
 
     /**
+     * A method to get the hashcode of the workout
+     * 
+     * @return the hashcode of the workout
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((exercises == null) ? 0 : exercises.hashCode());
+        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        return result;
+    }
+
+    /**
      * Method for comparing two workouts.
      * 
      * @param obj the object to compare to
