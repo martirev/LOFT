@@ -58,11 +58,6 @@
             </DropShadow>
          </effect>
       </Rectangle>
-      <Text fill="#fafafa" layoutX="540.0" layoutY="510.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Journal" textAlignment="CENTER">
-         <font>
-            <Font name="Roboto" size="30.0" />
-         </font>
-      </Text>
       <Text fill="#fafafa" layoutX="960.0" layoutY="510.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Highscore" textAlignment="CENTER">
          <font>
             <Font name="Roboto" size="30.0" />
@@ -93,15 +88,23 @@
             <Font name="Roboto" size="50.0" />
          </font>
       </Text>
-      <Text fill="#d7d7d7" layoutX="569.0" layoutY="599.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not implemented yet" wrappingWidth="216.2646484375">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
       <Text fill="#d7d7d7" layoutX="992.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not implemented yet" wrappingWidth="216.2646484375">
          <font>
             <Font size="22.0" />
          </font>
       </Text>
+      <AnchorPane layoutX="520.0" layoutY="230.0" onMousePressed="#handleJournalPress" prefHeight="450.0" prefWidth="320.0">
+         <children>
+            <Text fill="#fafafa" layoutX="25.0" layoutY="351.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Previous exercises and progress" textAlignment="CENTER" wrappingWidth="270.4249267578125">
+               <font>
+                  <Font name="Roboto" size="26.0" />
+               </font>
+            </Text>
+            <Text fill="#fafafa" layoutX="108.0" layoutY="273.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Journal" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
    </children>
 </AnchorPane>
