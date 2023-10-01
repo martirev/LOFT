@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * This class contains unit tests for the Exercise class.
+ */
 public class ExerciseTest {
 
     private Exercise exercise;

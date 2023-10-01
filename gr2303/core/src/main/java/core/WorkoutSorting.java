@@ -7,6 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The WorkoutSorting class provides methods to sort and manipulate a list of
+ * workouts. It includes methods to sort workouts by date, get a HashMap of all
+ * exercises with the same name, get a list of all exercises with the same name,
+ * get the weight of the personal record (PR) in the workouts of an exercise
+ * with a given name, and search for exercises with a given name.
+ */
 public class WorkoutSorting {
 
     private List<Workout> workouts = new ArrayList<Workout>();
@@ -16,7 +23,7 @@ public class WorkoutSorting {
      * Constructor for a WorkoutSorting that lets you specify a list of workouts. It
      * also creates a HashMap of all exercises with key being the name of the
      * exercise and value being a list of all exercises with that name.
-     * 
+     *
      * @param workouts a list of workouts to sort
      */
     public WorkoutSorting(List<Workout> workouts) {
@@ -36,7 +43,7 @@ public class WorkoutSorting {
     /**
      * The method sorts all the workouts by date with a stream and compares them
      * based on the date.
-     * 
+     *
      * @return a list of all workouts sorted by date
      */
     public List<Workout> getMostRecentWorkouts() {
@@ -47,7 +54,7 @@ public class WorkoutSorting {
 
     /**
      * The method returns the HashMap created in the constructor.
-     * 
+     *
      * @return A HashMap of all exercises with key being the name of the exercise
      *         and value being a list of all exercises with that name.
      */
@@ -58,7 +65,7 @@ public class WorkoutSorting {
     /**
      * The method returns a list of all exercises with the same name. Uses the
      * HashMap created in the constructor.
-     * 
+     *
      * @param name the name of the exercise to get all exercises with the same name.
      * @return a list of all exercises with the same name.
      */
@@ -73,7 +80,7 @@ public class WorkoutSorting {
      * The method returns a list of all exercises with the same name. Thsi takes an
      * exercise as an argument and uses the getSameExersices(String name) method to
      * get all exercises with the same name.
-     * 
+     *
      * @param exercise the exercise to get all exercises with the same name.
      * @return a list of all exercises with the same name.
      */
@@ -84,7 +91,7 @@ public class WorkoutSorting {
     /**
      * The method returns the weight of the pr in the workouts of the exercise with
      * the given name. Uses the HashMap created in the constructor.
-     * 
+     *
      * @param name the name of the exercise to get the pr of the workouts of.
      * @return the weight of the pr in the workouts of the exercise with the given
      *         name.
@@ -95,7 +102,7 @@ public class WorkoutSorting {
 
     /**
      * The method returns a Collection of workout with the same name.
-     * 
+     *
      * @param name the name of the exercises to search for
      * @return A Collection of workout with the same name
      */

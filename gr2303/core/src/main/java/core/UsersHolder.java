@@ -10,8 +10,8 @@ class UsersHolder {
     private List<User> users;
 
     /**
-     * Constructor for the UsersHolder class
-     * 
+     * Constructor for the UsersHolder class.
+     *
      * @param users List of users
      */
     public UsersHolder(List<User> users) {
@@ -19,8 +19,8 @@ class UsersHolder {
     }
 
     /**
-     * Returns the users in the UsersHolder class
-     * 
+     * Returns the users in the UsersHolder class.
+     *
      * @return List of users
      */
     public List<User> getUsers() {
