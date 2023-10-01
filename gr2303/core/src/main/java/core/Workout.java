@@ -102,4 +102,17 @@ public class Workout {
             return false;
         return true;
     }
+
+    private int getTotalSets() {
+        int totalSets = 0;
+        for (Exercise exercise : exercises) {
+            totalSets += exercise.getSets().size();
+        }
+        return totalSets;
+    }
+
+    @Override
+    public String toString() {
+        return getDate().toString() + " Number of exercises: " + getExercises().size() + " Number of sets " + getTotalSets(); 
+    }
 }
