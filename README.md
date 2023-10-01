@@ -15,6 +15,8 @@ To test the app, run `mvn test` from the [project directory](gr2303). Make sure 
 
 To check the code coverage, run `mvn jacoco:report` from the [project directory](gr2303). This will generate a report for all modules. These can be viewed by opening the index.html file in each respective target/site/jacoco folder.
 
+To check the code for style errors, run `mvn checkstyle:check` from the [project directory](gr2303). This will generate a report for all modules. The results can be viewed in the terminal, or by viewing the checkstyle-result.xml file in each modules target folder.
+
 ## Requirements
 - **Java 17**: This project is built using Java 17.
 - **Maven 3.8.7**: The project is managed with Maven.
@@ -22,6 +24,7 @@ To check the code coverage, run `mvn jacoco:report` from the [project directory]
 - **TestFX 4.0.16-alpha**: Used to test the UI of the App.
 - **JaCoCo 0.8.7**: Used for generating code coverage reports.
 - **Gson 2.10**: Used to parse our JSON-files.
+- **Checkstyle 10.3.4**: Used to check the code for style errors.
 
 ## Directory Structure
 The project's directory structure is organized as follows:
