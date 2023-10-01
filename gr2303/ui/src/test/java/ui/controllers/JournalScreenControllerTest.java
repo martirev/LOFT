@@ -43,7 +43,7 @@ public class JournalScreenControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
-        SceneSwitcher.testFileLocation = testFileLocation;
+        SceneSwitcher.setFileLocation(testFileLocation);
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("JournalScreen.fxml"));
         controller = new JournalScreenController(testFileLocation);
@@ -142,8 +142,6 @@ public class JournalScreenControllerTest extends ApplicationTest {
         clickOn(workout2.toString());
         assertTrue("Shoulder Press".equals(workoutListView.getItems().get(0).getText().split("\n")[0]));
         assertTrue("Lateral Raises".equals(workoutListView.getItems().get(1).getText().split("\n")[0]));
-
-
     }
 
     @Test
@@ -167,5 +165,4 @@ public class JournalScreenControllerTest extends ApplicationTest {
             System.err.println("Error deleting file");
         }
     }
-
 }
