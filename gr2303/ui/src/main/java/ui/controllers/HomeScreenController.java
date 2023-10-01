@@ -18,6 +18,11 @@ public class HomeScreenController extends SceneSwitcher {
         insertPane("WorkoutScreen.fxml");
     }
 
+    @FXML
+    private void handleJournalPress() {
+        insertPane("JournalScreen.fxml");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }

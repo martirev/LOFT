@@ -82,12 +82,14 @@ public class WorkoutScreenController extends SceneSwitcher {
     }
 
     /**
-     * Returns the workout being created.
+     * Returns a copy of the workout being created.
      *
      * @return the workout being created
      */
     public Workout getWorkout() {
-        return workout;
+        Workout workoutCopy = new Workout(workout.getDate());
+        workout.getExercises().stream().forEach(workoutCopy::addExercise);
+        return workoutCopy;
     }
 
     /**

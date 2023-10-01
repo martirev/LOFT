@@ -40,6 +40,20 @@ public class Set {
     }
 
     /**
+     * A method to get the hashcode of the set.
+     *
+     * @return the hashcode of the set
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + reps;
+        result = prime * result + weight;
+        return result;
+    }
+
+    /**
      * A method to check if two sets are equal.
      *
      * @param obj the object to compare to

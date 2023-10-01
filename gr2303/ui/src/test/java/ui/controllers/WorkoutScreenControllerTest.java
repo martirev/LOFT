@@ -37,7 +37,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
-        SceneSwitcher.testFileLocation = testFileLocation;
+        SceneSwitcher.setFileLocation(testFileLocation);
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("WorkoutScreen.fxml"));
         controller = new WorkoutScreenController(testFileLocation);

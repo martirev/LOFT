@@ -9,6 +9,13 @@
             "name": "App",
             "request": "launch",
             "mainClass": "ui/ui.App",
+            "projectName": "ui"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "ui/ui.App",
             "projectName": "gr2303"
         },
         {
