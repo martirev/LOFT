@@ -14,7 +14,9 @@ To test the app, run `mvn test` from the [project directory](gr2303). Make sure 
 
 To check the code coverage, run `mvn jacoco:report` from the [project directory](gr2303). This will generate a report for all modules. These can be viewed by opening the index.html file in each respective target/site/jacoco folder.
 
-To check for possible bugsm run `mvn spotbugs:check` from the [project directory](gr2303). This will run the SpotBugs tool and check for possible bugs in the code. The results are printed to the terminal, or can be viewed with GUI using `mvn spotbugs:gui`.
+To check for possible bugs run `mvn spotbugs:check` from the [project directory](gr2303). This will run the SpotBugs tool and check for possible bugs in the code. The results are printed to the terminal, or can be viewed with GUI using `mvn spotbugs:gui`.
+
+To check the code for style errors, run `mvn checkstyle:check` from the [project directory](gr2303). This will generate a report for all modules. The results can be viewed in the terminal, or by viewing the checkstyle-result.xml file in each modules target folder.
 
 ## Requirements
 
@@ -25,6 +27,7 @@ To check for possible bugsm run `mvn spotbugs:check` from the [project directory
 - **JaCoCo 0.8.7**: Used for generating code coverage reports.
 - **Gson 2.10**: Used to parse our JSON-files.
 - **SpotBugs 4.7.3**: Used to check for possible bugs in the code.
+- **Checkstyle 10.3.4**: Used to check the code for style errors.
 
 ## Directory Structure
 

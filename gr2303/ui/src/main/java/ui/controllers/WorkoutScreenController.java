@@ -1,17 +1,16 @@
 package ui.controllers;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import core.Exercise;
 import core.ReadAndWrite;
 import core.Set;
 import core.User;
 import core.Workout;
 import core.WorkoutSorting;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -25,6 +24,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 
+/**
+ * The WorkoutScreenController class is responsible for controlling the workout
+ * screen UI. It extends the SceneSwitcher class and initializes the UI elements
+ * such as dropdown menu, workout list view, search bar, set field, grid,
+ * exercise settings, edit button, and add button. It also provides methods to
+ * get the workout being created and to update the UI based on user input.
+ */
 public class WorkoutScreenController extends SceneSwitcher {
 
     @FXML
@@ -34,7 +40,10 @@ public class WorkoutScreenController extends SceneSwitcher {
     private ListView<TextArea> workoutListView;
 
     @FXML
-    private TextField searchBar, setField;
+    private TextField searchBar;
+
+    @FXML
+    private TextField setField;
 
     @FXML
     private GridPane grid;
@@ -43,7 +52,10 @@ public class WorkoutScreenController extends SceneSwitcher {
     private AnchorPane exerciseSettings;
 
     @FXML
-    private Button editButton, addButton;
+    private Button editButton;
+
+    @FXML
+    private Button addButton;
 
     private Exercise selectedExercise;
 
@@ -53,7 +65,7 @@ public class WorkoutScreenController extends SceneSwitcher {
 
     /**
      * Creates a new WorkoutScreenController with the default location of the
-     * save-file
+     * save-file.
      */
     public WorkoutScreenController() {
         readAndWrite = new ReadAndWrite();
@@ -61,8 +73,8 @@ public class WorkoutScreenController extends SceneSwitcher {
 
     /**
      * Creates a new WorkoutScreenController with the specified location of the
-     * save-file
-     * 
+     * save-file.
+     *
      * @param location the location of the file to read and write to
      */
     public WorkoutScreenController(String location) {
@@ -70,8 +82,8 @@ public class WorkoutScreenController extends SceneSwitcher {
     }
 
     /**
-     * Returns a copy of the workout being created
-     * 
+     * Returns a copy of the workout being created.
+     *
      * @return the workout being created
      */
     public Workout getWorkout() {
@@ -85,20 +97,18 @@ public class WorkoutScreenController extends SceneSwitcher {
      * Called to initialize a controller after its root element has been completely
      * processed.
      * </p>
-     * 
+     *
      * <p>
      * The user and its workouts is loaded from file and the search bar is set up to
      * search for exercises. The field used to specify number of sets is set up to
      * listen for changes. The current workout is initialized.
      * </p>
-     * 
+     *
      * @param location  The location used to resolve relative paths for the root
-     *                  object, or
-     *                  null if the location is not known.
-     * 
+     *                  object, or null if the location is not known.
+     *
      * @param resources The resources used to localize the root object, or null if
-     *                  the root
-     *                  object was not localized.
+     *                  the root object was not localized.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -111,7 +121,10 @@ public class WorkoutScreenController extends SceneSwitcher {
         });
         searchUpdated(workoutSorting, "");
 
-        dropdownMenu.getSelectionModel().selectedItemProperty().addListener(dropdownSelectHandler());
+        dropdownMenu
+                .getSelectionModel()
+                .selectedItemProperty()
+                .addListener(dropdownSelectHandler());
 
         setField.setTextFormatter(getNumberFormatter());
         setField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -124,8 +137,8 @@ public class WorkoutScreenController extends SceneSwitcher {
 
     /**
      * Creates a ChangeListener that enables the edit button if the dropdown menu
-     * has a valid item selected
-     * 
+     * has a valid item selected.
+     *
      * @return a ChangeListener that enables the edit button if the dropdown menu
      *         has a valid item selected
      */
@@ -134,7 +147,8 @@ public class WorkoutScreenController extends SceneSwitcher {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                     String newValue) {
-                if (newValue == null || (newValue.equals("Add as new") && searchBar.getText().isEmpty())) {
+                if (newValue == null
+                        || (newValue.equals("Add as new") && searchBar.getText().isEmpty())) {
                     editButton.setDisable(true);
                     return;
                 }
@@ -145,8 +159,8 @@ public class WorkoutScreenController extends SceneSwitcher {
     }
 
     /**
-     * Updates the dropdown menu with the search results
-     * 
+     * Updates the dropdown menu with the search results.
+     *
      * @param workoutSorting the WorkoutSorting object to search with
      * @param newValue       the new value of the search bar
      */
@@ -163,8 +177,8 @@ public class WorkoutScreenController extends SceneSwitcher {
 
     /**
      * Updates the grid with the new number of sets when the set inputfield is
-     * updated
-     * 
+     * updated.
+     *
      * @param newValue the new value of the set inputfield
      */
     private void setFieldUpdated(String newValue) {
@@ -203,7 +217,7 @@ public class WorkoutScreenController extends SceneSwitcher {
     }
 
     /**
-     * Makes the program go back to the home screen
+     * Makes the program go back to the home screen.
      */
     @FXML
     private void handleReturnPress() {
@@ -211,7 +225,7 @@ public class WorkoutScreenController extends SceneSwitcher {
     }
 
     /**
-     * Adds the workout to the user and goes back to the home screen
+     * Adds the workout to the user and goes back to the home screen.
      */
     @FXML
     private void handleFinishPress() {
@@ -220,9 +234,9 @@ public class WorkoutScreenController extends SceneSwitcher {
     }
 
     /**
-     * Creates a TextFormatter that only allows numbers to be entered
-     * 
-     * @return a TextFormatter that only allows numbers to be entered
+     * Creates a TextFormatter that only allows numbers to be entered.
+     *
+     * @return a TextFormatter that only allows numbers to be entered.
      */
     private TextFormatter<String> getNumberFormatter() {
         return new TextFormatter<>(change -> {

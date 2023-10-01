@@ -3,18 +3,13 @@ package ui.controllers;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import core.Exercise;
+import core.Set;
+import core.Workout;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
-import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.matcher.control.LabeledMatchers;
-
-import core.Exercise;
-import core.Set;
-import core.Workout;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,12 +19,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.Test;
+import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.matcher.control.LabeledMatchers;
 import ui.App;
 
+/**
+ * This class contains tests for the WorkoutScreenController class.
+ */
 public class WorkoutScreenControllerTest extends ApplicationTest {
 
-    private static String testFileLocation = System.getProperty("user.home") + System.getProperty("file.separator")
-            + "testUserData.json";
+    private static String testFileLocation = System.getProperty("user.home")
+            + System.getProperty("file.separator") + "testUserData.json";
     private WorkoutScreenController controller;
 
     private Parent root;
@@ -105,7 +106,8 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
         clickLabels("Finish workout");
         clickIds("#newWorkoutRectangle");
         assertDoesNotThrow(() -> clickLabels("Test Exercise"),
-                "Clicking \"Test Exercise\" should not throw an exception, since it is supposed to be saved in the dropdown menu");
+                "Clicking \"Test Exercise\" should not throw an exception, "
+                        + "since it is supposed to be saved in the dropdown menu");
         deleteTestfile();
     }
 
@@ -183,7 +185,10 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
 
         ObservableList<Node> gridChildren = grid.getChildren();
         assertTrue(gridChildren.size() == 3 * expectedNumberOfSets,
-                "Grid should have " + 3 * expectedNumberOfSets + " children (cells), but has " + gridChildren.size());
+                "Grid should have "
+                        + 3 * expectedNumberOfSets
+                        + " children (cells), but has "
+                        + gridChildren.size());
         createTestExerciseSecondHalf(gridChildren, numberOfSets);
     }
 }

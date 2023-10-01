@@ -4,14 +4,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The Exercise class represents a single exercise in a workout routine. It
+ * contains a name and a list of sets. The class provides methods to add sets to
+ * the exercise, get the name of the exercise, get all sets in the exercise,
+ * calculate the total weight of all sets in the exercise, get the highest
+ * weight in the exercise, check if two exercises are equal, and a toString
+ * method that returns the name of the exercise.
+ */
 public class Exercise {
 
     private String name;
     private List<Set> sets = new ArrayList<Set>();
 
     /**
-     * Constructor for an exercise that only lets you specify the name
-     * 
+     * Constructor for an exercise that only lets you specify the name.
+     *
      * @param name the name of the exercise
      */
     public Exercise(String name) {
@@ -20,8 +28,8 @@ public class Exercise {
 
     /**
      * Constructor for an exercise that lets you specify the name and lets you add
-     * an arbitrary number of sets
-     * 
+     * an arbitrary number of sets.
+     *
      * @param name the name of the exercise
      * @param sets the sets to add to the exercise
      */
@@ -31,8 +39,8 @@ public class Exercise {
     }
 
     /**
-     * Adds a set to the exercise
-     * 
+     * Adds a set to the exercise.
+     *
      * @param set the set to add to the exercise
      */
     public void addSet(Set set) {
@@ -40,8 +48,8 @@ public class Exercise {
     }
 
     /**
-     * A method to get the name of the exercise
-     * 
+     * A method to get the name of the exercise.
+     *
      * @return the name of the exercise
      */
     public String getName() {
@@ -49,8 +57,8 @@ public class Exercise {
     }
 
     /**
-     * A method to get all sets in the exercise
-     * 
+     * A method to get all sets in the exercise.
+     *
      * @return A list of sets in the exercise
      */
     public List<Set> getSets() {
@@ -58,8 +66,8 @@ public class Exercise {
     }
 
     /**
-     * Calculates the total weight of all sets in the exercise
-     * 
+     * Calculates the total weight of all sets in the exercise.
+     *
      * @return the total weight of all sets in the exercise
      */
     public int getTotalWeight() {
@@ -72,8 +80,8 @@ public class Exercise {
 
     /**
      * A method that lets you get the highest wieght in the exercise. Is useful for
-     * calculating the pr of an exercise
-     * 
+     * calculating the pr of an exercise.
+     *
      * @return the highest weight in the exercise
      */
     public int getLocalPr() {
@@ -81,8 +89,8 @@ public class Exercise {
     }
 
     /**
-     * A toString that returns the name of the exercise
-     * 
+     * A toString that returns the name of the exercise.
+     *
      * @return the name of the exercise
      */
     @Override
@@ -91,8 +99,8 @@ public class Exercise {
     }
 
     /**
-     * A method to get the hashcode of the exercise
-     * 
+     * A method to get the hashcode of the exercise.
+     *
      * @return the hashcode of the exercise
      */
     @Override
@@ -105,30 +113,37 @@ public class Exercise {
     }
 
     /**
-     * A method to check if two exercises are equal
-     * 
+     * A method to check if two exercises are equal.
+     *
      * @param obj the object to compare to
      * @return boolean true if the exercises are equal, false if not
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Exercise other = (Exercise) obj;
         if (name == null) {
-            if (other.getName() != null)
+            if (other.getName() != null) {
                 return false;
-        } else if (!name.equals(other.getName()))
+            }
+        } else if (!name.equals(other.getName())) {
             return false;
+        }
         if (sets == null) {
-            if (other.getSets() != null)
+            if (other.getSets() != null) {
                 return false;
-        } else if (!sets.equals(other.getSets()))
+            }
+        } else if (!sets.equals(other.getSets())) {
             return false;
+        }
         return true;
     }
 }

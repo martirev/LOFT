@@ -1,15 +1,16 @@
 package ui;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ui.controllers.HomeScreenController;
 
-import java.io.IOException;
-
 /**
- * JavaFX App
+ * The main class of the application that extends the JavaFX Application class.
+ * It sets up the primary stage and loads the HomeScreen.fxml file with the
+ * HomeScreenController as its controller.
  */
 public class App extends Application {
 

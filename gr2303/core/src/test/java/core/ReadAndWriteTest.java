@@ -1,23 +1,29 @@
 package core;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Random;
-
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * This class contains JUnit tests for the ReadAndWrite class. It tests the
+ * constructor, writeWorkoutToUser method, and returnUserClassFromFile method.
+ * The tests include checking if the ReadAndWrite object is an instance of User,
+ * writing and reading workouts to and from a file, and checking if the workouts
+ * are equal.
+ */
 public class ReadAndWriteTest {
 
     private ReadAndWrite readAndWrite;
 
-    private static String testFileLocation = System.getProperty("user.home") + System.getProperty("file.separator")
-            + "testUserData.json";
+    private static String testFileLocation = System.getProperty("user.home")
+            + System.getProperty("file.separator") + "testUserData.json";
     private Random rand = new Random();
 
     private User user = new User();
@@ -34,6 +40,9 @@ public class ReadAndWriteTest {
     private Set set3;
     private Set set4;
 
+    /**
+     * This method sets up the necessary objects for the tests to run.
+     */
     @BeforeEach
     public void setUp() {
         set1 = new Set(rand.nextInt(20), rand.nextInt(120));
@@ -66,13 +75,17 @@ public class ReadAndWriteTest {
     @Test
     public void constructorTest1() {
         readAndWrite = new ReadAndWrite();
-        assertInstanceOf(User.class, readAndWrite.returnUserClassFromFile(), "ReadAndWrite is not an instance of User");
+        assertInstanceOf(User.class,
+                readAndWrite.returnUserClassFromFile(),
+                "ReadAndWrite is not an instance of User");
     }
 
     @Test
     public void constructorTest2() {
         readAndWrite = new ReadAndWrite(testFileLocation);
-        assertInstanceOf(User.class, readAndWrite.returnUserClassFromFile(), "ReadAndWrite is not an instance of User");
+        assertInstanceOf(User.class,
+                readAndWrite.returnUserClassFromFile(),
+                "ReadAndWrite is not an instance of User");
     }
 
     @Test
@@ -83,7 +96,8 @@ public class ReadAndWriteTest {
         readAndWrite.writeWorkoutToUser(workout2);
         User fileUser = readAndWrite.returnUserClassFromFile();
         for (int i = 0; i < user.getNumberOfWorkouts(); i++) {
-            assertTrue(user.getWorkouts().get(i).equals(fileUser.getWorkouts().get(i)), "Workouts are not equal");
+            assertTrue(user.getWorkouts().get(i).equals(fileUser.getWorkouts().get(i)),
+                    "Workouts are not equal");
         }
         deleteTestfile();
     }

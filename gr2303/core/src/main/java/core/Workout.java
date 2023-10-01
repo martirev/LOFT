@@ -1,24 +1,28 @@
 package core;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
 
+/**
+ * The Workout class represents a workout consisting of a list of exercises and
+ * a date.
+ */
 public class Workout {
 
     private List<Exercise> exercises = new ArrayList<Exercise>();
     private String date;
 
     /**
-     * Constructor for a workout that sets the date to today
+     * Constructor for a workout that sets the date to today.
      */
     public Workout() {
         this.date = LocalDate.now().toString();
     }
 
     /**
-     * Constructor for a workout that lets you specify the date
-     * 
+     * Constructor for a workout that lets you specify the date.
+     *
      * @param date the date of the workout
      */
     public Workout(LocalDate date) {
@@ -26,8 +30,8 @@ public class Workout {
     }
 
     /**
-     * Adds an exercise to the workout
-     * 
+     * Adds an exercise to the workout.
+     *
      * @param exercise the exercise to add to the workout
      */
     public void addExercise(Exercise exercise) {
@@ -35,8 +39,8 @@ public class Workout {
     }
 
     /**
-     * A method to get the all exercises in the workout
-     * 
+     * A method to get the all exercises in the workout.
+     *
      * @return A list of exercises in the workout
      */
     public List<Exercise> getExercises() {
@@ -44,8 +48,8 @@ public class Workout {
     }
 
     /**
-     * A method to get the total weight of all exercises in the workout
-     * 
+     * A method to get the total weight of all exercises in the workout.
+     *
      * @return the total weight of all exercises in the workout
      */
     public int getTotalWeight() {
@@ -53,8 +57,8 @@ public class Workout {
     }
 
     /**
-     * A method to get the date of the workout
-     * 
+     * A method to get the date of the workout.
+     *
      * @return the date of the workout
      */
     public LocalDate getDate() {
@@ -62,8 +66,8 @@ public class Workout {
     }
 
     /**
-     * A method to get the hashcode of the workout
-     * 
+     * A method to get the hashcode of the workout.
+     *
      * @return the hashcode of the workout
      */
     @Override
@@ -77,29 +81,36 @@ public class Workout {
 
     /**
      * Method for comparing two workouts.
-     * 
+     *
      * @param obj the object to compare to
      * @return boolean true if the workouts are equal, false if not
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Workout other = (Workout) obj;
         if (exercises == null) {
-            if (other.getExercises() != null)
+            if (other.getExercises() != null) {
                 return false;
-        } else if (!exercises.equals(other.getExercises()))
+            }
+        } else if (!exercises.equals(other.getExercises())) {
             return false;
+        }
         if (getDate() == null) {
-            if (other.getDate() != null)
+            if (other.getDate() != null) {
                 return false;
-        } else if (!getDate().equals(other.getDate()))
+            }
+        } else if (!getDate().equals(other.getDate())) {
             return false;
+        }
         return true;
     }
 
@@ -113,6 +124,10 @@ public class Workout {
 
     @Override
     public String toString() {
-        return getDate().toString() + " Number of exercises: " + getExercises().size() + " Number of sets " + getTotalSets(); 
+        return getDate().toString()
+                + " Number of exercises: "
+                + getExercises().size()
+                + " Number of sets "
+                + getTotalSets();
     }
 }

@@ -8,10 +8,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * This class contains JUnit tests for the WorkoutSorting class. It tests the
+ * functionality of the methods in the WorkoutSorting class, which sorts and
+ * retrieves data from a list of Workout objects.
+ */
 public class WorkoutSortingTest {
 
     private Workout workout1;
@@ -22,9 +26,11 @@ public class WorkoutSortingTest {
     private Exercise exercise4;
     private List<Workout> workouts = new ArrayList<Workout>();
 
+    /**
+     * Sets up needed stuff before each test method runs.
+     */
     @BeforeEach
     public void setUp() {
-
         workout1 = new Workout();
         workout2 = new Workout(LocalDate.of(2019, 1, 1));
         exercise1 = new Exercise("Bench Press");
@@ -32,21 +38,19 @@ public class WorkoutSortingTest {
         exercise3 = new Exercise("Bench Press");
         exercise4 = new Exercise("Squats");
 
-        Set benchSet1 = new Set(10, 150);
-        Set benchSet2 = new Set(8, 130);
-        Set benchSet3 = new Set(6, 110);
-        Set benchSet4 = new Set(4, 90);
-
-        Set squatSet1 = new Set(10, 200);
-        Set squatSet2 = new Set(8, 180);
-        Set squatSet3 = new Set(6, 160);
-        Set squatSet4 = new Set(4, 140);
-
+        final Set benchSet1 = new Set(10, 150);
+        final Set benchSet2 = new Set(8, 130);
+        final Set benchSet3 = new Set(6, 110);
+        final Set benchSet4 = new Set(4, 90);
         exercise1.addSet(benchSet1);
         exercise1.addSet(benchSet2);
         exercise1.addSet(benchSet3);
         exercise1.addSet(benchSet4);
 
+        final Set squatSet1 = new Set(10, 200);
+        final Set squatSet2 = new Set(8, 180);
+        final Set squatSet3 = new Set(6, 160);
+        final Set squatSet4 = new Set(4, 140);
         exercise2.addSet(squatSet1);
         exercise2.addSet(squatSet2);
         exercise2.addSet(squatSet3);
@@ -55,15 +59,13 @@ public class WorkoutSortingTest {
         workout1.addExercise(exercise1);
         workout1.addExercise(exercise2);
 
-        Set benchSet5 = new Set(4, 130);
-        Set benchSet6 = new Set(4, 120);
-
-        Set squatSet5 = new Set(5, 170);
-        Set squatSet6 = new Set(5, 180);
-
+        final Set benchSet5 = new Set(4, 130);
+        final Set benchSet6 = new Set(4, 120);
         exercise3.addSet(benchSet5);
         exercise3.addSet(benchSet6);
 
+        final Set squatSet5 = new Set(5, 170);
+        final Set squatSet6 = new Set(5, 180);
         exercise4.addSet(squatSet5);
         exercise4.addSet(squatSet6);
 
@@ -87,10 +89,11 @@ public class WorkoutSortingTest {
     @Test
     public void testGetSameExersices() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
-        Map<String, List<Exercise>> sameExercises = workoutSorting.getSameExersices();
         assertEquals(2, workoutSorting.getSameExersices().size());
         assertTrue(workoutSorting.getSameExersices().containsKey("Bench Press"));
         assertTrue(workoutSorting.getSameExersices().containsKey("Squats"));
+
+        Map<String, List<Exercise>> sameExercises = workoutSorting.getSameExersices();
         for (String name : sameExercises.keySet()) {
             for (Exercise exercise : sameExercises.get(name)) {
                 assertTrue(exercise.getName().equals(name));

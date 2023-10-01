@@ -1,19 +1,26 @@
 package ui.controllers;
 
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import core.Exercise;
 import core.ReadAndWrite;
 import core.Set;
 import core.User;
 import core.Workout;
 import core.WorkoutSorting;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 
+/**
+ * The JournalScreenController class is responsible for controlling the Journal
+ * Screen of the application. It extends the SceneSwitcher class and initializes
+ * the user's workout history and exercise history. It loads the most recent
+ * workouts and displays them in the exercises list view. It also loads the
+ * selected workout and displays its exercises and sets in the workout list
+ * view.
+ */
 public class JournalScreenController extends SceneSwitcher {
 
     @FXML
@@ -28,7 +35,7 @@ public class JournalScreenController extends SceneSwitcher {
 
     /**
      * Creates a new JournalScreenController with the default location of the
-     * save-file
+     * save-file.
      */
     public JournalScreenController() {
         this.readAndWrite = new ReadAndWrite();
@@ -37,7 +44,7 @@ public class JournalScreenController extends SceneSwitcher {
     /**
      * Creates a new JournalScreenController with the specified location of the
      * save-file. Used for testing.
-     * 
+     *
      * @param testFileLocation String
      */
     public JournalScreenController(String testFileLocation) {
@@ -47,7 +54,7 @@ public class JournalScreenController extends SceneSwitcher {
     /**
      * Initializes the controller class. The user of the apliication is loaded in
      * and the users workouts are loaded in.
-     * 
+     *
      * @param location  Location for resolving relative paths for the root object,
      *                  or null if the location is not known.
      * @param resources Used to localuze the root of the object, or null if the root
@@ -80,7 +87,7 @@ public class JournalScreenController extends SceneSwitcher {
     /**
      * Loads the given workout by iterating over its exercises and calling the
      * loadExercise method for each exercise.
-     * 
+     *
      * @param workout the workout to be loaded
      */
     private void loadWorkout(Workout workout) {
