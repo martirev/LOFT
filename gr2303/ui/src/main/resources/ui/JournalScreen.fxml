@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #EFEFEF;" xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Button layoutX="683.0" layoutY="129.0" mnemonicParsing="false" onAction="#switchToJournal" prefHeight="48.0" prefWidth="683.0" style="-fx-background-color: #ed8152; -fx-text-fill: #fafafa; -fx-border-width: 2px; -fx-border-color: #333333; -fx-arc-height: 20; -fx-arc-weight: 20;" text="Journal">
+        <Button layoutX="683.0" layoutY="129.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="683.0" style="-fx-background-color: #ed8152; -fx-text-fill: #fafafa; -fx-border-width: 2px; -fx-border-color: #333333; -fx-arc-height: 20; -fx-arc-weight: 20;" text="Journal">
             <font>
                 <Font name="Roboto" size="20.0" />
             </font>
@@ -30,7 +30,7 @@
                 <Font name="Roboto" size="50.0" />
             </font>
         </Text>
-        <ListView fx:id="exercisesListView" layoutX="99.0" layoutY="267.0" prefHeight="450.0" prefWidth="479.0" style="-fx-border-color: #ed8152;" />
+        <ListView fx:id="exercisesListView" layoutX="102.0" layoutY="267.0" prefHeight="450.0" prefWidth="479.0" style="-fx-border-color: #ed8152;" />
         <Text fill="#ed8152" layoutX="206.0" layoutY="244.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Exercise History" textAlignment="CENTER">
             <font>
                 <Font name="Roboto" size="36.0" />

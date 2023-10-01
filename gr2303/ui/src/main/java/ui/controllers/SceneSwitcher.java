@@ -22,6 +22,9 @@ public abstract class SceneSwitcher implements Initializable {
      */
     protected void insertPane(String fxmlFilename) {
         switch (fxmlFilename) {
+            case "JournalScreen.fxml":
+                controller = new JournalScreenController();
+                break;
             case "HomeScreen.fxml":
                 controller = new HomeScreenController();
                 break;
@@ -47,6 +50,7 @@ public abstract class SceneSwitcher implements Initializable {
             baseAnchor.getChildren().add(parent);
         } catch (IOException e) {
             System.err.println("Problem with loading: " + fxmlFilename);
+            e.printStackTrace();
             System.exit(1);
         }
     }
