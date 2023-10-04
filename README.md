@@ -1,5 +1,7 @@
 # Project Structure
 
+[<img src="https://eclipse.dev/che/docs/_/img/icon-eclipse-che.svg" width="20" /> open in eclipse che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2303/gr2303?new)
+
 ## Overview
 
 This project is structured following a module template to ensure a clean and organized codebase. The main codebase for the project is located in the [gr2303/core/src/main/java/core](gr2303/core/src/main/java/core) directory, while the app is launched from [gr2303/ui/src/main/java/ui/App.java](gr2303/ui/src/main/java/ui/App.java).
