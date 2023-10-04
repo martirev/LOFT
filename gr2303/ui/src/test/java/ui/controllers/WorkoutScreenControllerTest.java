@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.Exercise;
 import core.Set;
+import core.User;
 import core.Workout;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,12 +33,15 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     private static String testFileLocation = System.getProperty("user.home")
             + System.getProperty("file.separator") + "testUserData.json";
     private WorkoutScreenController controller;
+    private User user;
 
     private Parent root;
 
     @Override
     public void start(Stage stage) throws IOException {
+        user = new User("Test person", "tester", "hunter2", "tester@test.com");
         SceneSwitcher.setFileLocation(testFileLocation);
+        SceneSwitcher.setUser(user);
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("WorkoutScreen.fxml"));
         controller = new WorkoutScreenController(testFileLocation);

@@ -26,7 +26,7 @@ public class ReadAndWriteTest {
             + System.getProperty("file.separator") + "testUserData.json";
     private Random rand = new Random();
 
-    private User user = new User();
+    private User user;
 
     private Workout workout1 = new Workout();
     private Workout workout2 = new Workout();
@@ -45,6 +45,7 @@ public class ReadAndWriteTest {
      */
     @BeforeEach
     public void setUp() {
+        user = new User("Test User", "tester", "hunter2", "tester@example.com");
         set1 = new Set(rand.nextInt(20), rand.nextInt(120));
         set2 = new Set(rand.nextInt(20), rand.nextInt(120));
         set3 = new Set(rand.nextInt(20), rand.nextInt(120));
@@ -76,7 +77,7 @@ public class ReadAndWriteTest {
     public void constructorTest1() {
         readAndWrite = new ReadAndWrite();
         assertInstanceOf(User.class,
-                readAndWrite.returnUserClassFromFile(),
+                readAndWrite.returnUserClassFromFile(user),
                 "ReadAndWrite is not an instance of User");
     }
 
@@ -84,7 +85,7 @@ public class ReadAndWriteTest {
     public void constructorTest2() {
         readAndWrite = new ReadAndWrite(testFileLocation);
         assertInstanceOf(User.class,
-                readAndWrite.returnUserClassFromFile(),
+                readAndWrite.returnUserClassFromFile(user),
                 "ReadAndWrite is not an instance of User");
     }
 
@@ -92,9 +93,9 @@ public class ReadAndWriteTest {
     public void writeAndReadToFormFileTest() {
         readAndWrite = new ReadAndWrite(testFileLocation);
         deleteTestfile();
-        readAndWrite.writeWorkoutToUser(workout1);
-        readAndWrite.writeWorkoutToUser(workout2);
-        User fileUser = readAndWrite.returnUserClassFromFile();
+        readAndWrite.writeWorkoutToUser(workout1, user);
+        readAndWrite.writeWorkoutToUser(workout2, user);
+        User fileUser = readAndWrite.returnUserClassFromFile(user);
         for (int i = 0; i < user.getNumberOfWorkouts(); i++) {
             assertTrue(user.getWorkouts().get(i).equals(fileUser.getWorkouts().get(i)),
                     "Workouts are not equal");

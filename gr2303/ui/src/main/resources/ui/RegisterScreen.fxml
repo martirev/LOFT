@@ -17,37 +17,38 @@
             <Font name="Roboto" size="50.0" />
          </font>
       </Text>
-      <TextField layoutX="930.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="First Name">
+      <TextField fx:id="name" layoutX="930.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="Name">
          <font>
             <Font name="Roboto" size="13.0" />
          </font>
       </TextField>
-      <TextField layoutX="930.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="Last Name">
+      <TextField fx:id="username" layoutX="930.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="Username">
          <font>
             <Font name="Roboto" size="13.0" />
          </font>
       </TextField>
-      <TextField layoutX="930.0" layoutY="550.0" prefHeight="30.0" prefWidth="200.0" promptText="Email">
+      <PasswordField fx:id="password1" layoutX="930.0" layoutY="430.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" />
+      <PasswordField fx:id="password2" layoutX="930.0" layoutY="490.0" prefHeight="30.0" prefWidth="200.0" promptText="Confirm Password" />
+      <TextField fx:id="email" layoutX="930.0" layoutY="550.0" prefHeight="30.0" prefWidth="200.0" promptText="Email">
          <font>
             <Font name="Roboto" size="13.0" />
          </font>
       </TextField>
-      <Text fill="#ed8152" layoutX="934.0" layoutY="670.0" onMousePressed="#handleLogInPressed" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account? Log in" underline="true">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
       <Button layoutX="930.0" layoutY="610.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #ed8152;" text="Register" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </Button>
+      <Text fill="#ed8152" layoutX="934.0" layoutY="670.0" onMousePressed="#handleLogInPressed" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account? Log in" underline="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
       <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="905.0" layoutY="336.0" size="30" />
       <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="905.0" layoutY="396.0" size="30" />
       <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="905.0" layoutY="456.0" size="30" />
       <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="905.0" layoutY="516.0" size="30" />
       <FontAwesomeIconView fill="#ed8152" glyphName="ENVELOPE" layoutX="900.0" layoutY="573.0" size="26" />
-      <PasswordField layoutX="930.0" layoutY="430.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" />
-      <PasswordField layoutX="930.0" layoutY="490.0" prefHeight="30.0" prefWidth="200.0" promptText="Confirm Password" />
+      <Text fx:id="errorMessage" fill="RED" layoutX="908.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="240.0" />
    </children>
 </AnchorPane>

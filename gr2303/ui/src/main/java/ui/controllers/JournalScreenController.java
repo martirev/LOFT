@@ -62,7 +62,7 @@ public class JournalScreenController extends SceneSwitcher {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user = readAndWrite.returnUserClassFromFile();
+        User user = readAndWrite.returnUserClassFromFile(getUser());
         workoutSorting = new WorkoutSorting(user.getWorkouts());
         exercisesListView.setOnMouseClicked(event -> {
             workoutListView.getItems().clear();
