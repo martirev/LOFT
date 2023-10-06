@@ -1,5 +1,8 @@
 package core;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +13,10 @@ import java.util.ArrayList;
 public class User {
     private final String name;
     private final String username;
-    private final String password;
+
+    // This is a transient field. It will not be serialized.
+    private transient String password;
+    private final String passwordHash;
     private final String email;
     private ArrayList<Workout> workouts;
 
@@ -27,6 +33,7 @@ public class User {
         this.name = name;
         this.username = username;
         this.password = password;
+        this.passwordHash = hash(password);
         this.email = email;
         workouts = new ArrayList<Workout>();
     }
@@ -56,6 +63,24 @@ public class User {
      */
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * Sets the password for the user.
+     *
+     * @param password the password to set for the user.
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Returns the password hash of the user.
+     *
+     * @return the user's password hash.
+     */
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
     /**
@@ -93,4 +118,39 @@ public class User {
     public void addWorkout(Workout workout) {
         workouts.add(workout);
     }
+
+    /**
+     * Hashes a string using the SHA-256 algorithm. Used for hashing password.
+     *
+     * @param word the word to hash
+     * @return the hashed word as a string
+     */
+    public static String hash(String word) {
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Could not hash word");
+        }
+        byte[] encodedhash = digest.digest(word.getBytes(StandardCharsets.UTF_8));
+        return bytesToHex(encodedhash);
+    }
+
+    /**
+     * Converts a byte array to a hexadecimal string.
+     *
+     * @param bytes the byte array to convert
+     * @return the hexadecimal string
+     */
+    private static String bytesToHex(byte[] bytes) {
+        final char[] hexArray = "0123456789abcdef".toCharArray();
+        char[] hex = new char[bytes.length * 2];
+        for (int j = 0; j < bytes.length; j++) {
+            int lastBits = bytes[j] & 0xFF;
+            hex[j * 2] = hexArray[lastBits / 16];
+            hex[j * 2 + 1] = hexArray[lastBits % 16];
+        }
+        return new String(hex);
+    }
+
 }

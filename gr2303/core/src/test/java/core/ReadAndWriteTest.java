@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Random;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +41,16 @@ public class ReadAndWriteTest {
     private Set set2;
     private Set set3;
     private Set set4;
+
+    @BeforeAll
+    public static void cleanStart() {
+        deleteTestfile();
+    }
+
+    @AfterEach
+    public void cleanUp() {
+        deleteTestfile();
+    }
 
     /**
      * This method sets up the necessary objects for the tests to run.
@@ -74,25 +86,16 @@ public class ReadAndWriteTest {
     }
 
     @Test
-    public void constructorTest1() {
-        readAndWrite = new ReadAndWrite();
-        assertInstanceOf(User.class,
-                readAndWrite.returnUserClassFromFile(user),
-                "ReadAndWrite is not an instance of User");
-    }
-
-    @Test
-    public void constructorTest2() {
+    public void constructorTest() {
         readAndWrite = new ReadAndWrite(testFileLocation);
         assertInstanceOf(User.class,
                 readAndWrite.returnUserClassFromFile(user),
-                "ReadAndWrite is not an instance of User");
+                "The user should either be already saved, or be created and now be of type user.");
     }
 
     @Test
     public void writeAndReadToFormFileTest() {
         readAndWrite = new ReadAndWrite(testFileLocation);
-        deleteTestfile();
         readAndWrite.writeWorkoutToUser(workout1, user);
         readAndWrite.writeWorkoutToUser(workout2, user);
         User fileUser = readAndWrite.returnUserClassFromFile(user);
@@ -100,10 +103,9 @@ public class ReadAndWriteTest {
             assertTrue(user.getWorkouts().get(i).equals(fileUser.getWorkouts().get(i)),
                     "Workouts are not equal");
         }
-        deleteTestfile();
     }
 
-    private void deleteTestfile() {
+    private static void deleteTestfile() {
         try {
             if ((new File(testFileLocation)).exists()) {
                 Files.delete(Path.of(testFileLocation));

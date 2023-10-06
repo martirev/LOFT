@@ -80,7 +80,8 @@ public class LoginScreenControllerTest extends ApplicationTest {
         clickOn("Or register new profile");
         ObservableList<Node> rootChildren = root.getChildrenUnmodifiable();
         assertTrue(rootChildren.size() == 1, "There should only be one child of the root");
-        assertTrue(rootChildren.get(0).getId().equals("baseAnchor"), "The child should be the baseAnchor");
+        assertTrue(rootChildren.get(0).getId().equals("baseAnchor"),
+                "The child should be the baseAnchor");
 
         assertTrue(((Parent) rootChildren.get(0))
                 .getChildrenUnmodifiable()
@@ -111,7 +112,7 @@ public class LoginScreenControllerTest extends ApplicationTest {
         User loggedIn = SceneSwitcher.getUser();
         assertTrue(loggedIn.getName().equals(user.getName()),
                 "The logged in user should be the same as the registered user");
-        assertTrue(loggedIn.getPassword().equals(user.getPassword()),
+        assertTrue(loggedIn.getPasswordHash().equals(user.getPasswordHash()),
                 "The logged in user should be the same as the registered user");
         assertTrue(loggedIn.getEmail().equals(user.getEmail()),
                 "The logged in user should be the same as the registered user");

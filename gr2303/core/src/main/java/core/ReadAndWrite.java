@@ -53,18 +53,18 @@ public class ReadAndWrite {
      * @param user the user to be registered
      */
     public void registerUser(User user) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        List<User> users = getUsers();
-        users.add(user);
-
-        try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
-            gson.toJson(new UsersHolder(users), file);
-        } catch (IOException e) {
-            System.err.println("Writing to file failed");
-        }
+        registerUserGetUsers(user);
     }
 
-    private List<User> createUser(User user) {
+    /**
+     * Adds a new user to the list of existing users and writes the updated list to
+     * a file. Same as {@link #registerUser(User)} but returns the updated list of
+     * users as well.
+     *
+     * @param user the user to be added
+     * @return the updated list of users, or null if writing to file failed
+     */
+    private List<User> registerUserGetUsers(User user) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         List<User> users = getUsers();
         users.add(user);
@@ -90,7 +90,7 @@ public class ReadAndWrite {
         List<User> users = getUsers();
         User tmpUser = getUser(user, users);
         if (tmpUser == null) {
-            users = createUser(user);
+            users = registerUserGetUsers(user);
             tmpUser = getUser(user, users);
         }
         tmpUser.addWorkout(workout);
@@ -146,8 +146,10 @@ public class ReadAndWrite {
      *         user in the system, null otherwise
      */
     private User getUser(String username, String password, List<User> users) {
+        String passwordHash = User.hash(password);
         for (User user : users) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+            if (user.getUsername().equals(username)
+                    && user.getPasswordHash().equals(passwordHash)) {
                 return user;
             }
         }
@@ -177,7 +179,7 @@ public class ReadAndWrite {
     public User returnUserClassFromFile(User user) {
         User updatedUser = getUser(user.getUsername(), user.getPassword());
         if (updatedUser == null) {
-            createUser(user);
+            registerUser(user);
             updatedUser = getUser(user.getUsername(), user.getPassword());
         }
         return updatedUser;

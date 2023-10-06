@@ -50,11 +50,11 @@ public class LoginScreenController extends SceneSwitcher {
         String password = passwordField.getText();
 
         User user = readAndWrite.getUser(username, password);
-
         if (user == null) {
             errorMessage.setText("Login invalid");
             return;
         }
+        user.setPassword(password);
 
         setUser(user);
         insertPane("HomeScreen.fxml");
