@@ -72,10 +72,18 @@ public abstract class SceneSwitcher implements Initializable {
                 }
                 break;
             case "LoginScreen.fxml":
-                controller = new LoginScreenController();
+                if (fileLocation != null && !fileLocation.isEmpty()) {
+                    controller = new LoginScreenController(fileLocation);
+                } else {
+                    controller = new LoginScreenController();
+                }
                 break;
             case "RegisterScreen.fxml":
-                controller = new RegisterScreenController();
+                if (fileLocation != null && !fileLocation.isEmpty()) {
+                    controller = new RegisterScreenController(fileLocation);
+                } else {
+                    controller = new RegisterScreenController();
+                }
                 break;
             default:
                 System.err.println("Error: Invalid FXML filename");
