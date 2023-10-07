@@ -1,0 +1,56 @@
+image: maven:3.8.3-openjdk-17
+
+variables:
+  MAVEN_OPTS: "-Djava.awt.headless=true -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  MAVEN_CLI_OPTS: "--batch-mode -DskipUiTests=true"
+
+stages:
+  - test
+  - build
+  - validate
+
+cache:
+  paths:
+    - .m2/repository
+  key: "$CI_BUILD_REF_NAME"
+
+test:
+  stage: test
+  before_script:
+    - cd gr2303
+  script:
+    - mvn clean test $MAVEN_CLI_OPTS
+
+build:
+  stage: build
+  before_script:
+    - cd gr2303
+  script:
+    - mvn clean install $MAVEN_CLI_OPTS
+
+jacoco:
+  stage: test
+  needs: ["test"]
+  before_script:
+    - cd gr2303
+  script:
+    - mvn clean test $MAVEN_CLI_OPTS
+    - mvn jacoco:report
+    - cat core/target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/Jacoco Coverage core:/'
+
+checkstyle:
+  stage: validate
+  needs: []
+  before_script:
+    - cd gr2303
+  script:
+    - mvn checkstyle:check
+
+spotbugs:
+  stage: validate
+  needs: ["build"]
+  before_script:
+    - cd gr2303
+  script:
+    - mvn clean install $MAVEN_CLI_OPTS
+    - mvn spotbugs:check
