@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Random;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +28,7 @@ public class ReadAndWriteTest {
             + System.getProperty("file.separator") + "testUserData.json";
     private Random rand = new Random();
 
-    private User user = new User();
+    private User user;
 
     private Workout workout1 = new Workout();
     private Workout workout2 = new Workout();
@@ -40,11 +42,22 @@ public class ReadAndWriteTest {
     private Set set3;
     private Set set4;
 
+    @BeforeAll
+    public static void cleanStart() {
+        deleteTestfile();
+    }
+
+    @AfterEach
+    public void cleanUp() {
+        deleteTestfile();
+    }
+
     /**
      * This method sets up the necessary objects for the tests to run.
      */
     @BeforeEach
     public void setUp() {
+        user = new User("Test User", "tester", "hunter2", "tester@example.com");
         set1 = new Set(rand.nextInt(20), rand.nextInt(120));
         set2 = new Set(rand.nextInt(20), rand.nextInt(120));
         set3 = new Set(rand.nextInt(20), rand.nextInt(120));
@@ -73,36 +86,26 @@ public class ReadAndWriteTest {
     }
 
     @Test
-    public void constructorTest1() {
-        readAndWrite = new ReadAndWrite();
-        assertInstanceOf(User.class,
-                readAndWrite.returnUserClassFromFile(),
-                "ReadAndWrite is not an instance of User");
-    }
-
-    @Test
-    public void constructorTest2() {
+    public void constructorTest() {
         readAndWrite = new ReadAndWrite(testFileLocation);
         assertInstanceOf(User.class,
-                readAndWrite.returnUserClassFromFile(),
-                "ReadAndWrite is not an instance of User");
+                readAndWrite.returnUserClassFromFile(user),
+                "The user should either be already saved, or be created and now be of type user.");
     }
 
     @Test
     public void writeAndReadToFormFileTest() {
         readAndWrite = new ReadAndWrite(testFileLocation);
-        deleteTestfile();
-        readAndWrite.writeWorkoutToUser(workout1);
-        readAndWrite.writeWorkoutToUser(workout2);
-        User fileUser = readAndWrite.returnUserClassFromFile();
+        readAndWrite.writeWorkoutToUser(workout1, user);
+        readAndWrite.writeWorkoutToUser(workout2, user);
+        User fileUser = readAndWrite.returnUserClassFromFile(user);
         for (int i = 0; i < user.getNumberOfWorkouts(); i++) {
             assertTrue(user.getWorkouts().get(i).equals(fileUser.getWorkouts().get(i)),
                     "Workouts are not equal");
         }
-        deleteTestfile();
     }
 
-    private void deleteTestfile() {
+    private static void deleteTestfile() {
         try {
             if ((new File(testFileLocation)).exists()) {
                 Files.delete(Path.of(testFileLocation));

@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ui.controllers.HomeScreenController;
+import ui.controllers.LoginScreenController;
 
 /**
  * The main class of the application that extends the JavaFX Application class.
@@ -17,8 +17,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle("Light Weight");
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
-        fxmlLoader.setController(new HomeScreenController());
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
+        fxmlLoader.setController(new LoginScreenController());
 
         stage.setScene(new Scene(fxmlLoader.load()));
 
