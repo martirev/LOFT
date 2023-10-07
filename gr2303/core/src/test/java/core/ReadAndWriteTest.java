@@ -22,8 +22,6 @@ import org.junit.jupiter.api.Test;
  */
 public class ReadAndWriteTest {
 
-    private ReadAndWrite readAndWrite;
-
     private static String testFileLocation = System.getProperty("user.home")
             + System.getProperty("file.separator") + "testUserData.json";
     private Random rand = new Random();
@@ -45,6 +43,7 @@ public class ReadAndWriteTest {
     @BeforeAll
     public static void cleanStart() {
         deleteTestfile();
+        ReadAndWrite.setFileLocation(testFileLocation);
     }
 
     @AfterEach
@@ -87,18 +86,16 @@ public class ReadAndWriteTest {
 
     @Test
     public void constructorTest() {
-        readAndWrite = new ReadAndWrite(testFileLocation);
         assertInstanceOf(User.class,
-                readAndWrite.returnUserClassFromFile(user),
+                ReadAndWrite.returnUserClassFromFile(user),
                 "The user should either be already saved, or be created and now be of type user.");
     }
 
     @Test
     public void writeAndReadToFormFileTest() {
-        readAndWrite = new ReadAndWrite(testFileLocation);
-        readAndWrite.writeWorkoutToUser(workout1, user);
-        readAndWrite.writeWorkoutToUser(workout2, user);
-        User fileUser = readAndWrite.returnUserClassFromFile(user);
+        ReadAndWrite.writeWorkoutToUser(workout1, user);
+        ReadAndWrite.writeWorkoutToUser(workout2, user);
+        User fileUser = ReadAndWrite.returnUserClassFromFile(user);
         for (int i = 0; i < user.getNumberOfWorkouts(); i++) {
             assertTrue(user.getWorkouts().get(i).equals(fileUser.getWorkouts().get(i)),
                     "Workouts are not equal");

@@ -24,17 +24,6 @@ public class LoginScreenController extends SceneSwitcher {
     @FXML
     private PasswordField passwordField;
 
-    private ReadAndWrite readAndWrite;
-
-    
-    public LoginScreenController() {
-        readAndWrite = new ReadAndWrite();
-    }
-
-    public LoginScreenController(String fileLocation) {
-        readAndWrite = new ReadAndWrite(fileLocation);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -49,7 +38,8 @@ public class LoginScreenController extends SceneSwitcher {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        User user = readAndWrite.getUser(username, password);
+        User user = ReadAndWrite.getUser(username, password);
+
         if (user == null) {
             errorMessage.setText("Login invalid");
             return;

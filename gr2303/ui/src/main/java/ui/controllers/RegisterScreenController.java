@@ -34,17 +34,6 @@ public class RegisterScreenController extends SceneSwitcher {
     @FXML
     private TextField email;
 
-    private ReadAndWrite readAndWrite;
-
-    public RegisterScreenController() {
-        readAndWrite = new ReadAndWrite();
-
-    }
-
-    public RegisterScreenController(String fileLocation) {
-        readAndWrite = new ReadAndWrite(fileLocation);
-    }
-
     /**
      * Handles the user input for registering a new account. Validates the input and
      * registers the user if the input is valid.
@@ -89,13 +78,13 @@ public class RegisterScreenController extends SceneSwitcher {
             return;
         }
 
-        if (readAndWrite.usernameExists(username)) {
+        if (ReadAndWrite.usernameExists(username)) {
             errorMessage.setText("Username is already taken");
             return;
         }
 
         User newUser = new User(name, username, password1, email);
-        readAndWrite.registerUser(newUser);
+        ReadAndWrite.registerUser(newUser);
         insertPane("LoginScreen.fxml");
     }
 
