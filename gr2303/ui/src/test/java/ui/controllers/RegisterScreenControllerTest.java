@@ -37,10 +37,8 @@ public class RegisterScreenControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
-        SceneSwitcher.setFileLocation(testFileLocation);
-
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("RegisterScreen.fxml"));
-        controller = new RegisterScreenController(testFileLocation);
+        controller = new RegisterScreenController();
         fxmlLoader.setController(controller);
         root = fxmlLoader.load();
         stage.setScene(new Scene(root));
@@ -50,6 +48,7 @@ public class RegisterScreenControllerTest extends ApplicationTest {
     @BeforeAll
     public static void setUp() {
         deleteTestfile();
+        ReadAndWrite.setFileLocation(testFileLocation);
     }
 
     @AfterAll
@@ -110,8 +109,7 @@ public class RegisterScreenControllerTest extends ApplicationTest {
     @Test
     public void testUsernameTaken() {
         User user = new User("Test User", "test", "test", "t@t.no");
-        ReadAndWrite readAndWrite = new ReadAndWrite(testFileLocation);
-        readAndWrite.registerUser(user);
+        ReadAndWrite.registerUser(user);
 
         writeSeparator("\t", "Another user", "test", "1234", "1234", "te@st.no");
         clickRegister();

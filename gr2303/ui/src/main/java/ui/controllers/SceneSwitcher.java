@@ -35,22 +35,6 @@ public abstract class SceneSwitcher implements Initializable {
     private static User user = null;
 
     /**
-     * The file location of the current savefile.
-     */
-    static String fileLocation;
-
-    /**
-     * Sets the location of the save-file. This location will be used for all
-     * objects extending SceneSwitcher. This method is package-private so few
-     * classes can modify the location.
-     *
-     * @param fileLocation The location of the save-file.
-     */
-    static void setFileLocation(String fileLocation) {
-        SceneSwitcher.fileLocation = fileLocation;
-    }
-
-    /**
      * A method to switch scenes.
      *
      * @param fxmlFilename The name of the FXML file to load, which lives inside
@@ -65,25 +49,13 @@ public abstract class SceneSwitcher implements Initializable {
                 controller = new HomeScreenController();
                 break;
             case "WorkoutScreen.fxml":
-                if (fileLocation != null && !fileLocation.isEmpty()) {
-                    controller = new WorkoutScreenController(fileLocation);
-                } else {
-                    controller = new WorkoutScreenController();
-                }
+                controller = new WorkoutScreenController();
                 break;
             case "LoginScreen.fxml":
-                if (fileLocation != null && !fileLocation.isEmpty()) {
-                    controller = new LoginScreenController(fileLocation);
-                } else {
-                    controller = new LoginScreenController();
-                }
+                controller = new LoginScreenController();
                 break;
             case "RegisterScreen.fxml":
-                if (fileLocation != null && !fileLocation.isEmpty()) {
-                    controller = new RegisterScreenController(fileLocation);
-                } else {
-                    controller = new RegisterScreenController();
-                }
+                controller = new RegisterScreenController();
                 break;
             default:
                 System.err.println("Error: Invalid FXML filename");

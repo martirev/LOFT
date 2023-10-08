@@ -29,27 +29,7 @@ public class JournalScreenController extends SceneSwitcher {
     @FXML
     private ListView<TextArea> workoutListView;
 
-    private ReadAndWrite readAndWrite;
-
     private WorkoutSorting workoutSorting;
-
-    /**
-     * Creates a new JournalScreenController with the default location of the
-     * save-file.
-     */
-    public JournalScreenController() {
-        this.readAndWrite = new ReadAndWrite();
-    }
-
-    /**
-     * Creates a new JournalScreenController with the specified location of the
-     * save-file. Used for testing.
-     *
-     * @param testFileLocation String
-     */
-    public JournalScreenController(String testFileLocation) {
-        this.readAndWrite = new ReadAndWrite(testFileLocation);
-    }
 
     /**
      * Initializes the controller class. The user of the apliication is loaded in
@@ -62,7 +42,7 @@ public class JournalScreenController extends SceneSwitcher {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user = readAndWrite.returnUserClassFromFile(getUser());
+        User user = ReadAndWrite.returnUserClassFromFile(getUser());
         workoutSorting = new WorkoutSorting(user.getWorkouts());
         exercisesListView.setOnMouseClicked(event -> {
             workoutListView.getItems().clear();

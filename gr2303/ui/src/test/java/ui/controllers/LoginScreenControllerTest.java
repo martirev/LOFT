@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import ui.App;
@@ -38,14 +39,18 @@ public class LoginScreenControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
-        SceneSwitcher.setFileLocation(testFileLocation);
-
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("LoginScreen.fxml"));
-        controller = new LoginScreenController(testFileLocation);
+        controller = new LoginScreenController();
         fxmlLoader.setController(controller);
         root = fxmlLoader.load();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    @BeforeAll
+    public static void cleanStart() {
+        deleteTestfile();
+        ReadAndWrite.setFileLocation(testFileLocation);
     }
 
     @AfterAll
@@ -96,9 +101,7 @@ public class LoginScreenControllerTest extends ApplicationTest {
         deleteTestfile();
         User user = new User("Test User", "tester", "hunter2", "tester@example.com");
 
-        SceneSwitcher.setFileLocation(testFileLocation);
-        ReadAndWrite readAndWrite = new ReadAndWrite(testFileLocation);
-        readAndWrite.registerUser(user);
+        ReadAndWrite.registerUser(user);
 
         write("tester");
         write("\t");

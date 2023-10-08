@@ -61,26 +61,6 @@ public class WorkoutScreenController extends SceneSwitcher {
 
     private Workout workout;
 
-    private ReadAndWrite readAndWrite;
-
-    /**
-     * Creates a new WorkoutScreenController with the default location of the
-     * save-file.
-     */
-    public WorkoutScreenController() {
-        readAndWrite = new ReadAndWrite();
-    }
-
-    /**
-     * Creates a new WorkoutScreenController with the specified location of the
-     * save-file.
-     *
-     * @param location the location of the file to read and write to
-     */
-    public WorkoutScreenController(String location) {
-        readAndWrite = new ReadAndWrite(location);
-    }
-
     /**
      * Returns a copy of the workout being created.
      *
@@ -112,7 +92,7 @@ public class WorkoutScreenController extends SceneSwitcher {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user = readAndWrite.returnUserClassFromFile(getUser());
+        User user = ReadAndWrite.returnUserClassFromFile(getUser());
 
         WorkoutSorting workoutSorting = new WorkoutSorting(user.getWorkouts());
 
@@ -229,7 +209,7 @@ public class WorkoutScreenController extends SceneSwitcher {
      */
     @FXML
     private void handleFinishPress() {
-        readAndWrite.writeWorkoutToUser(workout, getUser());
+        ReadAndWrite.writeWorkoutToUser(workout, getUser());
         insertPane("HomeScreen.fxml");
     }
 
