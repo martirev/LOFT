@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import core.Exercise;
 import core.ReadAndWrite;
 import core.Set;
+import core.User;
 import core.Workout;
 import java.io.File;
 import java.io.IOException;
@@ -43,13 +44,15 @@ public class JournalScreenControllerTest extends ApplicationTest {
 
     private static Workout workout1;
     private static Workout workout2;
+    private static User user;
 
     @Override
     public void start(Stage stage) throws IOException {
-        SceneSwitcher.setFileLocation(testFileLocation);
+        user = new User("Test person", "tester", "hunter2", "tester@test.com");
+        SceneSwitcher.setUser(user);
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("JournalScreen.fxml"));
-        controller = new JournalScreenController(testFileLocation);
+        controller = new JournalScreenController();
         fxmlLoader.setController(controller);
         root = fxmlLoader.load();
         stage.setScene(new Scene(root));
@@ -60,13 +63,15 @@ public class JournalScreenControllerTest extends ApplicationTest {
     public static void tearDown() {
         deleteTestfile();
     }
-
+    
     /**
      * Sets up the test data before running the tests.
      */
     @BeforeAll
     public static void setUp() {
+        ReadAndWrite.setFileLocation(testFileLocation);
         deleteTestfile();
+        user = new User("Test person", "tester", "hunter2", "tester@example.com");
 
         workout1 = new Workout(LocalDate.of(2023, 10, 1));
         workout2 = new Workout(LocalDate.of(2019, 1, 1));
@@ -110,9 +115,8 @@ public class JournalScreenControllerTest extends ApplicationTest {
         workout2.addExercise(exercise3);
         workout2.addExercise(exercise4);
 
-        ReadAndWrite readAndWrite = new ReadAndWrite(testFileLocation);
-        readAndWrite.writeWorkoutToUser(workout1);
-        readAndWrite.writeWorkoutToUser(workout2);
+        ReadAndWrite.writeWorkoutToUser(workout1, user);
+        ReadAndWrite.writeWorkoutToUser(workout2, user);
     }
 
     @Test

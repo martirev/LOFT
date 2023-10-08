@@ -1,5 +1,6 @@
 package ui.controllers;
 
+import core.User;
 import java.io.IOException;
 import java.net.URL;
 import javafx.fxml.FXML;
@@ -20,19 +21,18 @@ public abstract class SceneSwitcher implements Initializable {
     @FXML
     protected AnchorPane baseAnchor;
 
+    /**
+     * The SceneSwitcher controller. For example JournalScreenController. This is
+     * used to link fxml files to their correct
+     */
     protected SceneSwitcher controller;
-    static String fileLocation;
 
     /**
-     * Sets the location of the save-file. This location will be used for all
-     * objects extending SceneSwitcher. This method is package-private so few
-     * classes can modify the location.
-     *
-     * @param fileLocation The location of the save-file.
+     * The currently logged in user. This is set when the user logs in and is used
+     * to keep track of the user throughout the application. This is why it is
+     * static.
      */
-    static void setFileLocation(String fileLocation) {
-        SceneSwitcher.fileLocation = fileLocation;
-    }
+    private static User user = null;
 
     /**
      * A method to switch scenes.
@@ -52,15 +52,18 @@ public abstract class SceneSwitcher implements Initializable {
                 controller = new ProgressScreenController();
                 break;
             case "WorkoutScreen.fxml":
-                if (fileLocation != null && !fileLocation.isEmpty()) {
-                    controller = new WorkoutScreenController(fileLocation);
-                } else {
-                    controller = new WorkoutScreenController();
-                }
+                controller = new WorkoutScreenController();
+                break;
+            case "LoginScreen.fxml":
+                controller = new LoginScreenController();
+                break;
+            case "RegisterScreen.fxml":
+                controller = new RegisterScreenController();
                 break;
             default:
                 System.err.println("Error: Invalid FXML filename");
         }
+
         try {
             baseAnchor.getChildren().clear();
             URL url = SceneSwitcher.class.getResource("/ui/" + fxmlFilename);
@@ -74,5 +77,23 @@ public abstract class SceneSwitcher implements Initializable {
             System.err.println("Problem with loading: " + fxmlFilename);
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Sets the current user.
+     *
+     * @param user the user to set
+     */
+    static void setUser(User user) {
+        SceneSwitcher.user = user;
+    }
+
+    /**
+     * Returns the currently logged in user.
+     *
+     * @return the User object representing the currently logged in user.
+     */
+    static User getUser() {
+        return user;
     }
 }

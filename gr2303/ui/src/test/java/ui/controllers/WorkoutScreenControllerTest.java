@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.Exercise;
+import core.ReadAndWrite;
 import core.Set;
+import core.User;
 import core.Workout;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,6 +22,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
@@ -32,15 +37,32 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     private static String testFileLocation = System.getProperty("user.home")
             + System.getProperty("file.separator") + "testUserData.json";
     private WorkoutScreenController controller;
+    private static User user;
 
     private Parent root;
 
+    /**
+     * Sets up the test environment by deleting an existing test file and setting
+     * the file location to the test file location. Also creates a test user and
+     * sets it as the current user.
+     */
+    @BeforeAll
+    public static void setUp() {
+        deleteTestfile();
+        ReadAndWrite.setFileLocation(testFileLocation);
+        user = new User("Test person", "tester", "hunter2", "tester@test.com");
+        SceneSwitcher.setUser(user);
+    }
+
+    @AfterEach
+    public void cleanUp() {
+        deleteTestfile();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
-        SceneSwitcher.setFileLocation(testFileLocation);
-
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("WorkoutScreen.fxml"));
-        controller = new WorkoutScreenController(testFileLocation);
+        controller = new WorkoutScreenController();
         fxmlLoader.setController(controller);
         root = fxmlLoader.load();
         stage.setScene(new Scene(root));
@@ -129,9 +151,11 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
                 .anyMatch(x -> x instanceof Text && ((Text) x).getText().equals("FT")));
     }
 
-    private void deleteTestfile() {
+    private static void deleteTestfile() {
         try {
-            Files.delete(Path.of(testFileLocation));
+            if ((new File(testFileLocation)).exists()) {
+                Files.delete(Path.of(testFileLocation));
+            }
         } catch (IOException e) {
             System.err.println("Error deleting file");
         }

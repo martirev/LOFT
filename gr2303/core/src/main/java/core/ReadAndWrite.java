@@ -12,38 +12,61 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is a class for reading and writing to the loftUserData file stored in
- * the users home directory. The two methods writeWorkoutToUser and
- * returnUserClassFromFile are of most interest. The file is stored in json
- * format. Using the Gson library we can parse the classes from/to json.
+ * The ReadAndWrite class provides methods for reading and writing user data to
+ * a file in JSON format. It includes methods for registering new users, adding
+ * workouts to existing users, and retrieving user data. The file location can
+ * be set using the setFileLocation method.
  */
-public class ReadAndWrite {
-    /**
-     * For the first version of the application we will only have one user. However,
-     * we have structured
-     * the code in a way that it is easy to add multiple users in the future.
-     */
+public abstract class ReadAndWrite {
     private static String fileFolderLocation = System.getProperty("user.home")
             + System.getProperty("file.separator");
-    private String fileLocation;
+    private static String fileLocation = fileFolderLocation + "userData.json";
 
     /**
-     * The constructor for the ReadAndWrite class. It will use the default file
-     * location.
+     * Private constructor to prevent instantiation.
      */
-    public ReadAndWrite() {
-        this(fileFolderLocation + "userData.json");
+    private ReadAndWrite() {
     }
 
     /**
-     * The constructor for the ReadAndWrite class. It will use the file location
-     * specified in the parameter.
-     * Used for the tests
+     * Sets the file location for ReadAndWrite class.
      *
-     * @param location The location of the file
+     * @param fileLocation the file location to be set.
      */
-    public ReadAndWrite(String location) {
-        this.fileLocation = location;
+    public static void setFileLocation(String fileLocation) {
+        ReadAndWrite.fileLocation = fileLocation;
+    }
+
+    /**
+     * Registers a new user by adding it to the list of existing users and writing
+     * the updated list to a file.
+     *
+     * @param user the user to be registered
+     */
+    public static void registerUser(User user) {
+        registerUserGetUsers(user);
+    }
+
+    /**
+     * Adds a new user to the list of existing users and writes the updated list to
+     * a file. Same as {@link #registerUser(User)} but returns the updated list of
+     * users as well.
+     *
+     * @param user the user to be added
+     * @return the updated list of users, or null if writing to file failed
+     */
+    private static List<User> registerUserGetUsers(User user) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<User> users = getUsers();
+        users.add(user);
+
+        try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
+            gson.toJson(new UsersHolder(users), file);
+        } catch (IOException e) {
+            System.err.println("Writing to file failed");
+            return null;
+        }
+        return users;
     }
 
     /**
@@ -52,15 +75,16 @@ public class ReadAndWrite {
      *
      * @param workout The workout to add to the current user
      */
-    public void writeWorkoutToUser(Workout workout) {
+    public static void writeWorkoutToUser(Workout workout, User user) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
         List<User> users = getUsers();
-
-        if (users.size() == 0) {
-            users.add(new User());
+        User tmpUser = getUser(user, users);
+        if (tmpUser == null) {
+            users = registerUserGetUsers(user);
+            tmpUser = getUser(user, users);
         }
-
-        users.get(0).addWorkout(workout);
+        tmpUser.addWorkout(workout);
 
         try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
             gson.toJson(new UsersHolder(users), file);
@@ -75,7 +99,7 @@ public class ReadAndWrite {
      *
      * @return List of users
      */
-    private List<User> getUsers() {
+    private static List<User> getUsers() {
         List<User> users = new ArrayList<User>();
         try {
             String text = new String(Files.readAllBytes(Paths.get(fileLocation)),
@@ -83,9 +107,58 @@ public class ReadAndWrite {
             Gson gson = new Gson();
             users = gson.fromJson(text, UsersHolder.class).getUsers();
         } catch (IOException e) {
-            // It is fine if no file exists. We will create a new one.
+            // It is fine if no file exists. We will create a new one later.
         }
         return users;
+    }
+
+    /**
+     * Returns a User object if the given user matches an existing user in the list
+     * of users.
+     *
+     * @param user  the user to retrieve
+     * @param users the list of users to search through
+     * @return a User object if the given user matches an existing user in the
+     *         system, null otherwise. This will be the same user as the parameter
+     *         but with updated data.
+     */
+    private static User getUser(User user, List<User> users) {
+        return getUser(user.getUsername(), user.getPassword(), users);
+    }
+
+    /**
+     * Returns a User object if the given username and password match an existing
+     * user in the users-list.
+     *
+     * @param username the username of the user to retrieve
+     * @param password the password of the user to retrieve
+     * @param users    the list of users to search through
+     * @return a User object if the given username and password match an existing
+     *         user in the system, null otherwise
+     */
+    private static User getUser(String username, String password, List<User> users) {
+        String passwordHash = User.hash(password);
+        for (User user : users) {
+            if (user.getUsername().equals(username)
+                    && user.getPasswordHash().equals(passwordHash)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns a User object if the given username and password match an existing
+     * user in the system.
+     *
+     * @param username the username of the user to retrieve
+     * @param password the password of the user to retrieve
+     * @return a User object if the given username and password match an existing
+     *         user in the system, null otherwise
+     */
+    public static User getUser(String username, String password) {
+        List<User> users = getUsers();
+        return getUser(username, password, users);
     }
 
     /**
@@ -94,12 +167,22 @@ public class ReadAndWrite {
      *
      * @return The user data from the file
      */
-    public User returnUserClassFromFile() {
-        List<User> users = getUsers();
-
-        if (users.size() == 0) {
-            return new User();
+    public static User returnUserClassFromFile(User user) {
+        User updatedUser = getUser(user.getUsername(), user.getPassword());
+        if (updatedUser == null) {
+            registerUser(user);
+            updatedUser = getUser(user.getUsername(), user.getPassword());
         }
-        return users.get(0);
+        return updatedUser;
+    }
+
+    /**
+     * Checks if a username already exists.
+     *
+     * @param username the username to check for existence
+     * @return true if the username exists, false otherwise
+     */
+    public static boolean usernameExists(String username) {
+        return getUsers().stream().anyMatch(user -> user.getUsername().equals(username));
     }
 }

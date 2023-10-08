@@ -17,18 +17,19 @@
             <Font name="Roboto" size="50.0" />
          </font>
       </Text>
-      <TextField layoutX="940.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="Username" />
-      <Text fill="#ed8152" layoutX="940.0" layoutY="490.0" onMousePressed="#handleRegisterNewProfile" strokeType="OUTSIDE" strokeWidth="0.0" text="Or register new profile" underline="true">
-         <font>
-            <Font name="Roboto" size="20.0" />
-         </font></Text>
+      <TextField fx:id="usernameField" layoutX="940.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="Username" />
+      <PasswordField fx:id="passwordField" layoutX="940.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" />
       <Button layoutX="940.0" layoutY="420.0" minHeight="30.0" minWidth="200.0" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: ed8152;" text="Log in" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </Button>
+      <Text fill="#ed8152" layoutX="940.0" layoutY="490.0" onMousePressed="#handleRegisterNewProfile" strokeType="OUTSIDE" strokeWidth="0.0" text="Or register new profile" underline="true">
+         <font>
+            <Font name="Roboto" size="20.0" />
+         </font></Text>
       <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="915.0" layoutY="336.0" size="30" />
       <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="915.0" layoutY="396.0" size="30" />
-      <PasswordField layoutX="940.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" />
+      <Text fx:id="errorMessage" fill="RED" layoutX="940.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="198.2421875" />
    </children>
 </AnchorPane>
