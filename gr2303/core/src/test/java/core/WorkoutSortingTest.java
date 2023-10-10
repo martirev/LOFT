@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -109,7 +110,7 @@ public class WorkoutSortingTest {
     }
 
     @Test
-    public void testGetExercises() {
+    public void testGetSameExercisesString() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
         List<Exercise> exercises = workoutSorting.getSameExersices("Bench Press");
         assertEquals(2, exercises.size());
@@ -118,4 +119,38 @@ public class WorkoutSortingTest {
         assertFalse(exercises.contains(exercise2));
     }
 
+    @Test
+    public void testGetPrOnDay() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        assertEquals(150, workoutSorting.getPrOnDay(exercise1, workout1.getDate()));
+        assertEquals(130, workoutSorting.getPrOnDay(exercise3, workout2.getDate()));
+    }
+
+    @Test
+    public void testGetTotalWeightOnDay() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        assertEquals(2750, workoutSorting.getTotalWeightOnDay(workout2.getDate()));
+    }
+
+    @Test
+    public void testGetUniqueDates() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        List<LocalDate> list = new ArrayList<>();
+        list.add(workout2.getDate());
+        list.add(workout1.getDate());
+
+        List<LocalDate> unique = workoutSorting.getUniqueDates();
+        for (int i = 0; i < list.size(); i++) {
+            assertEquals(list.get(i), unique.get(i));
+        }
+    }
+
+    @Test
+    public void getWeightPerDay() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        HashMap<LocalDate, Integer> hashmap = new HashMap<>();
+        hashmap.put(workout1.getDate(), workout1.getTotalWeight());
+        hashmap.put(workout2.getDate(), workout2.getTotalWeight());
+        assertEquals(hashmap, workoutSorting.getWeightPerDay());
+    }
 }

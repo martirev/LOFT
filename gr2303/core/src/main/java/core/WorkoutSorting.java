@@ -1,10 +1,12 @@
 package core;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -89,6 +91,32 @@ public class WorkoutSorting {
     }
 
     /**
+     * Returns the personal record (PR) for a specific exercise on a given date.
+     * The PR is the highest weight lifted for the type of exercise on the given
+     * date.
+     *
+     * @param exercise the exercise type to get the PR for, only the exercise name
+     *                 matters (e.g. "Squat")
+     * @param date     the date to get the PR for
+     * @return the PR for the exercise on the given date, or 0 if no PR was found
+     */
+    public int getPrOnDay(Exercise exercise, LocalDate date) {
+        int max = 0;
+        for (Workout workout : workouts) {
+            if (workout.getDate().equals(date)) {
+                int val = workout.getExercises().stream()
+                        .filter(tempExercise -> tempExercise.getName().equals(exercise.getName()))
+                        .mapToInt(tempExercise -> tempExercise.getLocalPr()).max()
+                        .orElse(0);
+                if (val > max) {
+                    max = val;
+                }
+            }
+        }
+        return max;
+    }
+
+    /**
      * The method returns the weight of the pr in the workouts of the exercise with
      * the given name. Uses the HashMap created in the constructor.
      *
@@ -110,5 +138,44 @@ public class WorkoutSorting {
         return sameExersices.keySet().stream()
                 .filter(n -> n.toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the total weight lifted on a specific day.
+     *
+     * @param date the date to filter the workouts by
+     * @return the total weight lifted on the specified day
+     */
+    public int getTotalWeightOnDay(LocalDate date) {
+        return workouts.stream()
+                .filter(w -> w.getDate().equals(date))
+                .mapToInt(Workout::getTotalWeight)
+                .sum();
+    }
+
+    /**
+     * Returns a list of unique dates from the workouts in chronological order.
+     *
+     * @return a list of LocalDate objects representing unique dates from the
+     *         workouts in ascending order.
+     */
+    public List<LocalDate> getUniqueDates() {
+        return workouts.stream()
+                .map(Workout::getDate)
+                .distinct()
+                .sorted((d1, d2) -> d1.compareTo(d2))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns a map of the total weight lifted per day, where the keys are the
+     * unique dates of the workouts and the values are the total weight lifted on
+     * each day.
+     *
+     * @return a map of the total weight lifted per day
+     */
+    public Map<LocalDate, Integer> getWeightPerDay() {
+        return getUniqueDates().stream().map(d -> Map.entry(d, getTotalWeightOnDay(d)))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }
