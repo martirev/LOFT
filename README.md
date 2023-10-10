@@ -4,21 +4,21 @@
 
 ## Overview
 
-This project is structured following a module template to ensure a clean and organized codebase. The main codebase for the project is located in the [gr2303/core/src/main/java/core](gr2303/core/src/main/java/core) directory, while the app is launched from [gr2303/ui/src/main/java/ui/App.java](gr2303/ui/src/main/java/ui/App.java).
+This project is structured following a module template to ensure a clean and organized codebase. The main codebase for the project is located in the [loft/core/src/main/java/core](loft/core/src/main/java/core) directory, while the app is launched from [loft/ui/src/main/java/ui/App.java](loft/ui/src/main/java/ui/App.java).
 
 ## Building and Running the App
 
-This project uses Maven to build and run the app. To start, make sure you are in the [project directory](gr2303/), the same directory as README.md, pom.xml, core/ and ui/. Run `cd gr2303` if you are in the root directory (the same directory as this README file).
+This project uses Maven to build and run the app. To start, make sure you are in the [project directory](loft/), the same directory as README.md, pom.xml, core/ and ui/. Run `cd loft` if you are in the root directory (the same directory as this README file).
 
-Then, run the following command to build the project: `mvn install`. This will run all tests, including UI tests, and build the project. To run the app go to the UI module (`cd ui`), and from there run `mvn javafx:run`. This will start the app.
+Then, run the following command to build the project: `mvn install`. This will run all tests, including UI tests, and build the project. To run the app run `mvn javafx:run -f ui/pom.xml` as this runs the ui module, and will start the app.
 
-To test the app, run `mvn test` from the [project directory](gr2303). Make sure the source code is compiled first with `mvn compile`. The command `mvn install` will do both these two in one, among some other things. Doing `mvn test` will run all tests, including UI tests. To only run tests for a specific module, go to that module in the terminal and run `mvn test` from there.
+To test the app, run `mvn test` from the [project directory](loft). Make sure the source code is compiled first with `mvn compile`. The command `mvn install` will do both these two in one, among some other things. Doing `mvn test` will run all tests, including UI tests. To only run tests for a specific module, go to that module in the terminal and run `mvn test` from there.
 
-To check the code coverage, run `mvn jacoco:report` from the [project directory](gr2303). This will generate a report for all modules. These can be viewed by opening the index.html file in each respective target/site/jacoco folder.
+To check the code coverage, run `mvn jacoco:report` from the [project directory](loft). This will generate a report for all modules. These can be viewed by opening the index.html file in each respective target/site/jacoco folder.
 
-To check for possible bugs run `mvn spotbugs:check` from the [project directory](gr2303). This will run the SpotBugs tool and check for possible bugs in the code. The results are printed to the terminal, or can be viewed with GUI using `mvn spotbugs:gui`.
+To check for possible bugs run `mvn spotbugs:check` from the [project directory](loft). This will run the SpotBugs tool and check for possible bugs in the code. The results are printed to the terminal, or can be viewed with GUI using `mvn spotbugs:gui`.
 
-To check the code for style errors, run `mvn checkstyle:check` from the [project directory](gr2303). This will generate a report for all modules. The results can be viewed in the terminal, or by viewing the checkstyle-result.xml file in each modules target folder.
+To check the code for style errors, run `mvn checkstyle:check` from the [project directory](loft). This will generate a report for all modules. The results can be viewed in the terminal, or by viewing the checkstyle-result.xml file in each modules target folder.
 
 ## Requirements
 
@@ -35,7 +35,7 @@ To check the code for style errors, run `mvn checkstyle:check` from the [project
 
 The project's directory structure is organized as follows:
 
-- gr2303
+- loft
   - core
     - src
       - main
@@ -62,3 +62,13 @@ The project's directory structure is organized as follows:
           - ui
             - controller
               - This is where all the tests for the controllers are located.
+    - filehandling
+      - src
+        - main
+          - java
+            - filehandling
+              - Here are the necessary files for handling filereading.
+        - test
+          - java
+            - filehandling
+              - Here are all the tests for file handling located.

@@ -17,14 +17,14 @@ cache:
 test:
   stage: test
   before_script:
-    - cd gr2303
+    - cd loft
   script:
     - mvn clean test $MAVEN_CLI_OPTS
 
 build:
   stage: build
   before_script:
-    - cd gr2303
+    - cd loft
   script:
     - mvn clean install $MAVEN_CLI_OPTS
 
@@ -32,17 +32,18 @@ jacoco:
   stage: test
   needs: ["test"]
   before_script:
-    - cd gr2303
+    - cd loft
   script:
     - mvn clean test $MAVEN_CLI_OPTS
     - mvn jacoco:report
     - cat core/target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/Jacoco Coverage core:/'
+    - cat filehandling/target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/Jacoco Coverage filehandling:/'
 
 checkstyle:
   stage: validate
   needs: []
   before_script:
-    - cd gr2303
+    - cd loft
   script:
     - mvn checkstyle:check
 
@@ -50,7 +51,7 @@ spotbugs:
   stage: validate
   needs: ["build"]
   before_script:
-    - cd gr2303
+    - cd loft
   script:
     - mvn clean install $MAVEN_CLI_OPTS
     - mvn spotbugs:check

@@ -16,7 +16,7 @@
             "name": "App",
             "request": "launch",
             "mainClass": "ui/ui.App",
-            "projectName": "gr2303"
+            "projectName": "loft"
         },
         {
             "type": "java",
@@ -26,7 +26,7 @@
         },
         {
             "type": "java",
-            "name": "gr2303 App",
+            "name": "loft App",
             "request": "launch",
             "mainClass": "ui/ui.App",
             "vmArgs": [
@@ -37,7 +37,7 @@
                 "--add-exports",
                 "javafx.graphics/com.sun.javafx.application=ALL-UNNAMED"
             ],
-            "projectName": "gr2303"
+            "projectName": "loft"
         }
     ]
 }

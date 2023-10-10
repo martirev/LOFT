@@ -1,8 +1,8 @@
 schemaVersion: 2.1.0
 metadata:
-  name: gr2303
+  name: loft
 components:
-  - name: gr2303
+  - name: loft
     container:
       image: adrianstoica/it1901:latest
       memoryLimit: 3Gi
@@ -34,6 +34,6 @@ components:
 commands:
   - id: changedir
     exec:
-      component: gr2303
-      commandLine: cd gr2303
+      component: loft
+      commandLine: cd loft
       label: change directory
