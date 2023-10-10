@@ -1,6 +1,8 @@
 package core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,12 +30,15 @@ public class ExerciseTest {
         exercise.addSet(set2);
         exercise.addSet(set3);
 
-        assertEquals(3, exercise.getSets().size());
+        assertEquals(3, exercise.getSets().size(), "Should be 3 sets");
     }
 
     @Test
     public void testGetName() {
-        assertTrue(exercise.getName().equals("Bench Press"));
+        assertTrue(exercise.getName().equals("Bench Press"),
+                "Exercise name should be Bench Press");
+        assertTrue(exercise.toString().equals("Bench Press"),
+                "Exercise name should be Bench Press");
     }
 
     @Test
@@ -46,7 +51,7 @@ public class ExerciseTest {
         exercise.addSet(set2);
         exercise.addSet(set3);
 
-        assertEquals(2000, exercise.getTotalWeight());
+        assertEquals(2000, exercise.getTotalWeight(), "Total weight should be 2000");
     }
 
     @Test
@@ -59,9 +64,9 @@ public class ExerciseTest {
         exercise.addSet(set2);
         exercise.addSet(set3);
 
-        assertEquals(3, exercise.getSets().size());
+        assertEquals(3, exercise.getSets().size(), "Should be 3 sets");
         exercise.getSets().clear();
-        assertEquals(3, exercise.getSets().size());
+        assertEquals(3, exercise.getSets().size(), "getSets() should not reveal the actual list");
     }
 
     @Test
@@ -74,7 +79,16 @@ public class ExerciseTest {
         exercise.addSet(set2);
         exercise.addSet(set3);
 
-        assertEquals(100, exercise.getLocalPr());
+        assertEquals(100, exercise.getLocalPr(), "Local PR should be 100");
+    }
+
+    @Test
+    public void testConstructor() {
+        Exercise exercise = new Exercise("Bench Press");
+        assertTrue(exercise.getName().equals("Bench Press"), "Exercise name should be Bench Press");
+
+        assertThrows(IllegalArgumentException.class, () -> new Exercise(null),
+                "Should not be possible to create an exercise with null name");
     }
 
     @Test
@@ -85,6 +99,42 @@ public class ExerciseTest {
 
         Exercise exercise = new Exercise("Bench Press", set1, set2, set3);
 
-        assertEquals(3, exercise.getSets().size());
+        assertEquals(3, exercise.getSets().size(), "Should be 3 sets");
+    }
+
+    @Test
+    public void testHashCode() {
+        Exercise exercise1 = new Exercise("Bench Press");
+        assertEquals(exercise1.hashCode(), exercise.hashCode());
+
+        Exercise exercise2 = new Exercise("Squats");
+        assertNotEquals(exercise2.hashCode(), exercise1.hashCode());
+
+        Exercise exercise3 = new Exercise("Bench Press");
+        assertEquals(exercise1.hashCode(), exercise3.hashCode());
+
+        exercise3.addSet(new Set(8, 100));
+        assertNotEquals(exercise1.hashCode(), exercise3.hashCode());
+
+        exercise1.addSet(new Set(8, 100));
+        assertEquals(exercise1.hashCode(), exercise3.hashCode());
+    }
+
+    @Test
+    public void testEquals() {
+        Exercise exercise1 = new Exercise("Bench Press");
+        assertEquals(exercise1, exercise1);
+
+        assertNotEquals(exercise1, null);
+        assertNotEquals(exercise1, new String());
+
+        Exercise exercise2 = new Exercise("Squats");
+        assertNotEquals(exercise1, exercise2);
+
+        Exercise exercise3 = new Exercise("Bench Press");
+        assertEquals(exercise1, exercise3);
+
+        exercise3.addSet(new Set(8, 100));
+        assertNotEquals(exercise1, exercise3);
     }
 }

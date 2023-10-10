@@ -24,8 +24,12 @@ public class Workout {
      * Constructor for a workout that lets you specify the date.
      *
      * @param date the date of the workout
+     * @throws IllegalArgumentException if the date is null
      */
     public Workout(LocalDate date) {
+        if (date == null) {
+            throw new IllegalArgumentException("Date cannot be null");
+        }
         this.date = date.toString();
     }
 
@@ -74,8 +78,8 @@ public class Workout {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((exercises == null) ? 0 : exercises.hashCode());
-        result = prime * result + ((date == null) ? 0 : date.hashCode());
+        result = prime * result + exercises.hashCode();
+        result = prime * result + date.hashCode();
         return result;
     }
 
@@ -97,23 +101,20 @@ public class Workout {
             return false;
         }
         Workout other = (Workout) obj;
-        if (exercises == null) {
-            if (other.getExercises() != null) {
-                return false;
-            }
-        } else if (!exercises.equals(other.getExercises())) {
+        if (!exercises.equals(other.getExercises())) {
             return false;
         }
-        if (getDate() == null) {
-            if (other.getDate() != null) {
-                return false;
-            }
-        } else if (!getDate().equals(other.getDate())) {
+        if (!getDate().equals(other.getDate())) {
             return false;
         }
         return true;
     }
 
+    /**
+     * Returns the total number of sets in the workout.
+     *
+     * @return the total number of sets in the workout
+     */
     private int getTotalSets() {
         int totalSets = 0;
         for (Exercise exercise : exercises) {

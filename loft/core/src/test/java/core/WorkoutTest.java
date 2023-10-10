@@ -1,6 +1,8 @@
 package core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
@@ -30,7 +32,8 @@ public class WorkoutTest {
 
     @Test
     public void testAddExercise() {
-        assertEquals(0, workout.getTotalWeight());
+        assertEquals(0, workout.getTotalWeight(),
+                "Total weight should be 0 as no exercises are added yet");
 
         Set benchSet1 = new Set(10, 150);
         Set benchSet2 = new Set(8, 130);
@@ -52,8 +55,8 @@ public class WorkoutTest {
 
         workout.addExercise(exercise1);
         workout.addExercise(exercise2);
-        assertEquals(8520, workout.getTotalWeight());
-        assertEquals(LocalDate.now(), workout.getDate());
+        assertEquals(8520, workout.getTotalWeight(), "Total weight should be 8520");
+        assertEquals(LocalDate.now(), workout.getDate(), "The date should be today");
     }
 
     @Test
@@ -61,7 +64,8 @@ public class WorkoutTest {
         workout.addExercise(exercise1);
         workout.addExercise(exercise2);
 
-        assertTrue(workout.getExercises().containsAll(Arrays.asList(exercise1, exercise2)));
+        assertTrue(workout.getExercises().containsAll(Arrays.asList(exercise1, exercise2)),
+                "Should contain both exercises");
     }
 
     @Test
@@ -72,7 +76,8 @@ public class WorkoutTest {
         List<Exercise> exercises = workout.getExercises();
         exercises.clear();
 
-        assertTrue(workout.getExercises().containsAll(Arrays.asList(exercise1, exercise2)));
+        assertTrue(workout.getExercises().containsAll(Arrays.asList(exercise1, exercise2)),
+                "getExercises() should not reveal the actual list");
     }
 
     @Test
@@ -87,14 +92,17 @@ public class WorkoutTest {
         exercise2.addSet(squatSet3);
         exercise2.addSet(squatSet4);
         workout.addExercise(exercise2);
-        assertEquals(4960, workout.getTotalWeight());
+        assertEquals(4960, workout.getTotalWeight(), "Total weight should be 4960");
     }
-    
+
     @Test
     public void testGetDate() {
         LocalDate date = LocalDate.of(2020, 1, 1);
         Workout workout = new Workout(date);
-        assertEquals(date, workout.getDate());
+
+        assertThrows(IllegalArgumentException.class, () -> new Workout(null),
+                "Date cannot be null");
+        assertEquals(date, workout.getDate(), "Date should be 2020-01-01");
     }
 
     @Test
@@ -107,6 +115,42 @@ public class WorkoutTest {
         exercise2.addSet(squatSet2);
         workout.addExercise(exercise2);
         assertTrue(workout.toString().contains("Number of sets: 2"));
+    }
 
-    } 
+    @Test
+    public void testEquals() {
+        Workout workout1 = new Workout();
+        assertEquals(workout1, workout1);
+        assertNotEquals(workout1, null);
+
+        assertNotEquals(workout1, new String());
+
+        Workout workout2 = new Workout();
+        workout2.addExercise(exercise1);
+        assertNotEquals(workout1, workout2);
+
+        Workout workout3 = new Workout(LocalDate.of(2020, 1, 1));
+        assertNotEquals(workout1, workout3);
+
+        Workout workout4 = new Workout();
+        workout1.addExercise(exercise1);
+        workout4.addExercise(exercise1);
+        assertEquals(workout1, workout4);
+    }
+
+    @Test
+    public void testHashCode() {
+        Workout workout1 = new Workout();
+        Workout workout2 = new Workout();
+        assertEquals(workout1.hashCode(), workout2.hashCode());
+
+        Workout workout3 = new Workout(LocalDate.of(2020, 1, 1));
+        assertNotEquals(workout1.hashCode(), workout3.hashCode());
+
+        workout1.addExercise(exercise1);
+        assertNotEquals(workout1.hashCode(), workout2.hashCode());
+
+        workout2.addExercise(exercise1);
+        assertEquals(workout1.hashCode(), workout2.hashCode());
+    }
 }
