@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -111,7 +110,7 @@ public class WorkoutSortingTest {
     }
 
     @Test
-    public void testGetExercises() {
+    public void testGetSameExercisesString() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
         List<Exercise> exercises = workoutSorting.getSameExersices("Bench Press");
         assertEquals(2, exercises.size());
@@ -136,12 +135,16 @@ public class WorkoutSortingTest {
     @Test
     public void testGetUniqueDates() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
-        HashSet<LocalDate> list = new HashSet<>();
-        list.add(workout1.getDate());
+        List<LocalDate> list = new ArrayList<>();
         list.add(workout2.getDate());
-        assertEquals(list, workoutSorting.getUniqueDates());
+        list.add(workout1.getDate());
+
+        List<LocalDate> unique = workoutSorting.getUniqueDates();
+        for (int i = 0; i < list.size(); i++) {
+            assertEquals(list.get(i), unique.get(i));
+        }
     }
-    
+
     @Test
     public void getWeightPerDay() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
@@ -150,8 +153,4 @@ public class WorkoutSortingTest {
         hashmap.put(workout2.getDate(), workout2.getTotalWeight());
         assertEquals(hashmap, workoutSorting.getWeightPerDay());
     }
-
-
-
-
 }

@@ -90,13 +90,25 @@ public class WorkoutSorting {
         return getSameExersices(exercise.getName());
     }
 
+    /**
+     * Returns the personal record (PR) for a specific exercise on a given date.
+     * The PR is the highest weight lifted for the type of exercise on the given
+     * date.
+     *
+     * @param exercise the exercise type to get the PR for, only the exercise name
+     *                 matters (e.g. "Squat")
+     * @param date     the date to get the PR for
+     * @return the PR for the exercise on the given date, or 0 if no PR was found
+     */
     public int getPrOnDay(Exercise exercise, LocalDate date) {
         int max = 0;
-        for(Workout workout : workouts) {
-            if(workout.getDate().equals(date)) {
-                int val = workout.getExercises().stream().filter(tempExercise -> tempExercise.getName()
-                .equals(exercise.getName())).mapToInt(tempExercise -> tempExercise.getLocalPr()).max().orElse(0);
-                if(val > max ) {
+        for (Workout workout : workouts) {
+            if (workout.getDate().equals(date)) {
+                int val = workout.getExercises().stream()
+                        .filter(tempExercise -> tempExercise.getName().equals(exercise.getName()))
+                        .mapToInt(tempExercise -> tempExercise.getLocalPr()).max()
+                        .orElse(0);
+                if (val > max) {
                     max = val;
                 }
             }
@@ -142,15 +154,17 @@ public class WorkoutSorting {
     }
 
     /**
-     * Returns a collection of unique dates from the workouts.
+     * Returns a list of unique dates from the workouts in chronological order.
      *
-     * @return a collection of LocalDate objects representing unique dates from the
-     *         workouts.
+     * @return a list of LocalDate objects representing unique dates from the
+     *         workouts in ascending order.
      */
-    public Collection<LocalDate> getUniqueDates() {
+    public List<LocalDate> getUniqueDates() {
         return workouts.stream()
                 .map(Workout::getDate)
-                .collect(Collectors.toSet());
+                .distinct()
+                .sorted((d1, d2) -> d1.compareTo(d2))
+                .collect(Collectors.toList());
     }
 
     /**

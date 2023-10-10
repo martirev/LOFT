@@ -39,7 +39,7 @@
         </Button>
       <LineChart fx:id="totalWeightChart" layoutX="495.0" layoutY="240.0" prefHeight="200.0" prefWidth="400.0">
         <xAxis>
-          <CategoryAxis label="Date" fx:id="xAxis"/>
+          <CategoryAxis label="Date"/>
         </xAxis>
         <yAxis>
           <NumberAxis side="LEFT" />
@@ -57,7 +57,7 @@
       </Text>
       <LineChart fx:id="benchPressChart" horizontalZeroLineVisible="false" layoutX="60.0" layoutY="520.0" prefHeight="200.0" prefWidth="400.0">
          <xAxis>
-            <CategoryAxis label="Date" fx:id="xAxis" />
+            <CategoryAxis label="Date" />
          </xAxis>
          <yAxis>
             <NumberAxis side="LEFT" />
@@ -65,7 +65,7 @@
       </LineChart>
       <LineChart fx:id="deadliftChart" layoutX="470.0" layoutY="520.0" prefHeight="200.0" prefWidth="400.0">
          <xAxis>
-            <CategoryAxis label="Date" fx:id="xAxis" />
+            <CategoryAxis label="Date" />
          </xAxis>
          <yAxis>
             <NumberAxis side="LEFT" />
@@ -84,7 +84,7 @@
       </Text>
       <LineChart fx:id="squatChart" layoutX="910.0" layoutY="520.0" prefHeight="200.0" prefWidth="400.0">
          <xAxis>
-            <CategoryAxis label="Date" fx:id="xAxis" />
+            <CategoryAxis label="Date" />
          </xAxis>
          <yAxis>
             <NumberAxis side="LEFT" />
