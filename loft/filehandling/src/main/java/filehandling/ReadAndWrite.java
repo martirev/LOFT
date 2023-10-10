@@ -40,6 +40,13 @@ public abstract class ReadAndWrite {
     }
 
     /**
+     * Gets the file location for ReadAndWrite class.
+     */
+    public static String getFileLocation() {
+        return fileLocation;
+    }
+
+    /**
      * Registers a new user by adding it to the list of existing users and writing
      * the updated list to a file.
      *
@@ -86,6 +93,11 @@ public abstract class ReadAndWrite {
             users = registerUserGetUsers(user);
             tmpUser = getUser(user, users);
         }
+        if (tmpUser == null) {
+            throw new IllegalStateException(
+                    "User should exist at this point."
+                            + " Filelocation is probably a folder and not file.");
+        }
         tmpUser.addWorkout(workout);
 
         try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
@@ -125,6 +137,9 @@ public abstract class ReadAndWrite {
      *         but with updated data.
      */
     private static User getUser(User user, List<User> users) {
+        if (users == null) {
+            return null;
+        }
         return getUser(user.getUsername(), user.getPassword(), users);
     }
 

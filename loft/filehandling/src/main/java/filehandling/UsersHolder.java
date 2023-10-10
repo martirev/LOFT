@@ -1,8 +1,8 @@
 package filehandling;
 
 import core.User;
+import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * This is a class for holding the users in a list. It is used for parsing the
@@ -17,7 +17,7 @@ class UsersHolder {
      * @param users List of users
      */
     public UsersHolder(List<User> users) {
-        this.users = users;
+        this.users = new ArrayList<User>(users);
     }
 
     /**
@@ -26,6 +26,6 @@ class UsersHolder {
      * @return List of users
      */
     public List<User> getUsers() {
-        return users;
+        return new ArrayList<User>(users);
     }
 }
