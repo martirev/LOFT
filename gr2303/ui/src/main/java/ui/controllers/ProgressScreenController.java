@@ -2,12 +2,10 @@ package ui.controllers;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.Year;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Collections;
-
 import core.Exercise;
 import core.ReadAndWrite;
 import core.User;
@@ -36,21 +34,12 @@ public class ProgressScreenController extends SceneSwitcher {
     @FXML
     private LineChart<String, Number> squatChart;
 
-    WorkoutSorting workoutSorting;
+    private WorkoutSorting workoutSorting;
 
-    private ReadAndWrite readAndWrite;
-
-    public ProgressScreenController() {
-        readAndWrite = new ReadAndWrite();
-    }
-
-    public ProgressScreenController(String location) {
-        readAndWrite = new ReadAndWrite(location);
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user = readAndWrite.returnUserClassFromFile();
+        User user = ReadAndWrite.returnUserClassFromFile(getUser());
         workoutSorting = new WorkoutSorting(user.getWorkouts());
         populateTopExercisesCharts();
         populateTotalWeightChart();
@@ -69,7 +58,7 @@ public class ProgressScreenController extends SceneSwitcher {
     *@param workouts
     *</p>
     */
-    @FXML
+
     public void populateTotalWeightChart() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Total lifted weight per workout");
@@ -99,7 +88,7 @@ public class ProgressScreenController extends SceneSwitcher {
     *@param workouts
     *</p>
     */
-    @FXML
+    
     public void populateTopExercisesCharts() {
         XYChart.Series<String, Number> benchSeries = new XYChart.Series<>();
         benchSeries.setName("Highest bench PR per workout");
@@ -108,36 +97,45 @@ public class ProgressScreenController extends SceneSwitcher {
         XYChart.Series<String, Number> squatSeries = new XYChart.Series<>();
         squatSeries.setName("Highest squat PR per workout");
 
-        List<Workout> list = workoutSorting.getMostRecentWorkouts();
-        Collections.reverse(list);
-        for(Workout workout : list) {
-            LocalDate date = workout.getDate();
-            for(Exercise exercise : workout.getExercises()) {
-                 switch (exercise.getName().toLowerCase().replaceAll("\s", "")) {
+        for (LocalDate date : workoutSorting.getUniqueDates()) {
+            for (var entry : workoutSorting.getSameExersices().entrySet()) {
+                String name = entry.getKey();
+                Exercise exercise = entry.getValue().get(0);
+                switch (name.toLowerCase().replaceAll("\s", "")) {
                     case "benchpress":
-                        benchSeries.getData().add(new XYChart.Data<>(date.toString(), workoutSorting.getPrOnDay(exercise, date)));
+                        benchSeries.getData()
+                                .add(new XYChart.Data<>(date.toString(),
+                                        workoutSorting.getPrOnDay(exercise, date)));
                         break;
-                    case "deadlift" :
-                        deadliftSeries.getData().add(new XYChart.Data<>(date.toString(), workoutSorting.getPrOnDay(exercise, date)));
+                    case "deadlift":
+                        deadliftSeries.getData()
+                                .add(new XYChart.Data<>(date.toString(),
+                                        workoutSorting.getPrOnDay(exercise, date)));
                         break;
                     case "squat":
-                        squatSeries.getData().add(new XYChart.Data<>(date.toString(), workoutSorting.getPrOnDay(exercise, date)));
+                        squatSeries.getData()
+                                .add(new XYChart.Data<>(date.toString(),
+                                        workoutSorting.getPrOnDay(exercise, date)));
+                        break;
+                    default:
                         break;
                 }
             }
         }
+
         benchPressChart.getData().add(benchSeries);
         deadliftChart.getData().add(deadliftSeries);
         squatChart.getData().add(squatSeries);
     }
+     
 
     @FXML
-    private void handleReturnPress() {
+    public void handleReturnPress() {
         insertPane("HomeScreen.fxml");
     }
 
     @FXML
-    private void switchToJournal() {
+    public void switchToJournal() {
         insertPane("JournalScreen.fxml");
     }
 }

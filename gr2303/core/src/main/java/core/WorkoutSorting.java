@@ -104,10 +104,6 @@ public class WorkoutSorting {
         return max;
     }
 
-    
-    
-          
-
     /**
      * The method returns the weight of the pr in the workouts of the exercise with
      * the given name. Uses the HashMap created in the constructor.
@@ -138,7 +134,7 @@ public class WorkoutSorting {
      * @param date the date to filter the workouts by
      * @return the total weight lifted on the specified day
      */
-    private int getTotalWeightOnDay(LocalDate date) {
+    public int getTotalWeightOnDay(LocalDate date) {
         return workouts.stream()
                 .filter(w -> w.getDate().equals(date))
                 .mapToInt(Workout::getTotalWeight)
@@ -151,7 +147,7 @@ public class WorkoutSorting {
      * @return a collection of LocalDate objects representing unique dates from the
      *         workouts.
      */
-    private Collection<LocalDate> getUniqueDates() {
+    public Collection<LocalDate> getUniqueDates() {
         return workouts.stream()
                 .map(Workout::getDate)
                 .collect(Collectors.toSet());
