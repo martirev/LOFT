@@ -48,6 +48,9 @@ public abstract class SceneSwitcher implements Initializable {
             case "HomeScreen.fxml":
                 controller = new HomeScreenController();
                 break;
+            case "ProgressScreen.fxml":
+                controller = new ProgressScreenController();
+                break;
             case "WorkoutScreen.fxml":
                 controller = new WorkoutScreenController();
                 break;
