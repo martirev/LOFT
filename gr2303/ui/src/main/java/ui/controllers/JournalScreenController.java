@@ -113,7 +113,6 @@ public class JournalScreenController extends SceneSwitcher {
      */
     @FXML
     private void switchToProgress() {
-        // UNCOMMENT THIS WHEN PROGRESS SCREEN IS IMPLEMENTED
-        // insertPane("ProgressScreen.fxml");
+        insertPane("ProgressScreen.fxml");
     }
 }
