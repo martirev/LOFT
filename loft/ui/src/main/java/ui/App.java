@@ -9,8 +9,8 @@ import ui.controllers.LoginScreenController;
 
 /**
  * The main class of the application that extends the JavaFX Application class.
- * It sets up the primary stage and loads the HomeScreen.fxml file with the
- * HomeScreenController as its controller.
+ * It sets up the primary stage and loads the LoginScreen.fxml file with the
+ * LoginScreenController as its controller.
  */
 public class App extends Application {
 
