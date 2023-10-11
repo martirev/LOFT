@@ -16,10 +16,9 @@ import javafx.scene.control.TextArea;
 /**
  * The JournalScreenController class is responsible for controlling the Journal
  * Screen of the application. It extends the SceneSwitcher class and initializes
- * the user's workout history and workout history. It loads the most recent
- * workouts and displays them in the exercises list view. It also loads the
- * selected workout and displays its exercises and sets in the workout list
- * view.
+ * the user's workout history. It loads the most recent workouts and displays
+ * them in the exercises list view. It also loads the selected workout and
+ * displays its exercises and sets in the workout list view.
  */
 public class JournalScreenController extends SceneSwitcher {
 
@@ -49,7 +48,7 @@ public class JournalScreenController extends SceneSwitcher {
             Workout selected = workoutHistoryListView.getSelectionModel().getSelectedItem();
             loadWorkout(selected);
         });
-        loadExerciseHistory();
+        loadWorkoutHistory();
     }
 
     /**
@@ -57,7 +56,7 @@ public class JournalScreenController extends SceneSwitcher {
      * them to the exercises list view.
      * Uses the workoutSorting object to get the most recent workouts.
      */
-    private void loadExerciseHistory() {
+    private void loadWorkoutHistory() {
         List<Workout> workouts = workoutSorting.getMostRecentWorkouts();
         for (Workout workout : workouts) {
             workoutHistoryListView.getItems().add(workout);

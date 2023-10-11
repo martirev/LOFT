@@ -15,7 +15,7 @@ participant Core
 database jsonFile2
 
 User2 -> UserInterface2: User request viewing previous workouts
-UserInterface2 -> Controller2: loadExerciseHistory()
+UserInterface2 -> Controller2: loadWorkoutHistory()
 Controller2 -> Core: getMostRecentWorkouts()
 Core -> jsonFile2: request users workout history
 jsonFile2 -> Core: Respond with users history

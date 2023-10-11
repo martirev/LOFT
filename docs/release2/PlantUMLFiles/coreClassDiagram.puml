@@ -51,9 +51,9 @@ package core {
 
         +WorkoutSorting(List<Workout> workouts)
         +getMostRecentWorkouts()
-        +getSameExersices()
-        +getSameExersices(String name)
-        +getSameExersices(Exercise exercise)
+        +getSameExercises()
+        +getSameExercises(String name)
+        +getSameExercises(Exercise exercise)
         +getPrOnDay(Exercise exercise, LocalDate date)
         +getExercisesPr(String name)
         +searchForExercises(String name)
