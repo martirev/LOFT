@@ -1,0 +1,72 @@
+@startuml coreClassDiagram
+
+package core {
+    class Exercise {
+        - name: String
+        -sets: List<Set>
+
+        +Exercise(String name)
+        +Exercise(String name, Set... sets)
+        +addSet(Set set)
+        +getTotalWeight(): int
+        +getLocalPr(): int
+    }
+    class Set {
+        -reps: int
+        -weight: int
+
+        +Set(int reps, int weight)
+        +getReps()
+        +getReps()
+    }
+    class User {
+        - name: String
+        - username: String
+        -password: String
+        -passwordHash: String
+        -email: String
+        -workouts: ArrayList<Workout>
+
+        +User(String name, String username, String password, String email)
+        +getNumberOfWorkouts()
+        +getWorkouts()
+        +addWorkout(Workout workout)
+        +hash(String word)
+    }
+    class Workout {
+        -exercises: ArrayList<Exercise>
+        -date: String
+
+        +workout()
+        +workout(LocalDate date)
+        +addExercise(Exercise exercise)
+        +getExercises()
+        +getTotalWeight()
+        +getDate()
+        +getTotalSets()
+    }
+    class WorkoutSorting {
+        -workouts: ArrayList<Workout>
+        -sameExercises: HashMap<String, List<Exercise>>
+
+        +WorkoutSorting(List<Workout> workouts)
+        +getMostRecentWorkouts()
+        +getSameExersices()
+        +getSameExersices(String name)
+        +getSameExersices(Exercise exercise)
+        +getPrOnDay(Exercise exercise, LocalDate date)
+        +getExercisesPr(String name)
+        +searchForExercises(String name)
+        +getTotalWeightOnDay(LocalDate date)
+        +getUniqueDates()
+        +getWeightPerDay()
+    }
+
+    WorkoutSorting --> "*" Workout: contains
+    WorkoutSorting --> "*" Exercise: contains
+    User --> "*"  Workout: have completed
+    Workout --> "*" Exercise: contains
+    Exercise  --> "*" Set: contains
+
+}
+@enduml
