@@ -36,6 +36,9 @@ To check the code for style errors, run `mvn checkstyle:check` from the [project
 The project's directory structure is organized as follows:
 
 - loft
+  - config
+    - checkstyle
+      - This is where the checkstyle rules are located.
   - core
     - src
       - main
@@ -62,13 +65,13 @@ The project's directory structure is organized as follows:
           - ui
             - controller
               - This is where all the tests for the controllers are located.
-    - filehandling
-      - src
-        - main
-          - java
-            - filehandling
-              - Here are the necessary files for handling filereading.
-        - test
-          - java
-            - filehandling
-              - Here are all the tests for file handling located.
+  - filehandling
+    - src
+      - main
+        - java
+          - filehandling
+            - Here are the necessary files for handling filereading.
+      - test
+        - java
+          - filehandling
+            - Here are all the tests for file handling located.

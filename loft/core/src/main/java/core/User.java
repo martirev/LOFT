@@ -16,7 +16,7 @@ public class User {
 
     // This is a transient field. It will not be serialized.
     private transient String password;
-    private final String passwordHash;
+    private String passwordHash;
     private final String email;
     private ArrayList<Workout> workouts;
 
@@ -28,8 +28,13 @@ public class User {
      * @param username the username of the user
      * @param password the password of the user
      * @param email    the email of the user
+     * @throws IllegalArgumentException if any of the parameters are null
      */
     public User(String name, String username, String password, String email) {
+        if (name == null || username == null || password == null || email == null) {
+            throw new IllegalArgumentException("Null values are not allowed");
+        }
+
         this.name = name;
         this.username = username;
         this.password = password;
@@ -72,6 +77,7 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+        this.passwordHash = hash(password);
     }
 
     /**
@@ -130,7 +136,8 @@ public class User {
         try {
             digest = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Could not hash word");
+            // THIS WILL NEVER HAPPEN
+            throw new IllegalStateException("SHA-256 is not supported");
         }
         byte[] encodedhash = digest.digest(word.getBytes(StandardCharsets.UTF_8));
         return bytesToHex(encodedhash);
@@ -151,6 +158,36 @@ public class User {
             hex[j * 2 + 1] = hexArray[lastBits % 16];
         }
         return new String(hex);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + username.hashCode();
+        result = prime * result + passwordHash.hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        User other = (User) obj;
+        if (!username.equals(other.username)) {
+            return false;
+        }
+        if (!passwordHash.equals(other.passwordHash)) {
+            return false;
+        }
+        return true;
     }
 
 }

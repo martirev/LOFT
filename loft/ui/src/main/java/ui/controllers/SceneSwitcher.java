@@ -61,7 +61,7 @@ public abstract class SceneSwitcher implements Initializable {
                 controller = new RegisterScreenController();
                 break;
             default:
-                System.err.println("Error: Invalid FXML filename");
+                throw new IllegalArgumentException("Invalid FXML filename");
         }
 
         try {

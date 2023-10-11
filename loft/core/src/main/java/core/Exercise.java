@@ -21,8 +21,12 @@ public class Exercise {
      * Constructor for an exercise that only lets you specify the name.
      *
      * @param name the name of the exercise
+     * @throws IllegalArgumentException if the name is null
      */
     public Exercise(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Name cannot be null");
+        }
         this.name = name;
     }
 
@@ -32,9 +36,10 @@ public class Exercise {
      *
      * @param name the name of the exercise
      * @param sets the sets to add to the exercise
+     * @throws IllegalArgumentException if the name is null
      */
     public Exercise(String name, Set... sets) {
-        this.name = name;
+        this(name);
         this.sets = new ArrayList<Set>(Arrays.asList(sets));
     }
 
@@ -107,8 +112,8 @@ public class Exercise {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((sets == null) ? 0 : sets.hashCode());
+        result = prime * result + name.hashCode();
+        result = prime * result + sets.hashCode();
         return result;
     }
 
@@ -130,18 +135,10 @@ public class Exercise {
             return false;
         }
         Exercise other = (Exercise) obj;
-        if (name == null) {
-            if (other.getName() != null) {
-                return false;
-            }
-        } else if (!name.equals(other.getName())) {
+        if (!name.equals(other.getName())) {
             return false;
         }
-        if (sets == null) {
-            if (other.getSets() != null) {
-                return false;
-            }
-        } else if (!sets.equals(other.getSets())) {
+        if (!sets.equals(other.getSets())) {
             return false;
         }
         return true;
