@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import ui.controllers.LoginScreenController;
 
@@ -16,11 +17,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        stage.setTitle("Light Weight");
+        stage.setTitle("LØFT");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
         fxmlLoader.setController(new LoginScreenController());
 
         stage.setScene(new Scene(fxmlLoader.load()));
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("images/weightlifter.png")));
 
         stage.show();
     }

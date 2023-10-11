@@ -209,6 +209,9 @@ public class WorkoutScreenController extends SceneSwitcher {
      */
     @FXML
     private void handleFinishPress() {
+        if (workout.getExercises().isEmpty()) {
+            return;
+        }
         ReadAndWrite.writeWorkoutToUser(workout, getUser());
         insertPane("HomeScreen.fxml");
     }
