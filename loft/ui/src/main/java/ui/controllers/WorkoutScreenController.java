@@ -145,7 +145,7 @@ public class WorkoutScreenController extends SceneSwitcher {
      * @param newValue       the new value of the search bar
      */
     private void searchUpdated(WorkoutSorting workoutSorting, String newValue) {
-        if (newValue == null || newValue.isEmpty()) {
+        if (newValue.isEmpty()) {
             editButton.setDisable(true);
         }
         String dummy = "Add as new";
@@ -162,7 +162,7 @@ public class WorkoutScreenController extends SceneSwitcher {
      * @param newValue the new value of the set inputfield
      */
     private void setFieldUpdated(String newValue) {
-        if (newValue == null || newValue.isEmpty()) {
+        if (newValue.isEmpty()) {
             newValue = "0";
         }
 
@@ -236,10 +236,6 @@ public class WorkoutScreenController extends SceneSwitcher {
     @FXML
     private void handleEditButton() {
         String selectedExercisename = dropdownMenu.getSelectionModel().getSelectedItem();
-
-        if (selectedExercisename == null) {
-            return;
-        }
 
         selectedExercise = new Exercise(selectedExercisename);
         exerciseSettings.setVisible(true);

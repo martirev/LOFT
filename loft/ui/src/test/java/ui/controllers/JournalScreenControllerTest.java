@@ -1,5 +1,6 @@
 package ui.controllers;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -63,7 +64,7 @@ public class JournalScreenControllerTest extends ApplicationTest {
     public static void tearDown() {
         deleteTestfile();
     }
-    
+
     /**
      * Sets up the test data before running the tests.
      */
@@ -154,15 +155,52 @@ public class JournalScreenControllerTest extends ApplicationTest {
     }
 
     @Test
+    public void testLoadNonExistingWorkout() {
+        ListView<TextArea> workoutListView = lookup("#workoutListView").query();
+        assertEquals(0, workoutListView.getItems().size(),
+                "There should be no workouts shown");
+
+        // There is no listelement in the middle of the list, so this wont click any
+        // workout
+        assertDoesNotThrow(() -> clickOn("#exercisesListView"),
+                "Clicking an empty field should not throw an exception");
+
+        workoutListView = lookup("#workoutListView").query();
+        assertEquals(0, workoutListView.getItems().size(),
+                "There should still be no workouts shown");
+    }
+
+    @Test
+    public void testGoToProgress() {
+        clickOn("Progress");
+        checkOnScene("Progress Journal", "Total weight");
+    }
+
+    @Test
     public void testReturn() {
         clickOn("Return");
+        checkOnScene("LØ", "FT");
+    }
+
+    /**
+     * Checks if the given text nodes are present in the scene.
+     *
+     * @param textNodesToBePresent The text nodes to be checked.
+     */
+    private void checkOnScene(String... textNodesToBePresent) {
         ObservableList<Node> rootChildren = root.getChildrenUnmodifiable();
-        assertTrue(rootChildren.size() == 1);
-        assertTrue(rootChildren.get(0).getId().equals("baseAnchor"));
-        assertTrue(((Parent) rootChildren.get(0)).getChildrenUnmodifiable().stream()
-                .anyMatch(x -> x instanceof Text && ((Text) x).getText().equals("LØ")));
-        assertTrue(((Parent) rootChildren.get(0)).getChildrenUnmodifiable().stream()
-                .anyMatch(x -> x instanceof Text && ((Text) x).getText().equals("FT")));
+        assertTrue(rootChildren.size() == 1, "There should only be one child of the root");
+        assertTrue(rootChildren.get(0).getId().equals("baseAnchor"),
+                "The child should be the baseAnchor");
+
+        for (String s : textNodesToBePresent) {
+            assertTrue(((Parent) rootChildren.get(0))
+                    .getChildrenUnmodifiable()
+                    .stream()
+                    .anyMatch(x -> x instanceof Text
+                            && ((Text) x).getText().equals(s)),
+                    "The text \"" + s + "\" should be present");
+        }
     }
 
     private static void deleteTestfile() {

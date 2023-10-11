@@ -154,7 +154,7 @@ public class WorkoutSortingTest {
     }
 
     @Test
-    public void searchForExercises() {
+    public void testSearchForExercises() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
 
         Collection<String> exercisesContainsE = workoutSorting.searchForExercises("e");
@@ -187,7 +187,7 @@ public class WorkoutSortingTest {
     }
 
     @Test
-    public void getWeightPerDay() {
+    public void testGetWeightPerDay() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
         HashMap<LocalDate, Integer> hashmap = new HashMap<>();
         hashmap.put(workout1.getDate(), workout1.getTotalWeight());

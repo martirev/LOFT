@@ -1,6 +1,8 @@
 package ui.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.Exercise;
@@ -18,6 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -70,6 +74,22 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     }
 
     @Test
+    public void testFormatter() {
+        createTestExerciseFirstHalf(1);
+        clickOn("#setField");
+        write("1a2b3c");
+        TextField setField = lookup("#setField").query();
+        assertTrue("123".equals(setField.getText()));
+    }
+
+    @Test
+    public void testEmptyAddAsNew() {
+        clickLabels("Add as new");
+        assertTrue(lookup("#editButton").query().isDisabled(),
+                "The edit button should be disabled when the search bar is empty");
+    }
+
+    @Test
     public void testAddNewFieldTypes() {
         final int wantedSetsCount = 200;
         final int expectedSetsCount = 18;
@@ -104,7 +124,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     public void testAddMultipleExercises() {
         final int wantedSetsCount = 2;
         for (int i = 1; i < 3; i++) {
-            createTestExercise(wantedSetsCount, "Test Exercise " + i);
+            createTestExercise(wantedSetsCount, "Test " + i);
         }
 
         Workout workout = controller.getWorkout();
@@ -114,7 +134,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
             Exercise exercise = workout.getExercises().get(i);
             List<Set> sets = exercise.getSets();
             assertTrue(sets.size() == wantedSetsCount);
-            assertTrue(exercise.getName().equals("Test Exercise " + (i + 1)));
+            assertTrue(exercise.getName().equals("Test " + (i + 1)));
             for (int j = 0; j < wantedSetsCount * 3; j += 3) {
                 assertTrue(sets.get(j / 3).getWeight() == j + 1);
                 assertTrue(sets.get(j / 3).getReps() == j + 2);
@@ -127,9 +147,12 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
         createTestExercise(2);
         clickLabels("Finish workout");
         clickIds("#newWorkoutRectangle");
-        assertDoesNotThrow(() -> clickLabels("Test Exercise"),
-                "Clicking \"Test Exercise\" should not throw an exception, "
+        assertDoesNotThrow(() -> clickLabels("Test"),
+                "Clicking \"Test\" should not throw an exception, "
                         + "since it is supposed to be saved in the dropdown menu");
+        assertDoesNotThrow(() -> clickOn("#editButton"),
+                "Clicking \"Edit\" should not throw an exception, "
+                        + "since \"Test\" is supposed to be saved in the dropdown menu");
         deleteTestfile();
     }
 
@@ -174,10 +197,16 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     }
 
     private void createTestExerciseFirstHalf(int numberOfSets) {
-        createTestExerciseFirstHalf(numberOfSets, "Test Exercise");
+        createTestExerciseFirstHalf(numberOfSets, "Test");
     }
 
     private void createTestExerciseFirstHalf(int numberOfSets, String name) {
+        Button button = lookup("#editButton").query();
+        button.fire();
+
+        assertFalse(lookup("#exerciseSettings").query().isVisible(),
+                "Exercise settings should not be visible");
+
         clickIds("#searchBar");
         write(name);
         clickLabels("Add as new", "Edit");
@@ -186,17 +215,26 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     }
 
     private void createTestExerciseSecondHalf(ObservableList<Node> gridChildren, int numberOfSets) {
+        ListView<Workout> view = lookup("#workoutListView").query();
+        int size = view.getItems().size();
+        Button button = lookup("#addButton").query();
+        button.fire();
+        assertEquals(size, view.getItems().size(), "The workout listview should not change size");
+
         for (int i = 0; i < numberOfSets * 3; i += 3) {
-            clickOn(gridChildren.get(i + 1));
+            write("\t");
             write("" + (i + 1));
-            clickOn(gridChildren.get(i + 2));
+            button.fire();
+            assertEquals(size, view.getItems().size(),
+                    "The workout listview should not change size");
+            write("\t");
             write("" + (i + 2));
         }
         clickIds("#addButton");
     }
 
     private void createTestExercise(int wantedSetCount) {
-        createTestExercise(wantedSetCount, wantedSetCount, "Test Exercise");
+        createTestExercise(wantedSetCount, wantedSetCount, "Test");
     }
 
     private void createTestExercise(int wantedSetCount, String name) {

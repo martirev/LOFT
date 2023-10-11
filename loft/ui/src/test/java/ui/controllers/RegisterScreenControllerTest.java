@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Collection;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -32,6 +34,9 @@ public class RegisterScreenControllerTest extends ApplicationTest {
     private static String testFileLocation = System.getProperty("user.home")
             + System.getProperty("file.separator") + "testUserData.json";
     private RegisterScreenController controller;
+
+    private Collection<String> fields = Arrays.asList("#name", "#username",
+            "#password1", "#password2", "#email");
 
     private Parent root;
 
@@ -58,10 +63,19 @@ public class RegisterScreenControllerTest extends ApplicationTest {
 
     @Test
     public void testNotAllFieldsFilledOut() {
-        write("T");
-        clickRegister();
-        Text errorMessage = lookup("#errorMessage").query();
-        assertTrue(errorMessage.getText().equals("Please fill out all fields"));
+        for (String field : fields) {
+            fillFields("test");
+            lookup(field).queryTextInputControl().setText("");
+            clickRegister();
+            Text errorMessage = lookup("#errorMessage").query();
+            assertTrue(errorMessage.getText().equals("Please fill out all fields"));
+        }
+    }
+
+    private void fillFields(String text) {
+        for (String field : fields) {
+            lookup(field).queryTextInputControl().setText(text);
+        }
     }
 
     @Test
@@ -99,8 +113,16 @@ public class RegisterScreenControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void testIllegalEmail() {
+    public void testIllegalEmail1() {
         writeSeparator("\t", "test", "test", "test", "test", "test");
+        clickRegister();
+        Text errorMessage = lookup("#errorMessage").query();
+        assertTrue(errorMessage.getText().equals("Please enter a valid email"));
+    }
+
+    @Test
+    public void testIllegalEmail2() {
+        writeSeparator("\t", "test", "test", "test", "test", "te@st");
         clickRegister();
         Text errorMessage = lookup("#errorMessage").query();
         assertTrue(errorMessage.getText().equals("Please enter a valid email"));
@@ -132,6 +154,13 @@ public class RegisterScreenControllerTest extends ApplicationTest {
         checkOnScene("Or register new profile");
     }
 
+    /**
+     * Checks if the given strings are present in the current scene.
+     * After registering, we should be at the log in screen, and there should only
+     * be one child of the root (the baseAnchor).
+     *
+     * @param stringsToBePresent the strings to check for in the scene
+     */
     private void checkOnScene(String... stringsToBePresent) {
         ObservableList<Node> rootChildren = root.getChildrenUnmodifiable();
         // After registering, we should be at the log in screen, and there should only

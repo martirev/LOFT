@@ -89,7 +89,7 @@ public class ReadAndWriteTest {
     }
 
     @Test
-    public void constructorTest() {
+    public void testConstructor() {
         assertInstanceOf(User.class,
                 ReadAndWrite.returnUserClassFromFile(user),
                 "The user should either be already saved, or be created and now be of type user.");
@@ -133,7 +133,7 @@ public class ReadAndWriteTest {
     }
 
     @Test
-    public void writeAndReadToFormFileTest() {
+    public void testWriteAndReadToFormFile() {
         ReadAndWrite.writeWorkoutToUser(workout1, user);
         ReadAndWrite.writeWorkoutToUser(workout2, user);
         User fileUser = ReadAndWrite.returnUserClassFromFile(user);
