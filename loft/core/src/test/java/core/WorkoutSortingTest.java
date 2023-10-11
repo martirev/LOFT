@@ -90,15 +90,15 @@ public class WorkoutSortingTest {
     }
 
     @Test
-    public void testGetSameExersicesNoInput() {
+    public void testGetSameExercisesNoInput() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
-        assertEquals(2, workoutSorting.getSameExersices().size());
-        assertTrue(workoutSorting.getSameExersices().containsKey("Bench Press"),
+        assertEquals(2, workoutSorting.getSameExercises().size());
+        assertTrue(workoutSorting.getSameExercises().containsKey("Bench Press"),
                 "Same exercises should contain Bench Press");
-        assertTrue(workoutSorting.getSameExersices().containsKey("Squats"),
+        assertTrue(workoutSorting.getSameExercises().containsKey("Squats"),
                 "Same exercises should contain Squats");
 
-        Map<String, List<Exercise>> sameExercises = workoutSorting.getSameExersices();
+        Map<String, List<Exercise>> sameExercises = workoutSorting.getSameExercises();
         for (String name : sameExercises.keySet()) {
             for (Exercise exercise : sameExercises.get(name)) {
                 assertTrue(exercise.getName().equals(name), "Exercise name should be " + name);
@@ -109,25 +109,25 @@ public class WorkoutSortingTest {
     @Test
     public void testGetSameExercisesString() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
-        List<Exercise> exercises1 = workoutSorting.getSameExersices("Bench Press");
+        List<Exercise> exercises1 = workoutSorting.getSameExercises("Bench Press");
         assertEquals(2, exercises1.size());
         assertTrue(exercises1.contains(exercise1), "exercises1 should contain exercise1");
         assertTrue(exercises1.contains(exercise3), "exercises1 should contain exercise3");
         assertFalse(exercises1.contains(exercise2), "exercises1 should not contain exercise2");
 
-        List<Exercise> exercises2 = workoutSorting.getSameExersices("This exercise does not exist");
+        List<Exercise> exercises2 = workoutSorting.getSameExercises("This exercise does not exist");
         assertEquals(0, exercises2.size());
     }
 
     @Test
-    public void testGetSameExersicesExercise() {
+    public void testGetSameExercisesExercise() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
         Exercise exercise1 = new Exercise("This exercise does not exist");
-        List<Exercise> exercises1 = workoutSorting.getSameExersices(exercise1);
+        List<Exercise> exercises1 = workoutSorting.getSameExercises(exercise1);
         assertEquals(0, exercises1.size());
 
         Exercise exercise2 = new Exercise("Bench Press");
-        List<Exercise> exercises2 = workoutSorting.getSameExersices(exercise2);
+        List<Exercise> exercises2 = workoutSorting.getSameExercises(exercise2);
         assertEquals(2, exercises2.size());
     }
 

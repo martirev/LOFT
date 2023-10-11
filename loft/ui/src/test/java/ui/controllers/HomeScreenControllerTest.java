@@ -74,7 +74,7 @@ public class HomeScreenControllerTest extends ApplicationTest {
     @Test
     public void testGoToJournal() {
         clickOn("Journal");
-        checkOnScene("Exercise Journal", "Exercise History", "Workout");
+        checkOnScene("Workout Journal", "Workout History", "Workout Details");
     }
 
     @Test

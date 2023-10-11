@@ -60,6 +60,8 @@ The project's directory structure is organized as follows:
         - resources
           - ui
             - This is where all the fxml-files are located. These files are used to define the user interface.
+            - images
+              - This is where all the images used in the user interface are located.
       - test
         - java
           - ui

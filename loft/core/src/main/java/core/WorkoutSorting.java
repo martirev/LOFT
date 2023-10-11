@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class WorkoutSorting {
 
     private List<Workout> workouts = new ArrayList<Workout>();
-    private HashMap<String, List<Exercise>> sameExersices = new HashMap<String, List<Exercise>>();
+    private HashMap<String, List<Exercise>> sameExercises = new HashMap<String, List<Exercise>>();
 
     /**
      * Constructor for a WorkoutSorting that lets you specify a list of workouts. It
@@ -33,10 +33,10 @@ public class WorkoutSorting {
         for (Workout workout : workouts) {
             for (Exercise exercise : workout.getExercises()) {
                 String name = exercise.getName();
-                if (sameExersices.containsKey(name)) {
-                    sameExersices.get(name).add(exercise);
+                if (sameExercises.containsKey(name)) {
+                    sameExercises.get(name).add(exercise);
                 } else {
-                    sameExersices.put(name, new ArrayList<Exercise>(Arrays.asList(exercise)));
+                    sameExercises.put(name, new ArrayList<Exercise>(Arrays.asList(exercise)));
                 }
             }
         }
@@ -60,8 +60,8 @@ public class WorkoutSorting {
      * @return A HashMap of all exercises with key being the name of the exercise
      *         and value being a list of all exercises with that name.
      */
-    public HashMap<String, List<Exercise>> getSameExersices() {
-        return new HashMap<>(sameExersices);
+    public HashMap<String, List<Exercise>> getSameExercises() {
+        return new HashMap<>(sameExercises);
     }
 
     /**
@@ -71,23 +71,23 @@ public class WorkoutSorting {
      * @param name the name of the exercise to get all exercises with the same name.
      * @return a list of all exercises with the same name.
      */
-    public List<Exercise> getSameExersices(String name) {
-        if (!sameExersices.containsKey(name)) {
+    public List<Exercise> getSameExercises(String name) {
+        if (!sameExercises.containsKey(name)) {
             return new ArrayList<>();
         }
-        return new ArrayList<>(sameExersices.get(name));
+        return new ArrayList<>(sameExercises.get(name));
     }
 
     /**
      * The method returns a list of all exercises with the same name. Thsi takes an
-     * exercise as an argument and uses the getSameExersices(String name) method to
-     * get all exercises with the same name.
+     * exercise as an argument and uses the {@link #getSameExercises(String name)}
+     * method to get all exercises with the same name.
      *
      * @param exercise the exercise to get all exercises with the same name.
      * @return a list of all exercises with the same name.
      */
-    public List<Exercise> getSameExersices(Exercise exercise) {
-        return getSameExersices(exercise.getName());
+    public List<Exercise> getSameExercises(Exercise exercise) {
+        return getSameExercises(exercise.getName());
     }
 
     /**
@@ -125,7 +125,7 @@ public class WorkoutSorting {
      *         name.
      */
     public int getExercisesPr(String name) {
-        return sameExersices.get(name).stream().mapToInt(e -> e.getLocalPr()).max().getAsInt();
+        return sameExercises.get(name).stream().mapToInt(e -> e.getLocalPr()).max().getAsInt();
     }
 
     /**
@@ -135,7 +135,7 @@ public class WorkoutSorting {
      * @return A Collection of workout with the same name
      */
     public Collection<String> searchForExercises(String name) {
-        return sameExersices.keySet().stream()
+        return sameExercises.keySet().stream()
                 .filter(n -> n.toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
     }

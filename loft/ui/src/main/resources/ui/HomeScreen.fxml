@@ -12,6 +12,21 @@
 <AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #EFEFEF;" xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#db4c40" height="130.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="1366.0" />
+      <Text layoutX="589.0" layoutY="86.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="LØ">
+         <font>
+            <Font name="Roboto" size="50.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="120.0" fitWidth="200.0" layoutX="626.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/weightlifter.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="721.0" layoutY="86.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="FT">
+         <font>
+            <Font name="Roboto" size="50.0" />
+         </font>
+      </Text>
       <AnchorPane fx:id="newWorkoutRectangle" layoutX="100.0" layoutY="230.0" onMousePressed="#handleWorkoutPress" prefHeight="450.0" prefWidth="320.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ed8152" height="450.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="320.0">
@@ -25,7 +40,7 @@
             </Rectangle>
             <ImageView fitHeight="200.0" fitWidth="300.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="false">
                <image>
-                  <Image url="data:image/png;base64,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" />
+                  <Image url="@images/dumbbell.png" />
                </image>
             </ImageView>
             <Text fill="#fafafa" layoutX="64.0" layoutY="273.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="New workout" textAlignment="CENTER">
@@ -40,61 +55,22 @@
             </Text>
          </children>
       </AnchorPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ed8152" height="450.0" layoutX="520.0" layoutY="230.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="320.0">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.8289473652839661" green="0.7944079041481018" blue="0.7944079041481018" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ed8152" height="450.0" layoutX="940.0" layoutY="230.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="320.0">
-         <effect>
-            <DropShadow>
-               <color>
-                  <Color red="0.8289473652839661" green="0.7944079041481018" blue="0.7944079041481018" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Rectangle>
-      <Text fill="#fafafa" layoutX="960.0" layoutY="510.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Highscore" textAlignment="CENTER">
-         <font>
-            <Font name="Roboto" size="30.0" />
-         </font>
-      </Text>
-      <Text layoutX="630.0" layoutY="80.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="LØ">
-         <font>
-            <Font name="Roboto" size="50.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="200.0" fitWidth="300.0" layoutX="530.0" layoutY="240.0" pickOnBounds="true" preserveRatio="false">
-         <image>
-            <Image url="https://static.vecteezy.com/system/resources/thumbnails/001/486/411/small/open-book-icon-free-vector.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="200.0" fitWidth="300.0" layoutX="950.0" layoutY="240.0" pickOnBounds="true" preserveRatio="false">
-         <image>
-            <Image url="https://www.pngkey.com/png/detail/406-4068714_free-icon-score-high-score-icon-png.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="120.0" fitWidth="200.0" layoutX="677.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="https://cdn-icons-png.flaticon.com/512/3018/3018604.png" />
-         </image>
-      </ImageView>
-      <Text layoutX="780.0" layoutY="80.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="FT">
-         <font>
-            <Font name="Roboto" size="50.0" />
-         </font>
-      </Text>
-      <Text fill="#d7d7d7" layoutX="992.0" layoutY="613.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not implemented yet" wrappingWidth="216.2646484375">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Text>
       <AnchorPane layoutX="520.0" layoutY="230.0" onMousePressed="#handleJournalPress" prefHeight="450.0" prefWidth="320.0">
          <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ed8152" height="450.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="320.0">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8289473652839661" green="0.7944079041481018" blue="0.7944079041481018" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Rectangle>
+            <ImageView fitHeight="200.0" fitWidth="300.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="false">
+               <image>
+                  <Image url="@images/book.jpg" />
+               </image>
+            </ImageView>
             <Text fill="#fafafa" layoutX="25.0" layoutY="351.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Previous exercises and progress" textAlignment="CENTER" wrappingWidth="270.4249267578125">
                <font>
                   <Font name="Roboto" size="26.0" />
@@ -105,6 +81,35 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Text>
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="940.0" layoutY="230.0" prefHeight="450.0" prefWidth="320.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ed8152" height="450.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="320.0">
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.8289473652839661" green="0.7944079041481018" blue="0.7944079041481018" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </Rectangle>
+            <ImageView fitHeight="200.0" fitWidth="300.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="false">
+               <image>
+                  <Image url="@images/trophy.jpg" />
+               </image>
+            </ImageView>
+            <Text fill="#fafafa" layoutX="89.0" layoutY="272.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Highscore" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text fill="#d7d7d7" layoutX="52.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Not implemented yet" wrappingWidth="216.2646484375">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

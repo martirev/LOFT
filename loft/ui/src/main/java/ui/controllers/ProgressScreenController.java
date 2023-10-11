@@ -81,7 +81,7 @@ public class ProgressScreenController extends SceneSwitcher {
         squatSeries.setName("Highest squat PR per day");
 
         for (LocalDate date : workoutSorting.getUniqueDates()) {
-            HashMap<String, List<Exercise>> sameExercises = workoutSorting.getSameExersices();
+            HashMap<String, List<Exercise>> sameExercises = workoutSorting.getSameExercises();
             for (Map.Entry<String, List<Exercise>> entry : sameExercises.entrySet()) {
                 String name = entry.getKey();
                 Exercise exercise = entry.getValue().get(0);
