@@ -90,6 +90,16 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     }
 
     @Test
+    public void testEmptyWorkoutFinish() {
+        clickLabels("Finish workout");
+        assertTrue(root
+                .getChildrenUnmodifiable()
+                .stream()
+                .anyMatch(x -> x instanceof Text && ((Text) x).getText()
+                        .equals("Current workout")));
+    }
+
+    @Test
     public void testAddNewFieldTypes() {
         final int wantedSetsCount = 200;
         final int expectedSetsCount = 18;

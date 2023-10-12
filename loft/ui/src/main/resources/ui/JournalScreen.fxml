@@ -25,25 +25,25 @@
             </font>
         </Button>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#db4c40" height="130.0" layoutY="1.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="1366.0" />
-        <Text fill="#fafafa" layoutX="518.0" layoutY="87.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Exercise Journal">
+        <Text fill="#fafafa" layoutX="500.0" layoutY="90.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Workout Journal">
             <font>
                 <Font name="Roboto" size="50.0" />
             </font>
         </Text>
-        <ListView fx:id="exercisesListView" layoutX="102.0" layoutY="267.0" prefHeight="450.0" prefWidth="479.0" style="-fx-border-color: #ed8152;" />
-        <Text fill="#ed8152" layoutX="206.0" layoutY="244.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Exercise History" textAlignment="CENTER">
+        <ListView fx:id="workoutHistoryListView" layoutX="102.0" layoutY="267.0" prefHeight="450.0" prefWidth="479.0" style="-fx-border-color: #ed8152;" />
+        <Text fill="#ed8152" layoutX="207.0" layoutY="241.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Workout History" textAlignment="CENTER">
             <font>
                 <Font name="Roboto" size="36.0" />
             </font>
         </Text>
-        <Line endX="450.0" endY="185.0" fill="#ed8152" layoutX="88.0" layoutY="71.0" startX="50.0" startY="185.0" stroke="#ed8152" strokeWidth="3.0" />
+        <Line endX="450.0" endY="185.0" fill="#ed8152" layoutX="88.0" layoutY="72.0" startX="50.0" startY="185.0" stroke="#ed8152" strokeWidth="3.0" />
         <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #ed8152;" text="Return" textFill="#fafafa">
             <font>
                 <Font name="Roboto" size="20.0" />
             </font>
         </Button>
         <Line endX="450.0" endY="185.0" fill="#ed8152" layoutX="762.0" layoutY="72.0" startX="50.0" startY="185.0" stroke="#ed8152" strokeWidth="3.0" />
-        <Text fill="#ed8152" layoutX="943.0" layoutY="243.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Workout" textAlignment="CENTER">
+        <Text fill="#ed8152" layoutX="885.0" layoutY="241.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Workout Details" textAlignment="CENTER">
             <font>
                 <Font name="Roboto" size="36.0" />
             </font>

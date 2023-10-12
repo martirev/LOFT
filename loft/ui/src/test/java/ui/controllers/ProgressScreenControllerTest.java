@@ -186,7 +186,7 @@ public class ProgressScreenControllerTest extends ApplicationTest {
     @Test
     public void testExerciseJournal() {
         clickOn("Journal");
-        checkOnScene("Exercise Journal");
+        checkOnScene("Workout Journal");
     }
 
     /**

@@ -16,15 +16,14 @@ import javafx.scene.control.TextArea;
 /**
  * The JournalScreenController class is responsible for controlling the Journal
  * Screen of the application. It extends the SceneSwitcher class and initializes
- * the user's workout history and exercise history. It loads the most recent
- * workouts and displays them in the exercises list view. It also loads the
- * selected workout and displays its exercises and sets in the workout list
- * view.
+ * the user's workout history. It loads the most recent workouts and displays
+ * them in the exercises list view. It also loads the selected workout and
+ * displays its exercises and sets in the workout list view.
  */
 public class JournalScreenController extends SceneSwitcher {
 
     @FXML
-    private ListView<Workout> exercisesListView;
+    private ListView<Workout> workoutHistoryListView;
 
     @FXML
     private ListView<TextArea> workoutListView;
@@ -44,23 +43,23 @@ public class JournalScreenController extends SceneSwitcher {
     public void initialize(URL location, ResourceBundle resources) {
         User user = ReadAndWrite.returnUserClassFromFile(getUser());
         workoutSorting = new WorkoutSorting(user.getWorkouts());
-        exercisesListView.setOnMouseClicked(event -> {
+        workoutHistoryListView.setOnMouseClicked(event -> {
             workoutListView.getItems().clear();
-            Workout selected = exercisesListView.getSelectionModel().getSelectedItem();
+            Workout selected = workoutHistoryListView.getSelectionModel().getSelectedItem();
             loadWorkout(selected);
         });
-        loadExerciseHistory();
+        loadWorkoutHistory();
     }
 
     /**
-     * Loads the exercise history by getting the most recent workouts and adding
+     * Loads the workout history by getting the most recent workouts and adding
      * them to the exercises list view.
      * Uses the workoutSorting object to get the most recent workouts.
      */
-    private void loadExerciseHistory() {
+    private void loadWorkoutHistory() {
         List<Workout> workouts = workoutSorting.getMostRecentWorkouts();
         for (Workout workout : workouts) {
-            exercisesListView.getItems().add(workout);
+            workoutHistoryListView.getItems().add(workout);
         }
     }
 

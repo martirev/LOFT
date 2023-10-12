@@ -122,13 +122,13 @@ public class JournalScreenControllerTest extends ApplicationTest {
 
     @Test
     public void testJournalLength() {
-        ListView<Workout> listView = lookup("#exercisesListView").query();
+        ListView<Workout> listView = lookup("#workoutHistoryListView").query();
         assertEquals(2, listView.getItems().size());
     }
 
     @Test
     public void testJournalOrder() {
-        ListView<Workout> listView = lookup("#exercisesListView").query();
+        ListView<Workout> listView = lookup("#workoutHistoryListView").query();
         assertTrue(listView.getItems().get(0).getDate().toString().equals("2023-10-01"));
         assertTrue(listView.getItems().get(1).getDate().toString().equals("2019-01-01"));
     }
@@ -162,7 +162,7 @@ public class JournalScreenControllerTest extends ApplicationTest {
 
         // There is no listelement in the middle of the list, so this wont click any
         // workout
-        assertDoesNotThrow(() -> clickOn("#exercisesListView"),
+        assertDoesNotThrow(() -> clickOn("#workoutHistoryListView"),
                 "Clicking an empty field should not throw an exception");
 
         workoutListView = lookup("#workoutListView").query();
