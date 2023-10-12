@@ -1,0 +1,153 @@
+{
+    "users": [
+      {
+        "name": "Markus",
+        "username": "Marky",
+        "passwordHash": "cd1b2f87d45a84e3e0d9a3ac3dce883f7d65777655805acd8c97aa1a2060d196",
+        "email": "marky@gmail.com",
+        "workouts": [
+          {
+            "exercises": [
+              {
+                "name": "Benkpress",
+                "sets": [
+                  {
+                    "reps": 8,
+                    "weight": 100
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 100
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 90
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 90
+                  }
+                ]
+              },
+              {
+                "name": "Incline-Bench",
+                "sets": [
+                  {
+                    "reps": 8,
+                    "weight": 80
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 80
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 80
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 80
+                  }
+                ]
+              },
+              {
+                "name": "Flyes",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  }
+                ]
+              }
+            ],
+            "date": "2023-10-12"
+          }
+        ]
+      },
+      {
+        "name": "Runar",
+        "username": "Runis",
+        "passwordHash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+        "email": "runar@gmail.com",
+        "workouts": [
+          {
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets": [
+                  {
+                    "reps": 8,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 120
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 120
+                  }
+                ]
+              },
+              {
+                "name": "Leg-Extensions",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 30
+                  }
+                ]
+              },
+              {
+                "name": "Hamstring-Curls",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 25
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 25
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 25
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 25
+                  }
+                ]
+              }
+            ],
+            "date": "2023-10-12"
+          }
+        ]
+      }
+    ]
+  }
+  

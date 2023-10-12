@@ -1,0 +1,16 @@
+@startuml sequenceDiagram2
+actor User
+participant UserInterface
+participant Controller
+participant Core
+database jsonFile
+
+User -> UserInterface: User request viewing previous workouts
+UserInterface -> Controller: loadExerciseHistory()
+Controller -> Core: getMostRecentWorkouts()
+Core -> jsonFile: request users workout history
+jsonFile -> Core: Respond with users history
+Core -> Controller: Respond with list of workouts
+Controller -> UserInterface: adds workouts to listView
+UserInterface -> User: displays history
+@enduml
