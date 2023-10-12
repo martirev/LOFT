@@ -2,6 +2,8 @@
 
 [<img src="https://eclipse.dev/che/docs/_/img/icon-eclipse-che.svg" width="20" /> open in eclipse che](https://che.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2023/gr2303/gr2303?new)
 
+The Eclipse Che link above will create a new workspace from our GitLab repo. To run and test the application in Eclipse Che, follow the steps below. To view the UI in a web browser, find the endpoint **"6080-tcp-desktop-ui"** and paste the URL in the search bar.
+
 ## Overview
 
 This project is structured following a module template to ensure a clean and organized codebase. The main codebase for the project is located in the [loft/core/src/main/java/core](loft/core/src/main/java/core) directory, while the app is launched from [loft/ui/src/main/java/ui/App.java](loft/ui/src/main/java/ui/App.java).

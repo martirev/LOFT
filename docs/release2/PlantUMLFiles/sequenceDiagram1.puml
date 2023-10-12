@@ -1,0 +1,10 @@
+@startuml SequenceDiagram1
+actor User
+participant UserInterface
+participant Controller
+database jsonFile
+
+User -> UserInterface: Inputs data for a new workout
+UserInterface -> Controller: data is stored in a workout
+Controller -> jsonFile: workout added to file
+@enduml
