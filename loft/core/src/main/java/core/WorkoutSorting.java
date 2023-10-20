@@ -125,7 +125,10 @@ public class WorkoutSorting {
      *         name.
      */
     public int getExercisesPr(String name) {
-        return sameExercises.get(name).stream().mapToInt(e -> e.getLocalPr()).max().getAsInt();
+        if (!sameExercises.containsKey(name)) {
+            return 0;
+        }
+        return sameExercises.get(name).stream().mapToInt(e -> e.getLocalPr()).max().orElse(0);
     }
 
     /**
@@ -177,5 +180,39 @@ public class WorkoutSorting {
     public Map<LocalDate, Integer> getWeightPerDay() {
         return getUniqueDates().stream().map(d -> Map.entry(d, getTotalWeightOnDay(d)))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    /**
+     * Returns the heaviest total weight lifted in a set of a specific exercise.
+     *
+     * @param name the name of the exercise to get the heaviest weight lifted in a
+     *             set of
+     * @return the heaviest weight lifted in a set of the exercise with the given
+     *         name.
+     */
+    public int getHeaviestLiftedSet(String name) {
+        if (!sameExercises.containsKey(name)) {
+            return 0;
+        }
+        return sameExercises.get(name).stream()
+                .mapToInt(e -> e.getHeaviestLiftedSet())
+                .max().orElse(0);
+    }
+
+    /**
+     * Returns a string with the format for the highscore of a specific exercise.
+     * The format is: "name\n\tPersonal record: x kg\n\tHighest weight lifted in a
+     * set: y kg"
+     *
+     * @param name - the name of the exercise to get the format for
+     *
+     * @return - a string with the format for the highscore of the exercise with the
+     */
+    public String getFormatForHighscore(String name) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(name);
+        sb.append("\n\tPersonal record: " + getExercisesPr(name) + " kg");
+        sb.append("\n\tHighest weight in a set: " + getHeaviestLiftedSet(name) + " kg");
+        return sb.toString();
     }
 }

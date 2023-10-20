@@ -84,13 +84,22 @@ public class Exercise {
     }
 
     /**
-     * A method that lets you get the highest wieght in the exercise. Is useful for
+     * A method that lets you get the highest weight in the exercise. Is useful for
      * calculating the pr of an exercise.
      *
      * @return the highest weight in the exercise
      */
     public int getLocalPr() {
-        return sets.stream().mapToInt(s -> s.getWeight()).max().getAsInt();
+        return sets.stream().mapToInt(s -> s.getWeight()).max().orElse(0);
+    }
+
+    /**
+     * A method that lets you get the heaviest lifted set in the exercise.
+     *
+     * @return the heaviest lifted weight in a set in the exercise
+     */
+    public int getHeaviestLiftedSet() {
+        return sets.stream().mapToInt(s -> s.getWeight() * s.getReps()).max().orElse(0);
     }
 
     /**
