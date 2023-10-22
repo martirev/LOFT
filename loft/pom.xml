@@ -89,6 +89,8 @@
                         <encoding>UTF-8</encoding>
                         <consoleOutput>true</consoleOutput>
                         <failsOnError>true</failsOnError>
+                        <violationSeverity>warning</violationSeverity>
+                        <failOnViolation>true</failOnViolation>
                         <linkXRef>false</linkXRef>
                     </configuration>
                     <executions>
