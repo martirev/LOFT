@@ -34,11 +34,12 @@ coverage core:
   needs: ["test"]
   before_script:
     - cd loft
+    - cd core
   script:
     - mvn clean test $MAVEN_CLI_OPTS
     - mvn jacoco:report
 
-    - core_stats=$(cat core/target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*BRANCH' | grep -o [0-9]*)
+    - core_stats=$(cat target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*BRANCH' | grep -o [0-9]*)
     - missed=$(echo ${core_stats} | grep -o "[0-9]* ")
     - hit=$(echo ${core_stats} | grep -o " [0-9]*")
     - core=$(awk -v hit="${hit}" -v missed="${missed}" 'BEGIN { print  100 * hit / (hit + missed) }')
@@ -51,11 +52,12 @@ coverage filehandling:
   needs: ["test"]
   before_script:
     - cd loft
+    - cd filehandling
   script:
     - mvn clean test $MAVEN_CLI_OPTS
     - mvn jacoco:report
 
-    - filehandling_stats=$(cat filehandling/target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*BRANCH' | grep -o [0-9]*)
+    - filehandling_stats=$(cat target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*BRANCH' | grep -o [0-9]*)
     - missed=$(echo ${filehandling_stats} | grep -o "[0-9]* ")
     - hit=$(echo ${filehandling_stats} | grep -o " [0-9]*")
     - filehandling=$(awk -v hit="${hit}" -v missed="${missed}" 'BEGIN { print  100 * hit / (hit + missed) }')
