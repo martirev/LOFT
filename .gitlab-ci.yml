@@ -23,12 +23,13 @@ test:
 
 build:
   stage: build
+  needs: []
   before_script:
     - cd loft
   script:
     - mvn clean install $MAVEN_CLI_OPTS
 
-jacoco:
+coverage core:
   stage: test
   needs: ["test"]
   before_script:
@@ -36,8 +37,31 @@ jacoco:
   script:
     - mvn clean test $MAVEN_CLI_OPTS
     - mvn jacoco:report
-    - cat core/target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/Jacoco Coverage core:/'
-    - cat filehandling/target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/Jacoco Coverage filehandling:/'
+
+    - core_stats=$(cat core/target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*BRANCH' | grep -o [0-9]*)
+    - missed=$(echo ${core_stats} | grep -o "[0-9]* ")
+    - hit=$(echo ${core_stats} | grep -o " [0-9]*")
+    - core=$(awk -v hit="${hit}" -v missed="${missed}" 'BEGIN { print  100 * hit / (hit + missed) }')
+
+    - 'echo "Code Coverage core: ${core}%"'
+  coverage: "/Code Coverage core: ([0-9\\.]*)%/"
+
+coverage filehandling:
+  stage: test
+  needs: ["test"]
+  before_script:
+    - cd loft
+  script:
+    - mvn clean test $MAVEN_CLI_OPTS
+    - mvn jacoco:report
+
+    - filehandling_stats=$(cat filehandling/target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*BRANCH' | grep -o [0-9]*)
+    - missed=$(echo ${filehandling_stats} | grep -o "[0-9]* ")
+    - hit=$(echo ${filehandling_stats} | grep -o " [0-9]*")
+    - filehandling=$(awk -v hit="${hit}" -v missed="${missed}" 'BEGIN { print  100 * hit / (hit + missed) }')
+
+    - 'echo "Code Coverage filehandling: ${filehandling}%"'
+  coverage: "/Code Coverage filehandling: ([0-9\\.]*)%/"
 
 checkstyle:
   stage: validate
