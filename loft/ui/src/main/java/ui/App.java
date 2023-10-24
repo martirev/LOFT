@@ -20,8 +20,9 @@ public class App extends Application {
         stage.setTitle("LØFT");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
         fxmlLoader.setController(new LoginScreenController());
-
-        stage.setScene(new Scene(fxmlLoader.load()));
+        Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add(getClass().getResource("Styles.css").toExternalForm());
+        stage.setScene(scene);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("images/weightlifter.png")));
 
         stage.show();

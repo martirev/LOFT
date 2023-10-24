@@ -6,43 +6,43 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #EFEFEF;" xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="Background" fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#db4c40" height="130.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="1366.0" />
-      <Text fill="#fafafa" layoutX="557.0" layoutY="90.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="New Workout">
+      <Region prefHeight="130.0" prefWidth="1366.0" styleClass="Navbar" />
+      <Text layoutX="557.0" layoutY="90.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="New Workout">
          <font>
             <Font name="Roboto" size="50.0" />
          </font>
       </Text>
-      <ListView fx:id="workoutListView" layoutX="918.0" layoutY="235.0" prefHeight="485.0" prefWidth="400.0" style="-fx-border-color: #ed8152;" />
-      <Text fill="#ed8152" layoutX="988.0" layoutY="214.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Current workout" textAlignment="CENTER">
+      <ListView fx:id="workoutListView" layoutX="918.0" layoutY="235.0" prefHeight="485.0" prefWidth="400.0" styleClass="ListViewComp" />
+      <Text layoutX="988.0" layoutY="214.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Current workout" textAlignment="CENTER">
          <font>
             <Font name="Roboto" size="36.0" />
          </font>
       </Text>
-      <Line endX="1316.0" endY="220.0" fill="#ed8152" startX="918.0" startY="220.0" stroke="#ed8152" strokeWidth="3.0" />
-      <TextField fx:id="searchBar" layoutX="100.0" layoutY="200.0" minHeight="-Infinity" minWidth="275.0" prefHeight="50.0" prefWidth="306.0" promptText="Search for an exercise..." style="-fx-border-radius: 10;">
+      <Line endX="1316.0" endY="220.0" startX="918.0" startY="220.0" strokeWidth="3.0" styleClass="Line" />
+      <TextField fx:id="searchBar" layoutX="100.0" layoutY="200.0" minHeight="-Infinity" minWidth="275.0" prefHeight="50.0" prefWidth="306.0" promptText="Search for an exercise..." style="-fx-border-radius: 10;" styleClass="jfx-text-field">
          <font>
             <Font size="26.0" />
          </font>
       </TextField>
-      <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #ed8152;" text="Return" textFill="#fafafa">
+      <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Return" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="20.0" />
          </font>
       </Button>
-      <ListView fx:id="dropdownMenu" layoutX="100.0" layoutY="270.0" minHeight="450.0" minWidth="400.0" prefHeight="450.0" prefWidth="400.0" style="-fx-border-color: #ed8152;" />
-      <Button layoutX="1165.0" layoutY="41.0" minHeight="60.0" minWidth="150.0" mnemonicParsing="false" onAction="#handleFinishPress" style="-fx-background-color: #ed8152;" text="Finish workout" textFill="#fafafa">
+      <ListView fx:id="dropdownMenu" layoutX="100.0" layoutY="270.0" minHeight="450.0" minWidth="400.0" prefHeight="450.0" prefWidth="400.0" styleClass="ListViewComp" />
+      <Button layoutX="1165.0" layoutY="41.0" minHeight="60.0" minWidth="150.0" mnemonicParsing="false" onAction="#handleFinishPress" styleClass="LoginButton" text="Finish workout" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="editButton" disable="true" layoutX="415.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleEditButton" prefHeight="48.0" prefWidth="85.0" style="-fx-background-color: #ed8152;" text="Edit" textFill="#fafafa">
+      <Button fx:id="editButton" disable="true" layoutX="415.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleEditButton" prefHeight="48.0" prefWidth="85.0" styleClass="LoginButton" text="Edit" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="20.0" />
          </font>
