@@ -15,10 +15,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
@@ -36,8 +34,6 @@ import ui.App;
  */
 public class JournalScreenControllerTest extends ApplicationTest {
 
-    private JournalScreenController controller;
-
     private static final String testFileLocation = System.getProperty("user.home")
             + System.getProperty("file.separator") + "testUserData.json";
 
@@ -52,12 +48,7 @@ public class JournalScreenControllerTest extends ApplicationTest {
         user = new User("Test person", "tester", "hunter2", "tester@test.com");
         SceneSwitcher.setUser(user);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("JournalScreen.fxml"));
-        controller = new JournalScreenController();
-        fxmlLoader.setController(controller);
-        root = fxmlLoader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+        root = App.customStart(stage, "JournalScreen.fxml", new JournalScreenController());
     }
 
     @AfterAll

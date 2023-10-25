@@ -16,10 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -40,7 +38,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
 
     private static String testFileLocation = System.getProperty("user.home")
             + System.getProperty("file.separator") + "testUserData.json";
-    private WorkoutScreenController controller;
+    private WorkoutScreenController controller = new WorkoutScreenController();
     private static User user;
 
     private Parent root;
@@ -65,12 +63,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("WorkoutScreen.fxml"));
-        controller = new WorkoutScreenController();
-        fxmlLoader.setController(controller);
-        root = fxmlLoader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+        root = App.customStart(stage, "WorkoutScreen.fxml", controller);
     }
 
     @Test
