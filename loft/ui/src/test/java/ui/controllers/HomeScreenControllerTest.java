@@ -10,10 +10,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
@@ -39,12 +37,8 @@ public class HomeScreenControllerTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("HomeScreen.fxml"));
         controller = new HomeScreenController();
-        fxmlLoader.setController(controller);
-        root = fxmlLoader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+        root = App.customStart(stage, "HomeScreen.fxml", controller);
     }
 
     /**
