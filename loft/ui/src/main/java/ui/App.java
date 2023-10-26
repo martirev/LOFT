@@ -18,17 +18,31 @@ import ui.controllers.SceneSwitcher;
 public class App extends Application {
 
     /**
+     * Sets up the JavaFX system properties to support headless mode.
+     */
+    public static void supportHeadless() {
+        if (Boolean.getBoolean("headless")) {
+            System.setProperty("testfx.robot", "glass");
+            System.setProperty("testfx.headless", "true");
+            System.setProperty("prism.order", "sw");
+            System.setProperty("prism.text", "t2k");
+            System.setProperty("java.awt.headless", "true");
+            System.setProperty("headless.geometry", "1366x768-32");
+        }
+    }
+
+    /**
      * Starts a custom JavaFX stage with the specified controller and FXML file.
      *
-     * @param stage         the JavaFX stage to start
-     * @param fxmlName      the name of the FXML file to load 
-     * @param controller    the controller for the FXML file
-     * @throws IOException  if the FXML file cannot be loaded
+     * @param stage      the JavaFX stage to start
+     * @param fxmlName   the name of the FXML file to load
+     * @param controller the controller for the FXML file
+     * @throws IOException if the FXML file cannot be loaded
      */
     public static Parent customStart(Stage stage, String fxmlName, SceneSwitcher controller)
             throws IOException {
         stage.setTitle("LØFT");
-        
+
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxmlName));
         fxmlLoader.setController(controller);
         Parent root = fxmlLoader.load();

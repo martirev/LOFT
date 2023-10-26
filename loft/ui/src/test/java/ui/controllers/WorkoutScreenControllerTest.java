@@ -44,6 +44,14 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     private Parent root;
 
     /**
+     * Sets up the test environment to support headless mode.
+     */
+    @BeforeAll
+    public static void setupHeadless() {
+        App.supportHeadless();
+    }
+
+    /**
      * Sets up the test environment by deleting an existing test file and setting
      * the file location to the test file location. Also creates a test user and
      * sets it as the current user.

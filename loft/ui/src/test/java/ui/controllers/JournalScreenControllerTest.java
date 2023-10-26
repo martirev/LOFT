@@ -43,6 +43,14 @@ public class JournalScreenControllerTest extends ApplicationTest {
     private static Workout workout2;
     private static User user;
 
+    /**
+     * Sets up the test environment to support headless mode.
+     */
+    @BeforeAll
+    public static void setupHeadless() {
+        App.supportHeadless();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         user = new User("Test person", "tester", "hunter2", "tester@test.com");
