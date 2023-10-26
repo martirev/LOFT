@@ -20,4 +20,7 @@
     "java.debug.settings.onBuildFailureProceed": true,
     "java.checkstyle.configuration": "${workspaceFolder}\\loft\\config\\checkstyle\\checkstyle-checker.xml",
     "java.checkstyle.version": "10.3.4",
+    "yaml.customTags": [
+        "!reference sequence", // To not be screamed at using gitlab custom yml syntax "!reference [.get_percentage, script]"
+    ]
 }

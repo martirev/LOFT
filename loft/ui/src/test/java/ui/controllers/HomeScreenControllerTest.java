@@ -35,6 +35,14 @@ public class HomeScreenControllerTest extends ApplicationTest {
 
     private Parent root;
 
+    /**
+     * Sets up the test environment to support headless mode.
+     */
+    @BeforeAll
+    public static void setupHeadless() {
+        App.supportHeadless();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         controller = new HomeScreenController();
