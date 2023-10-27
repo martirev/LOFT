@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import core.User;
 import core.Workout;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
@@ -34,8 +35,13 @@ public abstract class ReadAndWrite {
      * Sets the file location for ReadAndWrite class.
      *
      * @param fileLocation the file location to be set.
+     * @throws IllegalArgumentException if the file location is a directory
      */
     public static void setFileLocation(String fileLocation) {
+        if ((new File(fileLocation)).isDirectory()) {
+            throw new IllegalArgumentException(
+                    "File location " + fileLocation + " is a directory, not a file");
+        }
         ReadAndWrite.fileLocation = fileLocation;
     }
 
@@ -94,9 +100,7 @@ public abstract class ReadAndWrite {
             tmpUser = getUser(user, users);
         }
         if (tmpUser == null) {
-            throw new IllegalStateException(
-                    "User should exist at this point."
-                            + " Filelocation is probably a folder and not file.");
+            throw new IllegalStateException("User should exist at this point.");
         }
         tmpUser.addWorkout(workout);
 

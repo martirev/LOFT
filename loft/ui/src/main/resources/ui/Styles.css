@@ -1,0 +1,84 @@
+*{
+    -fx-primary: #0D1F30;
+    -fx-secondary: #ed8152;
+    -fx-white: #FAFAFA
+}
+
+.Background {
+    -fx-background-color: -fx-white;
+}
+
+.Navbar {
+    -fx-background-color: -fx-primary;
+    -fx-border-radius: 10;
+    -fx-background-radius: 5px;
+}
+
+.MainComp {
+    -fx-background-color: -fx-primary;
+    -fx-border-radius: 10;
+    -fx-cursor: hand;
+    -fx-background-radius: 10px;
+}
+
+.MainComp:hover {
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-scale-z: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(211, 211, 211, 0.80), 10, 0.5, 0, 0);
+}
+
+.text-id {
+    -fx-fill: -fx-secondary;
+}
+
+.text-register {
+    -fx-fill: -fx-secondary;
+}
+
+.text-register:hover {
+    -fx-cursor: hand;
+    -fx-underline: true;
+}
+
+.LoginButton {
+    -fx-background-color: -fx-secondary;
+}
+
+.LoginButton:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-scale-z: 1.1;
+    -fx-cursor: hand;
+}
+
+.LoginArea {
+    -fx-background-color: -fx-primary;
+}
+
+.jfx-text-field {
+    -fx-prompt-text-fill: -fx-secondary;
+}
+
+.Line {
+    -fx-stroke: -fx-secondary;
+}
+
+.ListViewComp {
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 3px;  
+}
+
+.SwitchButtonActive {
+    -fx-background-color: -fx-secondary;
+    -fx-effect: dropshadow(gaussian, rgba(211, 211, 211, 0.8), 10, 0, 0, 3);
+    -fx-scale-y: 1.1;
+    -fx-text-fill: -fx-white;
+}
+
+.SwitchButtonInactive {
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-white;
+    -fx-cursor: hand;
+}
+

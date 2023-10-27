@@ -5,41 +5,41 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #fafafa;" xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ed8152" height="768.0" stroke="BLACK" strokeType="INSIDE" width="683.0" />
+      <Region layoutX="683.0" prefHeight="768.0" prefWidth="683.0" styleClass="LoginArea" />
       <Text fill="#ed8152" layoutX="938.0" layoutY="250.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Register">
          <font>
             <Font name="Roboto" size="50.0" />
          </font>
       </Text>
-      <TextField fx:id="name" layoutX="930.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="Name">
+      <TextField fx:id="name" layoutX="930.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="Name" styleClass="jfx-text-field">
          <font>
             <Font name="Roboto" size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="username" layoutX="930.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="Username">
+      <TextField fx:id="username" layoutX="930.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="Username" styleClass="jfx-text-field">
          <font>
             <Font name="Roboto" size="13.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="password1" layoutX="930.0" layoutY="430.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" />
-      <PasswordField fx:id="password2" layoutX="930.0" layoutY="490.0" prefHeight="30.0" prefWidth="200.0" promptText="Confirm Password" />
-      <TextField fx:id="email" layoutX="930.0" layoutY="550.0" prefHeight="30.0" prefWidth="200.0" promptText="Email">
+      <PasswordField fx:id="password1" layoutX="930.0" layoutY="430.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" styleClass="jfx-text-field" />
+      <PasswordField fx:id="password2" layoutX="930.0" layoutY="490.0" prefHeight="30.0" prefWidth="200.0" promptText="Confirm Password" styleClass="jfx-text-field" />
+      <TextField fx:id="email" layoutX="930.0" layoutY="550.0" prefHeight="30.0" prefWidth="200.0" promptText="Email" styleClass="jfx-text-field">
          <font>
             <Font name="Roboto" size="13.0" />
          </font>
       </TextField>
-      <Button layoutX="930.0" layoutY="610.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #ed8152;" text="Register" textFill="#fafafa">
+      <Button layoutX="930.0" layoutY="610.0" mnemonicParsing="false" onAction="#handleRegister" prefHeight="30.0" prefWidth="200.0" styleClass="LoginButton" text="Register" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </Button>
-      <Text fill="#ed8152" layoutX="930.0" layoutY="670.0" onMousePressed="#handleLogInPressed" strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account? Log in" underline="true">
+      <Text layoutX="930.0" layoutY="670.0" onMousePressed="#handleLogInPressed" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-register" text="Already have an account? Log in">
          <font>
             <Font size="14.0" />
          </font>

@@ -126,10 +126,9 @@ public class ReadAndWriteTest {
 
     @Test
     public void testWriteWorkoutToUserError() {
-        ReadAndWrite.setFileLocation(testFolderLocation);
-        assertThrows(IllegalStateException.class,
-                () -> ReadAndWrite.writeWorkoutToUser(workout1, user),
-                "Should throw illegal state exception when trying to write to folder.");
+        assertThrows(IllegalArgumentException.class,
+                () -> ReadAndWrite.setFileLocation(testFolderLocation),
+                "Should throw illegal argument exception when trying to set a folder as location.");
     }
 
     @Test

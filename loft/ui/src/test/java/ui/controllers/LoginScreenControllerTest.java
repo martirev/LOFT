@@ -9,10 +9,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -33,18 +31,20 @@ public class LoginScreenControllerTest extends ApplicationTest {
 
     private static String testFileLocation = System.getProperty("user.home")
             + System.getProperty("file.separator") + "testUserData.json";
-    private LoginScreenController controller;
 
     private Parent root;
 
+    /**
+     * Sets up the test environment to support headless mode.
+     */
+    @BeforeAll
+    public static void setupHeadless() {
+        App.supportHeadless();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("LoginScreen.fxml"));
-        controller = new LoginScreenController();
-        fxmlLoader.setController(controller);
-        root = fxmlLoader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
+        root = App.customStart(stage, "LoginScreen.fxml", new LoginScreenController());
     }
 
     @BeforeAll

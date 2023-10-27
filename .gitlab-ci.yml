@@ -1,11 +1,21 @@
-image: maven:3.8.3-openjdk-17
+image: runarmod/maven-javafx
 
 variables:
   MAVEN_OPTS: "-Djava.awt.headless=true -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
-  MAVEN_CLI_OPTS: "--batch-mode -DskipUiTests=true"
+  MAVEN_CLI_OPTS_NO_UI: "--batch-mode -DskipUiTests"
+  MAVEN_CLI_OPTS_HEADLESS: "--batch-mode -P headless"
+
+# Function to get the percentage of code coverage for the "current module" (i.e. the module in pwd at the time of calling)
+.get_percentage:
+  script:
+  - missed_hit=$(cat target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*BRANCH' | grep -o [0-9]*)
+  - missed=$(echo ${missed_hit} | grep -o "[0-9]* ")
+  - hit=$(echo ${missed_hit} | grep -o " [0-9]*")
+  - percentage=$(awk -v hit="${hit}" -v missed="${missed}" 'BEGIN { print  100 * hit / (hit + missed) }')
 
 stages:
   - test
+  - coverage
   - build
   - validate
 
@@ -19,25 +29,61 @@ test:
   before_script:
     - cd loft
   script:
-    - mvn clean test $MAVEN_CLI_OPTS
+    - mvn clean test $MAVEN_CLI_OPTS_HEADLESS
+    - mvn jacoco:report
+  artifacts:
+    paths:
+      - loft/core/target/site/jacoco/jacoco.xml
+      - loft/filehandling/target/site/jacoco/jacoco.xml
+      - loft/ui/target/site/jacoco/jacoco.xml
+    expire_in: 1 day
 
 build:
   stage: build
+  needs: []
   before_script:
     - cd loft
   script:
-    - mvn clean install $MAVEN_CLI_OPTS
+    - mvn clean install $MAVEN_CLI_OPTS_NO_UI
 
-jacoco:
-  stage: test
+coverage core:
+  stage: coverage
   needs: ["test"]
+  dependencies:
+    - test
   before_script:
     - cd loft
+    - cd core
   script:
-    - mvn clean test $MAVEN_CLI_OPTS
-    - mvn jacoco:report
-    - cat core/target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/Jacoco Coverage core:/'
-    - cat filehandling/target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/Jacoco Coverage filehandling:/'
+    - !reference [.get_percentage, script]
+    - 'echo "Code Coverage core: ${percentage}%"'
+  coverage: "/Code Coverage core: ([0-9\\.]*)%/"
+
+coverage filehandling:
+  stage: coverage
+  needs: ["test"]
+  dependencies:
+    - test
+  before_script:
+    - cd loft
+    - cd filehandling
+  script:
+    - !reference [.get_percentage, script]
+    - 'echo "Code Coverage filehandling: ${percentage}%"'
+  coverage: "/Code Coverage filehandling: ([0-9\\.]*)%/"
+
+coverage ui:
+  stage: coverage
+  needs: ["test"]
+  dependencies:
+    - test
+  before_script:
+    - cd loft
+    - cd ui
+  script:
+    - !reference [.get_percentage, script]
+    - 'echo "Code Coverage ui: ${percentage}%"'
+  coverage: "/Code Coverage ui: ([0-9\\.]*)%/"
 
 checkstyle:
   stage: validate
@@ -53,5 +99,5 @@ spotbugs:
   before_script:
     - cd loft
   script:
-    - mvn clean install $MAVEN_CLI_OPTS
+    - mvn clean install $MAVEN_CLI_OPTS_NO_UI
     - mvn spotbugs:check

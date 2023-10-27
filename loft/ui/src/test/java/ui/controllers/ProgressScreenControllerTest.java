@@ -14,10 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.text.Text;
@@ -47,15 +45,18 @@ public class ProgressScreenControllerTest extends ApplicationTest {
     private XYChart<String, Number> deadliftChart;
     private XYChart<String, Number> squatChart;
 
+    /**
+     * Sets up the test environment to support headless mode.
+     */
+    @BeforeAll
+    public static void setupHeadless() {
+        App.supportHeadless();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ProgressScreen.fxml"));
-        ProgressScreenController controller = new ProgressScreenController();
-        fxmlLoader.setController(controller);
-        root = fxmlLoader.load();
-        stage.setScene(new Scene(root));
-        stage.show();
-
+        root = App.customStart(stage, "ProgressScreen.fxml", new ProgressScreenController());
+        
         totalweightChart = lookup("#totalWeightChart").query();
         benchChart = lookup("#benchPressChart").query();
         deadliftChart = lookup("#deadliftChart").query();
