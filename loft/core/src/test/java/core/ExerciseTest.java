@@ -42,6 +42,19 @@ public class ExerciseTest {
     }
 
     @Test
+    public void testFormatExerciseName() {
+        Exercise exercise = new Exercise("bench press");
+        assertTrue(exercise.getName().equals("Bench Press"),
+                "Exercise name should be Bench Press");
+        Exercise lateralRaises = new Exercise("Lateral      raises     ");
+        assertTrue(lateralRaises.getName().equals("Lateral Raises"),
+                "Exercise name should be Lateral Raises");
+        Exercise dumbellCurls = new Exercise("duMbell c-uRls?");
+        assertTrue(dumbellCurls.getName().equals("Dumbell C-urls?"),
+                "Exercise name should be Dumbell C-urls?");
+    }
+
+    @Test
     public void testGetTotalWeight() {
         Set set1 = new Set(8, 100);
         Set set2 = new Set(6, 100);

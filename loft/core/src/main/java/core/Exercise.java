@@ -24,10 +24,10 @@ public class Exercise {
      * @throws IllegalArgumentException if the name is null
      */
     public Exercise(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Name cannot be null");
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
         }
-        this.name = name;
+        this.name = formatName(name);
     }
 
     /**
@@ -41,6 +41,25 @@ public class Exercise {
     public Exercise(String name, Set... sets) {
         this(name);
         this.sets = new ArrayList<Set>(Arrays.asList(sets));
+    }
+
+    /**
+     * Converts a string to PascalCase format and removes all unnecessary
+     * whitespaces.
+     *
+     * @param name the string to be converted
+     * @return the converted string in PascalCase format
+     */
+    private static String formatName(String name) {
+        String[] words = name.split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for (String word : words) {
+            sb.append(Character.toUpperCase(word.charAt(0)));
+            sb.append(word.substring(1).toLowerCase());
+            sb.append(" ");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
     }
 
     /**
