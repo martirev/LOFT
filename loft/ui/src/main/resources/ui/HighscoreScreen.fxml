@@ -34,6 +34,14 @@
                 <Font name="Roboto" size="36.0" />
             </font>
         </Text>
-      <ListView fx:id="statsListView" layoutX="776.0" layoutY="248.0" prefHeight="470.0" prefWidth="480.0" style="-fx-border-color: #ed8152;" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="470.0" layoutX="785.0" layoutY="248.0" stroke="#ed8152" strokeType="INSIDE" width="479.0" />
+      <Text fx:id="header" layoutX="809.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="433.0">
+         <font>
+            <Font name="System Bold Italic" size="26.0" />
+         </font></Text>
+      <Text fx:id="body" layoutX="808.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="433.0">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
     </children>
 </AnchorPane>

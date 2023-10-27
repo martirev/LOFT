@@ -128,7 +128,7 @@ public class WorkoutScreenController extends SceneSwitcher {
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                     String newValue) {
                 if (newValue == null
-                        || (newValue.equals("Add as new") && searchBar.getText().isEmpty())) {
+                        || (newValue.equals("Add As New") && searchBar.getText().isEmpty())) {
                     editButton.setDisable(true);
                     return;
                 }
@@ -148,7 +148,7 @@ public class WorkoutScreenController extends SceneSwitcher {
         if (newValue.isEmpty()) {
             editButton.setDisable(true);
         }
-        String dummy = "Add as new";
+        String dummy = "Add As New";
 
         List<String> result = new ArrayList<String>(Arrays.asList(dummy));
         result.addAll(workoutSorting.searchForExercises(newValue));
@@ -232,7 +232,7 @@ public class WorkoutScreenController extends SceneSwitcher {
     }
 
     /**
-     * Handles the edit button being pressed. If user selects "Add as new", there
+     * Handles the edit button being pressed. If user selects "Add As New", there
      * will be created a new exercise with the name from the search bar. Else, the
      * selected exercise will be edited.
      */
@@ -243,7 +243,7 @@ public class WorkoutScreenController extends SceneSwitcher {
         selectedExercise = new Exercise(selectedExercisename);
         exerciseSettings.setVisible(true);
 
-        if (selectedExercise.getName().equals("Add as new")) {
+        if (selectedExercise.getName().equals("Add As New")) {
             selectedExercise = new Exercise(searchBar.getText());
         }
 
