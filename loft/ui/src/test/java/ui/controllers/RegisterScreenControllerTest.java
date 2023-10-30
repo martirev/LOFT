@@ -3,7 +3,8 @@ package ui.controllers;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.User;
-import filehandling.ReadAndWrite;
+import filehandling.DirectLoftAccess;
+import filehandling.LoftAccess;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,6 +38,8 @@ public class RegisterScreenControllerTest extends ApplicationTest {
 
     private Parent root;
 
+    private LoftAccess loftAccess = new DirectLoftAccess();
+
     /**
      * Sets up the test environment to support headless mode.
      */
@@ -53,7 +56,7 @@ public class RegisterScreenControllerTest extends ApplicationTest {
     @BeforeAll
     public static void setUp() {
         deleteTestfile();
-        ReadAndWrite.setFileLocation(testFileLocation);
+        DirectLoftAccess.setFileLocation(testFileLocation);
     }
 
     @AfterAll
@@ -131,7 +134,7 @@ public class RegisterScreenControllerTest extends ApplicationTest {
     @Test
     public void testUsernameTaken() {
         User user = new User("Test User", "test", "test", "t@t.no");
-        ReadAndWrite.registerUser(user);
+        loftAccess.registerUser(user);
 
         writeSeparator("\t", "Another user", "test", "1234", "1234", "te@st.no");
         clickRegister();

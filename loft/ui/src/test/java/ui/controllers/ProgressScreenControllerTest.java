@@ -7,7 +7,8 @@ import core.Exercise;
 import core.Set;
 import core.User;
 import core.Workout;
-import filehandling.ReadAndWrite;
+import filehandling.DirectLoftAccess;
+import filehandling.LoftAccess;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,6 +40,8 @@ public class ProgressScreenControllerTest extends ApplicationTest {
             + System.getProperty("file.separator") + "testUserData.json";
 
     private Parent root;
+
+    private static LoftAccess loftAccess = new DirectLoftAccess();
 
     private XYChart<String, Number> totalweightChart;
     private XYChart<String, Number> benchChart;
@@ -75,7 +78,7 @@ public class ProgressScreenControllerTest extends ApplicationTest {
      */
     @BeforeAll
     public static void setUp() {
-        ReadAndWrite.setFileLocation(testFileLocation);
+        DirectLoftAccess.setFileLocation(testFileLocation);
         deleteTestFile();
         User user = new User("Test person", "tester", "hunter2", "tester@example.com");
         SceneSwitcher.setUser(user);
@@ -122,9 +125,9 @@ public class ProgressScreenControllerTest extends ApplicationTest {
         workout3.addExercise(bench);
         workout3.addExercise(squat);
 
-        ReadAndWrite.writeWorkoutToUser(workout1, user);
-        ReadAndWrite.writeWorkoutToUser(workout2, user);
-        ReadAndWrite.writeWorkoutToUser(workout3, user);
+        loftAccess.writeWorkoutToUser(workout1, user);
+        loftAccess.writeWorkoutToUser(workout2, user);
+        loftAccess.writeWorkoutToUser(workout3, user);
     }
 
     @Test

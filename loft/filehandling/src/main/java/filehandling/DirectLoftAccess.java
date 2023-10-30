@@ -15,24 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The ReadAndWrite class provides methods for reading and writing user data to
- * a file in JSON format. It includes methods for registering new users, adding
- * workouts to existing users, and retrieving user data. The file location can
- * be set using the setFileLocation method.
+ * DirectLoftAccess is a class that implements the LoftAccess interface and
+ * provides direct access to the userData.json file. It allows for registering
+ * new users, adding workouts to existing users, and retrieving user data from
+ * the file. The file location can be set using the setFileLocation method, and
+ * retrieved using the getFileLocation method.
  */
-public abstract class ReadAndWrite {
+public class DirectLoftAccess implements LoftAccess {
     private static String fileFolderLocation = System.getProperty("user.home")
             + System.getProperty("file.separator");
     private static String fileLocation = fileFolderLocation + "userData.json";
 
     /**
-     * Private constructor to prevent instantiation.
-     */
-    private ReadAndWrite() {
-    }
-
-    /**
-     * Sets the file location for ReadAndWrite class.
+     * Sets the file location for DirectLoftAccess class.
      *
      * @param fileLocation the file location to be set.
      * @throws IllegalArgumentException if the file location is a directory
@@ -42,11 +37,11 @@ public abstract class ReadAndWrite {
             throw new IllegalArgumentException(
                     "File location " + fileLocation + " is a directory, not a file");
         }
-        ReadAndWrite.fileLocation = fileLocation;
+        DirectLoftAccess.fileLocation = fileLocation;
     }
 
     /**
-     * Gets the file location for ReadAndWrite class.
+     * Gets the file location for DirectLoftAccess class.
      */
     public static String getFileLocation() {
         return fileLocation;
@@ -58,7 +53,8 @@ public abstract class ReadAndWrite {
      *
      * @param user the user to be registered
      */
-    public static void registerUser(User user) {
+    @Override
+    public void registerUser(User user) {
         registerUserGetUsers(user);
     }
 
@@ -90,7 +86,8 @@ public abstract class ReadAndWrite {
      *
      * @param workout The workout to add to the current user
      */
-    public static void writeWorkoutToUser(Workout workout, User user) {
+    @Override
+    public void writeWorkoutToUser(Workout workout, User user) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         List<User> users = getUsers();
@@ -177,7 +174,8 @@ public abstract class ReadAndWrite {
      * @return a User object if the given username and password match an existing
      *         user in the system, null otherwise
      */
-    public static User getUser(String username, String password) {
+    @Override
+    public User getUser(String username, String password) {
         List<User> users = getUsers();
         return getUser(username, password, users);
     }
@@ -188,7 +186,8 @@ public abstract class ReadAndWrite {
      *
      * @return The user data from the file
      */
-    public static User returnUserClassFromFile(User user) {
+    @Override
+    public User getUpdatedUser(User user) {
         User updatedUser = getUser(user.getUsername(), user.getPassword());
         if (updatedUser == null) {
             registerUser(user);
@@ -203,7 +202,8 @@ public abstract class ReadAndWrite {
      * @param username the username to check for existence
      * @return true if the username exists, false otherwise
      */
-    public static boolean usernameExists(String username) {
+    @Override
+    public boolean usernameExists(String username) {
         return getUsers().stream().anyMatch(user -> user.getUsername().equals(username));
     }
 }

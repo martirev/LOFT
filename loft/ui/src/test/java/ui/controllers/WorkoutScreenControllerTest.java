@@ -9,7 +9,7 @@ import core.Exercise;
 import core.Set;
 import core.User;
 import core.Workout;
-import filehandling.ReadAndWrite;
+import filehandling.DirectLoftAccess;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -59,7 +59,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     @BeforeAll
     public static void setUp() {
         deleteTestfile();
-        ReadAndWrite.setFileLocation(testFileLocation);
+        DirectLoftAccess.setFileLocation(testFileLocation);
         user = new User("Test person", "tester", "hunter2", "tester@test.com");
         SceneSwitcher.setUser(user);
     }

@@ -20,18 +20,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * This class contains JUnit tests for the ReadAndWrite class. It tests the
- * constructor, writeWorkoutToUser method, and returnUserClassFromFile method.
- * The tests include checking if the ReadAndWrite object is an instance of User,
- * writing and reading workouts to and from a file, and checking if the workouts
- * are equal.
+ * This class contains unit tests for the DirectLoftAccess class. It tests the
+ * functionality of the DirectLoftAccess class by testing its methods for
+ * reading and writing to a file, registering a user, checking if a username
+ * exists, and getting a user.
  */
-public class ReadAndWriteTest {
+public class DirectLoftAccessTest {
 
     private static String testFolderLocation = System.getProperty("user.home")
             + System.getProperty("file.separator");
     private static String testFileLocation = testFolderLocation + "testUserData.json";
     private Random rand = new Random();
+
+    private LoftAccess loftAccess = new DirectLoftAccess();
 
     private User user;
 
@@ -57,7 +58,7 @@ public class ReadAndWriteTest {
      */
     @BeforeEach
     public void setUp() {
-        ReadAndWrite.setFileLocation(testFileLocation);
+        DirectLoftAccess.setFileLocation(testFileLocation);
         deleteTestfile();
 
         user = new User("Test User", "tester", "hunter2", "tester@example.com");
@@ -91,7 +92,7 @@ public class ReadAndWriteTest {
     @Test
     public void testConstructor() {
         assertInstanceOf(User.class,
-                ReadAndWrite.returnUserClassFromFile(user),
+                loftAccess.getUpdatedUser(user),
                 "The user should either be already saved, or be created and now be of type user.");
     }
 
@@ -99,43 +100,43 @@ public class ReadAndWriteTest {
     public void testSetFileLocation() {
         String fileLocation = "example/location.json";
 
-        ReadAndWrite.setFileLocation(fileLocation);
-        assertTrue(ReadAndWrite.getFileLocation().equals(fileLocation),
+        DirectLoftAccess.setFileLocation(fileLocation);
+        assertTrue(DirectLoftAccess.getFileLocation().equals(fileLocation),
                 "The file location should be the same as the one set.");
     }
 
     @Test
     public void testGetUser() {
-        ReadAndWrite.writeWorkoutToUser(workout1, user);
-        User fileUser1 = ReadAndWrite.getUser(user.getUsername(), user.getPassword());
+        loftAccess.writeWorkoutToUser(workout1, user);
+        User fileUser1 = loftAccess.getUser(user.getUsername(), user.getPassword());
         assertTrue(user.equals(fileUser1), "The users should be equal.");
 
-        User fileUser2 = ReadAndWrite.getUser(user.getUsername() + "1", user.getPassword());
+        User fileUser2 = loftAccess.getUser(user.getUsername() + "1", user.getPassword());
         assertNull(fileUser2, "There should not be any matching user.");
 
-        User fileUser3 = ReadAndWrite.getUser(user.getUsername(), user.getPassword() + "1");
+        User fileUser3 = loftAccess.getUser(user.getUsername(), user.getPassword() + "1");
         assertNull(fileUser3, "There should not be any matching user.");
     }
 
     @Test
     public void testRegisterUser() {
-        ReadAndWrite.registerUser(user);
-        User fileUser = ReadAndWrite.getUser(user.getUsername(), user.getPassword());
+        loftAccess.registerUser(user);
+        User fileUser = loftAccess.getUser(user.getUsername(), user.getPassword());
         assertTrue(user.equals(fileUser), "The users should be equal.");
     }
 
     @Test
     public void testWriteWorkoutToUserError() {
         assertThrows(IllegalArgumentException.class,
-                () -> ReadAndWrite.setFileLocation(testFolderLocation),
+                () -> DirectLoftAccess.setFileLocation(testFolderLocation),
                 "Should throw illegal argument exception when trying to set a folder as location.");
     }
 
     @Test
     public void testWriteAndReadToFormFile() {
-        ReadAndWrite.writeWorkoutToUser(workout1, user);
-        ReadAndWrite.writeWorkoutToUser(workout2, user);
-        User fileUser = ReadAndWrite.returnUserClassFromFile(user);
+        loftAccess.writeWorkoutToUser(workout1, user);
+        loftAccess.writeWorkoutToUser(workout2, user);
+        User fileUser = loftAccess.getUpdatedUser(user);
         for (int i = 0; i < user.getNumberOfWorkouts(); i++) {
             assertTrue(user.getWorkouts().get(i).equals(fileUser.getWorkouts().get(i)),
                     "Workouts are not equal");
@@ -144,11 +145,11 @@ public class ReadAndWriteTest {
 
     @Test
     public void testUsernameExists() {
-        ReadAndWrite.writeWorkoutToUser(workout1, user);
-        assertTrue(ReadAndWrite.usernameExists(user.getUsername()),
+        loftAccess.writeWorkoutToUser(workout1, user);
+        assertTrue(loftAccess.usernameExists(user.getUsername()),
                 "The username should exist in the file");
 
-        assertFalse(ReadAndWrite.usernameExists("thisUsernameDoesntExist"),
+        assertFalse(loftAccess.usernameExists("thisUsernameDoesntExist"),
                 "The username should not exist in the file");
     }
 

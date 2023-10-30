@@ -1,7 +1,8 @@
 package ui.controllers;
 
 import core.User;
-import filehandling.ReadAndWrite;
+import filehandling.DirectLoftAccess;
+import filehandling.LoftAccess;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -24,6 +25,8 @@ public class LoginScreenController extends SceneSwitcher {
     @FXML
     private PasswordField passwordField;
 
+    private LoftAccess loftAccess = new DirectLoftAccess();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
@@ -38,7 +41,7 @@ public class LoginScreenController extends SceneSwitcher {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        User user = ReadAndWrite.getUser(username, password);
+        User user = loftAccess.getUser(username, password);
 
         if (user == null) {
             errorMessage.setText("Login invalid");

@@ -5,7 +5,8 @@ import core.Set;
 import core.User;
 import core.Workout;
 import core.WorkoutSorting;
-import filehandling.ReadAndWrite;
+import filehandling.DirectLoftAccess;
+import filehandling.LoftAccess;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -30,6 +31,8 @@ public class JournalScreenController extends SceneSwitcher {
 
     private WorkoutSorting workoutSorting;
 
+    private LoftAccess loftAccess = new DirectLoftAccess();
+
     /**
      * Initializes the controller class. The user of the apliication is loaded in
      * and the users workouts are loaded in.
@@ -41,7 +44,7 @@ public class JournalScreenController extends SceneSwitcher {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user = ReadAndWrite.returnUserClassFromFile(getUser());
+        User user = loftAccess.getUpdatedUser(getUser());
         workoutSorting = new WorkoutSorting(user.getWorkouts());
         workoutHistoryListView.setOnMouseClicked(event -> {
             workoutListView.getItems().clear();

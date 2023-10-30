@@ -3,7 +3,8 @@ package ui.controllers;
 import core.Exercise;
 import core.User;
 import core.WorkoutSorting;
-import filehandling.ReadAndWrite;
+import filehandling.DirectLoftAccess;
+import filehandling.LoftAccess;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -38,9 +39,11 @@ public class ProgressScreenController extends SceneSwitcher {
 
     private WorkoutSorting workoutSorting;
 
+    private LoftAccess loftAccess = new DirectLoftAccess();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user = ReadAndWrite.returnUserClassFromFile(getUser());
+        User user = loftAccess.getUpdatedUser(getUser());
         workoutSorting = new WorkoutSorting(user.getWorkouts());
         populateTopExercisesCharts();
         populateTotalWeightChart();

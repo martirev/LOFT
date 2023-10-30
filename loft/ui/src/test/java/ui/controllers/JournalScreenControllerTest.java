@@ -8,7 +8,8 @@ import core.Exercise;
 import core.Set;
 import core.User;
 import core.Workout;
-import filehandling.ReadAndWrite;
+import filehandling.DirectLoftAccess;
+import filehandling.LoftAccess;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -43,6 +44,8 @@ public class JournalScreenControllerTest extends ApplicationTest {
     private static Workout workout2;
     private static User user;
 
+    private static LoftAccess loftAccess = new DirectLoftAccess();
+
     /**
      * Sets up the test environment to support headless mode.
      */
@@ -69,7 +72,7 @@ public class JournalScreenControllerTest extends ApplicationTest {
      */
     @BeforeAll
     public static void setUp() {
-        ReadAndWrite.setFileLocation(testFileLocation);
+        DirectLoftAccess.setFileLocation(testFileLocation);
         deleteTestfile();
         user = new User("Test person", "tester", "hunter2", "tester@example.com");
 
@@ -115,8 +118,8 @@ public class JournalScreenControllerTest extends ApplicationTest {
         workout2.addExercise(exercise3);
         workout2.addExercise(exercise4);
 
-        ReadAndWrite.writeWorkoutToUser(workout1, user);
-        ReadAndWrite.writeWorkoutToUser(workout2, user);
+        loftAccess.writeWorkoutToUser(workout1, user);
+        loftAccess.writeWorkoutToUser(workout2, user);
     }
 
     @Test
