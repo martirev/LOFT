@@ -79,9 +79,9 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Text>
-            <Text layoutX="53.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="View your highscores" wrappingWidth="216.2646484375">
+            <Text layoutX="53.0" layoutY="367.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="View your highscores" wrappingWidth="216.2646484375">
                <font>
-                  <Font size="22.0" />
+                  <Font size="26.0" />
                </font>
             </Text>
          </children>

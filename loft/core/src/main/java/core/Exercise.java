@@ -21,7 +21,7 @@ public class Exercise {
      * Constructor for an exercise that only lets you specify the name.
      *
      * @param name the name of the exercise
-     * @throws IllegalArgumentException if the name is null
+     * @throws IllegalArgumentException if the name is null or empty
      */
     public Exercise(String name) {
         if (name == null || name.isEmpty()) {
