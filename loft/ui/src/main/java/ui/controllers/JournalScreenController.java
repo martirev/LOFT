@@ -40,7 +40,8 @@ public class JournalScreenController extends SceneSwitcher {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user = loftAccess.getUpdatedUser(getUser());
+        User prev = getUser();
+        User user = loftAccess.getUser(prev.getUsername(), prev.getPassword());
         workoutSorting = new WorkoutSorting(user.getWorkouts());
         workoutHistoryListView.setOnMouseClicked(event -> {
             workoutListView.getItems().clear();

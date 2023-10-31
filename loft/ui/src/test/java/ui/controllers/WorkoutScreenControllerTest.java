@@ -34,7 +34,7 @@ import ui.App;
  */
 public class WorkoutScreenControllerTest extends ControllerTestBase {
 
-    private WorkoutScreenController controller = new WorkoutScreenController();
+    private WorkoutScreenController controller;
     private static User user;
 
     /**
@@ -56,6 +56,9 @@ public class WorkoutScreenControllerTest extends ControllerTestBase {
 
     @Override
     public void start(Stage stage) throws IOException {
+        loftAccess.registerUser(user);
+        controller = new WorkoutScreenController();
+
         root = App.customStart(stage, "WorkoutScreen.fxml", controller);
     }
 

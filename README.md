@@ -14,6 +14,8 @@ This project uses Maven to build and run the app. To start, make sure you are in
 
 Then, run the following command to build the project: `mvn install`. This will run all tests, including UI tests, and build the project. To run the app run `mvn javafx:run -f ui/pom.xml` as this runs the ui module, and will start the app.
 
+To start the REST-API, run `mvn spring-boot:run -f springboot/restserver/pom.xml` from the [project directory](loft). This will start the API on port 8080. See [the documentation](docs/release3/restapi.md) for how to interact with the API.
+
 To test the app, run `mvn test` from the [project directory](loft). Make sure the source code is compiled first with `mvn compile`. The command `mvn install` will do both these two in one, among some other things. Doing `mvn test` will run all tests, including UI tests. To only run tests for a specific module, go to that module in the terminal and run `mvn test` from there.
 
 To check the code coverage, run `mvn jacoco:report` from the [project directory](loft). This will generate a report for all modules. These can be viewed by opening the index.html file in each respective target/site/jacoco folder.
@@ -34,6 +36,8 @@ To check the code for style errors, run `mvn checkstyle:check` from the [project
 - **Gson 2.10**: Used to parse our JSON-files.
 - **SpotBugs 4.7.3**: Used to check for possible bugs in the code.
 - **Checkstyle 10.3.4**: Used to check the code for style errors.
+- **SLF4J 2.0.3**: Used for logging of server.
+- **SpringFramework Boot 2.4.4**: Used for REST-API.
 
 ## Directory Structure
 

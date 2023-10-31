@@ -47,12 +47,6 @@ public class DirectLoftAccess implements LoftAccess {
         return fileLocation;
     }
 
-    /**
-     * Registers a new user by adding it to the list of existing users and writing
-     * the updated list to a file.
-     *
-     * @param user the user to be registered
-     */
     @Override
     public void registerUser(User user) {
         registerUserGetUsers(user);
@@ -80,12 +74,6 @@ public class DirectLoftAccess implements LoftAccess {
         return users;
     }
 
-    /**
-     * The method to be used for writing a workout class to the userData file in
-     * json format.
-     *
-     * @param workout The workout to add to the current user
-     */
     @Override
     public void writeWorkoutToUser(Workout workout, User user) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -165,43 +153,12 @@ public class DirectLoftAccess implements LoftAccess {
         return null;
     }
 
-    /**
-     * Returns a User object if the given username and password match an existing
-     * user in the system.
-     *
-     * @param username the username of the user to retrieve
-     * @param password the password of the user to retrieve
-     * @return a User object if the given username and password match an existing
-     *         user in the system, null otherwise
-     */
     @Override
     public User getUser(String username, String password) {
         List<User> users = getUsers();
         return getUser(username, password, users);
     }
 
-    /**
-     * The method to be used for reading the userData file in json format. If no
-     * file or user exists, it will return a new User.
-     *
-     * @return The user data from the file
-     */
-    @Override
-    public User getUpdatedUser(User user) {
-        User updatedUser = getUser(user.getUsername(), user.getPassword());
-        if (updatedUser == null) {
-            registerUser(user);
-            updatedUser = getUser(user.getUsername(), user.getPassword());
-        }
-        return updatedUser;
-    }
-
-    /**
-     * Checks if a username already exists.
-     *
-     * @param username the username to check for existence
-     * @return true if the username exists, false otherwise
-     */
     @Override
     public boolean usernameExists(String username) {
         return getUsers().stream().anyMatch(user -> user.getUsername().equals(username));

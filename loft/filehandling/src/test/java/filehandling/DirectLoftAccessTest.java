@@ -1,7 +1,6 @@
 package filehandling;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -87,13 +86,7 @@ public class DirectLoftAccessTest {
 
         user.addWorkout(workout1);
         user.addWorkout(workout2);
-    }
-
-    @Test
-    public void testConstructor() {
-        assertInstanceOf(User.class,
-                loftAccess.getUpdatedUser(user),
-                "The user should either be already saved, or be created and now be of type user.");
+        loftAccess.registerUser(user);
     }
 
     @Test
@@ -136,7 +129,7 @@ public class DirectLoftAccessTest {
     public void testWriteAndReadToFormFile() {
         loftAccess.writeWorkoutToUser(workout1, user);
         loftAccess.writeWorkoutToUser(workout2, user);
-        User fileUser = loftAccess.getUpdatedUser(user);
+        User fileUser = loftAccess.getUser(user.getUsername(), user.getPassword());
         for (int i = 0; i < user.getNumberOfWorkouts(); i++) {
             assertTrue(user.getWorkouts().get(i).equals(fileUser.getWorkouts().get(i)),
                     "Workouts are not equal");
