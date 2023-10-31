@@ -241,20 +241,18 @@ public class WorkoutSorting {
      * @throws IllegalArgumentException if no exercise with the given name exists
      */
     public int daysSinceExercise(String name) {
-        if (!sameExercises.containsKey(name)) {
-            throw new IllegalArgumentException("No exercise with the given name was found");
-        }
-
-        for (Workout workout : getMostRecentWorkouts()) {
-            for (Exercise exercise : workout.getExercises()) {
-                if (exercise.getName().equals(name)) {
-                    LocalDate workoutDate = workout.getDate();
-                    LocalDate currentDate = LocalDate.now();
-                    return (int) ChronoUnit.DAYS.between(workoutDate, currentDate);
+        if (sameExercises.containsKey(name)) {
+            for (Workout workout : getMostRecentWorkouts()) {
+                for (Exercise exercise : workout.getExercises()) {
+                    if (exercise.getName().equals(name)) {
+                        LocalDate workoutDate = workout.getDate();
+                        LocalDate currentDate = LocalDate.now();
+                        return (int) ChronoUnit.DAYS.between(workoutDate, currentDate);
+                    }
                 }
             }
         }
-        throw new IllegalStateException("No exercise found");
+        throw new IllegalArgumentException("No exercise with the given name was found");
     }
 
     /**
