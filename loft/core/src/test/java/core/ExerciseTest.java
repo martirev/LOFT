@@ -34,6 +34,16 @@ public class ExerciseTest {
     }
 
     @Test
+    public void testSetIllegalName() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Exercise(null),
+                "Should not be possible to set name to null");
+        assertThrows(IllegalArgumentException.class,
+                () -> new Exercise(""),
+                "Should not be possible to set name to empty string");
+    }
+
+    @Test
     public void testGetName() {
         assertTrue(exercise.getName().equals("Bench Press"),
                 "Exercise name should be Bench Press");
