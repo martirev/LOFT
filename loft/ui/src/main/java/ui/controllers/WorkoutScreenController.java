@@ -5,8 +5,6 @@ import core.Set;
 import core.User;
 import core.Workout;
 import core.WorkoutSorting;
-import filehandling.DirectLoftAccess;
-import filehandling.LoftAccess;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,8 +59,6 @@ public class WorkoutScreenController extends SceneSwitcher {
     private Exercise selectedExercise;
 
     private Workout workout;
-
-    private LoftAccess loftAccess = new DirectLoftAccess();
 
     /**
      * Returns a copy of the workout being created.

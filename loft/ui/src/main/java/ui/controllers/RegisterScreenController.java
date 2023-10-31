@@ -1,8 +1,6 @@
 package ui.controllers;
 
 import core.User;
-import filehandling.DirectLoftAccess;
-import filehandling.LoftAccess;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -34,8 +32,6 @@ public class RegisterScreenController extends SceneSwitcher {
 
     @FXML
     private TextField email;
-
-    private LoftAccess loftAccess = new DirectLoftAccess();
 
     /**
      * Handles the user input for registering a new account. Validates the input and

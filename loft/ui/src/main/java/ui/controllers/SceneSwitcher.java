@@ -1,6 +1,8 @@
 package ui.controllers;
 
 import core.User;
+import filehandling.DirectLoftAccess;
+import filehandling.LoftAccess;
 import java.io.IOException;
 import java.net.URL;
 import javafx.fxml.FXML;
@@ -33,6 +35,8 @@ public abstract class SceneSwitcher implements Initializable {
      * static.
      */
     private static User user = null;
+
+    protected static LoftAccess loftAccess = new DirectLoftAccess();
 
     /**
      * A method to switch scenes.
@@ -98,5 +102,9 @@ public abstract class SceneSwitcher implements Initializable {
      */
     static User getUser() {
         return user;
+    }
+
+    public static void setAccess(LoftAccess access) {
+        SceneSwitcher.loftAccess = access;
     }
 }

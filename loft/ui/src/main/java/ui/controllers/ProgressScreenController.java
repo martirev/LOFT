@@ -3,8 +3,6 @@ package ui.controllers;
 import core.Exercise;
 import core.User;
 import core.WorkoutSorting;
-import filehandling.DirectLoftAccess;
-import filehandling.LoftAccess;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -38,8 +36,6 @@ public class ProgressScreenController extends SceneSwitcher {
     private LineChart<String, Number> squatChart;
 
     private WorkoutSorting workoutSorting;
-
-    private LoftAccess loftAccess = new DirectLoftAccess();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

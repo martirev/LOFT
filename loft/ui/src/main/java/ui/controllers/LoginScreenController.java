@@ -1,8 +1,6 @@
 package ui.controllers;
 
 import core.User;
-import filehandling.DirectLoftAccess;
-import filehandling.LoftAccess;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -24,8 +22,6 @@ public class LoginScreenController extends SceneSwitcher {
 
     @FXML
     private PasswordField passwordField;
-
-    private LoftAccess loftAccess = new DirectLoftAccess();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

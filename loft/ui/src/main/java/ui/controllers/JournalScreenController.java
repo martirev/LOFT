@@ -5,8 +5,6 @@ import core.Set;
 import core.User;
 import core.Workout;
 import core.WorkoutSorting;
-import filehandling.DirectLoftAccess;
-import filehandling.LoftAccess;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -30,8 +28,6 @@ public class JournalScreenController extends SceneSwitcher {
     private ListView<TextArea> workoutListView;
 
     private WorkoutSorting workoutSorting;
-
-    private LoftAccess loftAccess = new DirectLoftAccess();
 
     /**
      * Initializes the controller class. The user of the apliication is loaded in
