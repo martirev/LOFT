@@ -1,5 +1,6 @@
 package ui;
 
+import filehandling.RemoteLoftAccess;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        if (RemoteLoftAccess.serverAlive()) {
+            System.setProperty("loft.port", "8080");
+        }
         customStart(stage, "LoginScreen.fxml", new LoginScreenController());
     }
 
