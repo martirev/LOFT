@@ -7,7 +7,6 @@ import core.Exercise;
 import core.Set;
 import core.User;
 import core.Workout;
-import filehandling.ReadAndWrite;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,18 +22,13 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 import ui.App;
 
 /**
  * Test class for the HighscoreScreenController.
  */
-public class HighscoreScreenControllerTest extends ApplicationTest {
+public class HighscoreScreenControllerTest extends ControllerTestBase {
 
-    private static final String testFileLocation = System.getProperty("user.home")
-            + System.getProperty("file.separator") + "testUserData.json";
-
-    private Parent root;
     private static Workout workout1;
     private static User user;
 
@@ -64,7 +58,6 @@ public class HighscoreScreenControllerTest extends ApplicationTest {
      */
     @BeforeAll
     public static void setUp() {
-        ReadAndWrite.setFileLocation(testFileLocation);
         deleteTestfile();
         user = new User("Test person", "tester", "hunter2", "tester@example.com");
 
@@ -100,7 +93,7 @@ public class HighscoreScreenControllerTest extends ApplicationTest {
         workout1.addExercise(exercise2);
         workout1.addExercise(exercise3);
 
-        ReadAndWrite.writeWorkoutToUser(workout1, user);
+        loftAccess.writeWorkoutToUser(workout1, user);
     }
 
     @Test

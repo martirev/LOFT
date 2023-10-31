@@ -74,12 +74,12 @@
                   <Image url="@images/trophy.jpg" />
                </image>
             </ImageView>
-            <Text layoutX="89.0" layoutY="272.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Highscore" textAlignment="CENTER">
+            <Text layoutX="89.0" layoutY="273.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Highscore" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </Text>
-            <Text layoutX="53.0" layoutY="367.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="View your highscores" wrappingWidth="216.2646484375">
+            <Text layoutX="25.0" layoutY="363.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="View your highscores" textAlignment="CENTER" wrappingWidth="270.4249267578125">
                <font>
                   <Font size="26.0" />
                </font>
