@@ -7,8 +7,6 @@ import core.Exercise;
 import core.Set;
 import core.User;
 import core.Workout;
-import filehandling.DirectLoftAccess;
-import filehandling.LoftAccess;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -24,7 +22,6 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 import ui.App;
 
 /**
@@ -34,27 +31,12 @@ import ui.App;
  * ensure that the charts on the progress screen are populated correctly and
  * that the correct data is displayed.
  */
-public class ProgressScreenControllerTest extends ApplicationTest {
-
-    private static final String testFileLocation = System.getProperty("user.home")
-            + System.getProperty("file.separator") + "testUserData.json";
-
-    private Parent root;
-
-    private static LoftAccess loftAccess = new DirectLoftAccess();
+public class ProgressScreenControllerTest extends ControllerTestBase {
 
     private XYChart<String, Number> totalweightChart;
     private XYChart<String, Number> benchChart;
     private XYChart<String, Number> deadliftChart;
     private XYChart<String, Number> squatChart;
-
-    /**
-     * Sets up the test environment to support headless mode.
-     */
-    @BeforeAll
-    public static void setupHeadless() {
-        App.supportHeadless();
-    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -78,7 +60,6 @@ public class ProgressScreenControllerTest extends ApplicationTest {
      */
     @BeforeAll
     public static void setUp() {
-        DirectLoftAccess.setFileLocation(testFileLocation);
         deleteTestFile();
         User user = new User("Test person", "tester", "hunter2", "tester@example.com");
         SceneSwitcher.setUser(user);

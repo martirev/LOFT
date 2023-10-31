@@ -3,8 +3,6 @@ package ui.controllers;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.User;
-import filehandling.DirectLoftAccess;
-import filehandling.LoftAccess;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,7 +18,6 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 import ui.App;
 
 /**
@@ -28,25 +25,10 @@ import ui.App;
  * It tests the functionality of the registration process, including error
  * messages for invalid input and successful registration.
  */
-public class RegisterScreenControllerTest extends ApplicationTest {
-
-    private static String testFileLocation = System.getProperty("user.home")
-            + System.getProperty("file.separator") + "testUserData.json";
+public class RegisterScreenControllerTest extends ControllerTestBase {
 
     private Collection<String> fields = Arrays.asList("#name", "#username",
             "#password1", "#password2", "#email");
-
-    private Parent root;
-
-    private LoftAccess loftAccess = new DirectLoftAccess();
-
-    /**
-     * Sets up the test environment to support headless mode.
-     */
-    @BeforeAll
-    public static void setupHeadless() {
-        App.supportHeadless();
-    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -56,7 +38,6 @@ public class RegisterScreenControllerTest extends ApplicationTest {
     @BeforeAll
     public static void setUp() {
         deleteTestfile();
-        DirectLoftAccess.setFileLocation(testFileLocation);
     }
 
     @AfterAll

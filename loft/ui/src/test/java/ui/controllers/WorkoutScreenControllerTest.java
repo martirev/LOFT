@@ -9,7 +9,6 @@ import core.Exercise;
 import core.Set;
 import core.User;
 import core.Workout;
-import filehandling.DirectLoftAccess;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -27,29 +26,16 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.matcher.control.LabeledMatchers;
 import ui.App;
 
 /**
  * This class contains tests for the WorkoutScreenController class.
  */
-public class WorkoutScreenControllerTest extends ApplicationTest {
+public class WorkoutScreenControllerTest extends ControllerTestBase {
 
-    private static String testFileLocation = System.getProperty("user.home")
-            + System.getProperty("file.separator") + "testUserData.json";
     private WorkoutScreenController controller = new WorkoutScreenController();
     private static User user;
-
-    private Parent root;
-
-    /**
-     * Sets up the test environment to support headless mode.
-     */
-    @BeforeAll
-    public static void setupHeadless() {
-        App.supportHeadless();
-    }
 
     /**
      * Sets up the test environment by deleting an existing test file and setting
@@ -59,7 +45,6 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     @BeforeAll
     public static void setUp() {
         deleteTestfile();
-        DirectLoftAccess.setFileLocation(testFileLocation);
         user = new User("Test person", "tester", "hunter2", "tester@test.com");
         SceneSwitcher.setUser(user);
     }

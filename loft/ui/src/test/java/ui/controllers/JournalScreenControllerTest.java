@@ -8,8 +8,6 @@ import core.Exercise;
 import core.Set;
 import core.User;
 import core.Workout;
-import filehandling.DirectLoftAccess;
-import filehandling.LoftAccess;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,7 +23,6 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 import ui.App;
 
 /**
@@ -33,26 +30,11 @@ import ui.App;
  * tests the functionality of the JournalScreenController class by setting up
  * test data and verifying that the expected results are produced.
  */
-public class JournalScreenControllerTest extends ApplicationTest {
-
-    private static final String testFileLocation = System.getProperty("user.home")
-            + System.getProperty("file.separator") + "testUserData.json";
-
-    private Parent root;
+public class JournalScreenControllerTest extends ControllerTestBase {
 
     private static Workout workout1;
     private static Workout workout2;
     private static User user;
-
-    private static LoftAccess loftAccess = new DirectLoftAccess();
-
-    /**
-     * Sets up the test environment to support headless mode.
-     */
-    @BeforeAll
-    public static void setupHeadless() {
-        App.supportHeadless();
-    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -72,7 +54,6 @@ public class JournalScreenControllerTest extends ApplicationTest {
      */
     @BeforeAll
     public static void setUp() {
-        DirectLoftAccess.setFileLocation(testFileLocation);
         deleteTestfile();
         user = new User("Test person", "tester", "hunter2", "tester@example.com");
 
