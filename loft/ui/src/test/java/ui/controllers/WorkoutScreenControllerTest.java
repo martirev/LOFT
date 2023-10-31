@@ -85,7 +85,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
 
     @Test
     public void testEmptyAddAsNew() {
-        clickLabels("Add as new");
+        clickLabels("Add As New");
         assertTrue(lookup("#editButton").query().isDisabled(),
                 "The edit button should be disabled when the search bar is empty");
     }
@@ -220,7 +220,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
 
         clickIds("#searchBar");
         write(name);
-        clickLabels("Add as new", "Edit");
+        clickLabels("Add As New", "Edit");
         clickIds("#setField");
         write("" + numberOfSets);
     }

@@ -66,7 +66,7 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="940.0" layoutY="230.0" prefHeight="450.0" prefWidth="320.0" styleClass="MainComp">
+      <AnchorPane layoutX="940.0" layoutY="230.0" onMousePressed="#handleHighscorePress" prefHeight="450.0" prefWidth="320.0" styleClass="MainComp">
          <children>
             <Region prefHeight="450.0" prefWidth="320.0" />
             <ImageView fitHeight="200.0" fitWidth="300.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="false">
@@ -79,9 +79,9 @@
                   <Font name="System Bold" size="30.0" />
                </font>
             </Text>
-            <Text layoutX="52.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Not implemented yet" wrappingWidth="216.2646484375">
+            <Text layoutX="53.0" layoutY="367.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="View your highscores" wrappingWidth="216.2646484375">
                <font>
-                  <Font size="22.0" />
+                  <Font size="26.0" />
                </font>
             </Text>
          </children>

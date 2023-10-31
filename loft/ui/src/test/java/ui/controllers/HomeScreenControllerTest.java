@@ -80,6 +80,12 @@ public class HomeScreenControllerTest extends ApplicationTest {
     }
 
     @Test
+    public void testGoToHighscore() {
+        clickOn("Highscore");
+        checkOnScene("Highscores", "Exercises", "Stats");
+    }
+
+    @Test
     public void testInvalidScreen() {
         assertThrows(IllegalArgumentException.class,
                 () -> controller.insertPane("nonExistingScreen.fxml"),

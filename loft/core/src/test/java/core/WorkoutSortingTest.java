@@ -2,9 +2,11 @@ package core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -27,6 +29,7 @@ public class WorkoutSortingTest {
     private Exercise exercise2;
     private Exercise exercise3;
     private Exercise exercise4;
+    private Exercise exercise5;
     private List<Workout> workouts = new ArrayList<Workout>();
 
     /**
@@ -40,6 +43,7 @@ public class WorkoutSortingTest {
         exercise2 = new Exercise("Squats");
         exercise3 = new Exercise("Bench Press");
         exercise4 = new Exercise("Squats");
+        exercise5 = new Exercise("Curls");
 
         final Set benchSet1 = new Set(10, 150);
         final Set benchSet2 = new Set(8, 130);
@@ -72,8 +76,12 @@ public class WorkoutSortingTest {
         exercise4.addSet(squatSet5);
         exercise4.addSet(squatSet6);
 
+        final Set curlsSet1 = new Set(5, 100);
+        exercise5.addSet(curlsSet1);
+
         workout2.addExercise(exercise3);
         workout2.addExercise(exercise4);
+        workout2.addExercise(exercise5);
 
         workouts.add(workout1);
         workouts.add(workout2);
@@ -92,7 +100,7 @@ public class WorkoutSortingTest {
     @Test
     public void testGetSameExercisesNoInput() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
-        assertEquals(2, workoutSorting.getSameExercises().size());
+        assertEquals(3, workoutSorting.getSameExercises().size());
         assertTrue(workoutSorting.getSameExercises().containsKey("Bench Press"),
                 "Same exercises should contain Bench Press");
         assertTrue(workoutSorting.getSameExercises().containsKey("Squats"),
@@ -136,6 +144,7 @@ public class WorkoutSortingTest {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
         assertEquals(150, workoutSorting.getExercisesPr("Bench Press"));
         assertEquals(200, workoutSorting.getExercisesPr("Squats"));
+        assertEquals(0, workoutSorting.getExercisesPr("Running"));
     }
 
     @Test
@@ -161,7 +170,7 @@ public class WorkoutSortingTest {
         checkContainsEachOther(exercisesContainsE, Arrays.asList("Bench Press"));
 
         Collection<String> exercisesContainsS = workoutSorting.searchForExercises("s");
-        checkContainsEachOther(exercisesContainsS, Arrays.asList("Bench Press", "Squats"));
+        checkContainsEachOther(exercisesContainsS, Arrays.asList("Bench Press", "Squats", "Curls"));
 
         Collection<String> exercisesContainsBench = workoutSorting.searchForExercises("bench");
         checkContainsEachOther(exercisesContainsBench, Arrays.asList("Bench Press"));
@@ -170,7 +179,7 @@ public class WorkoutSortingTest {
     @Test
     public void testGetTotalWeightOnDay() {
         WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
-        assertEquals(2750, workoutSorting.getTotalWeightOnDay(workout2.getDate()));
+        assertEquals(3250, workoutSorting.getTotalWeightOnDay(workout2.getDate()));
     }
 
     @Test
@@ -193,6 +202,65 @@ public class WorkoutSortingTest {
         hashmap.put(workout1.getDate(), workout1.getTotalWeight());
         hashmap.put(workout2.getDate(), workout2.getTotalWeight());
         assertEquals(hashmap, workoutSorting.getWeightPerDay());
+    }
+
+    @Test
+    public void testGetHeaviestLiftedSet() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        assertEquals(2000, workoutSorting.getHeaviestLiftedSet("Squats"));
+        assertEquals(1500, workoutSorting.getHeaviestLiftedSet("Bench Press"));
+        assertEquals(0, workoutSorting.getHeaviestLiftedSet("Running"));
+    }
+
+    @Test
+    public void testGetTotalWeightEver() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        assertEquals(4560, workoutSorting.getTotalWeightEver("Bench Press"));
+        assertEquals(6710, workoutSorting.getTotalWeightEver("Squats"));
+        assertEquals(0, workoutSorting.getTotalWeightEver("Pull ups"));
+
+    }
+
+    @Test
+    public void testGetFormat() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        String highscoreFormat = workoutSorting.getFormatForHighscore("Bench Press");
+        assertTrue(highscoreFormat.contains("\n\tPersonal record:\n\t" + 150 + " kg\n"));
+        assertTrue(highscoreFormat.contains("\n\tHighest weight in a set:\n\t" + 1500 + " kg\n"));
+        assertTrue(highscoreFormat.contains("\n\tDays since last exercise:\n\t"
+                + (int) ChronoUnit.DAYS.between(workout1.getDate(), LocalDate.now()) + "\n"));
+        assertTrue(highscoreFormat.contains("\n\tTotal reps ever:\n\t" + 36 + "\n"));
+        assertTrue(highscoreFormat.contains("\n\tTotal weight ever:\n\t" + 4560 + " kg"));
+    }
+
+    @Test
+    public void testDaysSinceExercise() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        assertThrows(IllegalArgumentException.class,
+                () -> workoutSorting.daysSinceExercise("Lateral Raise"),
+                "Should throw exception since exercise does not exist");
+
+        assertEquals((int) ChronoUnit.DAYS.between(workout1.getDate(), LocalDate.now()),
+                workoutSorting.daysSinceExercise("Bench Press"));
+
+        assertEquals((int) ChronoUnit.DAYS.between(workout1.getDate(), LocalDate.now()),
+                workoutSorting.daysSinceExercise("Squats"));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> workoutSorting.daysSinceExercise(null),
+                "Should throw exception since exercise is null");
+
+        assertEquals((int) ChronoUnit.DAYS.between(workout2.getDate(), LocalDate.now()),
+                workoutSorting.daysSinceExercise("Curls"));
+
+    }
+
+    @Test
+    public void testGetTotalReps() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        assertEquals(36, workoutSorting.getTotalReps("Bench Press"));
+        assertEquals(38, workoutSorting.getTotalReps("Squats"));
+        assertEquals(0, workoutSorting.getTotalReps("Dips"));
     }
 
     /**
