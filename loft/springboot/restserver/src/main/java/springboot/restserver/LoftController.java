@@ -85,8 +85,7 @@ public class LoftController {
     public User getUser(@PathVariable String username,
             @RequestParam String password) {
         LOG.debug("Getting user: " + username);
-        User user = access.getUser(username, password);
-        return user;
+        return access.getUser(username, password);
     }
 
     /**

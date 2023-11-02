@@ -39,7 +39,9 @@ public class RemoteLoftAccess implements LoftAccess {
      */
     public static boolean serverAlive() {
         try {
-            HttpRequest request = HttpRequest.newBuilder(URI.create("http://localhost:8080/loft/"))
+            HttpRequest request = HttpRequest
+                    .newBuilder(URI.create("http://localhost:" + System.getProperty("loft.port")
+                            + "/loft/"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .GET().build();
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
@@ -132,12 +134,10 @@ public class RemoteLoftAccess implements LoftAccess {
         URI endpoint = endpointBaseUri.resolve("users/" + user.getUsername() + "/workouts");
         URI endpointParams = paramifyUser(endpoint, user);
 
-        var content = BodyPublishers.ofString(workoutString);
-
         HttpRequest request = HttpRequest.newBuilder(endpointParams)
                 .header(ACCEPT_HEADER, APPLICATION_JSON)
                 .header(CONTENT_TYPE_HEADER, APPLICATION_JSON)
-                .PUT(content).build();
+                .PUT(BodyPublishers.ofString(workoutString)).build();
         try {
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());

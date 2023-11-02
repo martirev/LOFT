@@ -36,6 +36,7 @@ test:
       - loft/core/target/site/jacoco/jacoco.xml
       - loft/filehandling/target/site/jacoco/jacoco.xml
       - loft/ui/target/site/jacoco/jacoco.xml
+      - loft/springboot/restserver/target/site/jacoco/jacoco.xml
     expire_in: 1 day
 
 build:
@@ -84,6 +85,20 @@ coverage ui:
     - !reference [.get_percentage, script]
     - 'echo "Code Coverage ui: ${percentage}%"'
   coverage: "/Code Coverage ui: ([0-9\\.]*)%/"
+
+coverage restserver:
+  stage: coverage
+  needs: ["test"]
+  dependencies:
+    - test
+  before_script:
+    - cd loft
+    - cd springboot
+    - cd restserver
+  script:
+    - !reference [.get_percentage, script]
+    - 'echo "Code Coverage restserver: ${percentage}%"'
+  coverage: "/Code Coverage restserver: ([0-9\\.]*)%/"
 
 checkstyle:
   stage: validate

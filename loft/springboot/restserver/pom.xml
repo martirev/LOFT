@@ -119,8 +119,7 @@
                 <version>3.1.2</version>
                 <configuration>
                     <argLine>
-                        @{jaCoCoArgLine} --add-opens
-                        loft.springboot.restserver/loft.springboot.restserver=ALL-UNNAMED
+                        @{jaCoCoArgLine}
                     </argLine>
                 </configuration>
             </plugin>
