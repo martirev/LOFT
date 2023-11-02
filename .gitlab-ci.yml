@@ -8,7 +8,7 @@ variables:
 # Function to get the percentage of code coverage for the "current module" (i.e. the module in pwd at the time of calling)
 .get_percentage:
   script:
-  - missed_hit=$(cat target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*BRANCH' | grep -o [0-9]*)
+  - missed_hit=$(cat target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*/>' | grep -o [0-9]*)
   - missed=$(echo ${missed_hit} | grep -o "[0-9]* ")
   - hit=$(echo ${missed_hit} | grep -o " [0-9]*")
   - percentage=$(awk -v hit="${hit}" -v missed="${missed}" 'BEGIN { print  100 * hit / (hit + missed) }')
