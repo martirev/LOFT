@@ -137,6 +137,19 @@ public class DirectLoftAccessTest {
     }
 
     @Test
+    public void testWeirdUser() {
+        assertFalse(loftAccess.writeWorkoutToUser(workout1, null),
+                "Should return false when trying to write to a null user.");
+        assertTrue(loftAccess.writeWorkoutToUser(workout2,
+                new User("test", "test", "test", "test")),
+                "Should return true when trying to write to a user that doesn't exist.");
+        assertThrows(IllegalStateException.class,
+                () -> loftAccess.writeWorkoutToUser(workout1,
+                        new User(user.getName(), user.getUsername(), "wrongPass", user.getEmail())),
+                "Should throw an exception when trying to write to a user that doesn't exist.");
+    }
+
+    @Test
     public void testUsernameExists() {
         loftAccess.writeWorkoutToUser(workout1, user);
         assertTrue(loftAccess.usernameExists(user.getUsername()),

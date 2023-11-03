@@ -14,16 +14,18 @@ public interface LoftAccess {
      * the updated list to a file.
      *
      * @param user the user to be registered
+     * @return true if the user was successfully registered, false otherwise
      */
-    public void registerUser(User user);
+    public boolean registerUser(User user);
 
     /**
      * The method to be used for writing a workout class to the userData file in
      * json format.
      *
      * @param workout The workout to add to the current user
+     * @return true if the workout was successfully added, false otherwise
      */
-    public void writeWorkoutToUser(Workout workout, User user);
+    public boolean writeWorkoutToUser(Workout workout, User user);
 
     /**
      * Returns a User object if the given username and password match an existing

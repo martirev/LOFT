@@ -53,23 +53,38 @@ curl localhost:8080/loft/users/user123?password=hunter2
     - password - user password
     - email - user email
     - name - user name
-  - returns - nothing
+  - returns
+    - Content-Type: application/json
+    - true on success or false on failure
 
 ```bash
-curl -X POST "localhost:8080/loft/users/user123/register" -d "password=passodsad&email=sd&name=ofjhsa+faskj"
+curl -X POST "localhost:8080/loft/users/user123/register?password=hunter2&email=example%40example.com&name=Test%20Name"
+```
+
+```json
+true
 ```
 
 - PUT - register workout to user
   - URI - host:port/loft/users/{username}/workouts <http://localhost:8080/loft/users/user123/workouts>
   - parameters
-    - form-urlencoded
-      - password - user password
-      - email - user email
-      - name - user name
-    - body
-      - Content-Type: application/json
-      - json with workout info
-  - returns - nothing
+    - password - user password
+    - email - user email
+    - name - user name
+  - body
+    - Content-Type: application/json
+    - json with workout info
+  - returns
+    - Content-Type: application/json
+    - true on success or false on failure
+
+```bash
+curl -X PUT "localhost:8080/loft/users/user123/workouts?password=hunter2&email=example%40example.com&name=Test%20Name" -H "Content-Type: application/json" -d "{\"exercises\": [],\"date\": \"2023-11-03\"}"
+```
+
+```json
+true
+```
 
 ## loft/check-username/
 
@@ -78,7 +93,7 @@ curl -X POST "localhost:8080/loft/users/user123/register" -d "password=passodsad
   - parameters - none
   - returns
     - Content-Type: application/json
-    - json with boolean true if user exists, false otherwise
+    - true if user exists, false otherwise
 
 ```bash
 curl localhost:8080/loft/check-username/user123

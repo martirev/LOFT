@@ -59,7 +59,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        if (RemoteLoftAccess.serverAlive()) {
+        if (RemoteLoftAccess.serverAlive(8080)) {
             System.setProperty("loft.port", "8080");
         }
         customStart(stage, "LoginScreen.fxml", new LoginScreenController());

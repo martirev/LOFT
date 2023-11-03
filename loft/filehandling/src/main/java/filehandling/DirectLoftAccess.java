@@ -48,8 +48,13 @@ public class DirectLoftAccess implements LoftAccess {
     }
 
     @Override
-    public void registerUser(User user) {
-        registerUserGetUsers(user);
+    public boolean registerUser(User user) {
+        try {
+            registerUserGetUsers(user);
+        } catch (IllegalStateException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -59,10 +64,15 @@ public class DirectLoftAccess implements LoftAccess {
      *
      * @param user the user to be added
      * @return the updated list of users, or null if writing to file failed
+     * @throws IllegalStateException if the user already exists
      */
     private static List<User> registerUserGetUsers(User user) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         List<User> users = getUsers();
+        if (users.stream()
+                .anyMatch(nullUser -> nullUser.getUsername().equals(user.getUsername()))) {
+            throw new IllegalStateException("User already exists");
+        }
         users.add(user);
 
         try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
@@ -75,7 +85,10 @@ public class DirectLoftAccess implements LoftAccess {
     }
 
     @Override
-    public void writeWorkoutToUser(Workout workout, User user) {
+    public boolean writeWorkoutToUser(Workout workout, User user) {
+        if (user == null) {
+            return false;
+        }
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         List<User> users = getUsers();
@@ -85,15 +98,16 @@ public class DirectLoftAccess implements LoftAccess {
             tmpUser = getUser(user, users);
         }
         if (tmpUser == null) {
-            throw new IllegalStateException("User should exist at this point.");
+            return false;
         }
         tmpUser.addWorkout(workout);
 
         try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
             gson.toJson(new UsersHolder(users), file);
         } catch (IOException e) {
-            System.err.println("Writing to file failed");
+            return false;
         }
+        return true;
     }
 
     /**
@@ -126,9 +140,6 @@ public class DirectLoftAccess implements LoftAccess {
      *         but with updated data.
      */
     private static User getUser(User user, List<User> users) {
-        if (users == null) {
-            return null;
-        }
         return getUser(user.getUsername(), user.getPassword(), users);
     }
 

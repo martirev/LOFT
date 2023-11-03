@@ -31,17 +31,28 @@ public class RemoteLoftAccess implements LoftAccess {
 
     private static final Gson gson = new Gson();
 
+    public RemoteLoftAccess() {
+        this(URI.create("http://localhost:" + System.getProperty("loft.port") + "/loft/"));
+    }
+
+    public RemoteLoftAccess(int port) {
+        this(URI.create("http://localhost:" + port + "/loft/"));
+    }
+
+    public RemoteLoftAccess(URI endpointBaseUri) {
+        this.endpointBaseUri = endpointBaseUri;
+    }
+
     /**
      * Checks if the server is alive by sending a GET request to the root endpoint.
      *
      * @return true if the server is alive and returns a 200 status code, false
      *         otherwise.
      */
-    public static boolean serverAlive() {
+    public static boolean serverAlive(int port) {
         try {
             HttpRequest request = HttpRequest
-                    .newBuilder(URI.create("http://localhost:" + System.getProperty("loft.port")
-                            + "/loft/"))
+                    .newBuilder(URI.create("http://localhost:" + port + "/loft/"))
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .GET().build();
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
@@ -58,19 +69,21 @@ public class RemoteLoftAccess implements LoftAccess {
         }
     }
 
-    public RemoteLoftAccess() {
-        this(URI.create("http://localhost:" + System.getProperty("loft.port") + "/loft/"));
-    }
-
-    public RemoteLoftAccess(URI endpointBaseUri) {
-        this.endpointBaseUri = endpointBaseUri;
-    }
-
-    private String uriParam(String s) {
+    static String uriParam(String s) {
         return URLEncoder.encode(s, StandardCharsets.UTF_8);
     }
 
-    private String formUrlEncode(String... params) {
+    /**
+     * Encodes the given parameters as a URL-encoded string.
+     *
+     * @param params the parameters to encode, as alternating key-value pairs
+     * @return the URL-encoded string
+     * @throws IllegalArgumentException if the number of parameters is odd
+     */
+    static String formUrlEncode(String... params) {
+        if (params.length % 2 != 0) {
+            throw new IllegalArgumentException("Must have an even number of parameters");
+        }
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < params.length; i += 2) {
             s.append(uriParam(params[i]))
@@ -93,7 +106,7 @@ public class RemoteLoftAccess implements LoftAccess {
      * @param params   the query parameters to append to the endpoint URI
      * @return the constructed URI with the appended query parameters
      */
-    private URI getUriWithParams(URI endpoint, String... params) {
+    static URI getUriWithParams(URI endpoint, String... params) {
         StringBuilder uri = new StringBuilder(endpoint.toString());
         if (params.length > 0) {
             uri.append("?");
@@ -102,13 +115,13 @@ public class RemoteLoftAccess implements LoftAccess {
         return URI.create(uri.toString());
     }
 
-    private URI paramifyUser(URI endpoint, User user) {
+    static URI paramifyUser(URI endpoint, User user) {
         return getUriWithParams(endpoint, "name", user.getName(),
                 "password", user.getPassword(), "email", user.getEmail());
     }
 
     @Override
-    public void registerUser(User user) {
+    public boolean registerUser(User user) {
         URI endpoint = endpointBaseUri.resolve("users/" + user.getUsername() + "/register");
         String form = formUrlEncode("name", user.getName(),
                 "password", user.getPassword(), "email", user.getEmail());
@@ -121,15 +134,16 @@ public class RemoteLoftAccess implements LoftAccess {
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() != 200) {
-                throw new RuntimeException("Failed to register user: " + response.body());
+                return false;
             }
+            return gson.fromJson(response.body(), Boolean.class);
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 
     @Override
-    public void writeWorkoutToUser(Workout workout, User user) {
+    public boolean writeWorkoutToUser(Workout workout, User user) {
         String workoutString = gson.toJson(workout);
         URI endpoint = endpointBaseUri.resolve("users/" + user.getUsername() + "/workouts");
         URI endpointParams = paramifyUser(endpoint, user);
@@ -142,10 +156,11 @@ public class RemoteLoftAccess implements LoftAccess {
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() != 200) {
-                throw new RuntimeException("Failed to write workout to user: " + response.body());
+                return false;
             }
+            return gson.fromJson(response.body(), Boolean.class);
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 
@@ -161,15 +176,16 @@ public class RemoteLoftAccess implements LoftAccess {
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() != 200) {
-                throw new RuntimeException("Failed to get user: " + response.body());
+                return null;
             }
+
             User user = gson.fromJson(response.body(), User.class);
             if (user != null) {
                 user.setPassword(password);
             }
             return user;
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            return null;
         }
     }
 

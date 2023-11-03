@@ -44,13 +44,13 @@ public class LoftController {
      * @param email    the email of the user
      */
     @PostMapping(path = "users/{username}/register")
-    public void registerUser(@PathVariable String username,
+    public boolean registerUser(@PathVariable String username,
             @RequestParam String name,
             @RequestParam String password,
             @RequestParam String email) {
         LOG.debug("Registering user: " + username);
         User user = new User(name, username, password, email);
-        access.registerUser(user);
+        return access.registerUser(user);
     }
 
     /**
@@ -63,14 +63,14 @@ public class LoftController {
      * @param workout  the workout to save
      */
     @PutMapping(path = "users/{username}/workouts")
-    public void saveWorkout(@PathVariable String username,
+    public boolean saveWorkout(@PathVariable String username,
             @RequestParam String name,
             @RequestParam String password,
             @RequestParam String email,
             @RequestBody Workout workout) {
         LOG.debug("Adding workout to user: " + username);
         User user = new User(name, username, password, email);
-        access.writeWorkoutToUser(workout, user);
+        return access.writeWorkoutToUser(workout, user);
     }
 
     /**

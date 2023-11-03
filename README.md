@@ -28,10 +28,15 @@ To check the code for style errors, run `mvn checkstyle:check` from the [project
 
 - **Java 17**: This project is built using Java 17.
 - **Maven 3.8.7**: The project is managed with Maven.
+
+## Dependencies
+
 - **JUnit 5.10.0**: Used to test the code in the project.
 - **JavaFX 17.0.8**: Used for the UI of the App.
 - **TestFX 4.0.16-alpha**: Used to test the UI of the App.
 - **Monocle jdk-12.0.1+2**: Used for headless testing of the UI.
+- **Mockito 3.12.4**: Used for mocking objects in tests.
+- **Wiremock 2.27.4**: Used for mocking the REST-API.
 - **JaCoCo 0.8.7**: Used for generating code coverage reports.
 - **Gson 2.10**: Used to parse our JSON-files.
 - **SpotBugs 4.7.3**: Used to check for possible bugs in the code.
