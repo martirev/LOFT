@@ -22,6 +22,8 @@ To check for possible bugs run `mvn spotbugs:check` from the [project directory]
 
 To check the code for style errors, run `mvn checkstyle:check` from the [project directory](loft). This will generate a report for all modules. The results can be viewed in the terminal, or by viewing the checkstyle-result.xml file in each modules target folder.
 
+To create a shippable product, first run `mvn clean compile` from the [project directory](loft). Then run `mvn javafx:jlink -f ui/` to assemble all the modules and their dependencies. Finally, use `mvn jpackage:jpackage -f ui/` to generate the shippable product. You will find the executable in [ui/target/dist/](loft/ui/target/dist/). Once you run this, you will be able to install and run the application like any other program on your PC.
+
 ## Requirements
 
 - **Java 17**: This project is built using Java 17.
@@ -34,6 +36,9 @@ To check the code for style errors, run `mvn checkstyle:check` from the [project
 - **Gson 2.10**: Used to parse our JSON-files.
 - **SpotBugs 4.7.3**: Used to check for possible bugs in the code.
 - **Checkstyle 10.3.4**: Used to check the code for style errors.
+- **Fontawesomefx 8.9**: Used to show icons in UI.
+- **Jlink**: Used to assemble modules and their dependencies.
+- **Jpackage 1.4.0**: Used to make a shippable version.
 
 ## Directory Structure
 
