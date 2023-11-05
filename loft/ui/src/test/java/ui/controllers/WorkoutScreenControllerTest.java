@@ -44,6 +44,14 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
     private Parent root;
 
     /**
+     * Sets up the test environment to support headless mode.
+     */
+    @BeforeAll
+    public static void setupHeadless() {
+        App.supportHeadless();
+    }
+
+    /**
      * Sets up the test environment by deleting an existing test file and setting
      * the file location to the test file location. Also creates a test user and
      * sets it as the current user.
@@ -77,7 +85,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
 
     @Test
     public void testEmptyAddAsNew() {
-        clickLabels("Add as new");
+        clickLabels("Add As New");
         assertTrue(lookup("#editButton").query().isDisabled(),
                 "The edit button should be disabled when the search bar is empty");
     }
@@ -212,7 +220,7 @@ public class WorkoutScreenControllerTest extends ApplicationTest {
 
         clickIds("#searchBar");
         write(name);
-        clickLabels("Add as new", "Edit");
+        clickLabels("Add As New", "Edit");
         clickIds("#setField");
         write("" + numberOfSets);
     }

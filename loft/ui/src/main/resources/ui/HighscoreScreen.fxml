@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+      <Region prefHeight="130.0" prefWidth="1366.0" styleClass="Navbar" />
+        <Text layoutY="86.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Highscores" textAlignment="CENTER" wrappingWidth="1365.136688709259">
+            <font>
+                <Font name="Roboto" size="50.0" />
+            </font>
+        </Text>
+        <Text layoutX="99.0" layoutY="216.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Exercises" textAlignment="CENTER" wrappingWidth="479.0">
+            <font>
+                <Font name="Roboto" size="36.0" />
+            </font>
+        </Text>
+        <Line endX="450.0" endY="185.0" layoutX="85.0" layoutY="47.0" startX="50.0" startY="185.0" strokeWidth="3.0" styleClass="Line" />
+        <ListView fx:id="exerciseListView" layoutX="99.0" layoutY="248.0" prefHeight="470.0" prefWidth="480.0" styleClass="ListViewComp" />
+        <Text layoutX="786.0" layoutY="215.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Stats" textAlignment="CENTER" wrappingWidth="479.0">
+            <font>
+                <Font name="Roboto" size="36.0" />
+            </font>
+        </Text>
+        <Line endX="450.0" endY="185.0" layoutX="775.0" layoutY="47.0" startX="50.0" startY="185.0" strokeWidth="3.0" styleClass="Line" />
+      <Text fx:id="header" layoutX="809.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="433.0">
+         <font>
+            <Font name="System Bold Italic" size="26.0" />
+         </font></Text>
+      <Text fx:id="body" layoutX="808.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="433.0">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Region layoutX="785.0" layoutY="248.0" prefHeight="470.0" prefWidth="479.0" styleClass="ListViewComp" />
+        <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Return" textFill="#fafafa">
+            <font>
+                <Font name="Roboto" size="20.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

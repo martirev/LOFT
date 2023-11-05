@@ -28,6 +28,11 @@ public class HomeScreenController extends SceneSwitcher {
         insertPane("UserInfoScreen.fxml");
     }
 
+    @FXML
+    private void handleHighscorePress() {
+        insertPane("HighscoreScreen.fxml");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }

@@ -1,6 +1,7 @@
 package core;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -79,7 +80,7 @@ public class WorkoutSorting {
     }
 
     /**
-     * The method returns a list of all exercises with the same name. Thsi takes an
+     * The method returns a list of all exercises with the same name. This takes an
      * exercise as an argument and uses the {@link #getSameExercises(String name)}
      * method to get all exercises with the same name.
      *
@@ -106,7 +107,7 @@ public class WorkoutSorting {
             if (workout.getDate().equals(date)) {
                 int val = workout.getExercises().stream()
                         .filter(tempExercise -> tempExercise.getName().equals(exercise.getName()))
-                        .mapToInt(tempExercise -> tempExercise.getLocalPr()).max()
+                        .mapToInt(Exercise::getLocalPr).max()
                         .orElse(0);
                 if (val > max) {
                     max = val;
@@ -125,7 +126,10 @@ public class WorkoutSorting {
      *         name.
      */
     public int getExercisesPr(String name) {
-        return sameExercises.get(name).stream().mapToInt(e -> e.getLocalPr()).max().getAsInt();
+        if (!sameExercises.containsKey(name)) {
+            return 0;
+        }
+        return sameExercises.get(name).stream().mapToInt(Exercise::getLocalPr).max().orElse(0);
     }
 
     /**
@@ -177,5 +181,92 @@ public class WorkoutSorting {
     public Map<LocalDate, Integer> getWeightPerDay() {
         return getUniqueDates().stream().map(d -> Map.entry(d, getTotalWeightOnDay(d)))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    /**
+     * Returns the heaviest total weight lifted in a set of a specific exercise.
+     *
+     * @param name the name of the exercise to get the heaviest weight lifted in a
+     *             set
+     * @return the heaviest weight lifted in a set of the exercise with the given
+     *         name.
+     */
+    public int getHeaviestLiftedSet(String name) {
+        if (!sameExercises.containsKey(name)) {
+            return 0;
+        }
+        return sameExercises.get(name).stream()
+                .mapToInt(Exercise::getHeaviestLiftedSet)
+                .max().orElse(0);
+    }
+
+    /**
+     * Returns the total weight ever lifted for a specific exercise.
+     *
+     * @param name the name of the exercise to get the total weight for
+     * @return the total weight ever lifted for the exercise with the given name
+     */
+    public int getTotalWeightEver(String name) {
+        if (!sameExercises.containsKey(name)) {
+            return 0;
+        }
+        return sameExercises.get(name).stream()
+                .mapToInt(Exercise::getTotalWeight)
+                .sum();
+    }
+
+    /**
+     * Returns a string with the format for the highscore of a specific exercise.
+     *
+     * @param name the name of the exercise to get the format for
+     * @return a string with the format for the highscore of the exercise with the
+     */
+    public String getFormatForHighscore(String name) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n\tPersonal record:\n\t" + getExercisesPr(name) + " kg\n");
+        sb.append("\n\tHighest weight in a set:\n\t" + getHeaviestLiftedSet(name) + " kg\n");
+        sb.append("\n\tDays since last exercise:\n\t" + daysSinceExercise(name) + "\n");
+        sb.append("\n\tTotal reps ever:\n\t" + getTotalReps(name) + "\n");
+        sb.append("\n\tTotal weight ever:\n\t" + getTotalWeightEver(name) + " kg");
+        return sb.toString();
+    }
+
+    /**
+     * Returns the number of days since the last exercise with the given name was
+     * performed.
+     *
+     * @param name the name of the exercise to check for
+     * @return the number of days since the last exercise with the given name was
+     *         performed
+     * @throws IllegalArgumentException if no exercise with the given name exists
+     */
+    public int daysSinceExercise(String name) {
+        if (sameExercises.containsKey(name)) {
+            for (Workout workout : getMostRecentWorkouts()) {
+                for (Exercise exercise : workout.getExercises()) {
+                    if (exercise.getName().equals(name)) {
+                        LocalDate workoutDate = workout.getDate();
+                        LocalDate currentDate = LocalDate.now();
+                        return (int) ChronoUnit.DAYS.between(workoutDate, currentDate);
+                    }
+                }
+            }
+        }
+        throw new IllegalArgumentException("No exercise with the given name was found");
+    }
+
+    /**
+     * Returns the total number of reps performed for a specific exercise.
+     *
+     * @param name the name of the exercise to filter the workouts by
+     * @return the total number of reps performed for the specified exercise
+     */
+    public int getTotalReps(String name) {
+        if (!sameExercises.containsKey(name)) {
+            return 0;
+        }
+        return sameExercises.get(name).stream()
+                .mapToInt(e -> e.getSets().stream().mapToInt(Set::getReps).sum())
+                .sum();
     }
 }

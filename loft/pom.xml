@@ -10,6 +10,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <skipUiTests>false</skipUiTests>
+        <headlessTests>false</headlessTests>
     </properties>
 
     <dependencyManagement>
@@ -86,6 +87,7 @@
                     </dependencies>
                     <configuration>
                         <configLocation>config/checkstyle/checkstyle-checker.xml</configLocation>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
                         <encoding>UTF-8</encoding>
                         <consoleOutput>true</consoleOutput>
                         <failsOnError>true</failsOnError>

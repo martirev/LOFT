@@ -21,13 +21,13 @@ public class Exercise {
      * Constructor for an exercise that only lets you specify the name.
      *
      * @param name the name of the exercise
-     * @throws IllegalArgumentException if the name is null
+     * @throws IllegalArgumentException if the name is null or empty
      */
     public Exercise(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Name cannot be null");
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
         }
-        this.name = name;
+        this.name = formatName(name);
     }
 
     /**
@@ -41,6 +41,25 @@ public class Exercise {
     public Exercise(String name, Set... sets) {
         this(name);
         this.sets = new ArrayList<Set>(Arrays.asList(sets));
+    }
+
+    /**
+     * Converts a string to PascalCase format and removes all unnecessary
+     * whitespaces.
+     *
+     * @param name the string to be converted
+     * @return the converted string in PascalCase format
+     */
+    private static String formatName(String name) {
+        String[] words = name.split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for (String word : words) {
+            sb.append(Character.toUpperCase(word.charAt(0)));
+            sb.append(word.substring(1).toLowerCase());
+            sb.append(" ");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
     }
 
     /**
@@ -84,13 +103,22 @@ public class Exercise {
     }
 
     /**
-     * A method that lets you get the highest wieght in the exercise. Is useful for
+     * A method that lets you get the highest weight in the exercise. Is useful for
      * calculating the pr of an exercise.
      *
      * @return the highest weight in the exercise
      */
     public int getLocalPr() {
-        return sets.stream().mapToInt(s -> s.getWeight()).max().getAsInt();
+        return sets.stream().mapToInt(s -> s.getWeight()).max().orElse(0);
+    }
+
+    /**
+     * A method that lets you get the heaviest lifted set in the exercise.
+     *
+     * @return the heaviest lifted weight in a set in the exercise
+     */
+    public int getHeaviestLiftedSet() {
+        return sets.stream().mapToInt(s -> s.getWeight() * s.getReps()).max().orElse(0);
     }
 
     /**

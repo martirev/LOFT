@@ -34,11 +34,34 @@ public class ExerciseTest {
     }
 
     @Test
+    public void testSetIllegalName() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Exercise(null),
+                "Should not be possible to set name to null");
+        assertThrows(IllegalArgumentException.class,
+                () -> new Exercise(""),
+                "Should not be possible to set name to empty string");
+    }
+
+    @Test
     public void testGetName() {
         assertTrue(exercise.getName().equals("Bench Press"),
                 "Exercise name should be Bench Press");
         assertTrue(exercise.toString().equals("Bench Press"),
                 "Exercise name should be Bench Press");
+    }
+
+    @Test
+    public void testFormatExerciseName() {
+        Exercise exercise = new Exercise("bench press");
+        assertTrue(exercise.getName().equals("Bench Press"),
+                "Exercise name should be Bench Press");
+        Exercise lateralRaises = new Exercise("Lateral      raises     ");
+        assertTrue(lateralRaises.getName().equals("Lateral Raises"),
+                "Exercise name should be Lateral Raises");
+        Exercise dumbellCurls = new Exercise("duMbell c-uRls?");
+        assertTrue(dumbellCurls.getName().equals("Dumbell C-urls?"),
+                "Exercise name should be Dumbell C-urls?");
     }
 
     @Test
