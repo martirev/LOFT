@@ -25,7 +25,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 /**
- * This class contains the unit tests for the LoftApplication class. It tests
+ * This class contains the unit tests for the LoftController class. It tests
  * the functionality of the REST API endpoints provided by the LoftController
  * class. The tests are performed using the TestRestTemplate class to simulate
  * HTTP requests and responses. The tests cover the following functionality:

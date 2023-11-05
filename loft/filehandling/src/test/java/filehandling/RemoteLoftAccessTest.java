@@ -88,15 +88,19 @@ public class RemoteLoftAccessTest {
 
         assertTrue(expected.equals(
                 RemoteLoftAccess.formUrlEncode("name", user.getName(),
-                        "password", user.getPassword(), "email", user.getEmail())));
+                        "password", user.getPassword(), "email", user.getEmail())),
+                "formUrlEncode should return the correct string");
 
-        assertThrows(IllegalArgumentException.class, () -> RemoteLoftAccess.formUrlEncode("name"));
+        assertThrows(IllegalArgumentException.class,
+                () -> RemoteLoftAccess.formUrlEncode("name"),
+                "formUrlEncode should throw an exception if the number of arguments is odd");
     }
 
     @Test
     public void testGetUriWithParams() {
         URI base = URI.create("http://localhost:8080/loft");
-        assertEquals(base, RemoteLoftAccess.getUriWithParams(base));
+        assertEquals(base, RemoteLoftAccess.getUriWithParams(base),
+                "getUriWithParams should return the base URI if no params are given");
 
         Map<String, String> params = new LinkedHashMap<>();
         params.put("name", user.getName());
@@ -114,7 +118,8 @@ public class RemoteLoftAccessTest {
             paramsArray[i++] = entry.getKey();
             paramsArray[i++] = entry.getValue();
         }
-        assertEquals(expectedUri, RemoteLoftAccess.getUriWithParams(base, paramsArray));
+        assertEquals(expectedUri, RemoteLoftAccess.getUriWithParams(base, paramsArray),
+                "getUriWithParams with params should return the correct URI");
     }
 
     @Test
@@ -126,10 +131,12 @@ public class RemoteLoftAccessTest {
                         .withHeader("Content-Type", "application/json")
                         .withBody("true")));
 
-        assertTrue(new RemoteLoftAccess(8080).registerUser(user));
+        assertTrue(new RemoteLoftAccess(8080).registerUser(user),
+                "RemoteLoftAccess with int argument should work");
 
         String property = System.setProperty("loft.port", String.valueOf(port));
-        assertTrue(new RemoteLoftAccess().registerUser(user));
+        assertTrue(new RemoteLoftAccess().registerUser(user),
+                "RemoteLoftAccess with no arguments should work");
         // Reset the property just in case
         if (property != null) {
             System.setProperty("loft.port", property);
@@ -147,15 +154,18 @@ public class RemoteLoftAccessTest {
                         .withHeader("Content-Type", "application/json")
                         .withBody("true")));
 
-        assertTrue(RemoteLoftAccess.serverAlive(port));
+        assertTrue(RemoteLoftAccess.serverAlive(port),
+                "serverAlive should return true if the server is alive");
 
         stubFor(get(urlEqualTo("/loft/"))
                 .withHeader("Accept", equalTo("application/json"))
                 .willReturn(notFound()));
-        assertFalse(RemoteLoftAccess.serverAlive(port));
+        assertFalse(RemoteLoftAccess.serverAlive(port),
+                "serverAlive should return false if the server is not alive");
 
         wireMockServer.stop();
-        assertFalse(RemoteLoftAccess.serverAlive(port));
+        assertFalse(RemoteLoftAccess.serverAlive(port),
+                "serverAlive should return false if the server is not alive");
     }
 
     @Test
@@ -166,13 +176,15 @@ public class RemoteLoftAccessTest {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody("false")));
-        assertFalse(loftAccess.registerUser(user));
+        assertFalse(loftAccess.registerUser(user),
+                "registerUser should return false if the user is registered from before");
 
         stubFor(post(urlEqualTo("/loft/users/username/register"))
                 .withHeader("Accept", equalTo("application/json"))
                 .willReturn(aResponse()
                         .withStatus(404)));
-        assertFalse(loftAccess.registerUser(user));
+        assertFalse(loftAccess.registerUser(user),
+                "registerUser should return false if the server returns 404");
 
         stubFor(post(urlEqualTo("/loft/users/username/register"))
                 .withHeader("Accept", equalTo("application/json"))
@@ -180,7 +192,8 @@ public class RemoteLoftAccessTest {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody("true")));
-        assertTrue(loftAccess.registerUser(user));
+        assertTrue(loftAccess.registerUser(user),
+                "registerUser should return true if the user is not registered from before");
 
         wireMockServer.stop();
         assertFalse(loftAccess.registerUser(user));
@@ -201,7 +214,8 @@ public class RemoteLoftAccessTest {
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withBody("true")));
-        assertTrue(loftAccess.writeWorkoutToUser(workout, user));
+        assertTrue(loftAccess.writeWorkoutToUser(workout, user),
+                "writeWorkoutToUser should return true if the workout is written to the user");
 
         stubFor(put(urlEqualTo("/loft/users/username/workouts?" + urlParams))
                 .withHeader("Accept", equalTo("application/json"))
@@ -209,17 +223,20 @@ public class RemoteLoftAccessTest {
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withBody("false")));
-        assertFalse(loftAccess.writeWorkoutToUser(workout, user));
+        assertFalse(loftAccess.writeWorkoutToUser(workout, user),
+                "writeWorkoutToUser should return false if the workout is not written to the user");
 
         stubFor(put(urlEqualTo("/loft/users/username/workouts?" + urlParams))
                 .withHeader("Accept", equalTo("application/json"))
                 .withHeader("Content-Type", equalTo("application/json"))
                 .willReturn(aResponse()
                         .withStatus(404)));
-        assertFalse(loftAccess.writeWorkoutToUser(workout, user));
+        assertFalse(loftAccess.writeWorkoutToUser(workout, user),
+                "writeWorkoutToUser should return false if the server returns 404");
 
         wireMockServer.stop();
-        assertFalse(loftAccess.writeWorkoutToUser(workout, user));
+        assertFalse(loftAccess.writeWorkoutToUser(workout, user),
+                "writeWorkoutToUser should return false if the server is not alive");
     }
 
     @Test
@@ -230,7 +247,8 @@ public class RemoteLoftAccessTest {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody(new Gson().toJson(user))));
-        assertEquals(user, loftAccess.getUser(user.getUsername(), user.getPassword()));
+        assertEquals(user, loftAccess.getUser(user.getUsername(), user.getPassword()),
+                "getUser should return the correct user if the server returns 200");
 
         stubFor(get(urlEqualTo("/loft/users/username?password=wrongPassword"))
                 .withHeader("Accept", equalTo("application/json"))
@@ -238,16 +256,19 @@ public class RemoteLoftAccessTest {
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json")
                         .withBody(new Gson().toJson(null))));
-        assertNull(loftAccess.getUser(user.getUsername(), "wrongPassword"));
+        assertNull(loftAccess.getUser(user.getUsername(), "wrongPassword"),
+                "getUser should return null if the server returns 200 but the password is wrong");
 
         stubFor(get(urlEqualTo("/loft/users/username?password=password"))
                 .withHeader("Accept", equalTo("application/json"))
                 .willReturn(aResponse()
                         .withStatus(404)));
-        assertNull(loftAccess.getUser(user.getUsername(), user.getPassword()));
+        assertNull(loftAccess.getUser(user.getUsername(), user.getPassword()),
+                "getUser should return null if the server returns 404");
 
         wireMockServer.stop();
-        assertNull(loftAccess.getUser(user.getUsername(), user.getPassword()));
+        assertNull(loftAccess.getUser(user.getUsername(), user.getPassword()),
+                "getUser should return null if the server is not alive");
     }
 
     @Test
@@ -257,22 +278,28 @@ public class RemoteLoftAccessTest {
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withBody("true")));
-        assertTrue(loftAccess.usernameExists(user.getUsername()));
+        assertTrue(loftAccess.usernameExists(user.getUsername()),
+                "usernameExists should return true if the username exists");
 
         stubFor(get(urlEqualTo("/loft/check-username/username"))
                 .withHeader("Accept", equalTo("application/json"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withBody("false")));
-        assertFalse(loftAccess.usernameExists(user.getUsername()));
+        assertFalse(loftAccess.usernameExists(user.getUsername()),
+                "usernameExists should return false if the username does not exist");
 
         stubFor(get(urlEqualTo("/loft/check-username/username"))
                 .withHeader("Accept", equalTo("application/json"))
                 .willReturn(aResponse()
                         .withStatus(404)));
-        assertThrows(RuntimeException.class, () -> loftAccess.usernameExists(user.getUsername()));
+        assertThrows(RuntimeException.class,
+                () -> loftAccess.usernameExists(user.getUsername()),
+                "usernameExists should throw an exception if the server returns 404");
 
         wireMockServer.stop();
-        assertThrows(RuntimeException.class, () -> loftAccess.usernameExists(user.getUsername()));
+        assertThrows(RuntimeException.class,
+                () -> loftAccess.usernameExists(user.getUsername()),
+                "usernameExists should throw an exception if the server is not alive");
     }
 }
