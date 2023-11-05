@@ -118,13 +118,9 @@ public class UserInfoController extends SceneSwitcher {
     }
 
     private boolean isChanged(User user) {
-        if (!user.getName().equals(name.getText())) {
-            return true;
-        }
-        if (!user.getUsername().equals(username.getText())) {
-            return true;
-        }
-        if (!user.getEmail().equals(email.getText())) {
+        if (!user.getName().equals(name.getText()) 
+                || !user.getUsername().equals(username.getText()) 
+                || !user.getEmail().equals(email.getText())) {
             return true;
         }
         if (!password0.getText().equals("") || !password1.getText().equals("") 
