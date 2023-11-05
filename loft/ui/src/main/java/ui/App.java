@@ -51,6 +51,7 @@ public class App extends Application {
 
         stage.setScene(scene);
         stage.getIcons().add(new Image(App.class.getResourceAsStream("images/weightlifter.png")));
+        stage.setResizable(false);
 
         stage.show();
         return root;
