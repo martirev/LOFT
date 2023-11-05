@@ -32,7 +32,7 @@ public abstract class SceneSwitcher implements Initializable {
      * to keep track of the user throughout the application. This is why it is
      * static.
      */
-    private static User user = null;
+    private static User user;
 
     /**
      * A method to switch scenes.
@@ -59,6 +59,9 @@ public abstract class SceneSwitcher implements Initializable {
                 break;
             case "RegisterScreen.fxml":
                 controller = new RegisterScreenController();
+                break;
+            case "UserInfoScreen.fxml":
+                controller = new UserInfoController();
                 break;
             default:
                 throw new IllegalArgumentException("Invalid FXML filename");

@@ -23,6 +23,11 @@ public class HomeScreenController extends SceneSwitcher {
         insertPane("JournalScreen.fxml");
     }
 
+    @FXML
+    private void handleMyProfilePress() {
+        insertPane("UserInfoScreen.fxml");
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }

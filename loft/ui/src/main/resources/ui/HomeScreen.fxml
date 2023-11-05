@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Region prefHeight="130.0" prefWidth="1366.0" styleClass="Navbar" />
       <Text layoutX="589.0" layoutY="86.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="LØ">
@@ -86,6 +87,10 @@
             </Text>
          </children>
       </AnchorPane>
+      <Button layoutX="1196.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleMyProfilePress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="My Profile" textFill="#fafafa">
+         <font>
+            <Font name="Roboto" size="20.0" />
+         </font></Button>
    </children>
    <effect>
       <DropShadow />
