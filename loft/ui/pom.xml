@@ -157,9 +157,9 @@
                     <noHeaderFiles>true</noHeaderFiles>
                     <stripDebug>true</stripDebug>
                     <noManPages>true</noManPages>
-                    <launcher>Løft</launcher>
-                    <jlinkImageName>Løft</jlinkImageName>
-                    <jlinkZipName>Løft</jlinkZipName>
+                    <launcher>Loft</launcher>
+                    <jlinkImageName>Loft</jlinkImageName>
+                    <jlinkZipName>Loft</jlinkZipName>
                 </configuration>
             </plugin>
 
@@ -169,24 +169,24 @@
                 <artifactId>jpackage-maven-plugin</artifactId>
                 <version>1.4.0</version>
                 <configuration>
-                    <name>Løft</name>
+                    <name>Loft</name>
                     <appVersion>1.0.0</appVersion>
                     <vendor>it1901</vendor>
                     <destination>target/dist</destination>
                     <module>ui/ui.App</module>
-                    <runtimeImage>target/Løft</runtimeImage>
+                    <runtimeImage>target/Loft</runtimeImage>
                     <javaOptions>
                         <option>-Dfile.encoding=UTF-8</option>
                     </javaOptions>
                     <!-- linux options --> 
                     <linuxShortcut>true</linuxShortcut>
-                    <linuxMenuGroup>Løft</linuxMenuGroup>
+                    <linuxMenuGroup>Loft</linuxMenuGroup>
 
                     <!-- windows options --> 
                     <winDirChooser>true</winDirChooser>
                     <winShortcut>true</winShortcut>
                     <winMenu>true</winMenu>
-                    <winMenuGroup>Løft</winMenuGroup>
+                    <winMenuGroup>Loft</winMenuGroup>
                 </configuration>
             </plugin>
         </plugins>
