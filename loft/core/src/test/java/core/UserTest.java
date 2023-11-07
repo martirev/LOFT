@@ -76,6 +76,24 @@ public class UserTest {
     }
 
     @Test
+    public void testSetName() {
+        user.setName("John Doe");
+        assertTrue(user.getName().equals("John Doe"));
+    }
+
+    @Test
+    public void testSetUsername() {
+        user.setUsername("TestUser");
+        assertTrue(user.getUsername().equals("TestUser"));
+    }
+
+    @Test
+    public void testSetEmail() {
+        user.setEmail("johnDoe@gmail.com");
+        assertTrue(user.getEmail().equals("johnDoe@gmail.com"));
+    }
+
+    @Test
     public void testGetWorkouts() {
         Workout workout1 = new Workout();
         Workout workout2 = new Workout();

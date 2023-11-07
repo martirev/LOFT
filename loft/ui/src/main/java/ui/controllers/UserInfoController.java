@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 /**
- * This is the controller class for UserinfoScreen. It handles 
+ * This is the controller class for UserinfoScreen. It handles
  * requests form the user to see user information and lets the user
  * change name, username, password and email connected to the user.
  * The controller also allows the user to log out from the app
@@ -69,23 +69,28 @@ public class UserInfoController extends SceneSwitcher {
 
     }
 
-    @FXML 
-    private void handleSaveChangesPress() {
+    /**
+     * Handles saving updated user information to userData.json.
+     */
+    @FXML
+    public void handleSaveChangesPress() {
         String name = this.name.getText();
         String username = this.username.getText();
         String password0 = this.password0.getText();
         String password1 = this.password1.getText();
         String password2 = this.password2.getText();
         String email = this.email.getText();
-       
-
-        if (!password0.equals(getUser().getPassword())) {
-            errorMessage.setText("The old password is wrong");
+        if (name.isEmpty() || username.isEmpty() || password0.isEmpty() || password1.isEmpty()
+                || password2.isEmpty() || email.isEmpty()) {
+            errorMessage.setText("Please fill out all fields");
             return;
         }
-        if (name.isEmpty() || username.isEmpty() || password1.isEmpty() || password2.isEmpty()
-                || email.isEmpty()) {
-            errorMessage.setText("Please fill out all fields");
+        if (!password1.equals(password2)) {
+            errorMessage.setText("Passwords do not match");
+            return;
+        }
+        if (!password0.equals(getUser().getPassword())) {
+            errorMessage.setText("The old password is wrong");
             return;
         }
         if (password1.length() < 4) {
@@ -101,10 +106,6 @@ public class UserInfoController extends SceneSwitcher {
                     + "and the symbols _, @, # and !");
             return;
         }
-        if (!password1.equals(password2)) {
-            errorMessage.setText("Passwords do not match");
-            return;
-        }
         if (!email.contains("@") || !email.contains(".")) {
             errorMessage.setText("Please enter a valid email");
             return;
@@ -112,18 +113,23 @@ public class UserInfoController extends SceneSwitcher {
         User oldUser = getUser();
         User newUser = new User(name, username, password1, email);
         getUser().getWorkouts().stream().forEach(workout -> newUser.addWorkout(workout));
-        
-        ReadAndWrite.updateUserInfo(oldUser, newUser);
+        try {
+            ReadAndWrite.updateUserInfo(oldUser, newUser);
+        } catch (IllegalArgumentException e) {
+            errorMessage.setText("Username is taken");
+            return;
+        }
+        setUser(newUser);
         insertPane("LoginScreen.fxml");
     }
 
     private boolean isChanged(User user) {
-        if (!user.getName().equals(name.getText()) 
-                || !user.getUsername().equals(username.getText()) 
+        if (!user.getName().equals(name.getText())
+                || !user.getUsername().equals(username.getText())
                 || !user.getEmail().equals(email.getText())) {
             return true;
         }
-        if (!password0.getText().equals("") || !password1.getText().equals("") 
+        if (!password1.getText().equals("")
                 || !password2.getText().equals("")) {
             return true;
         }
@@ -133,5 +139,5 @@ public class UserInfoController extends SceneSwitcher {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         populateUserInfoFields();
-    }       
+    }
 }

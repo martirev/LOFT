@@ -215,6 +215,10 @@ public abstract class ReadAndWrite {
      * @param newUser the updates user
      */
     public static void updateUserInfo(User oldUser, User newUser) {
+        if (!oldUser.getUsername().equals(newUser.getUsername()) 
+                && usernameExists(newUser.getUsername())) {
+            throw new IllegalArgumentException("This username is already taken");
+        }
         List<User> users = getUsers();
         List<User> newUsers = users.stream()
                 .filter(user -> !user.equals(oldUser))
