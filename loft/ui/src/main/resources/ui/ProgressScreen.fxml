@@ -5,6 +5,8 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.shape.Line?>
@@ -13,14 +15,14 @@
 
 <AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <Region prefHeight="130.0" prefWidth="1366.0" styleClass="Navbar" />
+        <Region prefHeight="130.0" prefWidth="1366.0" styleClass="Navbar" />
         <Button layoutX="683.0" layoutY="129.0" mnemonicParsing="false" onAction="#switchToJournal" prefHeight="48.0" prefWidth="683.0" styleClass="SwitchButtonInactive" text="Journal">
             <font>
                 <Font name="Roboto" size="20.0" />
             </font>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
         </Button>
         <Button layoutY="129.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="683.0" styleClass="SwitchButtonActive" text="Progress">
             <font>
@@ -37,58 +39,35 @@
                 <Font name="Roboto" size="20.0" />
             </font>
         </Button>
-      <LineChart fx:id="totalWeightChart" layoutX="483.0" layoutY="238.0" prefHeight="200.0" prefWidth="400.0">
-        <xAxis>
-          <CategoryAxis label="Date" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
-      <Text layoutX="574.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Total weight">
-         <font>
-            <Font name="Roboto" size="40.0" />
-         </font>
-      </Text>
-      <Text layoutX="155.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Bench press">
-         <font>
-            <Font name="Roboto" size="40.0" />
-         </font>
-      </Text>
-      <LineChart fx:id="benchPressChart" horizontalZeroLineVisible="false" layoutX="60.0" layoutY="520.0" prefHeight="200.0" prefWidth="400.0">
-         <xAxis>
-            <CategoryAxis label="Date" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis side="LEFT" />
-         </yAxis>
-      </LineChart>
-      <LineChart fx:id="deadliftChart" layoutX="483.0" layoutY="520.0" prefHeight="200.0" prefWidth="400.0">
-         <xAxis>
-            <CategoryAxis label="Date" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis side="LEFT" />
-         </yAxis>
-      </LineChart>
-      <Text layoutX="614.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Deadlift">
-         <font>
-            <Font name="Roboto" size="40.0" />
-         </font>
-      </Text>
-      <Line endX="1366.0" fill="#ed8152" layoutY="440.0" strokeWidth="4.0" styleClass="Line" />
-      <Text layoutX="1059.0" layoutY="499.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Squat">
-         <font>
-            <Font name="Roboto" size="40.0" />
-         </font>
-      </Text>
-      <LineChart fx:id="squatChart" layoutX="910.0" layoutY="520.0" prefHeight="200.0" prefWidth="400.0">
-         <xAxis>
-            <CategoryAxis label="Date" />
-         </xAxis>
-         <yAxis>
-            <NumberAxis side="LEFT" />
-         </yAxis>
-      </LineChart>
+        <LineChart fx:id="totalWeightChart" animated="false" layoutX="506.0" layoutY="177.0" legendSide="TOP" prefHeight="300.0" prefWidth="845.0">
+            <xAxis>
+                <CategoryAxis label="Date" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </LineChart>
+        <Text layoutX="181.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Total weight">
+            <font>
+                <Font name="Roboto" size="40.0" />
+            </font>
+        </Text>
+        <Line endX="1366.0" fill="#ed8152" layoutY="475.0" strokeWidth="4.0" styleClass="Line" />
+        <ListView fx:id="exerciseHistoryListView" layoutX="90.0" layoutY="530.0" prefHeight="200.0" prefWidth="400.0" styleClass="ListViewComp" />
+        <Text layoutX="212.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Exercises">
+            <font>
+                <Font name="Roboto" size="40.0" />
+            </font>
+        </Text>
+        <LineChart fx:id="exerciseChart" animated="false" layoutX="506.0" layoutY="475.0" legendSide="TOP" prefHeight="300.0" prefWidth="845.0">
+            <xAxis>
+                <CategoryAxis label="Date" />
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT" />
+            </yAxis>
+        </LineChart>
+      <TextArea fx:id="exerciseListView" editable="false" layoutX="1220.0" layoutY="488.0" prefHeight="50.0" prefWidth="120.0" />
+      <TextArea fx:id="totalWeightListView" editable="false" layoutX="90.0" layoutY="250.0" prefHeight="200.0" prefWidth="400.0" styleClass="ListViewComp" />
     </children>
 </AnchorPane>

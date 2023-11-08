@@ -269,4 +269,39 @@ public class WorkoutSorting {
                 .mapToInt(e -> e.getSets().stream().mapToInt(Set::getReps).sum())
                 .sum();
     }
+
+    /**
+     * Returns a list of unique exercises from the most recent workouts.
+     *
+     * @return a list of Exercise objects representing unique exercises
+     */
+    public List<Exercise> getAllUniqueExerciseNames() {
+        return getMostRecentWorkouts().stream()
+                .flatMap(workout -> workout.getExercises().stream())
+                .map(exercise -> exercise.getName())
+                .distinct()
+                .map(name -> new Exercise(name))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns a list of all exercises sorted by PR.
+     *
+     * @return a list of all exercises sorted by PR
+     */
+    public List<Exercise> getAllUniqueExerciseNamesSortedByPr() {
+        return getAllUniqueExerciseNames().stream()
+                .sorted((e1, e2) -> getExercisesPr(e2.getName()) - getExercisesPr(e1.getName()))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Returns the total weight lifted in all workouts.
+     *
+     * @return the total weight lifted in all workouts
+     */
+    public int getTotalWeightLifted() {
+        return getWeightPerDay().values().stream().mapToInt(Integer::intValue).sum();
+
+    }
 }

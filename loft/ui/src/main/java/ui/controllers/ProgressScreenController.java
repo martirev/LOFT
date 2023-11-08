@@ -6,7 +6,6 @@ import core.WorkoutSorting;
 import filehandling.ReadAndWrite;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -15,6 +14,8 @@ import java.util.TreeSet;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 
 /**
  * The ProgressScreenController class is responsible for controlling the
@@ -25,16 +26,19 @@ import javafx.scene.chart.XYChart;
 public class ProgressScreenController extends SceneSwitcher {
 
     @FXML
+    private TextArea totalWeightListView;
+
+    @FXML
     private LineChart<String, Number> totalWeightChart;
 
     @FXML
-    private LineChart<String, Number> benchPressChart;
+    private ListView<Exercise> exerciseHistoryListView;
 
     @FXML
-    private LineChart<String, Number> deadliftChart;
+    private TextArea exerciseListView;
 
     @FXML
-    private LineChart<String, Number> squatChart;
+    private LineChart<String, Number> exerciseChart;
 
     private WorkoutSorting workoutSorting;
 
@@ -42,8 +46,87 @@ public class ProgressScreenController extends SceneSwitcher {
     public void initialize(URL location, ResourceBundle resources) {
         User user = ReadAndWrite.returnUserClassFromFile(getUser());
         workoutSorting = new WorkoutSorting(user.getWorkouts());
-        populateTopExercisesCharts();
+
         populateTotalWeightChart();
+        setTotalWeightListView();
+
+        loadExerciseHistory();
+        exerciseHistoryListView.setOnMouseClicked(event -> {
+            Exercise selected = exerciseHistoryListView.getSelectionModel().getSelectedItem();
+            if (selected == null) {
+                return;
+            }
+
+            exerciseChart.getData().clear();
+            exerciseListView.clear();
+            populateExerciseChart(selected);
+            setExerciseListView(selected);
+        });
+    }
+
+    /**
+     * Method for loading all exercises from the user's workout history into the
+     * exercise history ListView. The method uses the WorkoutSorting class to get
+     * all exercises.
+     */
+    private void loadExerciseHistory() {
+        List<Exercise> exercises = workoutSorting.getAllUniqueExerciseNames();
+        for (Exercise exercise : exercises) {
+            exerciseHistoryListView.getItems().add(exercise);
+        }
+    }
+
+    /**
+     * Method for setting the text in the exercise ListView. The method uses the
+     * WorkoutSorting class to get the exercise's name and personal record.
+     *
+     * @param exercise The exercise to be displayed in the ListView.
+     */
+    private void setExerciseListView(Exercise exercise) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(exercise.getName() + "\n");
+        sb.append("\t - PR: " + workoutSorting.getExercisesPr(exercise.getName()) + " kg");
+
+        exerciseListView.setText(sb.toString());
+    }
+
+    private void populateExerciseChart(Exercise exercise) {
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName(exercise.getName() + " personal records per day");
+
+        for (LocalDate date : workoutSorting.getUniqueDates()) {
+            int pr = workoutSorting.getPrOnDay(exercise, date);
+            if (pr != 0) {
+                series.getData().add(new XYChart.Data<>(date.toString(), pr));
+            }
+        }
+        exerciseChart.getData().add(series);
+    }
+
+    /**
+     * Method for setting the text in the total weight ListView. The method uses
+     * the WorkoutSorting class to get the total weight lifted and the top n < 3
+     * exercises.
+     */
+    private void setTotalWeightListView() {
+        List<Exercise> allExercisesSorted = workoutSorting.getAllUniqueExerciseNamesSortedByPr();
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Total weigth lifted: \n");
+        sb.append("\t - Weight: " + workoutSorting.getTotalWeightLifted() + " kg \n\n");
+
+        int size = Math.min(3, allExercisesSorted.size());
+        sb.append("Top " + size + " PRs:\n");
+
+        for (int i = 0; i < size; i++) {
+            sb.append("\t - " + allExercisesSorted.get(i).getName() + ": "
+                    + workoutSorting.getExercisesPr(allExercisesSorted.get(i).getName())
+                    + " kg\n");
+        }
+
+        totalWeightListView.setText(sb.toString());
     }
 
     /**
@@ -51,7 +134,7 @@ public class ProgressScreenController extends SceneSwitcher {
      * total weight chart. The data is displayed in a LineChart with weight on the
      * y-axis and date of the exercise on the x-axis.
      */
-    public void populateTotalWeightChart() {
+    private void populateTotalWeightChart() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Total lifted weight per day");
 
@@ -64,52 +147,6 @@ public class ProgressScreenController extends SceneSwitcher {
         }
 
         totalWeightChart.getData().add(series);
-    }
-
-    /**
-     * Populates the bench, deadlift and squat charts with data. The charts display
-     * the highest personal record (PR) for each exercise per day. The data is
-     * displayed in a LineChart with weight on the y-axis and date of the exercise
-     * on the x-axis
-     */
-    public void populateTopExercisesCharts() {
-        XYChart.Series<String, Number> benchSeries = new XYChart.Series<>();
-        benchSeries.setName("Highest bench PR per day");
-        XYChart.Series<String, Number> deadliftSeries = new XYChart.Series<>();
-        deadliftSeries.setName("Highest deadlift PR per day");
-        XYChart.Series<String, Number> squatSeries = new XYChart.Series<>();
-        squatSeries.setName("Highest squat PR per day");
-
-        for (LocalDate date : workoutSorting.getUniqueDates()) {
-            HashMap<String, List<Exercise>> sameExercises = workoutSorting.getSameExercises();
-            for (Map.Entry<String, List<Exercise>> entry : sameExercises.entrySet()) {
-                String name = entry.getKey();
-                Exercise exercise = entry.getValue().get(0);
-
-                int pr = workoutSorting.getPrOnDay(exercise, date);
-                if (pr == 0) {
-                    continue;
-                }
-
-                switch (name.toLowerCase().replaceAll("\s", "")) {
-                    case "benchpress":
-                        benchSeries.getData().add(new XYChart.Data<>(date.toString(), pr));
-                        break;
-                    case "deadlift":
-                        deadliftSeries.getData().add(new XYChart.Data<>(date.toString(), pr));
-                        break;
-                    case "squat":
-                        squatSeries.getData().add(new XYChart.Data<>(date.toString(), pr));
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        benchPressChart.getData().add(benchSeries);
-        deadliftChart.getData().add(deadliftSeries);
-        squatChart.getData().add(squatSeries);
     }
 
     @FXML
