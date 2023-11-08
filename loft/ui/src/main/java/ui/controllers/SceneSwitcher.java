@@ -37,17 +37,7 @@ public abstract class SceneSwitcher implements Initializable {
      */
     private static User user = null;
 
-    static LoftAccess loftAccess;
-
-    static {
-        if (System.getProperty("loft.port") != null) {
-            loftAccess = new RemoteLoftAccess();
-            System.out.println("Using RemoteLoftAccess");
-        } else {
-            loftAccess = new DirectLoftAccess();
-            System.out.println("Using DirectLoftAccess");
-        }
-    }
+    static LoftAccess loftAccess = new DirectLoftAccess();
 
     /**
      * A method to switch scenes.
@@ -117,5 +107,9 @@ public abstract class SceneSwitcher implements Initializable {
 
     static void setAccess(LoftAccess access) {
         SceneSwitcher.loftAccess = access;
+    }
+
+    static boolean usingServer() {
+        return loftAccess instanceof RemoteLoftAccess;
     }
 }

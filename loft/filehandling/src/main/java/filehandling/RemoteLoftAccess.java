@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class RemoteLoftAccess implements LoftAccess {
 
-    private final URI endpointBaseUri;
+    private URI endpointBaseUri;
 
     private static final String APPLICATION_JSON = "application/json";
 
@@ -31,28 +31,42 @@ public class RemoteLoftAccess implements LoftAccess {
 
     private static final Gson gson = new Gson();
 
-    public RemoteLoftAccess() {
-        this(URI.create("http://localhost:" + System.getProperty("loft.port") + "/loft/"));
-    }
-
-    public RemoteLoftAccess(int port) {
-        this(URI.create("http://localhost:" + port + "/loft/"));
-    }
-
     public RemoteLoftAccess(URI endpointBaseUri) {
         this.endpointBaseUri = endpointBaseUri;
     }
 
     /**
-     * Checks if the server is alive by sending a GET request to the root endpoint.
+     * Returns the URL of the remote loft access endpoint.
      *
-     * @return true if the server is alive and returns a 200 status code, false
-     *         otherwise.
+     * @return the URL of the remote loft access endpoint
+     */
+    public String getUrl() {
+        return endpointBaseUri == null ? "" : endpointBaseUri.toString();
+    }
+
+    /**
+     * Checks if the server is alive by sending a request to the specified port.
+     *
+     * @param port the port number to send the request to
+     * @return true if the server is alive and responds to the request, false
+     *         otherwise
      */
     public static boolean serverAlive(int port) {
+        return serverAlive(URI.create("http://localhost:" + port + "/loft/"));
+    }
+
+    /**
+     * Checks if the server at the specified URI is alive by sending a GET request
+     * and checking the response status code.
+     *
+     * @param uri the URI of the server to check
+     * @return true if the server is alive and responds with a 200 status code,
+     *         false otherwise
+     */
+    public static boolean serverAlive(URI uri) {
         try {
             HttpRequest request = HttpRequest
-                    .newBuilder(URI.create("http://localhost:" + port + "/loft/"))
+                    .newBuilder(uri)
                     .header(ACCEPT_HEADER, APPLICATION_JSON)
                     .GET().build();
             HttpResponse<String> response = HttpClient.newBuilder().build().send(request,

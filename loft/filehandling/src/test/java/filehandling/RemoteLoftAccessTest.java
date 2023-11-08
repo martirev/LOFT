@@ -76,6 +76,14 @@ public class RemoteLoftAccessTest {
     }
 
     @Test
+    public void testGetUrl() {
+        assertEquals("http://localhost:8080/loft/", ((RemoteLoftAccess) loftAccess).getUrl()
+                .toString(), "getUrl should return the correct URL");
+        assertEquals("", new RemoteLoftAccess(null).getUrl(),
+                "getUrl should return an empty string if the URL is null");
+    }
+
+    @Test
     public void testformUrlEncode() {
         Map<String, String> params = new LinkedHashMap<>();
         params.put("name", user.getName());
@@ -120,29 +128,6 @@ public class RemoteLoftAccessTest {
         }
         assertEquals(expectedUri, RemoteLoftAccess.getUriWithParams(base, paramsArray),
                 "getUriWithParams with params should return the correct URI");
-    }
-
-    @Test
-    public void testConstructors() {
-        stubFor(post(urlEqualTo("/loft/users/username/register"))
-                .withHeader("Accept", equalTo("application/json"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody("true")));
-
-        assertTrue(new RemoteLoftAccess(8080).registerUser(user),
-                "RemoteLoftAccess with int argument should work");
-
-        String property = System.setProperty("loft.port", String.valueOf(port));
-        assertTrue(new RemoteLoftAccess().registerUser(user),
-                "RemoteLoftAccess with no arguments should work");
-        // Reset the property just in case
-        if (property != null) {
-            System.setProperty("loft.port", property);
-        } else {
-            System.clearProperty("loft.port");
-        }
     }
 
     @Test
