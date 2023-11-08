@@ -1,5 +1,6 @@
 package ui.controllers;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.testfx.util.WaitForAsyncUtils;
 import ui.App;
 
 /**
@@ -141,6 +144,16 @@ public class HighscoreScreenControllerTest extends ControllerTestBase {
         }
     }
 
+    @Test
+    public void testEmptyListView() {
+        Platform.runLater(() -> {
+            ListView<Exercise> listView = lookup("#exerciseListView").query();
+            listView.getItems().clear();
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+        assertDoesNotThrow(() -> clickOn("#exerciseListView"));
+    }
+
     private boolean checkTitle(String expectedText) {
         Text textNode = lookup("#header").query();
         return textNode != null && textNode.getText() != null
@@ -162,5 +175,4 @@ public class HighscoreScreenControllerTest extends ControllerTestBase {
             System.err.println("Error deleting file");
         }
     }
-
 }
