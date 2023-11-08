@@ -152,6 +152,22 @@ public class ReadAndWriteTest {
                 "The username should not exist in the file");
     }
 
+    @Test
+    public void testIllegalUsername() {
+        User user2 = new User("John Doe", "test", "test123", "johnDoe@gmail.com");
+        ReadAndWrite.registerUser(user2);
+        assertThrows(IllegalArgumentException.class, () -> {
+            ReadAndWrite.updateUserInfo(user, user2);
+        });
+    }
+
+    @Test
+    public void testUserUpdated() {
+        User user2 = new User("John Doe", "johnDoe123", "test123", "johnDoe123@gmail.com");
+        ReadAndWrite.updateUserInfo(user, user2);
+        assertTrue(ReadAndWrite.getUser("johnDoe123", "test123").equals(user2));
+    }   
+
     /**
      * Deletes the test file if it exists.
      */

@@ -24,6 +24,11 @@ public class HomeScreenController extends SceneSwitcher {
     }
 
     @FXML
+    private void handleMyProfilePress() {
+        insertPane("UserInfoScreen.fxml");
+    }
+
+    @FXML
     private void handleHighscorePress() {
         insertPane("HighscoreScreen.fxml");
     }

@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The ReadAndWrite class provides methods for reading and writing user data to
@@ -205,5 +206,30 @@ public abstract class ReadAndWrite {
      */
     public static boolean usernameExists(String username) {
         return getUsers().stream().anyMatch(user -> user.getUsername().equals(username));
+    }
+
+    /**
+     * Updates the info about the user and overwrites the old info in the userData.json file.
+     *
+     * @param oldUser the old user
+     * @param newUser the updates user
+     */
+    public static void updateUserInfo(User oldUser, User newUser) {
+        if (!oldUser.getUsername().equals(newUser.getUsername()) 
+                && usernameExists(newUser.getUsername())) {
+            throw new IllegalArgumentException("This username is already taken");
+        }
+        List<User> users = getUsers();
+        List<User> newUsers = users.stream()
+                .filter(user -> !user.equals(oldUser))
+                .collect(Collectors.toList());
+        newUsers.add(newUser); 
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
+            gson.toJson(new UsersHolder(newUsers), file);
+        } catch (IOException e) {
+            System.err.println("Failed writing user updates to file");
+        }
     }
 }
