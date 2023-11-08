@@ -32,7 +32,7 @@ To create a shippable product, first run `mvn clean compile` from the [project d
 - **JavaFX 17.0.8**: Used for the UI of the App.
 - **TestFX 4.0.16-alpha**: Used to test the UI of the App.
 - **Monocle jdk-12.0.1+2**: Used for headless testing of the UI.
-- **JaCoCo 0.8.7**: Used for generating code coverage reports.
+- **JaCoCo 0.8.8**: Used for generating code coverage reports.
 - **Gson 2.10**: Used to parse our JSON-files.
 - **SpotBugs 4.7.3**: Used to check for possible bugs in the code.
 - **Checkstyle 10.3.4**: Used to check the code for style errors.
