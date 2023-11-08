@@ -7,9 +7,11 @@
 .Background {
     -fx-background-color: -fx-white;
 }
+
 .Background2 {
     -fx-background-color: -fx-primary;
 }
+
 .Navbar {
     -fx-background-color: -fx-primary;
     -fx-border-radius: 10;

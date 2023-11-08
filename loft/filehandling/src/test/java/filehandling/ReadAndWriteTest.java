@@ -157,7 +157,8 @@ public class ReadAndWriteTest {
         User user2 = new User("John Doe", "test", "test123", "johnDoe@gmail.com");
         ReadAndWrite.registerUser(user2);
         assertThrows(IllegalArgumentException.class, () -> {
-            ReadAndWrite.updateUserInfo(user, user2); });
+            ReadAndWrite.updateUserInfo(user, user2);
+        });
     }
 
     @Test

@@ -21,6 +21,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.util.WaitForAsyncUtils;
 import ui.App;
 
 /**
@@ -75,6 +76,7 @@ public class UserInfoScreenControllerTest extends ApplicationTest {
             Platform.runLater(() -> {
                 lookup(field).queryTextInputControl().setText("");
             });
+            WaitForAsyncUtils.waitForFxEvents();
             clickOn("Save changes");
             Text errorMessage = lookup("#errorMessage").queryText();
             assertEquals(errorMessage.getText(), "Please fill out all fields");
@@ -160,7 +162,6 @@ public class UserInfoScreenControllerTest extends ApplicationTest {
         assertEquals(errorMessage.getText(), "Please enter a valid email");
     }
 
-
     @Test
     public void testReturn() {
         clickOn("Return");
@@ -186,7 +187,7 @@ public class UserInfoScreenControllerTest extends ApplicationTest {
         fillFields("info");
         clickOn("Log out");
         Text errorMessage = lookup("#errorMessage").queryText();
-        assertEquals(errorMessage.getText(), "Save changes before log in out");
+        assertEquals(errorMessage.getText(), "Save changes before logging out");
     }
 
     @Test

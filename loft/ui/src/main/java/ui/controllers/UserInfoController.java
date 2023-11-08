@@ -61,7 +61,7 @@ public class UserInfoController extends SceneSwitcher {
     private void handlelogOutPress() {
         User user = getUser();
         if (isChanged(user)) {
-            errorMessage.setText("Save changes before log in out");
+            errorMessage.setText("Save changes before logging out");
             return;
         }
         SceneSwitcher.setUser(null);
