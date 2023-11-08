@@ -76,6 +76,9 @@ public class HighscoreScreenController extends SceneSwitcher {
      * @param exercise the exercise to load into the workout list view
      */
     private void loadExercise(Exercise exercise) {
+        if (exercise == null) {
+            return;
+        }
         header.setText(exercise.getName());
         body.setText(workoutSorting.getFormatForHighscore(exercise.getName()));
     }
