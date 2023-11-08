@@ -276,4 +276,35 @@ public class WorkoutSortingTest {
         assertTrue(collection2.containsAll(collection1),
                 "collection2 should contain all of collection1");
     }
+
+    @Test
+    public void testGetAllExercises() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        List<Exercise> exercises = workoutSorting.getAllUniqueExerciseNames();
+        assertEquals(3, exercises.size());
+        for (Exercise exercise : exercises) {
+            assertTrue(exercise.getName().equals("Bench Press")
+                    || exercise.getName().equals("Squats")
+                    || exercise.getName().equals("Curls"));
+        }
+    }
+
+    @Test
+    public void testGetExercisesSortedByPr() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        List<Exercise> exercises = workoutSorting.getAllUniqueExerciseNamesSortedByPr();
+        assertEquals(3, exercises.size());
+        assertEquals(exercise2.getName(), exercises.get(0).getName(),
+                "exercise2 should be first in the list");
+        assertEquals(exercise1.getName(), exercises.get(1).getName(),
+                "exercise1 should be second in the list");
+        assertEquals(exercise5.getName(), exercises.get(2).getName(),
+                "exercise5 should be third in the list");
+    }
+
+    @Test
+    public void testGetTotalWeightLifted() {
+        WorkoutSorting workoutSorting = new WorkoutSorting(workouts);
+        assertEquals(11770, workoutSorting.getTotalWeightLifted());
+    }
 }
