@@ -11,13 +11,13 @@ import java.util.ArrayList;
  * for the user. The idea is to have multiple users in the future.
  */
 public class User {
-    private final String name;
-    private final String username;
+    private String name;
+    private String username;
 
     // This is a transient field. It will not be serialized.
     private transient String password;
     private String passwordHash;
-    private final String email;
+    private String email;
     private ArrayList<Workout> workouts;
 
     /**
@@ -68,6 +68,33 @@ public class User {
      */
     public String getPassword() {
         return password;
+    }
+
+    /**
+     * Updates the name of the user.
+     *
+     * @param name the new name of the user
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Updates the username of the user.
+     *
+     * @param username the new username of the user
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * Updates the email connected to the user.
+     *
+     * @param email the new email
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**

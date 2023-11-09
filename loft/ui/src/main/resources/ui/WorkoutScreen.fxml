@@ -37,7 +37,7 @@
          </font>
       </Button>
       <ListView fx:id="dropdownMenu" layoutX="100.0" layoutY="270.0" minHeight="450.0" minWidth="400.0" prefHeight="450.0" prefWidth="400.0" styleClass="ListViewComp" />
-      <Button layoutX="1165.0" layoutY="41.0" minHeight="60.0" minWidth="150.0" mnemonicParsing="false" onAction="#handleFinishPress" styleClass="LoginButton" text="Finish workout" textFill="#fafafa">
+      <Button layoutX="1156.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleFinishPress" prefHeight="40.0" prefWidth="160.0" styleClass="LoginButton" text="Finish workout" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="20.0" />
          </font>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Region prefHeight="768.0" prefWidth="683.0" styleClass="Background2" />
+      <Text layoutX="230.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="My Profile">
+         <font>
+            <Font name="Roboto" size="50.0" />
+         </font>
+      </Text>
+      <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Return" textFill="#fafafa">
+         <font>
+            <Font name="Roboto" size="20.0" />
+         </font></Button>
+      <Button layoutX="282.0" layoutY="650.0" mnemonicParsing="false" onAction="#handlelogOutPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Log out" textFill="#fafafa">
+         <font>
+            <Font name="Roboto" size="20.0" />
+         </font>
+      </Button>
+      <TextField fx:id="name" layoutX="242.0" layoutY="190.0" prefHeight="30.0" prefWidth="200.0" promptText="new name" styleClass="jfx-text-field" />
+      <TextField fx:id="username" layoutX="242.0" layoutY="250.0" prefHeight="30.0" prefWidth="200.0" promptText="new username" styleClass="jfx-text-field" />
+      <PasswordField fx:id="password0" layoutX="242.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="old password" styleClass="jfx-text-field" />
+      <PasswordField fx:id="password1" layoutX="242.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="new password" styleClass="jfx-text-field" />
+      <PasswordField fx:id="password2" layoutX="242.0" layoutY="430.0" prefHeight="30.0" prefWidth="200.0" promptText="Confirm password" styleClass="jfx-text-field" />
+      <TextField fx:id="email" layoutX="242.0" layoutY="500.0" prefHeight="30.0" prefWidth="200.0" promptText="new email" styleClass="jfx-text-field" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="216.0" layoutY="216.0" size="30" text="" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="216.0" layoutY="276.0" size="30" text="" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="216.0" layoutY="336.0" size="30" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="216.0" layoutY="396.0" size="30" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="216.0" layoutY="456.0" size="30" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="ENVELOPE" layoutX="212.0" layoutY="524.0" size="26" />
+      <Button layoutX="242.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleSaveChangesPress" prefHeight="40.0" prefWidth="200.0" styleClass="LoginButton" text="Save changes" textFill="#fafafa">
+         <font>
+            <Font name="Roboto" size="20.0" />
+         </font>
+      </Button>
+      <Text fx:id="errorMessage" fill="RED" layoutX="229.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="224.7802734375">
+         <font>
+            <Font name="Roboto" size="14.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
