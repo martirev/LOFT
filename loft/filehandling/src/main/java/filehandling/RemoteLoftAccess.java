@@ -221,4 +221,29 @@ public class RemoteLoftAccess implements LoftAccess {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public boolean updateUserInfo(User oldUser, User newUser) {
+        URI endpoint = endpointBaseUri.resolve("users/" + oldUser.getUsername());
+        URI endpointParams = paramifyUser(endpoint, oldUser);
+        String newUserString = formUrlEncode("newName", newUser.getName(),
+                "newUsername", newUser.getUsername(), "newPassword", newUser.getPassword(),
+                "newEmail", newUser.getEmail());
+        URI finalEndpoint = URI.create(endpointParams.toString() + "&" + newUserString);
+
+        HttpRequest request = HttpRequest.newBuilder(finalEndpoint)
+                .header(ACCEPT_HEADER, APPLICATION_JSON)
+                .header(CONTENT_TYPE_HEADER, APPLICATION_FORM_URLENCODED)
+                .PUT(BodyPublishers.noBody()).build();
+        try {
+            HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) {
+                return false;
+            }
+            return gson.fromJson(response.body(), Boolean.class);
+        } catch (IOException | InterruptedException e) {
+            return false;
+        }
+    }
 }

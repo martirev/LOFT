@@ -69,7 +69,7 @@ public abstract class SceneSwitcher implements Initializable {
                 controller = new RegisterScreenController();
                 break;
             case "UserInfoScreen.fxml":
-                controller = new UserInfoController();
+                controller = new UserInfoScreenController();
                 break;
             default:
                 throw new IllegalArgumentException("Invalid FXML filename");

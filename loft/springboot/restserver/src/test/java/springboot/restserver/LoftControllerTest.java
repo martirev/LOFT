@@ -2,6 +2,7 @@ package springboot.restserver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,6 +11,8 @@ import core.Workout;
 import filehandling.DirectLoftAccess;
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -34,6 +37,7 @@ import org.springframework.http.ResponseEntity;
  * - Retrieving a user
  * - Registering a user
  * - Saving a workout
+ * - Updating a user
  */
 @SpringBootTest(classes = { LoftApplication.class, LoftController.class },
         webEnvironment = WebEnvironment.DEFINED_PORT)
@@ -142,6 +146,40 @@ public class LoftControllerTest {
         rest.put(getUrl() + "users/foobar/workouts?" + params, new Workout(), emptyMap);
         assertEquals(1, directAccess.getUser(user.getUsername(), user.getPassword())
                 .getWorkouts().size(), "Should save workout with body");
+    }
+
+    @Test
+    public void testUpdateUser() {
+        User user = new User("Foo Bar", "foobar", "foobar", "foo@bar.baz");
+        directAccess.registerUser(user);
+        String userParams = "name=" + urlEncode(user.getName())
+                + "&password=" + urlEncode(user.getPassword())
+                + "&email=" + urlEncode(user.getEmail());
+
+        User user2 = new User("Bar Baz", "barbaz", "barbaz", "bar@baz.foo");
+
+        String user2Params = "newUsername="
+                + urlEncode(user2.getUsername())
+                + "&newName=" + urlEncode(user2.getName())
+                + "&newPassword=" + urlEncode(user2.getPassword());
+
+        rest.put(getUrl() + "users/foobar?" + userParams + "&" + user2Params,
+                null, new HashMap<String, String>());
+        assertNotNull(directAccess.getUser(user.getUsername(), user.getPassword()),
+                "Should not update user with missing parameter(s)");
+        assertNull(directAccess.getUser(user2.getUsername(), user2.getPassword()),
+                "Should not update user with missing parameter(s)");
+
+        user2Params += "&newEmail=" + urlEncode(user2.getEmail());
+
+        rest.put(getUrl() + "users/foobar?" + userParams + "&" + user2Params,
+                null, new HashMap<String, String>());
+        assertEquals(user2, directAccess.getUser(user2.getUsername(), user2.getPassword()),
+                "Should update user with all parameters");
+    }
+
+    private String urlEncode(String string) {
+        return URLEncoder.encode(string, StandardCharsets.UTF_8);
     }
 
     private String getUrl() {

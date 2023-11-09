@@ -45,4 +45,19 @@ public interface LoftAccess {
      * @return true if the username exists, false otherwise
      */
     public boolean usernameExists(String username);
+
+    /**
+     * Updates the info about the user and overwrites the old info in the
+     * userData.json file.
+     * 
+     * <p>
+     * Note: Only the username and password of oldUser is of interest, and the new
+     * user does not need to include workouts.
+     * </p>
+     *
+     * @param oldUser the old user
+     * @param newUser the updated user
+     * @return true if the user was successfully updated, false otherwise
+     */
+    public boolean updateUserInfo(User oldUser, User newUser);
 }

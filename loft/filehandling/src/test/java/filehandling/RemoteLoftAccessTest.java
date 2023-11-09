@@ -287,4 +287,52 @@ public class RemoteLoftAccessTest {
                 () -> loftAccess.usernameExists(user.getUsername()),
                 "usernameExists should throw an exception if the server is not alive");
     }
+
+    @Test
+    public void testUpdateUserInfo() {
+        String urlParams = "name=" + urlEncode(user.getName())
+                + "&password=" + urlEncode(user.getPassword())
+                + "&email=" + urlEncode(user.getEmail());
+
+        User user2 = new User("John Doe", "test", "test123", "johnDoe@gmail.com");
+        String user2Params = "newName=" + urlEncode(user2.getName())
+                + "&newUsername=" + urlEncode(user2.getUsername())
+                + "&newPassword=" + urlEncode(user2.getPassword())
+                + "&newEmail=" + urlEncode(user2.getEmail());
+
+        String url = "/loft/users/username?" + urlParams + "&" + user2Params;
+        stubFor(put(urlEqualTo(url))
+                .withHeader("Accept", equalTo("application/json"))
+                .withHeader("Content-Type", equalTo("application/x-www-form-urlencoded"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withBody("true")));
+        assertTrue(loftAccess.updateUserInfo(user, user2),
+                "updateUserInfo should return true if user is updated");
+
+        stubFor(put(urlEqualTo("/loft/users/username?" + urlParams + "&" + user2Params))
+                .withHeader("Accept", equalTo("application/json"))
+                .withHeader("Content-Type", equalTo("application/x-www-form-urlencoded"))
+                .willReturn(aResponse()
+                        .withStatus(200)
+                        .withBody("false")));
+        assertFalse(loftAccess.updateUserInfo(user, user2),
+                "updateUserInfo should return false if the user is not updated");
+
+        stubFor(put(urlEqualTo("/loft/users/username?" + urlParams + "&" + user2Params))
+                .withHeader("Accept", equalTo("application/json"))
+                .withHeader("Content-Type", equalTo("application/x-www-form-urlencoded"))
+                .willReturn(aResponse()
+                        .withStatus(404)));
+        assertFalse(loftAccess.updateUserInfo(user, user2),
+                "updateUserInfo should return false if the server returns 404");
+
+        wireMockServer.stop();
+        assertFalse(loftAccess.updateUserInfo(user, user2),
+                "updateUserInfo should return false if the server is not alive");
+    }
+
+    private String urlEncode(String string) {
+        return URLEncoder.encode(string, StandardCharsets.UTF_8);
+    }
 }

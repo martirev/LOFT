@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.User;
-import filehandling.ReadAndWrite;
+import filehandling.DirectLoftAccess;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 import ui.App;
 
@@ -29,33 +28,21 @@ import ui.App;
  * It tests the functionality of viewing and updating user info including error
  * messages for invalid input and returning/log out without saving changes.
  */
-public class UserInfoScreenControllerTest extends ApplicationTest {
+public class UserInfoScreenControllerTest extends ControllerTestBase {
 
-    private static final String testFileLocation = System.getProperty("user.home")
-            + System.getProperty("file.separator") + "testUserData.json";
-
-    private Collection<String> fields = Arrays.asList("#name", "#username", 
+    private Collection<String> fields = Arrays.asList("#name", "#username",
             "#email", "#password0", "#password1",
             "#password2");
 
-    private static Parent root;
-
     private static User user;
-
-    /**
-     * Sets up the test environment to support headless mode.
-     */
-    @BeforeAll
-    public static void setupHeadless() {
-        App.supportHeadless();
-    }
 
     @Override
     public void start(Stage stage) throws IOException {
         user = new User("Test Person", "tester", "test123", "testPerson@gmail.com");
         SceneSwitcher.setUser(user);
+        new DirectLoftAccess().registerUser(user);
 
-        root = App.customStart(stage, "UserInfoScreen.fxml", new UserInfoController());
+        root = App.customStart(stage, "UserInfoScreen.fxml", new UserInfoScreenController());
     }
 
     @AfterAll
@@ -65,7 +52,6 @@ public class UserInfoScreenControllerTest extends ApplicationTest {
 
     @BeforeAll
     public static void setUp() {
-        ReadAndWrite.setFileLocation(testFileLocation);
         deleteTestfile();
     }
 
@@ -86,7 +72,7 @@ public class UserInfoScreenControllerTest extends ApplicationTest {
     @Test
     public void testAlreadyUsedUsername() {
         User user2 = new User("test1", "tester2", "testPerson", "testPerson2@gmail.com");
-        ReadAndWrite.registerUser(user2);
+        loftAccess.registerUser(user2);
         lookup("#name").queryTextInputControl().setText("Test Person");
         lookup("#username").queryTextInputControl().setText("tester2");
         lookup("#password0").queryTextInputControl().setText("test123");
@@ -199,10 +185,11 @@ public class UserInfoScreenControllerTest extends ApplicationTest {
         lookup("#password2").queryTextInputControl().setText("JohnDoe1");
         lookup("#email").queryTextInputControl().setText("johnDoe@gmail.com");
         clickOn("Save changes");
-        assertEquals(SceneSwitcher.getUser().getName(), "John Doe");
-        assertEquals(SceneSwitcher.getUser().getUsername(), "JohnDoe");
-        assertEquals(SceneSwitcher.getUser().getPassword(), "JohnDoe1");
-        assertEquals(SceneSwitcher.getUser().getEmail(), "johnDoe@gmail.com");
+
+        assertEquals("John Doe", SceneSwitcher.getUser().getName());
+        assertEquals("JohnDoe", SceneSwitcher.getUser().getUsername());
+        assertEquals("JohnDoe1", SceneSwitcher.getUser().getPassword());
+        assertEquals("johnDoe@gmail.com", SceneSwitcher.getUser().getEmail());
     }
 
     private static void deleteTestfile() {

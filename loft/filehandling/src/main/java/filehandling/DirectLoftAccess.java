@@ -90,7 +90,6 @@ public class DirectLoftAccess implements LoftAccess {
         if (user == null) {
             return false;
         }
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         List<User> users = getUsers();
         User tmpUser = getUser(user, users);
@@ -98,17 +97,9 @@ public class DirectLoftAccess implements LoftAccess {
             users = registerUserGetUsers(user);
             tmpUser = getUser(user, users);
         }
-        if (tmpUser == null) {
-            return false;
-        }
         tmpUser.addWorkout(workout);
 
-        try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
-            gson.toJson(new UsersHolder(users), file);
-        } catch (IOException e) {
-            return false;
-        }
-        return true;
+        return writeToFile(users);
     }
 
     /**
@@ -176,28 +167,43 @@ public class DirectLoftAccess implements LoftAccess {
         return getUsers().stream().anyMatch(user -> user.getUsername().equals(username));
     }
 
-    /**
-     * Updates the info about the user and overwrites the old info in the userData.json file.
-     *
-     * @param oldUser the old user
-     * @param newUser the updates user
-     */
-    public static void updateUserInfo(User oldUser, User newUser) {
-        if (!oldUser.getUsername().equals(newUser.getUsername()) 
+    @Override
+    public boolean updateUserInfo(User oldUser, User newUser) {
+        if (!oldUser.getUsername().equals(newUser.getUsername())
                 && usernameExists(newUser.getUsername())) {
-            throw new IllegalArgumentException("This username is already taken");
+            return false;
         }
+
+        User savedOldUser = getUser(oldUser.getUsername(), oldUser.getPassword());
+        if (savedOldUser == null) {
+            return false;
+        }
+
         List<User> users = getUsers();
         List<User> newUsers = users.stream()
-                .filter(user -> !user.equals(oldUser))
+                .filter(user -> !user.equals(savedOldUser))
                 .collect(Collectors.toList());
-        newUsers.add(newUser); 
-        
+
+        savedOldUser.getWorkouts().stream().forEach(workout -> newUser.addWorkout(workout));
+        newUsers.add(newUser);
+
+        return writeToFile(newUsers);
+    }
+
+    /**
+     * Writes the given list of users to the file. Returns true if successful, false
+     * otherwise.
+     *
+     * @param newUsers the list of users to write to the file
+     * @return true if successful, false otherwise
+     */
+    private boolean writeToFile(List<User> newUsers) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
             gson.toJson(new UsersHolder(newUsers), file);
         } catch (IOException e) {
-            System.err.println("Failed writing user updates to file");
+            return false;
         }
+        return true;
     }
 }

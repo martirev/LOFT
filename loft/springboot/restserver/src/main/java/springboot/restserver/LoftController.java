@@ -100,4 +100,32 @@ public class LoftController {
         LOG.debug("Checking if username exists: " + username);
         return access.usernameExists(username);
     }
+
+    /**
+     * Updates user information for the given username.
+     *
+     * @param username    the username of the user to update
+     * @param name        the name of the user
+     * @param password    the password of the user
+     * @param email       the email of the user
+     * @param newUsername the new username for the user
+     * @param newName     the new name for the user
+     * @param newPassword the new password for the user
+     * @param newEmail    the new email for the user
+     * @return true if the update was successful, false otherwise
+     */
+    @PutMapping(path = "users/{username}")
+    public boolean updateUserInfo(@PathVariable String username,
+            @RequestParam String name,
+            @RequestParam String password,
+            @RequestParam String email,
+            @RequestParam String newUsername,
+            @RequestParam String newName,
+            @RequestParam String newPassword,
+            @RequestParam String newEmail) {
+        LOG.debug("Updating user: " + username + " to: " + newUsername);
+        User oldUser = new User(name, username, password, email);
+        User newUser = new User(newName, newUsername, newPassword, newEmail);
+        return access.updateUserInfo(oldUser, newUser);
+    }
 }

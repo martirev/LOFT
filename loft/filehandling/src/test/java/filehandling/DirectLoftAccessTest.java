@@ -1,5 +1,6 @@
 package filehandling;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -162,18 +163,30 @@ public class DirectLoftAccessTest {
     @Test
     public void testIllegalUsername() {
         User user2 = new User("John Doe", "test", "test123", "johnDoe@gmail.com");
-        ReadAndWrite.registerUser(user2);
-        assertThrows(IllegalArgumentException.class, () -> {
-            ReadAndWrite.updateUserInfo(user, user2);
-        });
+        loftAccess.registerUser(user2);
+        assertFalse(loftAccess.updateUserInfo(user, user2),
+                "Should return false when trying to update to an existing username");
     }
 
     @Test
     public void testUserUpdated() {
         User user2 = new User("John Doe", "johnDoe123", "test123", "johnDoe123@gmail.com");
-        ReadAndWrite.updateUserInfo(user, user2);
-        assertTrue(ReadAndWrite.getUser("johnDoe123", "test123").equals(user2));
-    }   
+        assertTrue(loftAccess.updateUserInfo(user, user2), "Should return true when updating user");
+        assertEquals(user2, loftAccess.getUser("johnDoe123", "test123"),
+                "The user should be updated");
+
+        User user3 = new User("John Doe 2", "johnDoe123", "hunter2", "johnDoe@gmail.com");
+        assertTrue(loftAccess.updateUserInfo(user2, user3),
+                "Should return false when trying to update to an existing username");
+    }
+
+    @Test
+    public void testUpdateNonExistentUser() {
+        deleteTestfile();
+        User user2 = new User("John Doe", "johnDoe123", "test123", "johnDoe123@gmail.com");
+        assertFalse(loftAccess.updateUserInfo(user2, user),
+                "Should return false when trying to update a non-existent user");
+    }
 
     /**
      * Deletes the test file if it exists.
