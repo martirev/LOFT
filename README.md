@@ -90,8 +90,23 @@ The project's directory structure is organized as follows:
       - main
         - java
           - filehandling
-            - Here are the necessary files for handling filereading.
+            - Here are the necessary files for handling filereading. This includes both direct and remote filehandling.
       - test
         - java
           - filehandling
             - Here are all the tests for file handling located.
+  - springboot
+    - restserver
+      - src
+        - main
+          - java
+            - springboot
+              - restserver
+                - This is where server configuration and REST-API is located.
+          - resorces
+            - This folder contains some configuration for logging.
+        - test
+          - java
+            - springboot
+              - restserver
+                - This is where all the tests for the REST-API are located.

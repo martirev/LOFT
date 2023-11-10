@@ -83,6 +83,12 @@ public class RemoteLoftAccess implements LoftAccess {
         }
     }
 
+    /**
+     * Encodes the given string using the UTF-8 charset.
+     *
+     * @param s the string to be encoded
+     * @return the encoded string
+     */
     static String uriParam(String s) {
         return URLEncoder.encode(s, StandardCharsets.UTF_8);
     }
@@ -129,6 +135,16 @@ public class RemoteLoftAccess implements LoftAccess {
         return URI.create(uri.toString());
     }
 
+    /**
+     * Adds the given user's name, password, and email as query parameters to the
+     * endpoint URI.
+     *
+     * @param endpoint the endpoint URI to append the query parameters to
+     * @param user     the user whose name, password, and email to append as query
+     *                 parameters
+     * @return the constructed URI with the appended query parameters
+     * @see #getUriWithParams(URI, String...)
+     */
     static URI paramifyUser(URI endpoint, User user) {
         return getUriWithParams(endpoint, "name", user.getName(),
                 "password", user.getPassword(), "email", user.getEmail());
