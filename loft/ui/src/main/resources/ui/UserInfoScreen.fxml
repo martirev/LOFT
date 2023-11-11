@@ -6,47 +6,73 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Region prefHeight="768.0" prefWidth="683.0" styleClass="Background2" />
-      <Text layoutX="230.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="My Profile">
+      <Region layoutX="683.0" prefHeight="768.0" prefWidth="683.0" styleClass="Background2" />
+      <Text layoutX="912.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="My Profile">
          <font>
             <Font name="Roboto" size="50.0" />
          </font>
       </Text>
-      <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Return" textFill="#fafafa">
+      <Button layoutX="1196.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Return" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="20.0" />
          </font></Button>
-      <Button layoutX="282.0" layoutY="650.0" mnemonicParsing="false" onAction="#handlelogOutPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Log out" textFill="#fafafa">
+      <Button layoutX="968.0" layoutY="633.0" mnemonicParsing="false" onAction="#handlelogOutPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Log out" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="20.0" />
          </font>
       </Button>
-      <TextField fx:id="name" layoutX="242.0" layoutY="190.0" prefHeight="30.0" prefWidth="200.0" promptText="new name" styleClass="jfx-text-field" />
-      <TextField fx:id="username" layoutX="242.0" layoutY="250.0" prefHeight="30.0" prefWidth="200.0" promptText="new username" styleClass="jfx-text-field" />
-      <PasswordField fx:id="password0" layoutX="242.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="old password" styleClass="jfx-text-field" />
-      <PasswordField fx:id="password1" layoutX="242.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="new password" styleClass="jfx-text-field" />
-      <PasswordField fx:id="password2" layoutX="242.0" layoutY="430.0" prefHeight="30.0" prefWidth="200.0" promptText="Confirm password" styleClass="jfx-text-field" />
-      <TextField fx:id="email" layoutX="242.0" layoutY="500.0" prefHeight="30.0" prefWidth="200.0" promptText="new email" styleClass="jfx-text-field" />
-      <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="216.0" layoutY="216.0" size="30" text="" />
-      <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="216.0" layoutY="276.0" size="30" text="" />
-      <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="216.0" layoutY="336.0" size="30" />
-      <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="216.0" layoutY="396.0" size="30" />
-      <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="216.0" layoutY="456.0" size="30" />
-      <FontAwesomeIconView fill="#ed8152" glyphName="ENVELOPE" layoutX="212.0" layoutY="524.0" size="26" />
-      <Button layoutX="242.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleSaveChangesPress" prefHeight="40.0" prefWidth="200.0" styleClass="LoginButton" text="Save changes" textFill="#fafafa">
+      <TextField fx:id="name" layoutX="928.0" layoutY="179.0" prefHeight="30.0" prefWidth="200.0" promptText="new name" styleClass="jfx-text-field" />
+      <TextField fx:id="username" layoutX="928.0" layoutY="240.0" prefHeight="30.0" prefWidth="200.0" promptText="new username" styleClass="jfx-text-field" />
+      <PasswordField fx:id="password0" layoutX="928.0" layoutY="300.0" prefHeight="30.0" prefWidth="200.0" promptText="old password" styleClass="jfx-text-field" />
+      <PasswordField fx:id="password1" layoutX="928.0" layoutY="360.0" prefHeight="30.0" prefWidth="200.0" promptText="new password" styleClass="jfx-text-field" />
+      <PasswordField fx:id="password2" layoutX="928.0" layoutY="420.0" prefHeight="30.0" prefWidth="200.0" promptText="Confirm password" styleClass="jfx-text-field" />
+      <TextField fx:id="email" layoutX="928.0" layoutY="490.0" prefHeight="30.0" prefWidth="200.0" promptText="new email" styleClass="jfx-text-field" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="903.0" layoutY="205.0" size="30" text="" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="903.0" layoutY="267.0" size="30" text="" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="903.0" layoutY="327.0" size="30" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="903.0" layoutY="387.0" size="30" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="903.0" layoutY="447.0" size="30" />
+      <FontAwesomeIconView fill="#ed8152" glyphName="ENVELOPE" layoutX="897.0" layoutY="514.0" size="26" />
+      <Button layoutX="928.0" layoutY="552.0" mnemonicParsing="false" onAction="#handleSaveChangesPress" prefHeight="40.0" prefWidth="200.0" styleClass="LoginButton" text="Save changes" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="20.0" />
          </font>
       </Button>
-      <Text fx:id="errorMessage" fill="RED" layoutX="229.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="224.7802734375">
+      <Text fx:id="errorMessage" fill="RED" layoutX="915.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="224.7802734375">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </Text>
+      <Line endX="683.0" layoutY="550.0" strokeWidth="2.0" />
+      <Line endX="178.0" endY="-26.0" layoutX="160.0" layoutY="470.0" startX="143.0" startY="80.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="182.0" endY="-40.0" layoutX="133.0" layoutY="470.0" startX="143.0" startY="80.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="118.0" endY="-49.0" layoutX="223.0" layoutY="493.0" startX="155.0" startY="56.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="111.0" endY="-63.0" layoutX="250.0" layoutY="493.0" startX="155.0" startY="56.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="21.0" endY="6.0" layoutX="339.0" layoutY="424.0" startX="-24.0" startY="6.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="19.0" endY="-39.0" layoutX="350.0" layoutY="408.0" startX="12.0" startY="21.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="8.0" endY="-38.0" layoutX="301.0" layoutY="408.0" startX="14.0" startY="20.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="lowerLeftLine2" endX="17.0" endY="5.0" layoutX="291.0" layoutY="363.0" startX="-7.0" startY="-37.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="lowerLeftLine1" endX="30.0" endY="-10.0" layoutX="281.0" layoutY="358.0" startX="16.0" startY="-35.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="32.0" endY="5.0" layoutX="334.0" layoutY="343.0" startX="-21.0" startY="5.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="upperLeftLine1" endX="38.0" endY="-3.0" layoutX="257.0" layoutY="324.0" startX="29.0" startY="-37.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="upperLeftLine2" endX="25.0" endY="-8.0" layoutX="258.0" layoutY="332.0" startX="15.0" startY="-44.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="bar" endX="160" endY="2.5" layoutX="341.0" layoutY="289.0" startX="-154" startY="2.5" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Circle fill="TRANSPARENT" layoutX="339.0" layoutY="323.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
+      <Rectangle fx:id="weightLeftRectangle1" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="70.0" layoutX="213.0" layoutY="256.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="22.0" />
+      <Rectangle fx:id="weightLeftRectangle2" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="50.0" layoutX="195.0" layoutY="265.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="19.0" />
+      <Line fx:id="lowerRightLine1" endX="30.0" endY="-10.0" layoutX="338.0" layoutY="358.0" startX="45.0" startY="-35.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="upperRightLine1" endX="18.0" endY="-3.0" layoutX="366.0" layoutY="324.0" startX="29.0" startY="-37.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="lowerRightLine2" endX="24.0" endY="5.0" layoutX="346.0" layoutY="363.0" startX="48.0" startY="-37.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="upperRightLine2" endX="15.0" endY="-8.0" layoutX="380.0" layoutY="332.0" startX="28.0" startY="-44.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Rectangle fx:id="weightRightRectangle1" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="70.0" layoutX="453.0" layoutY="253.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="22.0" />
+      <Rectangle fx:id="weightRightRectangle2" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="50.0" layoutX="474.0" layoutY="266.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="19.0" />
    </children>
 </AnchorPane>
