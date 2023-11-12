@@ -128,10 +128,6 @@ public class UserInfoController extends SceneSwitcher {
             errorMessage.setText("Please fill out all fields");
             return;
         }
-        if ((password1.isEmpty() && !password2.isEmpty())
-                || (!password1.isEmpty() && password2.isEmpty())) {
-            errorMessage.setText("Please fill out all fields!");
-        }
         if (!password1.equals(password2)) {
             errorMessage.setText("Passwords do not match");
             return;
@@ -192,7 +188,7 @@ public class UserInfoController extends SceneSwitcher {
         animation.playAnimationWeight(weightLeftRectangle1);
         animation.playAnimationWeight(weightLeftRectangle2);
         animation.playAnimationArm(lowerLeftLine1, lowerLeftLine2,
-                lowerRightLine1, lowerRightLine2, upperRightLine1, upperRightLine2,
+                lowerRightLine1, lowerRightLine2, upperRightLine1, upperRightLine2, 
                 upperLeftLine1, upperLeftLine2);
     }
 }
