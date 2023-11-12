@@ -11,7 +11,6 @@ import core.Exercise;
 import core.Set;
 import core.User;
 import core.Workout;
-import filehandling.ReadAndWrite;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -30,7 +29,6 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 import ui.App;
 
 /**
@@ -40,12 +38,7 @@ import ui.App;
  * ensure that the charts on the progress screen are populated correctly and
  * that the correct data is displayed.
  */
-public class ProgressScreenControllerTest extends ApplicationTest {
-
-    private static final String testFileLocation = System.getProperty("user.home")
-            + System.getProperty("file.separator") + "testUserData.json";
-
-    private Parent root;
+public class ProgressScreenControllerTest extends ControllerTestBase {
 
     private XYChart<String, Number> totalweightChart;
     private XYChart<String, Number> exerciseChart;
@@ -58,14 +51,6 @@ public class ProgressScreenControllerTest extends ApplicationTest {
 
     private static List<LocalDate> dates = List.of(LocalDate.of(2023, 5, 16),
             LocalDate.of(2023, 4, 4));
-
-    /**
-     * Sets up the test environment to support headless mode.
-     */
-    @BeforeAll
-    public static void setupHeadless() {
-        App.supportHeadless();
-    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -87,7 +72,6 @@ public class ProgressScreenControllerTest extends ApplicationTest {
      */
     @BeforeAll
     public static void setUp() {
-        ReadAndWrite.setFileLocation(testFileLocation);
         deleteTestFile();
         user = new User("Test person", "tester", "hunter2", "tester@example.com");
         SceneSwitcher.setUser(user);
@@ -137,9 +121,9 @@ public class ProgressScreenControllerTest extends ApplicationTest {
         workout3.addExercise(bench1);
         workout3.addExercise(squat);
 
-        ReadAndWrite.writeWorkoutToUser(workout1, user);
-        ReadAndWrite.writeWorkoutToUser(workout2, user);
-        ReadAndWrite.writeWorkoutToUser(workout3, user);
+        loftAccess.writeWorkoutToUser(workout1, user);
+        loftAccess.writeWorkoutToUser(workout2, user);
+        loftAccess.writeWorkoutToUser(workout3, user);
     }
 
     @Test

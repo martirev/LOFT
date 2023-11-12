@@ -1,7 +1,6 @@
 package ui.controllers;
 
 import core.User;
-import filehandling.ReadAndWrite;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -10,12 +9,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 /**
- * This is the controller class for UserinfoScreen. It handles
+ * This is the controller class for UserInfoScreen. It handles
  * requests form the user to see user information and lets the user
  * change name, username, password and email connected to the user.
  * The controller also allows the user to log out from the app
  */
-public class UserInfoController extends SceneSwitcher {
+public class UserInfoScreenController extends SceneSwitcher {
     @FXML
     private Text errorMessage;
 
@@ -110,15 +109,16 @@ public class UserInfoController extends SceneSwitcher {
             errorMessage.setText("Please enter a valid email");
             return;
         }
+
         User oldUser = getUser();
         User newUser = new User(name, username, password1, email);
         getUser().getWorkouts().stream().forEach(workout -> newUser.addWorkout(workout));
-        try {
-            ReadAndWrite.updateUserInfo(oldUser, newUser);
-        } catch (IllegalArgumentException e) {
+
+        if (!loftAccess.updateUserInfo(oldUser, newUser)) {
             errorMessage.setText("Username is taken");
             return;
         }
+
         setUser(newUser);
         insertPane("LoginScreen.fxml");
     }

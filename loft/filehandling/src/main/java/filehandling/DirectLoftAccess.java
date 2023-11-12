@@ -16,24 +16,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * The ReadAndWrite class provides methods for reading and writing user data to
- * a file in JSON format. It includes methods for registering new users, adding
- * workouts to existing users, and retrieving user data. The file location can
- * be set using the setFileLocation method.
+ * DirectLoftAccess is a class that implements the LoftAccess interface and
+ * provides direct access to the userData.json file. It allows for registering
+ * new users, adding workouts to existing users, and retrieving user data from
+ * the file. The file location can be set using the setFileLocation method, and
+ * retrieved using the getFileLocation method.
  */
-public abstract class ReadAndWrite {
+public class DirectLoftAccess implements LoftAccess {
     private static String fileFolderLocation = System.getProperty("user.home")
             + System.getProperty("file.separator");
     private static String fileLocation = fileFolderLocation + "userData.json";
 
     /**
-     * Private constructor to prevent instantiation.
-     */
-    private ReadAndWrite() {
-    }
-
-    /**
-     * Sets the file location for ReadAndWrite class.
+     * Sets the file location for DirectLoftAccess class.
      *
      * @param fileLocation the file location to be set.
      * @throws IllegalArgumentException if the file location is a directory
@@ -43,24 +38,24 @@ public abstract class ReadAndWrite {
             throw new IllegalArgumentException(
                     "File location " + fileLocation + " is a directory, not a file");
         }
-        ReadAndWrite.fileLocation = fileLocation;
+        DirectLoftAccess.fileLocation = fileLocation;
     }
 
     /**
-     * Gets the file location for ReadAndWrite class.
+     * Gets the file location for DirectLoftAccess class.
      */
     public static String getFileLocation() {
         return fileLocation;
     }
 
-    /**
-     * Registers a new user by adding it to the list of existing users and writing
-     * the updated list to a file.
-     *
-     * @param user the user to be registered
-     */
-    public static void registerUser(User user) {
-        registerUserGetUsers(user);
+    @Override
+    public boolean registerUser(User user) {
+        try {
+            registerUserGetUsers(user);
+        } catch (IllegalStateException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -70,10 +65,15 @@ public abstract class ReadAndWrite {
      *
      * @param user the user to be added
      * @return the updated list of users, or null if writing to file failed
+     * @throws IllegalStateException if the user already exists
      */
     private static List<User> registerUserGetUsers(User user) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         List<User> users = getUsers();
+        if (users.stream()
+                .anyMatch(nullUser -> nullUser.getUsername().equals(user.getUsername()))) {
+            throw new IllegalStateException("User already exists");
+        }
         users.add(user);
 
         try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
@@ -85,14 +85,11 @@ public abstract class ReadAndWrite {
         return users;
     }
 
-    /**
-     * The method to be used for writing a workout class to the userData file in
-     * json format.
-     *
-     * @param workout The workout to add to the current user
-     */
-    public static void writeWorkoutToUser(Workout workout, User user) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    @Override
+    public boolean writeWorkoutToUser(Workout workout, User user) {
+        if (user == null) {
+            return false;
+        }
 
         List<User> users = getUsers();
         User tmpUser = getUser(user, users);
@@ -100,16 +97,9 @@ public abstract class ReadAndWrite {
             users = registerUserGetUsers(user);
             tmpUser = getUser(user, users);
         }
-        if (tmpUser == null) {
-            throw new IllegalStateException("User should exist at this point.");
-        }
         tmpUser.addWorkout(workout);
 
-        try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
-            gson.toJson(new UsersHolder(users), file);
-        } catch (IOException e) {
-            System.err.println("Writing to file failed");
-        }
+        return writeToFile(users);
     }
 
     /**
@@ -142,9 +132,6 @@ public abstract class ReadAndWrite {
      *         but with updated data.
      */
     private static User getUser(User user, List<User> users) {
-        if (users == null) {
-            return null;
-        }
         return getUser(user.getUsername(), user.getPassword(), users);
     }
 
@@ -169,67 +156,54 @@ public abstract class ReadAndWrite {
         return null;
     }
 
-    /**
-     * Returns a User object if the given username and password match an existing
-     * user in the system.
-     *
-     * @param username the username of the user to retrieve
-     * @param password the password of the user to retrieve
-     * @return a User object if the given username and password match an existing
-     *         user in the system, null otherwise
-     */
-    public static User getUser(String username, String password) {
+    @Override
+    public User getUser(String username, String password) {
         List<User> users = getUsers();
         return getUser(username, password, users);
     }
 
-    /**
-     * The method to be used for reading the userData file in json format. If no
-     * file or user exists, it will return a new User.
-     *
-     * @return The user data from the file
-     */
-    public static User returnUserClassFromFile(User user) {
-        User updatedUser = getUser(user.getUsername(), user.getPassword());
-        if (updatedUser == null) {
-            registerUser(user);
-            updatedUser = getUser(user.getUsername(), user.getPassword());
-        }
-        return updatedUser;
-    }
-
-    /**
-     * Checks if a username already exists.
-     *
-     * @param username the username to check for existence
-     * @return true if the username exists, false otherwise
-     */
-    public static boolean usernameExists(String username) {
+    @Override
+    public boolean usernameExists(String username) {
         return getUsers().stream().anyMatch(user -> user.getUsername().equals(username));
     }
 
-    /**
-     * Updates the info about the user and overwrites the old info in the userData.json file.
-     *
-     * @param oldUser the old user
-     * @param newUser the updates user
-     */
-    public static void updateUserInfo(User oldUser, User newUser) {
-        if (!oldUser.getUsername().equals(newUser.getUsername()) 
+    @Override
+    public boolean updateUserInfo(User oldUser, User newUser) {
+        if (!oldUser.getUsername().equals(newUser.getUsername())
                 && usernameExists(newUser.getUsername())) {
-            throw new IllegalArgumentException("This username is already taken");
+            return false;
         }
+
+        User savedOldUser = getUser(oldUser.getUsername(), oldUser.getPassword());
+        if (savedOldUser == null) {
+            return false;
+        }
+
         List<User> users = getUsers();
         List<User> newUsers = users.stream()
-                .filter(user -> !user.equals(oldUser))
+                .filter(user -> !user.equals(savedOldUser))
                 .collect(Collectors.toList());
-        newUsers.add(newUser); 
-        
+
+        savedOldUser.getWorkouts().stream().forEach(workout -> newUser.addWorkout(workout));
+        newUsers.add(newUser);
+
+        return writeToFile(newUsers);
+    }
+
+    /**
+     * Writes the given list of users to the file. Returns true if successful, false
+     * otherwise.
+     *
+     * @param newUsers the list of users to write to the file
+     * @return true if successful, false otherwise
+     */
+    private boolean writeToFile(List<User> newUsers) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (Writer file = new FileWriter(fileLocation, StandardCharsets.UTF_8)) {
             gson.toJson(new UsersHolder(newUsers), file);
         } catch (IOException e) {
-            System.err.println("Failed writing user updates to file");
+            return false;
         }
+        return true;
     }
 }

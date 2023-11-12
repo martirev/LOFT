@@ -5,7 +5,6 @@ import core.Set;
 import core.User;
 import core.Workout;
 import core.WorkoutSorting;
-import filehandling.ReadAndWrite;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,7 +91,8 @@ public class WorkoutScreenController extends SceneSwitcher {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user = ReadAndWrite.returnUserClassFromFile(getUser());
+        User prev = getUser();
+        User user = loftAccess.getUser(prev.getUsername(), prev.getPassword());
 
         WorkoutSorting workoutSorting = new WorkoutSorting(user.getWorkouts());
 
@@ -212,7 +212,7 @@ public class WorkoutScreenController extends SceneSwitcher {
         if (workout.getExercises().isEmpty()) {
             return;
         }
-        ReadAndWrite.writeWorkoutToUser(workout, getUser());
+        loftAccess.writeWorkoutToUser(workout, getUser());
         insertPane("HomeScreen.fxml");
     }
 

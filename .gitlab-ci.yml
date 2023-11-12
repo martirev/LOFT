@@ -8,7 +8,7 @@ variables:
 # Function to get the percentage of code coverage for the "current module" (i.e. the module in pwd at the time of calling)
 .get_percentage:
   script:
-  - missed_hit=$(cat target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*BRANCH' | grep -o [0-9]*)
+  - missed_hit=$(cat target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*/>' | grep -o [0-9]*)
   - missed=$(echo ${missed_hit} | grep -o "[0-9]* ")
   - hit=$(echo ${missed_hit} | grep -o " [0-9]*")
   - percentage=$(awk -v hit="${hit}" -v missed="${missed}" 'BEGIN { print  100 * hit / (hit + missed) }')
@@ -36,6 +36,7 @@ test:
       - loft/core/target/site/jacoco/jacoco.xml
       - loft/filehandling/target/site/jacoco/jacoco.xml
       - loft/ui/target/site/jacoco/jacoco.xml
+      - loft/springboot/restserver/target/site/jacoco/jacoco.xml
     expire_in: 1 day
 
 build:
@@ -84,6 +85,20 @@ coverage ui:
     - !reference [.get_percentage, script]
     - 'echo "Code Coverage ui: ${percentage}%"'
   coverage: "/Code Coverage ui: ([0-9\\.]*)%/"
+
+coverage restserver:
+  stage: coverage
+  needs: ["test"]
+  dependencies:
+    - test
+  before_script:
+    - cd loft
+    - cd springboot
+    - cd restserver
+  script:
+    - !reference [.get_percentage, script]
+    - 'echo "Code Coverage restserver: ${percentage}%"'
+  coverage: "/Code Coverage restserver: ([0-9\\.]*)%/"
 
 checkstyle:
   stage: validate

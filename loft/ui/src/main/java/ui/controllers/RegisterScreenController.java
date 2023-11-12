@@ -1,7 +1,6 @@
 package ui.controllers;
 
 import core.User;
-import filehandling.ReadAndWrite;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -78,13 +77,13 @@ public class RegisterScreenController extends SceneSwitcher {
             return;
         }
 
-        if (ReadAndWrite.usernameExists(username)) {
+        if (loftAccess.usernameExists(username)) {
             errorMessage.setText("Username is already taken");
             return;
         }
 
         User newUser = new User(name, username, password1, email);
-        ReadAndWrite.registerUser(newUser);
+        loftAccess.registerUser(newUser);
         insertPane("LoginScreen.fxml");
     }
 

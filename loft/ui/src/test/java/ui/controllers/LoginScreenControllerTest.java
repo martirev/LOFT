@@ -3,7 +3,6 @@ package ui.controllers;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.User;
-import filehandling.ReadAndWrite;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,7 +17,6 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 import ui.App;
 
 /**
@@ -27,20 +25,7 @@ import ui.App;
  * credentials, clicking the "register new profile" button, and successfully
  * logging in with correct credentials.
  */
-public class LoginScreenControllerTest extends ApplicationTest {
-
-    private static String testFileLocation = System.getProperty("user.home")
-            + System.getProperty("file.separator") + "testUserData.json";
-
-    private Parent root;
-
-    /**
-     * Sets up the test environment to support headless mode.
-     */
-    @BeforeAll
-    public static void setupHeadless() {
-        App.supportHeadless();
-    }
+public class LoginScreenControllerTest extends ControllerTestBase {
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -50,7 +35,6 @@ public class LoginScreenControllerTest extends ApplicationTest {
     @BeforeAll
     public static void cleanStart() {
         deleteTestfile();
-        ReadAndWrite.setFileLocation(testFileLocation);
     }
 
     @AfterAll
@@ -101,7 +85,7 @@ public class LoginScreenControllerTest extends ApplicationTest {
         deleteTestfile();
         User user = new User("Test User", "tester", "hunter2", "tester@example.com");
 
-        ReadAndWrite.registerUser(user);
+        loftAccess.registerUser(user);
 
         write("tester");
         write("\t");
