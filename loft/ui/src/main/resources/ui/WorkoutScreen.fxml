@@ -61,7 +61,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
             </GridPane>
-            <Button fx:id="addButton" layoutX="318.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="48.0" prefWidth="85.0" style="-fx-background-color: #ed8152;" text="Add" textFill="#fafafa">
+            <Button fx:id="addButton" disable="true" layoutX="318.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="48.0" prefWidth="85.0" style="-fx-background-color: #ed8152;" text="Add" textFill="#fafafa">
                <font>
                   <Font name="Roboto" size="20.0" />
                </font>
