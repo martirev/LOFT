@@ -34,7 +34,7 @@ public class UserInfoScreenControllerTest extends ApplicationTest {
     private static final String testFileLocation = System.getProperty("user.home")
             + System.getProperty("file.separator") + "testUserData.json";
 
-    private Collection<String> fields = Arrays.asList("#name", "#username", 
+    private Collection<String> fields = Arrays.asList("#name", "#username",
             "#email", "#password0", "#password1",
             "#password2");
 
@@ -81,6 +81,18 @@ public class UserInfoScreenControllerTest extends ApplicationTest {
             Text errorMessage = lookup("#errorMessage").queryText();
             assertEquals(errorMessage.getText(), "Please fill out all fields");
         }
+    }
+
+    @Test
+    public void testStartChangingPassword() {
+        lookup("#password1").queryTextInputControl().setText("test");
+        clickOn("Save changes");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Please fill out all fields");
+        lookup("#password1").queryTextInputControl().setText("");
+        lookup("#password2").queryTextInputControl().setText("test");
+        Text errorMessage2 = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage2.getText(), "Please fill out all fields");
     }
 
     @Test
