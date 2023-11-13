@@ -63,7 +63,7 @@ public abstract class Animation extends SceneSwitcher {
     *
     * @param bar the weight bar
     */
-    public void playAnimationBar(Line bar) {
+    private void playAnimationBar(Line bar) {
         TranslateTransition translateTransitionBar = new TranslateTransition();
         transitions.add(translateTransitionBar);
         translateTransitionBar.setAutoReverse(true);
@@ -79,7 +79,7 @@ public abstract class Animation extends SceneSwitcher {
     *
     * @param weight the weights on the bar
     */
-    public void playAnimationWeight(Rectangle weight) {
+    private void playAnimationWeight(Rectangle weight) {
         TranslateTransition translateTransitionWeights = new TranslateTransition();
         transitions.add(translateTransitionWeights);
         translateTransitionWeights.setAutoReverse(true);
@@ -102,7 +102,7 @@ public abstract class Animation extends SceneSwitcher {
      * @param upperLeft1  upper left arm top
      * @param upperleft2  upper left arm bottom
      */
-    public void playAnimationArm(Line lowerLeft1, Line lowerLeft2,
+    private void playAnimationArm(Line lowerLeft1, Line lowerLeft2,
                 Line lowerRight1, Line lowerRight2, Line upperRight1, Line upperRight2,
                 Line upperLeft1, Line upperleft2) {
         Rotate rotation1 = new Rotate();
@@ -220,7 +220,7 @@ public abstract class Animation extends SceneSwitcher {
     /**
      * Method for starting all animations.
      */
-    public void startAnimations() {
+    protected void startAnimations() {
         playAnimationBar(bar);
         playAnimationWeight(weightRightRectangle1);
         playAnimationWeight(weightRightRectangle2);
@@ -234,7 +234,7 @@ public abstract class Animation extends SceneSwitcher {
     /**
      * Method for pausing transistion when leaving scene.
      */
-    public void stopAllAnimations() {
+    protected void stopAllAnimations() {
         for (TranslateTransition transition : transitions) {
             stopTransitions(transition);
         }
