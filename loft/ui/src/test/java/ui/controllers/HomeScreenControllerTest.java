@@ -71,6 +71,12 @@ public class HomeScreenControllerTest extends ControllerTestBase {
     }
 
     @Test
+    public void testGoToUserInfoScreen() {
+        clickOn("My Profile");
+        checkOnScene("My Profile");
+    }
+
+    @Test
     public void testInvalidScreen() {
         assertThrows(IllegalArgumentException.class,
                 () -> controller.insertPane("nonExistingScreen.fxml"),

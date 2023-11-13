@@ -75,20 +75,28 @@ public class UserInfoScreenController extends SceneSwitcher {
     public void handleSaveChangesPress() {
         String name = this.name.getText();
         String username = this.username.getText();
-        String password0 = this.password0.getText();
         String password1 = this.password1.getText();
         String password2 = this.password2.getText();
         String email = this.email.getText();
-        if (name.isEmpty() || username.isEmpty() || password0.isEmpty() || password1.isEmpty()
-                || password2.isEmpty() || email.isEmpty()) {
+        if (name.isEmpty() || username.isEmpty() || email.isEmpty()) {
             errorMessage.setText("Please fill out all fields");
             return;
+        }
+        if ((!password1.isEmpty() && password2.isEmpty())
+                || (password1.isEmpty() && !password2.isEmpty())) {
+            errorMessage.setText("Please fill out all fields");
+            return;
+        }
+        if (password1.isEmpty()) {
+            password1 = getUser().getPassword();
+            password2 = getUser().getPassword();
         }
         if (!password1.equals(password2)) {
             errorMessage.setText("Passwords do not match");
             return;
         }
-        if (!password0.equals(getUser().getPassword())) {
+        String password0 = this.password0.getText();
+        if (!getUser().getPassword().equals(password0)) {
             errorMessage.setText("The old password is wrong");
             return;
         }
