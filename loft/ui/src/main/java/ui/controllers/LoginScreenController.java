@@ -11,15 +11,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 /**
  * This class is the controller for the login screen of the application. It
  * handles user input for logging in and linkes to registering a new profile.
  */
-public class LoginScreenController extends SceneSwitcher {
+public class LoginScreenController extends Animation  {
 
     @FXML
     private Text errorMessage;
@@ -48,58 +46,11 @@ public class LoginScreenController extends SceneSwitcher {
     @FXML
     private RadioButton directButton;
 
-    @FXML
-    private Line bar;
-
-    @FXML
-    private Rectangle weightRightRectangle1;
-
-    @FXML
-    private Rectangle weightRightRectangle2;
-
-    @FXML
-    private Rectangle weightLeftRectangle1;
-
-    @FXML
-    private Rectangle weightLeftRectangle2;
-
-    @FXML
-    private Line upperRightLine1;
-
-    @FXML
-    private Line upperRightLine2;
-
-    @FXML
-    private Line upperLeftLine1;
-
-    @FXML
-    private Line upperLeftLine2;
-
-    @FXML
-    private Line lowerRightLine1;
-
-    @FXML
-    private Line lowerRightLine2;
-
-    @FXML
-    private Line lowerLeftLine1;
-
-    @FXML
-    private Line lowerLeftLine2;
-
-    private Animation animation = new Animation();
+   
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        animation.playAnimationBar(bar);
-        animation.playAnimationWeight(weightRightRectangle1);
-        animation.playAnimationWeight(weightRightRectangle2);
-        animation.playAnimationWeight(weightLeftRectangle1);
-        animation.playAnimationWeight(weightLeftRectangle2);
-        animation.playAnimationArm(lowerLeftLine1, lowerLeftLine2,
-                lowerRightLine1, lowerRightLine2, upperRightLine1, upperRightLine2,
-                upperLeftLine1, upperLeftLine2);
-
+        startAnimations();
         if (!SceneSwitcher.usingServer()) {
             useLocal("Using local data", "#ed8152");
             directButton.setSelected(true);
@@ -121,7 +72,7 @@ public class LoginScreenController extends SceneSwitcher {
 
     @FXML
     private void handleRegisterNewProfile() {
-        animation.pauseAllAnimations();
+        pauseAllAnimations();
         insertPane("RegisterScreen.fxml");
     }
 
@@ -139,7 +90,7 @@ public class LoginScreenController extends SceneSwitcher {
         user.setPassword(password);
 
         setUser(user);
-        animation.pauseAllAnimations();
+        pauseAllAnimations();
         insertPane("HomeScreen.fxml");
     }
 

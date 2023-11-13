@@ -6,6 +6,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
+import javafx.fxml.FXML;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
@@ -14,9 +15,48 @@ import javafx.util.Duration;
 /**
  * Class for running animation on Login, Register and userInfo screen.
  */
-public class Animation {
+public abstract class Animation extends SceneSwitcher {
     private List<TranslateTransition> transitions = new ArrayList<>();
     private List<Timeline> timelines = new ArrayList<>();
+
+    @FXML
+    private Line bar;
+
+    @FXML
+    private Rectangle weightRightRectangle1;
+
+    @FXML
+    private Rectangle weightRightRectangle2;
+
+    @FXML
+    private Rectangle weightLeftRectangle1;
+
+    @FXML
+    private Rectangle weightLeftRectangle2;
+
+    @FXML
+    private Line upperRightLine1;
+
+    @FXML
+    private Line upperRightLine2;
+
+    @FXML
+    private Line upperLeftLine1;
+
+    @FXML
+    private Line upperLeftLine2;
+
+    @FXML
+    private Line lowerRightLine1;
+
+    @FXML
+    private Line lowerRightLine2;
+
+    @FXML
+    private Line lowerLeftLine1;
+
+    @FXML
+    private Line lowerLeftLine2;
 
     /**
     * Method for animating the weightbar.
@@ -175,6 +215,20 @@ public class Animation {
         timeline8.setAutoReverse(true);
         timeline8.setCycleCount(Timeline.INDEFINITE);
         timeline8.play();
+    }
+
+    /**
+     * Method for starting all animations.
+     */
+    public void startAnimations() {
+        playAnimationBar(bar);
+        playAnimationWeight(weightRightRectangle1);
+        playAnimationWeight(weightRightRectangle2);
+        playAnimationWeight(weightLeftRectangle1);
+        playAnimationWeight(weightLeftRectangle2);
+        playAnimationArm(lowerLeftLine1, lowerLeftLine2,
+                lowerRightLine1, lowerRightLine2, upperRightLine1, upperRightLine2,
+                upperLeftLine1, upperLeftLine2);
     }
 
     /**

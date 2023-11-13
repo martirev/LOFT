@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 /**
@@ -15,7 +13,7 @@ import javafx.scene.text.Text;
  * input for registering a new account. The class contains FXML fields for the
  * username and password fields.
  */
-public class RegisterScreenController extends SceneSwitcher {
+public class RegisterScreenController extends Animation {
 
     @FXML
     private Text errorMessage;
@@ -34,47 +32,6 @@ public class RegisterScreenController extends SceneSwitcher {
 
     @FXML
     private TextField email;
-
-    @FXML
-    private Line bar;
-
-    @FXML
-    private Rectangle weightRightRectangle1;
-
-    @FXML
-    private Rectangle weightRightRectangle2;
-
-    @FXML
-    private Rectangle weightLeftRectangle1;
-
-    @FXML
-    private Rectangle weightLeftRectangle2;
-
-    @FXML
-    private Line upperRightLine1;
-
-    @FXML
-    private Line upperRightLine2;
-
-    @FXML
-    private Line upperLeftLine1;
-
-    @FXML
-    private Line upperLeftLine2;
-
-    @FXML
-    private Line lowerRightLine1;
-
-    @FXML
-    private Line lowerRightLine2;
-
-    @FXML
-    private Line lowerLeftLine1;
-
-    @FXML
-    private Line lowerLeftLine2;
-
-    private Animation animation = new Animation();
 
     /**
      * Handles the user input for registering a new account. Validates the input and
@@ -127,26 +84,19 @@ public class RegisterScreenController extends SceneSwitcher {
 
         User newUser = new User(name, username, password1, email);
         loftAccess.registerUser(newUser);
-        animation.pauseAllAnimations();
+        pauseAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 
     @FXML
     public void handleLogInPressed() {
-        animation.pauseAllAnimations();
+        pauseAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        animation.playAnimationBar(bar);
-        animation.playAnimationWeight(weightRightRectangle1);
-        animation.playAnimationWeight(weightRightRectangle2);
-        animation.playAnimationWeight(weightLeftRectangle1);
-        animation.playAnimationWeight(weightLeftRectangle2);
-        animation.playAnimationArm(lowerLeftLine1, lowerLeftLine2,
-                lowerRightLine1, lowerRightLine2, upperRightLine1, upperRightLine2, 
-                upperLeftLine1, upperLeftLine2);
+        startAnimations();
     }
 
 }

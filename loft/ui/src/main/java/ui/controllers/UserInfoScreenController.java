@@ -6,8 +6,6 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 /**
@@ -16,7 +14,7 @@ import javafx.scene.text.Text;
  * change name, username, password and email connected to the user.
  * The controller also allows the user to log out from the app
  */
-public class UserInfoScreenController extends SceneSwitcher {
+public class UserInfoScreenController extends Animation {
     @FXML
     private Text errorMessage;
 
@@ -38,47 +36,6 @@ public class UserInfoScreenController extends SceneSwitcher {
     @FXML
     private TextField email;
 
-    @FXML
-    private Line bar;
-
-    @FXML
-    private Rectangle weightRightRectangle1;
-
-    @FXML
-    private Rectangle weightRightRectangle2;
-
-    @FXML
-    private Rectangle weightLeftRectangle1;
-
-    @FXML
-    private Rectangle weightLeftRectangle2;
-
-    @FXML
-    private Line upperRightLine1;
-
-    @FXML
-    private Line upperRightLine2;
-
-    @FXML
-    private Line upperLeftLine1;
-
-    @FXML
-    private Line upperLeftLine2;
-
-    @FXML
-    private Line lowerRightLine1;
-
-    @FXML
-    private Line lowerRightLine2;
-
-    @FXML
-    private Line lowerLeftLine1;
-
-    @FXML
-    private Line lowerLeftLine2;
-
-    private Animation animation = new Animation();
-
     /**
      * Populates the textfields for name, username and email.
      */
@@ -96,7 +53,7 @@ public class UserInfoScreenController extends SceneSwitcher {
             errorMessage.setText("Save changes before returning");
             return;
         }
-        animation.pauseAllAnimations();
+        pauseAllAnimations();
         insertPane("HomeScreen.fxml");
     }
 
@@ -108,7 +65,7 @@ public class UserInfoScreenController extends SceneSwitcher {
             return;
         }
         SceneSwitcher.setUser(null);
-        animation.pauseAllAnimations();
+        pauseAllAnimations();
         insertPane("LoginScreen.fxml");
 
     }
@@ -173,7 +130,7 @@ public class UserInfoScreenController extends SceneSwitcher {
         }
 
         setUser(newUser);
-        animation.pauseAllAnimations();
+        pauseAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 
@@ -193,13 +150,6 @@ public class UserInfoScreenController extends SceneSwitcher {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         populateUserInfoFields();
-        animation.playAnimationBar(bar);
-        animation.playAnimationWeight(weightRightRectangle1);
-        animation.playAnimationWeight(weightRightRectangle2);
-        animation.playAnimationWeight(weightLeftRectangle1);
-        animation.playAnimationWeight(weightLeftRectangle2);
-        animation.playAnimationArm(lowerLeftLine1, lowerLeftLine2,
-                lowerRightLine1, lowerRightLine2, upperRightLine1, upperRightLine2, 
-                upperLeftLine1, upperLeftLine2);
+        startAnimations();
     }
 }
