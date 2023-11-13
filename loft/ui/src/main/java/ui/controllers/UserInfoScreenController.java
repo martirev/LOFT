@@ -53,7 +53,7 @@ public class UserInfoScreenController extends Animation {
             errorMessage.setText("Save changes before returning");
             return;
         }
-        pauseAllAnimations();
+        stopAllAnimations();
         insertPane("HomeScreen.fxml");
     }
 
@@ -65,7 +65,7 @@ public class UserInfoScreenController extends Animation {
             return;
         }
         SceneSwitcher.setUser(null);
-        pauseAllAnimations();
+        stopAllAnimations();
         insertPane("LoginScreen.fxml");
 
     }
@@ -130,7 +130,7 @@ public class UserInfoScreenController extends Animation {
         }
 
         setUser(newUser);
-        pauseAllAnimations();
+        stopAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 

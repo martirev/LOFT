@@ -72,7 +72,7 @@ public class LoginScreenController extends Animation  {
 
     @FXML
     private void handleRegisterNewProfile() {
-        pauseAllAnimations();
+        stopAllAnimations();
         insertPane("RegisterScreen.fxml");
     }
 
@@ -90,7 +90,7 @@ public class LoginScreenController extends Animation  {
         user.setPassword(password);
 
         setUser(user);
-        pauseAllAnimations();
+        stopAllAnimations();
         insertPane("HomeScreen.fxml");
     }
 

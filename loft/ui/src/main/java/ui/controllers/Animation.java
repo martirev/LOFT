@@ -234,20 +234,20 @@ public abstract class Animation extends SceneSwitcher {
     /**
      * Method for pausing transistion when leaving scene.
      */
-    public void pauseAllAnimations() {
+    public void stopAllAnimations() {
         for (TranslateTransition transition : transitions) {
-            pauseTransitions(transition);
+            stopTransitions(transition);
         }
         for (Timeline timeline : timelines) {
-            pauseTimeline(timeline);
+            stopTimelines(timeline);
         }
     }
 
-    private void pauseTransitions(TranslateTransition transition) {
+    private void stopTransitions(TranslateTransition transition) {
         transition.stop();
     }
 
-    private void pauseTimeline(Timeline timeline) {
+    private void stopTimelines(Timeline timeline) {
         timeline.stop();
     }
 

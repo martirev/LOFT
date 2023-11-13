@@ -84,13 +84,13 @@ public class RegisterScreenController extends Animation {
 
         User newUser = new User(name, username, password1, email);
         loftAccess.registerUser(newUser);
-        pauseAllAnimations();
+        stopAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 
     @FXML
     public void handleLogInPressed() {
-        pauseAllAnimations();
+        stopAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 
