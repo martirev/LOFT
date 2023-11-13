@@ -57,16 +57,28 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
 
     @Test
     public void testFieldsNotFilledOut() {
-        for (String field : fields) {
-            fillFields("test");
-            Platform.runLater(() -> {
-                lookup(field).queryTextInputControl().setText("");
-            });
-            WaitForAsyncUtils.waitForFxEvents();
-            clickOn("Save changes");
-            Text errorMessage = lookup("#errorMessage").queryText();
-            assertEquals(errorMessage.getText(), "Please fill out all fields");
-        }
+        Platform.runLater(() -> {
+            lookup("#name").queryTextInputControl().setText("");
+            lookup("#username").queryTextInputControl().setText("");
+            lookup("#email").queryTextInputControl().setText("");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn("Save changes");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Please fill out all fields");
+    }
+
+    @Test
+    public void testPasswordsHalfUpdated() {
+        lookup("#password1").queryTextInputControl().setText("test");
+        clickOn("Save changes");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Please fill out all fields");
+        lookup("#password1").queryTextInputControl().setText("");
+        lookup("#password2").queryTextInputControl().setText("test");
+        clickOn("Save changes");
+        Text errorMessage2 = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage2.getText(), "Please fill out all fields");
     }
 
     @Test
@@ -92,6 +104,19 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
         clickOn("Save changes");
         Text errorMessage = lookup("#errorMessage").queryText();
         assertEquals(errorMessage.getText(), "Passwords do not match");
+    }
+
+    @Test
+    public void testChangingInfoWithoutPassword() {
+        lookup("#name").queryTextInputControl().setText("Joe Hunter");
+        lookup("#username").queryTextInputControl().setText("JoeHunter");
+        lookup("#email").queryTextInputControl().setText("hunter@gmail.com");
+        lookup("#password0").queryTextInputControl().setText("test123");
+        clickOn("Save changes");
+        assertEquals(SceneSwitcher.getUser().getPassword(), "test123");
+        assertEquals(SceneSwitcher.getUser().getName(), "Joe Hunter");
+        assertEquals(SceneSwitcher.getUser().getUsername(), "JoeHunter");
+        assertEquals(SceneSwitcher.getUser().getEmail(), "hunter@gmail.com");
     }
 
     @Test

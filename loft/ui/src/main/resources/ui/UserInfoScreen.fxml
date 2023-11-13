@@ -26,12 +26,12 @@
             <Font name="Roboto" size="20.0" />
          </font>
       </Button>
-      <TextField fx:id="name" layoutX="242.0" layoutY="190.0" prefHeight="30.0" prefWidth="200.0" promptText="new name" styleClass="jfx-text-field" />
-      <TextField fx:id="username" layoutX="242.0" layoutY="250.0" prefHeight="30.0" prefWidth="200.0" promptText="new username" styleClass="jfx-text-field" />
-      <PasswordField fx:id="password0" layoutX="242.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="old password" styleClass="jfx-text-field" />
-      <PasswordField fx:id="password1" layoutX="242.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="new password" styleClass="jfx-text-field" />
+      <TextField fx:id="name" layoutX="242.0" layoutY="190.0" prefHeight="30.0" prefWidth="200.0" promptText="New name" styleClass="jfx-text-field" />
+      <TextField fx:id="username" layoutX="242.0" layoutY="250.0" prefHeight="30.0" prefWidth="200.0" promptText="New username" styleClass="jfx-text-field" />
+      <PasswordField fx:id="password0" layoutX="242.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="Old password" styleClass="jfx-text-field" />
+      <PasswordField fx:id="password1" layoutX="242.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="New password" styleClass="jfx-text-field" />
       <PasswordField fx:id="password2" layoutX="242.0" layoutY="430.0" prefHeight="30.0" prefWidth="200.0" promptText="Confirm password" styleClass="jfx-text-field" />
-      <TextField fx:id="email" layoutX="242.0" layoutY="500.0" prefHeight="30.0" prefWidth="200.0" promptText="new email" styleClass="jfx-text-field" />
+      <TextField fx:id="email" layoutX="242.0" layoutY="500.0" prefHeight="30.0" prefWidth="200.0" promptText="New email" styleClass="jfx-text-field" />
       <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="216.0" layoutY="216.0" size="30" text="" />
       <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="216.0" layoutY="276.0" size="30" text="" />
       <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="216.0" layoutY="336.0" size="30" />
