@@ -1,5 +1,7 @@
 package ui.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -13,13 +15,17 @@ import javafx.util.Duration;
  * Class for running animation on Login, Register and userInfo screen.
  */
 public class Animation {
+    private List<TranslateTransition> transitions = new ArrayList<>();
+    private List<Timeline> timelines = new ArrayList<>();
+
     /**
-     * Method for animating the weightbar.
-     *
-     * @param bar    the weight bar
-     */
+    * Method for animating the weightbar.
+    *
+    * @param bar the weight bar
+    */
     public void playAnimationBar(Line bar) {
         TranslateTransition translateTransitionBar = new TranslateTransition();
+        transitions.add(translateTransitionBar);
         translateTransitionBar.setAutoReverse(true);
         translateTransitionBar.setCycleCount(TranslateTransition.INDEFINITE);
         translateTransitionBar.setByY(45);
@@ -29,12 +35,13 @@ public class Animation {
     }
 
     /**
-     * Animation for the weights.
-     *
-     * @param weight the weights on the bar
-     */
+    * Animation for the weights.
+    *
+    * @param weight the weights on the bar
+    */
     public void playAnimationWeight(Rectangle weight) {
         TranslateTransition translateTransitionWeights = new TranslateTransition();
+        transitions.add(translateTransitionWeights);
         translateTransitionWeights.setAutoReverse(true);
         translateTransitionWeights.setCycleCount(TranslateTransition.INDEFINITE);
         translateTransitionWeights.setByY(45);
@@ -43,21 +50,21 @@ public class Animation {
         translateTransitionWeights.play();
     }
 
-    /** 
+    /**
      * Animations for the upper and lower arm.
      *
-     * @param lowerLeft1 lower left arm top
-     * @param lowerLeft2 lower left arm bottom
+     * @param lowerLeft1  lower left arm top
+     * @param lowerLeft2  lower left arm bottom
      * @param lowerRight1 lower right arm top
      * @param lowerRight2 lower right arm bottom
      * @param upperRight1 upper right arm top
      * @param upperRight2 upper right arm bottom
-     * @param upperLeft1 upper left arm top
-     * @param upperleft2 upper left arm bottom
+     * @param upperLeft1  upper left arm top
+     * @param upperleft2  upper left arm bottom
      */
     public void playAnimationArm(Line lowerLeft1, Line lowerLeft2,
-            Line lowerRight1, Line lowerRight2, Line upperRight1, Line upperRight2,
-            Line upperLeft1, Line upperleft2) {
+                Line lowerRight1, Line lowerRight2, Line upperRight1, Line upperRight2,
+                Line upperLeft1, Line upperleft2) {
         Rotate rotation1 = new Rotate();
         rotation1.pivotXProperty().bind(lowerLeft1.endXProperty());
         rotation1.pivotYProperty().bind(lowerLeft1.endYProperty());
@@ -65,6 +72,7 @@ public class Animation {
         Timeline timeline1 = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(rotation1.angleProperty(), 0)),
                 new KeyFrame(Duration.seconds(4), new KeyValue(rotation1.angleProperty(), -75)));
+        timelines.add(timeline1);
         timeline1.setAutoReverse(true);
         timeline1.setCycleCount(Timeline.INDEFINITE);
         timeline1.play();
@@ -76,6 +84,7 @@ public class Animation {
         Timeline timeline2 = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(rotation2.angleProperty(), 0)),
                 new KeyFrame(Duration.seconds(4), new KeyValue(rotation2.angleProperty(), -65)));
+        timelines.add(timeline2);
         timeline2.setAutoReverse(true);
         timeline2.setCycleCount(Timeline.INDEFINITE);
         timeline2.play();
@@ -87,6 +96,7 @@ public class Animation {
         Timeline timeline3 = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(rotation3.angleProperty(), 0)),
                 new KeyFrame(Duration.seconds(4), new KeyValue(rotation3.angleProperty(), 75)));
+        timelines.add(timeline3);
         timeline3.setAutoReverse(true);
         timeline3.setCycleCount(Timeline.INDEFINITE);
         timeline3.play();
@@ -98,6 +108,7 @@ public class Animation {
         Timeline timeline4 = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(rotation4.angleProperty(), 0)),
                 new KeyFrame(Duration.seconds(4), new KeyValue(rotation4.angleProperty(), 65)));
+        timelines.add(timeline4);
         timeline4.setAutoReverse(true);
         timeline4.setCycleCount(Timeline.INDEFINITE);
         timeline4.play();
@@ -110,8 +121,9 @@ public class Animation {
                 new KeyFrame(Duration.ZERO, new KeyValue(upperLeft1.translateXProperty(), 0)),
                 new KeyFrame(Duration.seconds(4), new KeyValue(rotation5.angleProperty(), 40)),
                 new KeyFrame(Duration.seconds(4), new KeyValue(upperLeft1.translateYProperty(), 9)),
-                new KeyFrame(Duration.seconds(4), 
+                new KeyFrame(Duration.seconds(4),
                         new KeyValue(upperLeft1.translateXProperty(), -9)));
+        timelines.add(timeline5);
         timeline5.setAutoReverse(true);
         timeline5.setCycleCount(Timeline.INDEFINITE);
         timeline5.play();
@@ -123,10 +135,11 @@ public class Animation {
                 new KeyFrame(Duration.ZERO, new KeyValue(upperRight1.translateYProperty(), 0)),
                 new KeyFrame(Duration.ZERO, new KeyValue(upperRight1.translateXProperty(), 0)),
                 new KeyFrame(Duration.seconds(4), new KeyValue(rotation6.angleProperty(), -47)),
-                new KeyFrame(Duration.seconds(4),   
+                new KeyFrame(Duration.seconds(4),
                         new KeyValue(upperRight1.translateYProperty(), 43)),
-                new KeyFrame(Duration.seconds(4), 
+                new KeyFrame(Duration.seconds(4),
                         new KeyValue(upperRight1.translateXProperty(), 18)));
+        timelines.add(timeline6);
         timeline6.setAutoReverse(true);
         timeline6.setCycleCount(Timeline.INDEFINITE);
         timeline6.play();
@@ -138,14 +151,15 @@ public class Animation {
                 new KeyFrame(Duration.ZERO, new KeyValue(upperleft2.translateYProperty(), 0)),
                 new KeyFrame(Duration.ZERO, new KeyValue(upperleft2.translateXProperty(), 0)),
                 new KeyFrame(Duration.seconds(4), new KeyValue(rotation7.angleProperty(), 47)),
-                new KeyFrame(Duration.seconds(4), 
+                new KeyFrame(Duration.seconds(4),
                         new KeyValue(upperleft2.translateYProperty(), 25)),
-                new KeyFrame(Duration.seconds(4), 
+                new KeyFrame(Duration.seconds(4),
                         new KeyValue(upperleft2.translateXProperty(), -26)));
+        timelines.add(timeline7);
         timeline7.setAutoReverse(true);
         timeline7.setCycleCount(Timeline.INDEFINITE);
         timeline7.play();
-        
+
         Rotate rotation8 = new Rotate();
         upperRight2.getTransforms().add(rotation8);
         Timeline timeline8 = new Timeline(
@@ -153,13 +167,34 @@ public class Animation {
                 new KeyFrame(Duration.ZERO, new KeyValue(upperRight2.translateYProperty(), 0)),
                 new KeyFrame(Duration.ZERO, new KeyValue(upperRight2.translateXProperty(), 0)),
                 new KeyFrame(Duration.seconds(4), new KeyValue(rotation8.angleProperty(), -47)),
-                new KeyFrame(Duration.seconds(4),   
+                new KeyFrame(Duration.seconds(4),
                         new KeyValue(upperRight2.translateYProperty(), 58)),
-                new KeyFrame(Duration.seconds(4), 
+                new KeyFrame(Duration.seconds(4),
                         new KeyValue(upperRight2.translateXProperty(), 37)));
+        timelines.add(timeline8);
         timeline8.setAutoReverse(true);
         timeline8.setCycleCount(Timeline.INDEFINITE);
         timeline8.play();
-
     }
+
+    /**
+     * Method for pausing transistion when leaving scene.
+     */
+    public void pauseAllAnimations() {
+        for (TranslateTransition transition : transitions) {
+            pauseTransitions(transition);
+        }
+        for (Timeline timeline : timelines) {
+            pauseTimeline(timeline);
+        }
+    }
+
+    private void pauseTransitions(TranslateTransition transition) {
+        transition.stop();
+    }
+
+    private void pauseTimeline(Timeline timeline) {
+        timeline.stop();
+    }
+
 }

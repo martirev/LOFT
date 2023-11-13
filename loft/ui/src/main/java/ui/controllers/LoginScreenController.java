@@ -121,6 +121,7 @@ public class LoginScreenController extends SceneSwitcher {
 
     @FXML
     private void handleRegisterNewProfile() {
+        animation.pauseAllAnimations();
         insertPane("RegisterScreen.fxml");
     }
 
@@ -138,6 +139,7 @@ public class LoginScreenController extends SceneSwitcher {
         user.setPassword(password);
 
         setUser(user);
+        animation.pauseAllAnimations();
         insertPane("HomeScreen.fxml");
     }
 

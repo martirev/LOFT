@@ -127,11 +127,13 @@ public class RegisterScreenController extends SceneSwitcher {
 
         User newUser = new User(name, username, password1, email);
         loftAccess.registerUser(newUser);
+        animation.pauseAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 
     @FXML
     public void handleLogInPressed() {
+        animation.pauseAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 
