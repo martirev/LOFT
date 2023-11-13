@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.User;
-import filehandling.ReadAndWrite;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,7 +16,6 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
 import ui.App;
 
 /**
@@ -27,21 +25,9 @@ import ui.App;
  * journal screen, and if an exception is thrown when trying to navigate to a
  * non-existing screen.
  */
-public class HomeScreenControllerTest extends ApplicationTest {
+public class HomeScreenControllerTest extends ControllerTestBase {
 
-    private static String testFileLocation = System.getProperty("user.home")
-            + System.getProperty("file.separator") + "testUserData.json";
     private HomeScreenController controller;
-
-    private Parent root;
-
-    /**
-     * Sets up the test environment to support headless mode.
-     */
-    @BeforeAll
-    public static void setupHeadless() {
-        App.supportHeadless();
-    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -55,10 +41,9 @@ public class HomeScreenControllerTest extends ApplicationTest {
      */
     @BeforeAll
     public static void cleanStart() {
-        ReadAndWrite.setFileLocation(testFileLocation);
         deleteTestfile();
         User user = new User("Test user", "username", "password", "mail@email.com");
-        ReadAndWrite.registerUser(user);
+        loftAccess.registerUser(user);
         SceneSwitcher.setUser(user);
     }
 
@@ -83,6 +68,12 @@ public class HomeScreenControllerTest extends ApplicationTest {
     public void testGoToHighscore() {
         clickOn("Highscore");
         checkOnScene("Highscores", "Exercises", "Stats");
+    }
+
+    @Test
+    public void testGoToUserInfoScreen() {
+        clickOn("My Profile");
+        checkOnScene("My Profile");
     }
 
     @Test

@@ -3,7 +3,6 @@ package ui.controllers;
 import core.Exercise;
 import core.User;
 import core.WorkoutSorting;
-import filehandling.ReadAndWrite;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -44,7 +43,9 @@ public class ProgressScreenController extends SceneSwitcher {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user = ReadAndWrite.returnUserClassFromFile(getUser());
+        User prev = getUser();
+        User user = loftAccess.getUser(prev.getUsername(), prev.getPassword());
+
         workoutSorting = new WorkoutSorting(user.getWorkouts());
 
         populateTotalWeightChart();

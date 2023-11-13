@@ -14,6 +14,8 @@ This project uses Maven to build and run the app. To start, make sure you are in
 
 Then, run the following command to build the project: `mvn install`. This will run all tests, including UI tests, and build the project. To run the app run `mvn javafx:run -f ui/pom.xml` as this runs the ui module, and will start the app.
 
+To start the REST-API, run `mvn spring-boot:run -f springboot/restserver/pom.xml` from the [project directory](loft). This will start the API on port 8080. See [the documentation](docs/release3/restapi.md) for how to interact with the API.
+
 To test the app, run `mvn test` from the [project directory](loft). Make sure the source code is compiled first with `mvn compile`. The command `mvn install` will do both these two in one, among some other things. Doing `mvn test` will run all tests, including UI tests. To only run tests for a specific module, go to that module in the terminal and run `mvn test` from there.
 
 To check the code coverage, run `mvn jacoco:report` from the [project directory](loft). This will generate a report for all modules. These can be viewed by opening the index.html file in each respective target/site/jacoco folder.
@@ -28,14 +30,21 @@ To create a shippable product, first run `mvn clean compile` from the [project d
 
 - **Java 17**: This project is built using Java 17.
 - **Maven 3.8.7**: The project is managed with Maven.
+
+## Dependencies
+
 - **JUnit 5.10.0**: Used to test the code in the project.
 - **JavaFX 17.0.8**: Used for the UI of the App.
 - **TestFX 4.0.16-alpha**: Used to test the UI of the App.
 - **Monocle jdk-12.0.1+2**: Used for headless testing of the UI.
+- **Mockito 3.12.4**: Used for mocking objects in tests.
+- **Wiremock 2.27.4**: Used for mocking the REST-API.
 - **JaCoCo 0.8.8**: Used for generating code coverage reports.
 - **Gson 2.10**: Used to parse our JSON-files.
 - **SpotBugs 4.7.3**: Used to check for possible bugs in the code.
 - **Checkstyle 10.3.4**: Used to check the code for style errors.
+- **SLF4J 2.0.3**: Used for logging of server.
+- **SpringFramework Boot 2.4.4**: Used for REST-API.
 - **Fontawesomefx 8.9**: Used to show icons in UI.
 - **Jlink**: Used to assemble modules and their dependencies.
 - **Jpackage 1.4.0**: Used to make a shippable version.
@@ -81,8 +90,23 @@ The project's directory structure is organized as follows:
       - main
         - java
           - filehandling
-            - Here are the necessary files for handling filereading.
+            - Here are the necessary files for handling filereading. This includes both direct and remote filehandling.
       - test
         - java
           - filehandling
             - Here are all the tests for file handling located.
+  - springboot
+    - restserver
+      - src
+        - main
+          - java
+            - springboot
+              - restserver
+                - This is where server configuration and REST-API is located.
+          - resorces
+            - This folder contains some configuration for logging.
+        - test
+          - java
+            - springboot
+              - restserver
+                - This is where all the tests for the REST-API are located.

@@ -5,7 +5,6 @@ import core.Set;
 import core.User;
 import core.Workout;
 import core.WorkoutSorting;
-import filehandling.ReadAndWrite;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +12,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -92,7 +93,8 @@ public class WorkoutScreenController extends SceneSwitcher {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        User user = ReadAndWrite.returnUserClassFromFile(getUser());
+        User prev = getUser();
+        User user = loftAccess.getUser(prev.getUsername(), prev.getPassword());
 
         WorkoutSorting workoutSorting = new WorkoutSorting(user.getWorkouts());
 
@@ -156,6 +158,24 @@ public class WorkoutScreenController extends SceneSwitcher {
     }
 
     /**
+     * Checks if all the TextFields in the grid have text in them. If any of them
+     * are empty, the addButton is disabled.
+     */
+    private void weightRepsUpdated() {
+        ObservableList<Node> gridChildren = grid.getChildren();
+        for (Node child : gridChildren) {
+            if (child instanceof TextField) {
+                TextField field = (TextField) child;
+                if (field.getText().isEmpty()) {
+                    addButton.setDisable(true);
+                    return;
+                }
+            }
+        }
+        addButton.setDisable(false);
+    }
+
+    /**
      * Updates the grid with the new number of sets when the set inputfield is
      * updated.
      *
@@ -170,6 +190,10 @@ public class WorkoutScreenController extends SceneSwitcher {
             newValue = "18";
         }
 
+        if (newValue.equals("0")) {
+            addButton.setDisable(true);
+        }
+
         grid.getRowConstraints().clear();
         grid.getChildren().clear();
         int numSets = Integer.parseInt(newValue);
@@ -180,11 +204,13 @@ public class WorkoutScreenController extends SceneSwitcher {
             TextField weightField = new TextField();
             weightField.setTextFormatter(getNumberFormatter());
             weightField.setPromptText("Weight");
+            weightField.textProperty().addListener((observable, o, n) -> weightRepsUpdated());
             grid.add(weightField, 1, i);
 
             TextField repsField = new TextField();
             repsField.setTextFormatter(getNumberFormatter());
             repsField.setPromptText("Reps");
+            repsField.textProperty().addListener((observable, o, n) -> weightRepsUpdated());
             grid.add(repsField, 2, i);
         }
 
@@ -212,7 +238,7 @@ public class WorkoutScreenController extends SceneSwitcher {
         if (workout.getExercises().isEmpty()) {
             return;
         }
-        ReadAndWrite.writeWorkoutToUser(workout, getUser());
+        loftAccess.writeWorkoutToUser(workout, getUser());
         insertPane("HomeScreen.fxml");
     }
 
@@ -260,10 +286,6 @@ public class WorkoutScreenController extends SceneSwitcher {
         for (int i = 0; i < grid.getChildren().size(); i += 3) {
             TextField weightField = (TextField) grid.getChildren().get(i + 1);
             TextField repsField = (TextField) grid.getChildren().get(i + 2);
-
-            if (weightField.getText().isEmpty() || repsField.getText().isEmpty()) {
-                return;
-            }
 
             int weight = Integer.parseInt(weightField.getText());
             int reps = Integer.parseInt(repsField.getText());

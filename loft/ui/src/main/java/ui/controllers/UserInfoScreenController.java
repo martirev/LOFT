@@ -1,7 +1,6 @@
 package ui.controllers;
 
 import core.User;
-import filehandling.ReadAndWrite;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -12,12 +11,12 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 /**
- * This is the controller class for UserinfoScreen. It handles
+ * This is the controller class for UserInfoScreen. It handles
  * requests form the user to see user information and lets the user
  * change name, username, password and email connected to the user.
  * The controller also allows the user to log out from the app
  */
-public class UserInfoController extends SceneSwitcher {
+public class UserInfoScreenController extends SceneSwitcher {
     @FXML
     private Text errorMessage;
 
@@ -119,20 +118,28 @@ public class UserInfoController extends SceneSwitcher {
     public void handleSaveChangesPress() {
         String name = this.name.getText();
         String username = this.username.getText();
-        String password0 = this.password0.getText();
         String password1 = this.password1.getText();
         String password2 = this.password2.getText();
         String email = this.email.getText();
-        if (name.isEmpty() || username.isEmpty() || password0.isEmpty() || password1.isEmpty()
-                || password2.isEmpty() || email.isEmpty()) {
+        if (name.isEmpty() || username.isEmpty() || email.isEmpty()) {
             errorMessage.setText("Please fill out all fields");
             return;
+        }
+        if ((!password1.isEmpty() && password2.isEmpty())
+                || (password1.isEmpty() && !password2.isEmpty())) {
+            errorMessage.setText("Please fill out all fields");
+            return;
+        }
+        if (password1.isEmpty()) {
+            password1 = getUser().getPassword();
+            password2 = getUser().getPassword();
         }
         if (!password1.equals(password2)) {
             errorMessage.setText("Passwords do not match");
             return;
         }
-        if (!password0.equals(getUser().getPassword())) {
+        String password0 = this.password0.getText();
+        if (!getUser().getPassword().equals(password0)) {
             errorMessage.setText("The old password is wrong");
             return;
         }
@@ -153,15 +160,16 @@ public class UserInfoController extends SceneSwitcher {
             errorMessage.setText("Please enter a valid email");
             return;
         }
+
         User oldUser = getUser();
         User newUser = new User(name, username, password1, email);
         getUser().getWorkouts().stream().forEach(workout -> newUser.addWorkout(workout));
-        try {
-            ReadAndWrite.updateUserInfo(oldUser, newUser);
-        } catch (IllegalArgumentException e) {
+
+        if (!loftAccess.updateUserInfo(oldUser, newUser)) {
             errorMessage.setText("Username is taken");
             return;
         }
+
         setUser(newUser);
         insertPane("LoginScreen.fxml");
     }

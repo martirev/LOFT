@@ -1,6 +1,9 @@
 package ui.controllers;
 
 import core.User;
+import filehandling.DirectLoftAccess;
+import filehandling.LoftAccess;
+import filehandling.RemoteLoftAccess;
 import java.io.IOException;
 import java.net.URL;
 import javafx.fxml.FXML;
@@ -34,6 +37,8 @@ public abstract class SceneSwitcher implements Initializable {
      */
     private static User user;
 
+    static LoftAccess loftAccess = new DirectLoftAccess();
+
     /**
      * A method to switch scenes.
      *
@@ -64,7 +69,7 @@ public abstract class SceneSwitcher implements Initializable {
                 controller = new RegisterScreenController();
                 break;
             case "UserInfoScreen.fxml":
-                controller = new UserInfoController();
+                controller = new UserInfoScreenController();
                 break;
             default:
                 throw new IllegalArgumentException("Invalid FXML filename");
@@ -101,5 +106,13 @@ public abstract class SceneSwitcher implements Initializable {
      */
     static User getUser() {
         return user;
+    }
+
+    static void setAccess(LoftAccess access) {
+        SceneSwitcher.loftAccess = access;
+    }
+
+    static boolean usingServer() {
+        return loftAccess instanceof RemoteLoftAccess;
     }
 }
