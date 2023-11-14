@@ -1,7 +1,7 @@
-*{
-    -fx-primary: #0D1F30;
+* {
+    -fx-primary: #0d1f30;
     -fx-secondary: #ed8152;
-    -fx-white: #FAFAFA
+    -fx-white: #fafafa;
 }
 
 .Background {
@@ -28,8 +28,7 @@
 .MainComp:hover {
     -fx-scale-x: 1.02;
     -fx-scale-y: 1.02;
-    -fx-scale-z: 1.02;
-    -fx-effect: dropshadow(gaussian, rgba(211, 211, 211, 0.80), 10, 0.5, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(211, 211, 211, 0.8), 10, 0.5, 0, 0);
 }
 
 .text-id {
@@ -52,7 +51,6 @@
 .LoginButton:hover {
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
-    -fx-scale-z: 1.1;
     -fx-cursor: hand;
 }
 
@@ -70,7 +68,7 @@
 
 .ListViewComp {
     -fx-border-color: -fx-primary;
-    -fx-border-width: 3px;  
+    -fx-border-width: 3px;
 }
 
 .SwitchButtonActive {
@@ -85,4 +83,3 @@
     -fx-text-fill: -fx-white;
     -fx-cursor: hand;
 }
-

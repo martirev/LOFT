@@ -16,27 +16,27 @@
 <AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Region prefHeight="130.0" prefWidth="1366.0" styleClass="Navbar" />
-        <Button layoutX="683.0" layoutY="129.0" mnemonicParsing="false" onAction="#switchToJournal" prefHeight="48.0" prefWidth="683.0" styleClass="SwitchButtonInactive" text="Journal">
+        <Button layoutX="683.0" layoutY="129.0" mnemonicParsing="false" onAction="#switchToJournal" prefHeight="48.0" prefWidth="683.0" styleClass="SwitchButtonInactive" text="Journal" textAlignment="CENTER">
             <font>
-                <Font name="Roboto" size="20.0" />
+                <Font name="Roboto" size="18.0" />
             </font>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </Button>
-        <Button layoutY="129.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="683.0" styleClass="SwitchButtonActive" text="Progress">
+        <Button layoutY="129.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="683.0" styleClass="SwitchButtonActive" text="Progress" textAlignment="CENTER">
             <font>
-                <Font name="Roboto" size="20.0" />
+                <Font name="Roboto" size="18.0" />
             </font>
         </Button>
-        <Text layoutX="502.0" layoutY="90.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Progress Journal">
+        <Text layoutY="85.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Progress Journal" textAlignment="CENTER" wrappingWidth="1366.0">
             <font>
                 <Font name="Roboto" size="50.0" />
             </font>
         </Text>
         <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Return" textFill="#fafafa">
             <font>
-                <Font name="Roboto" size="20.0" />
+                <Font name="Roboto" size="18.0" />
             </font>
         </Button>
         <LineChart fx:id="totalWeightChart" animated="false" layoutX="506.0" layoutY="177.0" legendSide="TOP" prefHeight="300.0" prefWidth="845.0">
@@ -47,14 +47,14 @@
                 <NumberAxis side="LEFT" />
             </yAxis>
         </LineChart>
-        <Text layoutX="181.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Total weight">
+        <Text layoutX="90.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Total weight" textAlignment="CENTER" wrappingWidth="400.0">
             <font>
                 <Font name="Roboto" size="40.0" />
             </font>
         </Text>
         <Line endX="1366.0" fill="#ed8152" layoutY="475.0" strokeWidth="4.0" styleClass="Line" />
         <ListView fx:id="exerciseHistoryListView" layoutX="90.0" layoutY="530.0" prefHeight="200.0" prefWidth="400.0" styleClass="ListViewComp" />
-        <Text layoutX="212.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Exercises">
+        <Text layoutX="90.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Exercises" textAlignment="CENTER" wrappingWidth="400.0">
             <font>
                 <Font name="Roboto" size="40.0" />
             </font>

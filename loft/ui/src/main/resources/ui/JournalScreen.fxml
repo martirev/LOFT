@@ -14,7 +14,7 @@
       <Region prefHeight="130.0" prefWidth="1366.0" styleClass="Navbar" />
         <Button layoutX="683.0" layoutY="129.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="683.0" styleClass="SwitchButtonActive" text="Journal">
             <font>
-                <Font name="Roboto" size="20.0" />
+                <Font name="Roboto" size="18.0" />
             </font>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -22,16 +22,16 @@
         </Button>
         <Button layoutY="129.0" mnemonicParsing="false" onAction="#switchToProgress" prefHeight="48.0" prefWidth="683.0" styleClass="SwitchButtonInactive" text="Progress">
             <font>
-                <Font name="Roboto" size="20.0" />
+                <Font name="Roboto" size="18.0" />
             </font>
         </Button>
-        <Text layoutX="500.0" layoutY="90.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Workout Journal">
+        <Text layoutY="90.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Workout Journal" textAlignment="CENTER" wrappingWidth="1366.0">
             <font>
                 <Font name="Roboto" size="50.0" />
             </font>
         </Text>
         <ListView fx:id="workoutHistoryListView" layoutX="102.0" layoutY="267.0" prefHeight="450.0" prefWidth="479.0" styleClass="ListViewComp" />
-        <Text fill="#ed8152" layoutX="207.0" layoutY="241.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Workout History" textAlignment="CENTER">
+        <Text fill="#ed8152" layoutX="102.0" layoutY="244.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Workout History" textAlignment="CENTER" wrappingWidth="479.0">
             <font>
                 <Font name="Roboto" size="36.0" />
             </font>
@@ -39,11 +39,11 @@
         <Line endX="450.0" endY="185.0" fill="#ed8152" layoutX="88.0" layoutY="72.0" startX="50.0" startY="185.0" stroke="#ed8152" strokeWidth="3.0" styleClass="Line" />
         <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Return" textFill="#fafafa">
             <font>
-                <Font name="Roboto" size="20.0" />
+                <Font name="Roboto" size="18.0" />
             </font>
         </Button>
         <Line endX="450.0" endY="185.0" fill="#ed8152" layoutX="762.0" layoutY="72.0" startX="50.0" startY="185.0" stroke="#ed8152" strokeWidth="3.0" styleClass="Line" />
-        <Text fill="#ed8152" layoutX="885.0" layoutY="241.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Workout Details" textAlignment="CENTER">
+        <Text fill="#ed8152" layoutX="773.0" layoutY="243.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Workout Details" textAlignment="CENTER" wrappingWidth="479.0">
             <font>
                 <Font name="Roboto" size="36.0" />
             </font>
