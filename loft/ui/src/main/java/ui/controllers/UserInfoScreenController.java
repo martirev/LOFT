@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
  * change name, username, password and email connected to the user.
  * The controller also allows the user to log out from the app
  */
-public class UserInfoScreenController extends SceneSwitcher {
+public class UserInfoScreenController extends Animation {
     @FXML
     private Text errorMessage;
 
@@ -53,6 +53,7 @@ public class UserInfoScreenController extends SceneSwitcher {
             errorMessage.setText("Save changes before returning");
             return;
         }
+        stopAllAnimations();
         insertPane("HomeScreen.fxml");
     }
 
@@ -64,6 +65,7 @@ public class UserInfoScreenController extends SceneSwitcher {
             return;
         }
         SceneSwitcher.setUser(null);
+        stopAllAnimations();
         insertPane("LoginScreen.fxml");
 
     }
@@ -128,6 +130,7 @@ public class UserInfoScreenController extends SceneSwitcher {
         }
 
         setUser(newUser);
+        stopAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 
@@ -147,5 +150,6 @@ public class UserInfoScreenController extends SceneSwitcher {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         populateUserInfoFields();
+        startAnimations();
     }
 }

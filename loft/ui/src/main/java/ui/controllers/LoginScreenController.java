@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
  * This class is the controller for the login screen of the application. It
  * handles user input for logging in and linkes to registering a new profile.
  */
-public class LoginScreenController extends SceneSwitcher {
+public class LoginScreenController extends Animation  {
 
     @FXML
     private Text errorMessage;
@@ -46,8 +46,11 @@ public class LoginScreenController extends SceneSwitcher {
     @FXML
     private RadioButton directButton;
 
+   
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        startAnimations();
         if (!SceneSwitcher.usingServer()) {
             useLocal("Using local data", "#ed8152");
             directButton.setSelected(true);
@@ -69,6 +72,7 @@ public class LoginScreenController extends SceneSwitcher {
 
     @FXML
     private void handleRegisterNewProfile() {
+        stopAllAnimations();
         insertPane("RegisterScreen.fxml");
     }
 
@@ -86,6 +90,7 @@ public class LoginScreenController extends SceneSwitcher {
         user.setPassword(password);
 
         setUser(user);
+        stopAllAnimations();
         insertPane("HomeScreen.fxml");
     }
 

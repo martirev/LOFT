@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
  * input for registering a new account. The class contains FXML fields for the
  * username and password fields.
  */
-public class RegisterScreenController extends SceneSwitcher {
+public class RegisterScreenController extends Animation {
 
     @FXML
     private Text errorMessage;
@@ -84,16 +84,19 @@ public class RegisterScreenController extends SceneSwitcher {
 
         User newUser = new User(name, username, password1, email);
         loftAccess.registerUser(newUser);
+        stopAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 
     @FXML
     public void handleLogInPressed() {
+        stopAllAnimations();
         insertPane("LoginScreen.fxml");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        startAnimations();
     }
 
 }

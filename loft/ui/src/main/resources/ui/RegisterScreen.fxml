@@ -6,6 +6,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -50,5 +53,28 @@
       <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="905.0" layoutY="516.0" size="30" />
       <FontAwesomeIconView fill="#ed8152" glyphName="ENVELOPE" layoutX="900.0" layoutY="573.0" size="26" />
       <Text fx:id="errorMessage" fill="RED" layoutX="908.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="240.0" />
+      <Line endX="683.0" layoutY="550.0" strokeWidth="2.0" />
+      <Line endX="178.0" endY="-26.0" layoutX="160.0" layoutY="470.0" startX="143.0" startY="80.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="182.0" endY="-40.0" layoutX="133.0" layoutY="470.0" startX="143.0" startY="80.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="118.0" endY="-49.0" layoutX="223.0" layoutY="493.0" startX="155.0" startY="56.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="111.0" endY="-63.0" layoutX="250.0" layoutY="493.0" startX="155.0" startY="56.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="21.0" endY="6.0" layoutX="339.0" layoutY="424.0" startX="-24.0" startY="6.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="19.0" endY="-39.0" layoutX="350.0" layoutY="408.0" startX="12.0" startY="21.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="8.0" endY="-38.0" layoutX="301.0" layoutY="408.0" startX="14.0" startY="20.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="lowerLeftLine2" endX="17.0" endY="5.0" layoutX="291.0" layoutY="363.0" startX="-7.0" startY="-37.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="lowerLeftLine1" endX="30.0" endY="-10.0" layoutX="281.0" layoutY="358.0" startX="16.0" startY="-35.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line endX="32.0" endY="5.0" layoutX="334.0" layoutY="343.0" startX="-21.0" startY="5.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="upperLeftLine1" endX="38.0" endY="-3.0" layoutX="257.0" layoutY="324.0" startX="29.0" startY="-37.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="upperLeftLine2" endX="25.0" endY="-8.0" layoutX="258.0" layoutY="332.0" startX="15.0" startY="-44.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="bar" endX="160" endY="2.5" layoutX="341.0" layoutY="289.0" startX="-154" startY="2.5" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Circle fill="TRANSPARENT" layoutX="339.0" layoutY="323.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
+      <Rectangle fx:id="weightLeftRectangle1" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="70.0" layoutX="213.0" layoutY="256.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="22.0" />
+      <Rectangle fx:id="weightLeftRectangle2" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="50.0" layoutX="195.0" layoutY="265.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="19.0" />
+      <Line fx:id="lowerRightLine1" endX="30.0" endY="-10.0" layoutX="338.0" layoutY="358.0" startX="45.0" startY="-35.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="upperRightLine1" endX="18.0" endY="-3.0" layoutX="366.0" layoutY="324.0" startX="29.0" startY="-37.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="lowerRightLine2" endX="24.0" endY="5.0" layoutX="346.0" layoutY="363.0" startX="48.0" startY="-37.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="upperRightLine2" endX="15.0" endY="-8.0" layoutX="380.0" layoutY="332.0" startX="28.0" startY="-44.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Rectangle fx:id="weightRightRectangle1" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="70.0" layoutX="453.0" layoutY="253.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="22.0" />
+      <Rectangle fx:id="weightRightRectangle2" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="50.0" layoutX="474.0" layoutY="266.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="19.0" />
    </children>
 </AnchorPane>
