@@ -2,7 +2,7 @@ image: runarmod/maven-javafx
 
 variables:
   MAVEN_OPTS: "-Djava.awt.headless=true -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
-  MAVEN_CLI_OPTS_NO_UI: "--batch-mode -DskipUiTests"
+  MAVEN_CLI_OPTS_NO_TESTS: "--batch-mode -DskipTests"
   MAVEN_CLI_OPTS_HEADLESS: "--batch-mode -P headless"
 
 # Function to get the percentage of code coverage for the "current module" (i.e. the module in pwd at the time of calling)
@@ -45,7 +45,7 @@ build:
   before_script:
     - cd loft
   script:
-    - mvn clean install $MAVEN_CLI_OPTS_NO_UI
+    - mvn clean install $MAVEN_CLI_OPTS_NO_TESTS
 
 coverage core:
   stage: coverage
@@ -114,5 +114,5 @@ spotbugs:
   before_script:
     - cd loft
   script:
-    - mvn clean install $MAVEN_CLI_OPTS_NO_UI
+    - mvn clean install $MAVEN_CLI_OPTS_NO_TESTS
     - mvn spotbugs:check
