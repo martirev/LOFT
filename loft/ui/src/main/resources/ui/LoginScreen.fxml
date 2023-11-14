@@ -18,25 +18,25 @@
 <AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Region layoutX="683.0" prefHeight="768.0" prefWidth="683.0" styleClass="LoginArea" />
-      <Text fill="#ed8152" layoutX="956.0" layoutY="251.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in">
+      <Text fill="#ed8152" layoutX="683.0" layoutY="252.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Log in" textAlignment="CENTER" wrappingWidth="683.0">
          <font>
             <Font name="Roboto" size="50.0" />
          </font>
       </Text>
       <TextField fx:id="usernameField" layoutX="930.0" layoutY="310.0" prefHeight="30.0" prefWidth="200.0" promptText="Username" styleClass="jfx-text-field" />
       <PasswordField fx:id="passwordField" layoutX="930.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" promptText="Password" styleClass="jfx-text-field" />
-      <Button layoutX="930.0" layoutY="420.0" minHeight="30.0" minWidth="200.0" mnemonicParsing="false" onAction="#handleLogin" styleClass="LoginButton" text="Log in" textFill="#fafafa">
+      <Button layoutX="930.0" layoutY="420.0" minHeight="30.0" minWidth="200.0" mnemonicParsing="false" onAction="#handleLogin" styleClass="LoginButton" text="Log in" textAlignment="CENTER" textFill="#fafafa">
          <font>
             <Font name="Roboto" size="14.0" />
          </font>
       </Button>
-      <Text layoutX="930.0" layoutY="490.0" onMousePressed="#handleRegisterNewProfile" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-register" text="Or register new profile">
+      <Text layoutX="930.0" layoutY="484.0" onMousePressed="#handleRegisterNewProfile" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-register" text="Or register new profile" textAlignment="CENTER" wrappingWidth="200.0">
          <font>
-            <Font name="Roboto" size="20.0" />
+            <Font name="Roboto" size="16.0" />
          </font></Text>
       <FontAwesomeIconView fill="#ed8152" glyphName="USER" layoutX="905.0" layoutY="336.0" size="30" />
       <FontAwesomeIconView fill="#ed8152" glyphName="LOCK" layoutX="905.0" layoutY="396.0" size="30" />
-      <Text fx:id="errorMessage" fill="RED" layoutX="930.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="198.2421875" />
+      <Text fx:id="errorMessage" fill="RED" layoutX="930.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="200.0" />
       <Line endX="683.0" layoutY="550.0" strokeWidth="2.0" />
       <Line endX="178.0" endY="-26.0" layoutX="160.0" layoutY="470.0" startX="143.0" startY="80.0" strokeLineCap="ROUND" strokeWidth="3.0" />
       <Line endX="182.0" endY="-40.0" layoutX="133.0" layoutY="470.0" startX="143.0" startY="80.0" strokeLineCap="ROUND" strokeWidth="3.0" />
@@ -60,14 +60,14 @@
       <Line fx:id="upperRightLine2" endX="15.0" endY="-8.0" layoutX="380.0" layoutY="332.0" startX="28.0" startY="-44.0" strokeLineCap="ROUND" strokeWidth="3.0" />
       <Rectangle fx:id="weightRightRectangle1" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="70.0" layoutX="453.0" layoutY="253.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="22.0" />
       <Rectangle fx:id="weightRightRectangle2" arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="50.0" layoutX="474.0" layoutY="266.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="3.0" width="19.0" />
-      <Text fx:id="usingText" fill="#ed8152" layoutX="931.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Using local data" textAlignment="CENTER" wrappingWidth="198.2421875">
+      <Text fx:id="usingText" fill="#ed8152" layoutX="931.0" layoutY="544.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Using local data" textAlignment="CENTER" wrappingWidth="200.0">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
       <Pane layoutX="979.0" layoutY="550.0" prefHeight="30.0" prefWidth="103.0">
          <children>
-            <RadioButton fx:id="remoteButton" layoutX="58.0" layoutY="6.0" mnemonicParsing="false" onAction="#radiobuttonSelected" prefHeight="17.0" prefWidth="46.0" text="API" textFill="WHITE">
+            <RadioButton fx:id="remoteButton" layoutX="58.0" layoutY="6.0" mnemonicParsing="false" onAction="#radiobuttonSelected" prefHeight="17.0" prefWidth="46.0" text="API" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -75,14 +75,14 @@
                   <ToggleGroup fx:id="toggleGroup" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="directButton" layoutY="6.0" mnemonicParsing="false" onAction="#radiobuttonSelected" prefHeight="17.0" prefWidth="58.0" selected="true" text="Local" textFill="WHITE" toggleGroup="$toggleGroup">
+            <RadioButton fx:id="directButton" layoutY="6.0" mnemonicParsing="false" onAction="#radiobuttonSelected" prefHeight="17.0" prefWidth="58.0" selected="true" text="Local" textAlignment="CENTER" textFill="WHITE" toggleGroup="$toggleGroup">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </RadioButton>
          </children>
       </Pane>
-      <Pane fx:id="apiPane" layoutX="874.0" layoutY="582.0" prefHeight="135.0" prefWidth="312.0">
+      <Pane fx:id="apiPane" layoutX="874.0" layoutY="582.0" prefHeight="135.0" prefWidth="312.0" visible="false">
          <children>
             <Text fx:id="connectionInfo" fill="#ed8152" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting to connect" textAlignment="CENTER" wrappingWidth="312.0">
                <font>
@@ -90,7 +90,7 @@
                </font>
             </Text>
             <TextField fx:id="urlField" alignment="CENTER" layoutY="33.0" prefHeight="25.0" prefWidth="312.0" promptText="API URL" styleClass="jfx-text-field" text="http://localhost:8080/loft/" />
-            <Button fx:id="connectButton" layoutX="121.0" layoutY="71.0" mnemonicParsing="false" onAction="#connect" styleClass="LoginButton" text="Connect" textFill="#fafafa">
+            <Button fx:id="connectButton" layoutX="121.0" layoutY="71.0" mnemonicParsing="false" onAction="#connect" styleClass="LoginButton" text="Connect" textAlignment="CENTER" textFill="#fafafa">
                <font>
                   <Font size="14.0" />
                </font>

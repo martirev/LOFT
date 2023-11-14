@@ -11,7 +11,7 @@
 <AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <Region prefHeight="130.0" prefWidth="1366.0" styleClass="Navbar" />
-        <Text layoutY="86.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Highscores" textAlignment="CENTER" wrappingWidth="1365.136688709259">
+        <Text layoutY="86.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Highscores" textAlignment="CENTER" wrappingWidth="1366.0">
             <font>
                 <Font name="Roboto" size="50.0" />
             </font>
@@ -40,7 +40,7 @@
       <Region layoutX="785.0" layoutY="248.0" prefHeight="470.0" prefWidth="479.0" styleClass="ListViewComp" />
         <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Return" textFill="#fafafa">
             <font>
-                <Font name="Roboto" size="20.0" />
+                <Font name="Roboto" size="18.0" />
             </font>
         </Button>
     </children>

@@ -14,13 +14,13 @@
 <AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Region prefHeight="130.0" prefWidth="1366.0" styleClass="Navbar" />
-      <Text layoutX="557.0" layoutY="90.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="New Workout">
+      <Text layoutY="90.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="New Workout" textAlignment="CENTER" wrappingWidth="1366.0">
          <font>
             <Font name="Roboto" size="50.0" />
          </font>
       </Text>
       <ListView fx:id="workoutListView" layoutX="918.0" layoutY="235.0" prefHeight="485.0" prefWidth="400.0" styleClass="ListViewComp" />
-      <Text layoutX="988.0" layoutY="214.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Current workout" textAlignment="CENTER">
+      <Text layoutX="918.0" layoutY="208.0" lineSpacing="1.5" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="Current workout" textAlignment="CENTER" wrappingWidth="400.0">
          <font>
             <Font name="Roboto" size="36.0" />
          </font>
@@ -31,20 +31,20 @@
             <Font size="26.0" />
          </font>
       </TextField>
-      <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Return" textFill="#fafafa">
+      <Button layoutX="50.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleReturnPress" prefHeight="40.0" prefWidth="120.0" styleClass="LoginButton" text="Return" textAlignment="CENTER" textFill="#fafafa">
          <font>
-            <Font name="Roboto" size="20.0" />
+            <Font name="Roboto" size="18.0" />
          </font>
       </Button>
       <ListView fx:id="dropdownMenu" layoutX="100.0" layoutY="270.0" minHeight="450.0" minWidth="400.0" prefHeight="450.0" prefWidth="400.0" styleClass="ListViewComp" />
-      <Button layoutX="1156.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleFinishPress" prefHeight="40.0" prefWidth="160.0" styleClass="LoginButton" text="Finish workout" textFill="#fafafa">
+      <Button layoutX="1156.0" layoutY="50.0" mnemonicParsing="false" onAction="#handleFinishPress" prefHeight="40.0" prefWidth="160.0" styleClass="LoginButton" text="Finish workout" textAlignment="CENTER" textFill="#fafafa">
          <font>
-            <Font name="Roboto" size="20.0" />
+            <Font name="Roboto" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="editButton" disable="true" layoutX="415.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleEditButton" prefHeight="48.0" prefWidth="85.0" styleClass="LoginButton" text="Edit" textFill="#fafafa">
+      <Button fx:id="editButton" disable="true" layoutX="415.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleEditButton" prefHeight="48.0" prefWidth="85.0" styleClass="LoginButton" text="Edit" textAlignment="CENTER" textFill="#fafafa">
          <font>
-            <Font name="Roboto" size="20.0" />
+            <Font name="Roboto" size="18.0" />
          </font>
       </Button>
       <AnchorPane fx:id="exerciseSettings" layoutX="509.0" layoutY="200.0" prefHeight="521.0" prefWidth="400.0" visible="false">
@@ -61,9 +61,9 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
             </GridPane>
-            <Button fx:id="addButton" disable="true" layoutX="318.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="48.0" prefWidth="85.0" style="-fx-background-color: #ed8152;" text="Add" textFill="#fafafa">
+            <Button fx:id="addButton" disable="true" layoutX="318.0" layoutY="1.0" mnemonicParsing="false" onAction="#handleAddButton" prefHeight="48.0" prefWidth="85.0" style="-fx-background-color: #ed8152;" text="Add" textAlignment="CENTER" textFill="#fafafa">
                <font>
-                  <Font name="Roboto" size="20.0" />
+                  <Font name="Roboto" size="18.0" />
                </font>
             </Button>
          </children>
