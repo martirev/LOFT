@@ -1,0 +1,1228 @@
+{
+    "users": [
+      {
+        "name": "Runar Saur Modahl",
+        "username": "RunarSM",
+        "passwordHash": "60cfd103f4099e599d054e6a1c6ed794fe3bb11515348b3580d5f3abf6b5737a",
+        "email": "runarsm@stud.ntnu.no",
+        "workouts": [
+          {
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 80
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 90
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 80
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 80
+                  }
+                ]
+              },
+              {
+                "name": "Deadlift",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 100
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 90
+                  }
+                ]
+              },
+              {
+                "name": "Bench Press",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 90
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 95
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 97
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 100
+                  }
+                ]
+              },
+              {
+                "name": "Overhead Press",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 60
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 60
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  }
+                ]
+              },
+              {
+                "name": "Pull-ups",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 10
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 10
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-09"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Dumbell Rows",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 25
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  }
+                ]
+              },
+              {
+                "name": "Bicep Curls",
+                "sets": [
+                  {
+                    "reps": 15,
+                    "weight": 12
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 12
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 14
+                  }
+                ]
+              },
+              {
+                "name": "Tricep Dips",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  }
+                ]
+              },
+              {
+                "name": "Lat Pulldowns",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 33
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 34
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 35
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 35
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-10"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Lunges",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 35
+                  }
+                ]
+              },
+              {
+                "name": "Leg Press",
+                "sets": [
+                  {
+                    "reps": 15,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 110
+                  }
+                ]
+              },
+              {
+                "name": "Russian Twists",
+                "sets": [
+                  {
+                    "reps": 20,
+                    "weight": 12
+                  },
+                  {
+                    "reps": 20,
+                    "weight": 12
+                  },
+                  {
+                    "reps": 20,
+                    "weight": 12
+                  }
+                ]
+              },
+              {
+                "name": "Leg Raises",
+                "sets": [
+                  {
+                    "reps": 15,
+                    "weight": 5
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 5
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 5
+                  }
+                ]
+              },
+              {
+                "name": "Glute Briges",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 50
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 50
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 60
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 60
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-11"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Box Jumpes",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  }
+                ]
+              },
+              {
+                "name": "Push Press",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 15
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  }
+                ]
+              },
+              {
+                "name": "Burpees",
+                "sets": [
+                  {
+                    "reps": 15,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 20
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-12"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 90
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 100
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 90
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 90
+                  }
+                ]
+              },
+              {
+                "name": "Deadlift",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 120
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 100
+                  }
+                ]
+              },
+              {
+                "name": "Bench Press",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 100
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 105
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 107
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 110
+                  }
+                ]
+              },
+              {
+                "name": "Overhead Press",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 80
+                  }
+                ]
+              },
+              {
+                "name": "Pull-ups",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 20
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-13"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Dumbell Rows",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 50
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 50
+                  }
+                ]
+              },
+              {
+                "name": "Bicep Curls",
+                "sets": [
+                  {
+                    "reps": 15,
+                    "weight": 22
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 22
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 24
+                  }
+                ]
+              },
+              {
+                "name": "Tricep Dips",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  }
+                ]
+              },
+              {
+                "name": "Lat Pulldowns",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 43
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 43
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 45
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 45
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-14"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Lunges",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 50
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 45
+                  }
+                ]
+              },
+              {
+                "name": "Leg Press",
+                "sets": [
+                  {
+                    "reps": 15,
+                    "weight": 120
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 120
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 120
+                  }
+                ]
+              },
+              {
+                "name": "Russian Twists",
+                "sets": [
+                  {
+                    "reps": 20,
+                    "weight": 22
+                  },
+                  {
+                    "reps": 20,
+                    "weight": 22
+                  },
+                  {
+                    "reps": 20,
+                    "weight": 22
+                  }
+                ]
+              },
+              {
+                "name": "Leg Raises",
+                "sets": [
+                  {
+                    "reps": 15,
+                    "weight": 15
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 15
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 15
+                  }
+                ]
+              },
+              {
+                "name": "Glute Briges",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 60
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 60
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-15"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Box Jumpes",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  }
+                ]
+              },
+              {
+                "name": "Push Press",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 25
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  }
+                ]
+              },
+              {
+                "name": "Burpees",
+                "sets": [
+                  {
+                    "reps": 15,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 30
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-16"
+          }
+        ]
+      },
+      {
+        "name": "Martin Reve",
+        "username": "MartinR",
+        "passwordHash": "8d165104a19897911bb577a6471afa235209d1bcdcea66fa9eb97e6faa585690",
+        "email": "martirev@stud.ntnu.no",
+        "workouts": [
+          {
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets": [
+                  {
+                    "reps": 8,
+                    "weight": 100
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 100
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 90
+                  }
+                ]
+              },
+              {
+                "name": "Bench Press",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 80
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 90
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 90
+                  }
+                ]
+              },
+              {
+                "name": "Bent Over Row",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  }
+                ]
+              },
+              {
+                "name": "Overhead Shoulder Press",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  }
+                ]
+              },
+              {
+                "name": "Deadlift",
+                "sets": [
+                  {
+                    "reps": 8,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 100
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 100
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-05"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Barbell Curl",
+                "sets": [
+                  {
+                    "reps": 15,
+                    "weight": 12
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 12
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 12
+                  }
+                ]
+              },
+              {
+                "name": "Tricep Dips",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 10
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-06"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Lat Pulldowns",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 30
+                  }
+                ]
+              },
+              {
+                "name": "Incline Dumbell Press",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 90
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 90
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 100
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 100
+                  }
+                ]
+              },
+              {
+                "name": "Face Pulls",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 50
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-12"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets": [
+                  {
+                    "reps": 3,
+                    "weight": 150
+                  },
+                  {
+                    "reps": 3,
+                    "weight": 150
+                  },
+                  {
+                    "reps": 2,
+                    "weight": 150
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-13"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Romanian Deadlift",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  }
+                ]
+              },
+              {
+                "name": "Lunges",
+                "sets": [
+                  {
+                    "reps": 11,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 11,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 11,
+                    "weight": 40
+                  }
+                ]
+              },
+              {
+                "name": "Leg Press",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 120
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 120
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 120
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 120
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-14"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets": [
+                  {
+                    "reps": 8,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 100
+                  }
+                ]
+              },
+              {
+                "name": "Bench Press",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 90
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 100
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 100
+                  }
+                ]
+              },
+              {
+                "name": "Bent Over Row",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  }
+                ]
+              },
+              {
+                "name": "Overhead Shoulder Press",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 30
+                  }
+                ]
+              },
+              {
+                "name": "Deadlift",
+                "sets": [
+                  {
+                    "reps": 8,
+                    "weight": 130
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 130
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 130
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-15"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Barbell Curl",
+                "sets": [
+                  {
+                    "reps": 15,
+                    "weight": 22
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 22
+                  },
+                  {
+                    "reps": 15,
+                    "weight": 22
+                  }
+                ]
+              },
+              {
+                "name": "Tricep Dips",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 20
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 22
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-16"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Lat Pulldowns",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 50
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 50
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 50
+                  }
+                ]
+              },
+              {
+                "name": "Incline Dumbell Press",
+                "sets": [
+                  {
+                    "reps": 10,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 10,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 110
+                  },
+                  {
+                    "reps": 8,
+                    "weight": 110
+                  }
+                ]
+              },
+              {
+                "name": "Face Pulls",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 60
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 50
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-17"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Squat",
+                "sets": [
+                  {
+                    "reps": 3,
+                    "weight": 30
+                  },
+                  {
+                    "reps": 3,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 2,
+                    "weight": 40
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-18"
+          },
+          {
+            "exercises": [
+              {
+                "name": "Romanian Deadlift",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 70
+                  }
+                ]
+              },
+              {
+                "name": "Lunges",
+                "sets": [
+                  {
+                    "reps": 11,
+                    "weight": 40
+                  },
+                  {
+                    "reps": 11,
+                    "weight": 45
+                  },
+                  {
+                    "reps": 11,
+                    "weight": 45
+                  }
+                ]
+              },
+              {
+                "name": "Leg Press",
+                "sets": [
+                  {
+                    "reps": 12,
+                    "weight": 120
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 130
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 120
+                  },
+                  {
+                    "reps": 12,
+                    "weight": 1
+                  }
+                ]
+              }
+            ],
+            "date": "2023-11-19"
+          }
+        ]
+      }
+    ]
+  }

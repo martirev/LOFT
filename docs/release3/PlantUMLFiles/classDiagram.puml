@@ -1,0 +1,53 @@
+@startuml filehandlingClassDiagram
+
+package filehandling {
+
+    class DirectLoftAccess {
+        - {static} fileFolderLocation: String
+        - {static} fileLocation: String
+
+        + {static} setFileLocation(String fileLocation)
+        + {static} getFileLocation(): String
+        - {static} registerUserGetUsers(User user): List<User>
+        - {static} getUsers(): List<User>
+        - {static} getUser(User user, List<User> users): User
+        - {static} getUser(String username, String password, List<User> users): User
+        - {static} writeToFile(List<User> newUsers): boolean
+    }
+
+    interface LoftAccess {
+        + registerUser(User user): boolean
+        + writeWorkoutToUser(Workout workout, User user): boolean
+        + getUser(String username, String password): User
+        + usernameExists(String username): boolean
+        + updateUserInfo(User newUser, User oldUser); boolean
+    }
+
+    class RemoteLoftAccess {
+        - endpointBaseUri: URI
+        - {static} APPLICATION_JSON: String
+        - {static} APPLICATION_FORM_URLENCODED:String
+        - {static} ACCEPT_HEADER: String
+        - {static} CONTENT_TYPE_HEADER: String
+        - {static} gson: GSON
+
+        + RemoteLoftAccess(URI endpointBaseUri)
+        + getUrl(): String
+        + {static} serverAlive(int port): boolean
+        + {static} serverAlive(URI uri): boolean
+        ~ {static} uriParam(String s): String
+        ~ {static} formUrlEncode(String... params): String
+        ~ {static} getUriWithParams(URI endpoint, String... params): URI
+        ~ {static} paramifyUser(URI endpoint, User user): URI
+    }
+
+    class UsersHolder {
+        - users: List<User>
+        + UsersHolder(List<User> users)
+        + getUsers(): List<User>
+    }
+
+    DirectLoftAccess ..|> LoftAccess
+    RemoteLoftAccess ..|> LoftAccess
+}
+@enduml
