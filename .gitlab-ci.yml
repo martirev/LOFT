@@ -8,16 +8,17 @@ variables:
 # Function to get the percentage of code coverage for the "current module" (i.e. the module in pwd at the time of calling)
 .get_percentage:
   script:
-  - missed_hit=$(cat target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*/>' | grep -o [0-9]*)
-  - missed=$(echo ${missed_hit} | grep -o "[0-9]* ")
-  - hit=$(echo ${missed_hit} | grep -o " [0-9]*")
-  - percentage=$(awk -v hit="${hit}" -v missed="${missed}" 'BEGIN { print  100 * hit / (hit + missed) }')
+    - missed_hit=$(cat target/site/jacoco/jacoco.xml | sed 's/.*<\/package>//;' | grep -o 'INSTRUCTION.*/>' | grep -o [0-9]*)
+    - missed=$(echo ${missed_hit} | grep -o "[0-9]* ")
+    - hit=$(echo ${missed_hit} | grep -o " [0-9]*")
+    - percentage=$(awk -v hit="${hit}" -v missed="${missed}" 'BEGIN { print  100 * hit / (hit + missed) }')
 
 stages:
   - test
   - coverage
   - build
   - validate
+  - deploy
 
 cache:
   paths:
@@ -33,10 +34,10 @@ test:
     - mvn jacoco:report
   artifacts:
     paths:
-      - loft/core/target/site/jacoco/jacoco.xml
-      - loft/filehandling/target/site/jacoco/jacoco.xml
-      - loft/ui/target/site/jacoco/jacoco.xml
-      - loft/springboot/restserver/target/site/jacoco/jacoco.xml
+      - loft/core/target/site/jacoco/
+      - loft/filehandling/target/site/jacoco/
+      - loft/ui/target/site/jacoco/
+      - loft/springboot/restserver/target/site/jacoco/
     expire_in: 1 day
 
 build:
@@ -116,3 +117,21 @@ spotbugs:
   script:
     - mvn clean install $MAVEN_CLI_OPTS_NO_TESTS
     - mvn spotbugs:check
+
+pages:
+  stage: deploy
+  needs: ["test"]
+  dependencies:
+    - test
+  script:
+    - mkdir -p public/$CI_COMMIT_REF_NAME
+    - echo "<ul><li><a href="core/index.html">core</a></li><li><a href="filehandling/index.html">filehandling</a></li><li><a href="ui/index.html">ui</a></li><li><a href="restserver/index.html">restserver</a></li></ul>" > public/$CI_COMMIT_REF_NAME/index.html
+    - mv loft/core/target/site/jacoco/ public/$CI_COMMIT_REF_NAME/core/
+    - mv loft/filehandling/target/site/jacoco/ public/$CI_COMMIT_REF_NAME/filehandling/
+    - mv loft/ui/target/site/jacoco/ public/$CI_COMMIT_REF_NAME/ui/
+    - mv loft/springboot/restserver/target/site/jacoco/ public/$CI_COMMIT_REF_NAME/restserver/
+  artifacts:
+    name: "$CI_COMMIT_REF_NAME"
+    paths:
+      - public/
+    expire_in: 5 days
