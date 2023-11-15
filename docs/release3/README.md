@@ -63,7 +63,7 @@ We have made it possible for users to easily connect to a server and choose whic
 
 ## Architecture
 
-While maintaining a modular template, a new module, [springboot/restserver](../../loft/springboot/restserver/), was introduced. This module adds a REST API and a rest server to the application. Explore the entire application architecture in the [Package Diagram](./PlantUMLFiles/packageDiagram.puml), user interaction with the client in the [Sequence Diagram](./PlantUMLFiles/sequenceDiagram.puml), and a snapshot of our core logic in the [Class Diagram](./PlantUMLFiles/classDiagram.puml) :
+While maintaining a modular template, a new module, [springboot/restserver](../../loft/springboot/restserver/), was introduced. This module adds a REST API and a rest server to the application. Explore the entire application architecture in the [Package Diagram](./PlantUMLFiles/packageDiagram.puml), user interaction with the client in the [Sequence Diagram](./PlantUMLFiles/sequenceDiagram.puml), and a snapshot of our core logic in the [Class Diagram](./PlantUMLFiles/classDiagram.puml):
 
 <table>
     <tr>
