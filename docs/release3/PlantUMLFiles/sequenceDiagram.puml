@@ -1,0 +1,28 @@
+@startuml sequenceDiagram
+
+actor User
+participant ui.controllers.LoginScreenController as LoginScreenController
+participant filehandling.RemoteLoftAccess as RemoteLoftAccess
+participant springboot.restserver.LoftController as LoftController
+participant filehandling.DirectLoftAccess as DirectLoftAccess
+database userInfo.json as json
+
+User -> LoginScreenController : User clicks the API checkbox and types \nin url = http://localhost:8080/loft/ and clicks \nthe "connect" button
+LoginScreenController -> RemoteLoftAccess: loftAccess.serverAlive(url)
+RemoteLoftAccess -> LoftController : GET /loft/
+LoftController --> RemoteLoftAccess : "200 OK true"
+RemoteLoftAccess --> LoginScreenController : true
+LoginScreenController --> User : "Connected"
+
+User -> LoginScreenController : User writes credentials and clicks on \n"login" button
+LoginScreenController -> RemoteLoftAccess : loftAccess.getUser(username, password)
+RemoteLoftAccess -> LoftController : GET /loft/users/<username>\n?password=<password>
+LoftController -> DirectLoftAccess : loftAccess.getUser(username, password)
+DirectLoftAccess -> json : Files.readAllBytes(fileLocation)
+json --> DirectLoftAccess : String
+DirectLoftAccess --> LoftController : User-object
+LoftController --> RemoteLoftAccess : "200 OK User-object"
+RemoteLoftAccess --> LoginScreenController : User-object
+LoginScreenController --> User : *Redirected to HomeScreen*
+
+@enduml

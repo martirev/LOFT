@@ -1,0 +1,47 @@
+@startuml packageDiagram
+
+component ui {
+    package loft.ui
+    package loft.ui.controllers
+}
+
+component core {
+    package loft.core
+}
+
+component "springboot/restserver" as springboot.restserver {
+    package loft.springboot.restserver
+}
+
+component "spring boot" as springboot {
+
+}
+
+component filehandling {
+    package loft.filehandling
+}
+
+component Gson {
+
+}
+
+component javafx {
+    component fxml
+    component controls
+}
+
+ui ..> fxml
+ui ..> controls
+loft.ui .right.> loft.ui.controllers
+loft.ui.controllers .right.> loft.core
+loft.ui.controllers .right.> loft.filehandling
+
+loft.filehandling .right.> loft.core
+
+filehandling ..> Gson
+
+springboot.restserver ..> springboot
+loft.springboot.restserver .up.> loft.core
+loft.springboot.restserver .up.> loft.filehandling
+
+@enduml
