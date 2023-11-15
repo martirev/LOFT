@@ -36,7 +36,7 @@ The Progressscreen underwent a comprehensive redesign with the primary objective
 
 ## New content
 
-Additionally, we added the final component of the app, the HighscoreScreen. This is a space where users can review their statistics for every exercise they have ever done. We included this feature because many people who work out like to keep track of their records and achievements. 
+Additionally, we added the final component of the app, the HighscoreScreen. This is a space where users can review their statistics for every exercise they have ever done. We included this feature because many people who work out like to keep track of their records and achievements.
 
 <table>
     <tr>
@@ -63,12 +63,12 @@ We have made it possible for users to easily connect to a server and choose whic
 
 ## Architecture
 
-While maintaining a modular template, a new module, [springboot/restserver](../../loft/springboot/restserver/), was introduced. This module adds a REST API and a rest server to the application. Explore the entire application architecture in the [Package Diagram](./PlantUMLFiles/packageDiagram.puml), user interaction with the client in the [Sequence Diagram](./PlantUMLFiles/sequenceDiagram.puml), and a snapshot of our core logic in the [Class Diagram](./PlantUMLFiles/classDiagram.puml) : 
+While maintaining a modular template, a new module, [springboot/restserver](../../loft/springboot/restserver/), was introduced. This module adds a REST API and a rest server to the application. Explore the entire application architecture in the [Package Diagram](./PlantUMLFiles/packageDiagram.puml), user interaction with the client in the [Sequence Diagram](./PlantUMLFiles/sequenceDiagram.puml), and a snapshot of our core logic in the [Class Diagram](./PlantUMLFiles/classDiagram.puml) :
 
 <table>
     <tr>
         <td style="text-align:center;"><a href="./PlantUMLFiles/packageDiagram.puml"><img src="https://www.plantuml.com/plantuml/png/VP5XRiCW38N_SmhK0x0RJFstSx3KITaS71bJLPfszq4MYT2woQ_elO_tm3udyInvHZFGl524A3O7-sDi-HO_VFi9BD8eBWTDSmD5OK84JkRNx586Oj1ogjwJfxHmYDCdaRmn94d0D-2JzSasnpL7IrL1jSPMw26y9FRi612kFbwm05hTtkzFVYIAJt5V_kR7-nQqQxdF-21jurndMVRWtFjARV_DNczHHGxJLOgZxKFHse6sZ2DCUQvvahHGqmF5gvCnHjzezPlpt_22p4lNSuog3pX3lEGP_m00" alt="Package diagram" style="width:800px;"></a></td>
-        <td style="text-align:center;"><a href="./PlantUMLFiles/packageDiagram.puml"><img src="http://www.plantuml.com/plantuml/png/bLNHRfim57tFL_YHA5a-e9kgPWbjCsK1KQ9gJv475seLR6IRPbENVVik3cqSS5760nRsESVNn_TURfIcKjTbCQfeyanp81ahu8doj60y9w-Z4S4dAQXIPCaa97ejCZrF4b0ALqdxV2AlAAHPSZ3yMr6a8DSYmId1hyY3bgZs4Rg7UmTEJa05-jR2UaVe6N_iukKTtdWe6WavKnhaLe6y0zqCoclUfCONKjUu_AMPk7RHypVAfSYJzjGYc0c56itN0BlrmC0vBM5AsecAAhKNClqlqRra6cBHcELPD0xxRSlyAKG1b1louNX9Z6kG6Ks0EDDYSkQexQGjra9D08z2FejQny8GsY-oFuvJCgnmgIzT5oRlKFyNHgkw0ixDwYgb6XgT5S_4yMojMMsSM0JDEFvyxfnTKX6KGiC79GKyhGGw_9Kgs4g6GKShrytDmt2zMipZLR3PVNi8DbQ63s9lW-ZxRXkj_SqYMFhBgm7MOk67yUxUdo_zQ4X-4MnYVnFluX-XVm4yLqtLts7CLittJF7mt5qpnfrhbuLTsQxs8Lz0pWls0Xwga4f8RL_h8CC4K4lc8Fmz4H0GKadBj-nHLa1zT2PaYL7xF14fj9JPR4QgHcAOQixB7fb-ClkT-pCb3Yq4k8JCEij-cwAnHUn2C-nUvXg0kZTztavQmr7EzZUnELwlCrauTn-rOkZ_YcQpFzTM3p8WEu-SeCFe1azSbyK_" alt="Class diagram" style="width:800px;" /></a></td>    
+        <td style="text-align:center;"><a href="./PlantUMLFiles/packageDiagram.puml"><img src="http://www.plantuml.com/plantuml/png/bLNHRfim57tFL_YHA5a-e9kgPWbjCsK1KQ9gJv475seLR6IRPbENVVik3cqSS5760nRsESVNn_TURfIcKjTbCQfeyanp81ahu8doj60y9w-Z4S4dAQXIPCaa97ejCZrF4b0ALqdxV2AlAAHPSZ3yMr6a8DSYmId1hyY3bgZs4Rg7UmTEJa05-jR2UaVe6N_iukKTtdWe6WavKnhaLe6y0zqCoclUfCONKjUu_AMPk7RHypVAfSYJzjGYc0c56itN0BlrmC0vBM5AsecAAhKNClqlqRra6cBHcELPD0xxRSlyAKG1b1louNX9Z6kG6Ks0EDDYSkQexQGjra9D08z2FejQny8GsY-oFuvJCgnmgIzT5oRlKFyNHgkw0ixDwYgb6XgT5S_4yMojMMsSM0JDEFvyxfnTKX6KGiC79GKyhGGw_9Kgs4g6GKShrytDmt2zMipZLR3PVNi8DbQ63s9lW-ZxRXkj_SqYMFhBgm7MOk67yUxUdo_zQ4X-4MnYVnFluX-XVm4yLqtLts7CLittJF7mt5qpnfrhbuLTsQxs8Lz0pWls0Xwga4f8RL_h8CC4K4lc8Fmz4H0GKadBj-nHLa1zT2PaYL7xF14fj9JPR4QgHcAOQixB7fb-ClkT-pCb3Yq4k8JCEij-cwAnHUn2C-nUvXg0kZTztavQmr7EzZUnELwlCrauTn-rOkZ_YcQpFzTM3p8WEu-SeCFe1azSbyK_" alt="Class diagram" style="width:800px;" /></a></td>
     </tr>
     <tr>
     <td><em>Package diagram</em></td>
@@ -113,9 +113,13 @@ To be able to run the UI tests headlessly, we had to create a new Docker image w
 
 ## Example Data
 
-In previous releases, we have included an example data file for demonstrating data storage and/or testing purposes. Upon the initial use of the application, no data is stored. 
+In previous releases, we have included an example data file for demonstrating data storage and/or testing purposes. Upon the initial use of the application, no data is stored.
 
-Similar to previous releases, to use example data in this release, move the [example data](./userdata.json) to the "user.home" location. On Windows, this location is typically in the "C:\Users\<username>" folder, and on macOS, it is usually "/Users/<username>". This example data file is the most extensive and comprehensive compared to those in previous releases. The password for the user **RunarSM** is **Runar123** and for **MartinR** the password is **Martin123**. 
+Similar to previous releases, to use example data in this release, move the [example data](./userdata.json) to the "user.home" location. On Windows, this location is typically in the "C:\Users\<username>" folder, and on macOS, it is usually "/Users/<username>". This example data file is the most extensive and comprehensive compared to those in previous releases. The password for the user **RunarSM** is **Runar123** and for **MartinR** the password is **Martin123**.
+
+## Storage method
+
+We chose implicit saving because it makes for a natural user experience. Implicit saving automatically preserves user data without requiring explicit user action, ensuring an easy and uninterrupted workflow. When the information is saved, the user does not have to specify where the data is stored, as this happens automatically. This enhances usability, reduces the risk of data loss, and makes the application easier for the user to use.
 
 ## Other Information
 
