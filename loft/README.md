@@ -180,13 +180,13 @@ As a user, I want to view a highscore list because it motivates me to keep worki
 
 ## Changing user information (US-4):
 
-I desire the ability to modify my user information. By allowing me to edit user information, I have the opportunity to update the email if I wish to link the account to another one. I also want to have the option to change the username if I am not satisfied with it, and to switch passwords for security reasons, for example.
+As a user who values privacy and security, I want the ability to update my account information. This includes the option to change my email address, update my username, and modify my password. This functionality gives me control over my account and ensures that my information is accurate and secure.
 
 ### Important functionalities:
 
 - Updating user information.
 - Saving the changes.
-- Log out of the application.
+- Logging out of the application.
   
 ### Important information to view:
 
