@@ -71,12 +71,18 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
 
     @Test
     public void testPasswordsHalfUpdated() {
-        lookup("#password1").queryTextInputControl().setText("test");
+        Platform.runLater(() -> {
+            lookup("#password1").queryTextInputControl().setText("test");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("Save changes");
         Text errorMessage = lookup("#errorMessage").queryText();
         assertEquals(errorMessage.getText(), "Please fill out all fields");
-        lookup("#password1").queryTextInputControl().setText("");
-        lookup("#password2").queryTextInputControl().setText("test");
+        Platform.runLater(() -> {
+            lookup("#password1").queryTextInputControl().setText("");
+            lookup("#password2").queryTextInputControl().setText("test");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("Save changes");
         Text errorMessage2 = lookup("#errorMessage").queryText();
         assertEquals(errorMessage2.getText(), "Please fill out all fields");
@@ -86,12 +92,15 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
     public void testAlreadyUsedUsername() {
         User user2 = new User("test1", "tester2", "testPerson", "testPerson2@gmail.com");
         loftAccess.registerUser(user2);
-        lookup("#name").queryTextInputControl().setText("Test Person");
-        lookup("#username").queryTextInputControl().setText("tester2");
-        lookup("#password0").queryTextInputControl().setText("test123");
-        lookup("#password1").queryTextInputControl().setText("test123");
-        lookup("#password2").queryTextInputControl().setText("test123");
-        lookup("#email").queryTextInputControl().setText("testPerson@gmail.com");
+        Platform.runLater(() -> {
+            lookup("#name").queryTextInputControl().setText("Test Person");
+            lookup("#username").queryTextInputControl().setText("tester2");
+            lookup("#password0").queryTextInputControl().setText("test123");
+            lookup("#password1").queryTextInputControl().setText("test123");
+            lookup("#password2").queryTextInputControl().setText("test123");
+            lookup("#email").queryTextInputControl().setText("testPerson@gmail.com");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("Save changes");
         Text errorMessage = lookup("#errorMessage").queryText();
         assertEquals(errorMessage.getText(), "Username is taken");
@@ -100,8 +109,11 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
     @Test
     public void testPasswordDontMatch() {
         fillFields("test");
-        lookup("#password1").queryTextInputControl().setText("test123");
-        lookup("#password2").queryTextInputControl().setText("test321");
+        Platform.runLater(() -> {
+            lookup("#password1").queryTextInputControl().setText("test123");
+            lookup("#password2").queryTextInputControl().setText("test321");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("Save changes");
         Text errorMessage = lookup("#errorMessage").queryText();
         assertEquals(errorMessage.getText(), "Passwords do not match");
@@ -109,10 +121,13 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
 
     @Test
     public void testChangingInfoWithoutPassword() {
-        lookup("#name").queryTextInputControl().setText("Joe Hunter");
-        lookup("#username").queryTextInputControl().setText("JoeHunter");
-        lookup("#email").queryTextInputControl().setText("hunter@gmail.com");
-        lookup("#password0").queryTextInputControl().setText("test123");
+        Platform.runLater(() -> {
+            lookup("#name").queryTextInputControl().setText("Joe Hunter");
+            lookup("#username").queryTextInputControl().setText("JoeHunter");
+            lookup("#email").queryTextInputControl().setText("hunter@gmail.com");
+            lookup("#password0").queryTextInputControl().setText("test123");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("Save changes");
         DirectLoftAccess loftAccess = new DirectLoftAccess();
         User oldUser = loftAccess.getUser("tester", "test123");
@@ -186,7 +201,10 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
 
     @Test
     public void testReturnWithoutSavingChanges() {
-        lookup("#password1").queryTextInputControl().setText("test123");
+        Platform.runLater(() -> {
+            lookup("#password1").queryTextInputControl().setText("test123");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("Return");
         Text errorMessage = lookup("#errorMessage").queryText();
         assertEquals(errorMessage.getText(), "Save changes before returning");
@@ -208,12 +226,15 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
 
     @Test
     public void testSaveChanges() {
-        lookup("#name").queryTextInputControl().setText("John Doe");
-        lookup("#username").queryTextInputControl().setText("JohnDoe");
-        lookup("#password0").queryTextInputControl().setText("test123");
-        lookup("#password1").queryTextInputControl().setText("JohnDoe1");
-        lookup("#password2").queryTextInputControl().setText("JohnDoe1");
-        lookup("#email").queryTextInputControl().setText("johnDoe@gmail.com");
+        Platform.runLater(() -> {
+            lookup("#name").queryTextInputControl().setText("John Doe");
+            lookup("#username").queryTextInputControl().setText("JohnDoe");
+            lookup("#password0").queryTextInputControl().setText("test123");
+            lookup("#password1").queryTextInputControl().setText("JohnDoe1");
+            lookup("#password2").queryTextInputControl().setText("JohnDoe1");
+            lookup("#email").queryTextInputControl().setText("johnDoe@gmail.com");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("Save changes");
 
         DirectLoftAccess loftAccess = new DirectLoftAccess();
@@ -228,9 +249,12 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
 
     @Test
     public void testEmptyPassword() {
-        lookup("#password0").queryTextInputControl().setText("test123");
-        lookup("#password1").queryTextInputControl().setText("");
-        lookup("#password2").queryTextInputControl().setText("JohnDoe1");
+        Platform.runLater(() -> {
+            lookup("#password0").queryTextInputControl().setText("test123");
+            lookup("#password1").queryTextInputControl().setText("");
+            lookup("#password2").queryTextInputControl().setText("JohnDoe1");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
         clickOn("Return");
         Text errorMessage = lookup("#errorMessage").queryText();
         assertEquals(errorMessage.getText(), "Save changes before returning");
@@ -313,7 +337,10 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
 
     private void fillFields(String text) {
         for (String field : fields) {
-            lookup(field).queryTextInputControl().setText(text);
+            Platform.runLater(() -> {
+                lookup(field).queryTextInputControl().setText(text);
+            });
+            WaitForAsyncUtils.waitForFxEvents();
         }
     }
 
