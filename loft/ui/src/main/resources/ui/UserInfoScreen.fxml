@@ -15,7 +15,7 @@
 <AnchorPane fx:id="baseAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="Background" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Region layoutX="683.0" prefHeight="768.0" prefWidth="683.0" styleClass="Background2" />
-      <Text layoutX="683.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="My Profile" textAlignment="CENTER" wrappingWidth="683.0">
+      <Text layoutX="683.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-id" text="My Profile" textAlignment="CENTER" wrappingWidth="683.0">
          <font>
             <Font name="Roboto" size="50.0" />
          </font>
@@ -46,11 +46,7 @@
             <Font name="Roboto" size="18.0" />
          </font>
       </Button>
-      <Text fx:id="errorMessage" fill="RED" layoutX="912.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="225.0">
-         <font>
-            <Font name="Roboto" size="14.0" />
-         </font>
-      </Text>
+      <Text fx:id="errorMessage" fill="RED" layoutX="928.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="200.0" />
       <Line endX="683.0" layoutY="550.0" strokeWidth="2.0" />
       <Line endX="178.0" endY="-26.0" layoutX="160.0" layoutY="470.0" startX="143.0" startY="80.0" strokeLineCap="ROUND" strokeWidth="3.0" />
       <Line endX="182.0" endY="-40.0" layoutX="133.0" layoutY="470.0" startX="143.0" startY="80.0" strokeLineCap="ROUND" strokeWidth="3.0" />

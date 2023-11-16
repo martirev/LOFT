@@ -67,7 +67,7 @@
                 <NumberAxis side="LEFT" />
             </yAxis>
         </LineChart>
-      <TextArea fx:id="exerciseListView" editable="false" layoutX="1220.0" layoutY="488.0" prefHeight="50.0" prefWidth="120.0" />
+      <TextArea fx:id="exerciseListView" editable="false" layoutX="1220.0" layoutY="488.0" prefHeight="60.0" prefWidth="134.0" />
       <TextArea fx:id="totalWeightListView" editable="false" layoutX="90.0" layoutY="250.0" prefHeight="200.0" prefWidth="400.0" styleClass="ListViewComp" />
     </children>
 </AnchorPane>
