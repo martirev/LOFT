@@ -122,14 +122,13 @@ public class UserInfoScreenController extends Animation {
 
         User oldUser = getUser();
         User newUser = new User(name, username, password1, email);
-        getUser().getWorkouts().stream().forEach(workout -> newUser.addWorkout(workout));
 
         if (!loftAccess.updateUserInfo(oldUser, newUser)) {
             errorMessage.setText("Username is taken");
             return;
         }
 
-        setUser(newUser);
+        setUser(null);
         stopAllAnimations();
         insertPane("LoginScreen.fxml");
     }
