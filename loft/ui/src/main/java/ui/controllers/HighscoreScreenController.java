@@ -2,7 +2,6 @@ package ui.controllers;
 
 import core.Exercise;
 import core.User;
-import core.Workout;
 import core.WorkoutSorting;
 import java.net.URL;
 import java.util.List;
@@ -58,14 +57,9 @@ public class HighscoreScreenController extends SceneSwitcher {
      * Checks if the exercise name is already in the list view to avoid duplicates.
      */
     private void loadExerciseHistory() {
-        List<Workout> workouts = workoutSorting.getMostRecentWorkouts();
-        for (Workout workout : workouts) {
-            for (Exercise exercise : workout.getExercises()) {
-                if (!exerciseListView.getItems().stream()
-                        .anyMatch(e -> e.getName().equals(exercise.getName()))) {
-                    exerciseListView.getItems().add(exercise);
-                }
-            }
+        List<Exercise> exerciseNames = workoutSorting.getAllUniqueExerciseNames();
+        for (Exercise exercise : exerciseNames) {
+            exerciseListView.getItems().add(exercise);
         }
     }
 
