@@ -26,7 +26,7 @@ public abstract class SceneSwitcher implements Initializable {
 
     /**
      * The SceneSwitcher controller. For example JournalScreenController. This is
-     * used to link fxml files to their correct
+     * used to link fxml files to their correct controller.
      */
     protected SceneSwitcher controller;
 

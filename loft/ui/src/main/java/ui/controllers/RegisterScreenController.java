@@ -62,7 +62,7 @@ public class RegisterScreenController extends Animation {
         }
 
         if (!password1.matches("^[a-zA-Z0-9-_@#!]+$")) {
-            errorMessage.setText("Pasword can only contain letters, numbers, "
+            errorMessage.setText("Password can only contain letters, numbers, "
                     + "and the symbols _, @, # and !");
             return;
         }

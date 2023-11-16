@@ -156,7 +156,7 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
         writeSeparator("\t", "T", "test", "test123", "?æøå", "?æøå", "t@t.no");
         clickOn("Save changes");
         Text errorMessage = lookup("#errorMessage").query();
-        assertEquals(errorMessage.getText(), "Pasword can only contain letters,"
+        assertEquals(errorMessage.getText(), "Password can only contain letters,"
                 + " numbers, and the symbols _, @, # and !");
     }
 
@@ -224,6 +224,60 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
         assertEquals("JohnDoe", newUser.getUsername());
         assertEquals(User.hash("JohnDoe1"), newUser.getPasswordHash());
         assertEquals("johnDoe@gmail.com", newUser.getEmail());
+    }
+
+    @Test
+    public void testEmptyPassword() {
+        lookup("#password0").queryTextInputControl().setText("test123");
+        lookup("#password1").queryTextInputControl().setText("");
+        lookup("#password2").queryTextInputControl().setText("JohnDoe1");
+        clickOn("Return");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Save changes before returning");
+    }
+
+    @Test
+    public void testReturnEmptyUsername() {
+        Platform.runLater(() -> {
+            lookup("#username").queryTextInputControl().setText("");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn("Return");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Save changes before returning");
+    }
+
+    @Test
+    public void testReturnEmptyEmail() {
+        Platform.runLater(() -> {
+            lookup("#email").queryTextInputControl().setText("");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn("Return");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Save changes before returning");
+    }
+
+    @Test
+    public void testSaveEmptyUsername() {
+        Platform.runLater(() -> {
+            lookup("#username").queryTextInputControl().setText("");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn("Save changes");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Please fill out all fields");
+    }
+
+    @Test
+    public void testSaveEmptyEmail() {
+        Platform.runLater(() -> {
+            lookup("#email").queryTextInputControl().setText("");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn("Save changes");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Please fill out all fields");
     }
 
     private static void deleteTestfile() {
