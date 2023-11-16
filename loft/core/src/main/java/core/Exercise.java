@@ -6,11 +6,18 @@ import java.util.List;
 
 /**
  * The Exercise class represents a single exercise in a workout routine. It
- * contains a name and a list of sets. The class provides methods to add sets to
- * the exercise, get the name of the exercise, get all sets in the exercise,
- * calculate the total weight of all sets in the exercise, get the highest
- * weight in the exercise, check if two exercises are equal, and a toString
- * method that returns the name of the exercise.
+ * contains two constructors; one that only lets you specify the name of the
+ * exercise and one that lets you specify the name and add an arbitrary number
+ * of sets to the exercise.
+ * <p>
+ * The class contains two fields, one that holds a name and a list of sets.
+ * The class provides methods to add sets to the exercise, get the name of the
+ * exercise, formats the name, get all sets in the exercise, calculate the total 
+ * weight of all sets in the exercise, get the highest weight in the exercise,
+ * check if two exercises are equal and a methods that returns the exercise
+ * hashcode witch is used in the equals method. Also there are a toString method
+ * that returns the name of the exercise.
+ * </p>
  */
 public class Exercise {
 

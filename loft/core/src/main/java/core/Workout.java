@@ -5,8 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The Workout class represents a workout consisting of a list of exercises and
- * a date.
+ * The Workout class represents a workout inside a user. It contains two constructors;
+ * one that sets the date to today and one that lets you specify the date.
+ * <p>
+ * The class contains the fields, a list of exercises and a date. The class provides methods to add
+ * exercises to the workout, getters for the exercises, the total weight of all exercises
+ * in the workout, the date of the workout, the total number of sets in the workout and
+ * there are a toString method that returns the name of the exercise. Also there are an
+ * equals method to check if two workouts are equal and a methods that returns the workouts
+ * hashcode which is used in the equals method.
+ * </p>
  */
 public class Workout {
 

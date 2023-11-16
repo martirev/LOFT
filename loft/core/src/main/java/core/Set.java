@@ -1,8 +1,15 @@
 package core;
 
 /**
- * The Set class represents a set of weightlifting exercise, consisting of a
- * number of repetitions and a weight for the set.
+ * The Set class represents one set inside an exercise. It contains a constructor
+ * that allows you to specify the number of repetitions and weight.
+ * <p>
+ * The class contains two fields: the number of repetitions and the weight during
+ * the repetition. The class provides getters for the number of repetitions
+ * and the weight of the set. Additionally, there is an equals method to check if two
+ * sets are equal, and a method that returns the set's hashcode, which is used
+ * in the equals method.
+ * </p>
  */
 public class Set {
 
