@@ -97,6 +97,10 @@ public class DirectLoftAccess implements LoftAccess {
             users = registerUserGetUsers(user);
             tmpUser = getUser(user, users);
         }
+        if (tmpUser == null) {
+            // Error in writing to file, no workout is written to user
+            return false;
+        }
         tmpUser.addWorkout(workout);
 
         return writeToFile(users);
