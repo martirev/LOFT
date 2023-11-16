@@ -6,9 +6,15 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 /**
- * The User class represents a user of the application. For the first version of
- * the application we will only have one user. This is why we have a dummy name
- * for the user. The idea is to have multiple users in the future.
+ * The User class represents a user in the application. It contains one constructor
+ * that lets you specify the name, username, password and email.
+ * <p>
+ * The class contains the fields; name, username, password, email and a
+ * list of workouts. The class provides getters and setters for name, username,
+ * password and email. Other methods gives the possibilities to add workouts, get
+ * workouts, get the workouts list size, an equals method to check if two users are
+ * equal and a methods that returns the users hashcode which is used in the equals method.
+ * </p>
  */
 public class User {
     private String name;
@@ -187,6 +193,11 @@ public class User {
         return new String(hex);
     }
 
+    /**
+     * A method to get the hashcode of the user.
+     *
+     * @return the hashcode of the user
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -196,6 +207,12 @@ public class User {
         return result;
     }
 
+    /**
+     * A method to check if two users are equal.
+     *
+     * @param obj the object to compare to
+     * @return boolean true if the users are equal, false if not
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -216,5 +233,4 @@ public class User {
         }
         return true;
     }
-
 }

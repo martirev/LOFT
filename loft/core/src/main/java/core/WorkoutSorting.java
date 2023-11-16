@@ -12,10 +12,20 @@ import java.util.stream.Collectors;
 
 /**
  * The WorkoutSorting class provides methods to sort and manipulate a list of
- * workouts. It includes methods to sort workouts by date, get a HashMap of all
+ * workouts. It contaions one constructor that lets you specify a list of
+ * workouts.
+ * <p>
+ * The class contains two fields, one list of workouts and a HashMap of all
+ * exercises with key being the name of the exercise and value being a list of
+ * all exercises with that name.
+ * </p>
+ * <p>
+ * The class provides methods to sort workouts by date, get a HashMap of all
  * exercises with the same name, get a list of all exercises with the same name,
  * get the weight of the personal record (PR) in the workouts of an exercise
- * with a given name, and search for exercises with a given name.
+ * with a given name, and search for exercises with a given name, and more
+ * described below.
+ * </p>
  */
 public class WorkoutSorting {
 
