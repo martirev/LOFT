@@ -41,6 +41,10 @@ public class ProgressScreenController extends SceneSwitcher {
 
     private WorkoutSorting workoutSorting;
 
+    /**
+     * Method for initializing the Progress screen.
+     * The method populate the charts and loads the exercises 
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         User prev = getUser();
@@ -92,6 +96,9 @@ public class ProgressScreenController extends SceneSwitcher {
         exerciseListView.setText(sb.toString());
     }
 
+    /*
+     * Method which populate chart for choosen exercise
+     */
     private void populateExerciseChart(Exercise exercise) {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName(exercise.getName() + " personal records per day");
