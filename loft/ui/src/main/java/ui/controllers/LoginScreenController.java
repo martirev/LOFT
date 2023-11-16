@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
  * This class is the controller for the login screen of the application. It
  * handles user input for logging in and linkes to registering a new profile.
  */
-public class LoginScreenController extends Animation  {
+public class LoginScreenController extends Animation {
 
     @FXML
     private Text errorMessage;
@@ -46,8 +46,19 @@ public class LoginScreenController extends Animation  {
     @FXML
     private RadioButton directButton;
 
-   
-
+    /**
+     * Initializes the LoginScreenController by starting animations and setting up
+     * the UI based on whether the application is using local or remote data.
+     * If using local data, the UI is updated accordingly and the method returns.
+     * If using remote data, the UI is updated with the remote URL and connection
+     * status.
+     * If the remote server is not online, the UI is updated to indicate this.
+     *
+     * @param location  The location used to resolve relative paths for the root
+     *                  object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if
+     *                  the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         startAnimations();
@@ -76,6 +87,9 @@ public class LoginScreenController extends Animation  {
         insertPane("RegisterScreen.fxml");
     }
 
+    /**
+     *  Method for handling login request through checking if the user info is valid.
+     */
     @FXML
     private void handleLogin() {
         String username = usernameField.getText();
