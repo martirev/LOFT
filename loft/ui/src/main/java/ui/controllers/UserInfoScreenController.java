@@ -111,7 +111,7 @@ public class UserInfoScreenController extends Animation {
             return;
         }
         if (!password1.matches("^[a-zA-Z0-9-_@#!]+$")) {
-            errorMessage.setText("Pasword can only contain letters, numbers, "
+            errorMessage.setText("Password can only contain letters, numbers, "
                     + "and the symbols _, @, # and !");
             return;
         }
@@ -122,14 +122,13 @@ public class UserInfoScreenController extends Animation {
 
         User oldUser = getUser();
         User newUser = new User(name, username, password1, email);
-        getUser().getWorkouts().stream().forEach(workout -> newUser.addWorkout(workout));
 
         if (!loftAccess.updateUserInfo(oldUser, newUser)) {
             errorMessage.setText("Username is taken");
             return;
         }
 
-        setUser(newUser);
+        setUser(null);
         stopAllAnimations();
         insertPane("LoginScreen.fxml");
     }

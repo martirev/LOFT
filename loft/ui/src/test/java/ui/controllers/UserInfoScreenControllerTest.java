@@ -1,6 +1,7 @@
 package ui.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import core.User;
@@ -113,10 +114,14 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
         lookup("#email").queryTextInputControl().setText("hunter@gmail.com");
         lookup("#password0").queryTextInputControl().setText("test123");
         clickOn("Save changes");
-        assertEquals(SceneSwitcher.getUser().getPassword(), "test123");
-        assertEquals(SceneSwitcher.getUser().getName(), "Joe Hunter");
-        assertEquals(SceneSwitcher.getUser().getUsername(), "JoeHunter");
-        assertEquals(SceneSwitcher.getUser().getEmail(), "hunter@gmail.com");
+        DirectLoftAccess loftAccess = new DirectLoftAccess();
+        User oldUser = loftAccess.getUser("tester", "test123");
+        User newUser = loftAccess.getUser("JoeHunter", "test123");
+        assertNull(oldUser, "The old user should not exist");
+        assertEquals("Joe Hunter", newUser.getName());
+        assertEquals("JoeHunter", newUser.getUsername());
+        assertEquals(User.hash("test123"), newUser.getPasswordHash());
+        assertEquals("hunter@gmail.com", newUser.getEmail());
     }
 
     @Test
@@ -151,7 +156,7 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
         writeSeparator("\t", "T", "test", "test123", "?æøå", "?æøå", "t@t.no");
         clickOn("Save changes");
         Text errorMessage = lookup("#errorMessage").query();
-        assertEquals(errorMessage.getText(), "Pasword can only contain letters,"
+        assertEquals(errorMessage.getText(), "Password can only contain letters,"
                 + " numbers, and the symbols _, @, # and !");
     }
 
@@ -211,10 +216,68 @@ public class UserInfoScreenControllerTest extends ControllerTestBase {
         lookup("#email").queryTextInputControl().setText("johnDoe@gmail.com");
         clickOn("Save changes");
 
-        assertEquals("John Doe", SceneSwitcher.getUser().getName());
-        assertEquals("JohnDoe", SceneSwitcher.getUser().getUsername());
-        assertEquals("JohnDoe1", SceneSwitcher.getUser().getPassword());
-        assertEquals("johnDoe@gmail.com", SceneSwitcher.getUser().getEmail());
+        DirectLoftAccess loftAccess = new DirectLoftAccess();
+        User oldUser = loftAccess.getUser("tester", "test123");
+        User newUser = loftAccess.getUser("JohnDoe", "JohnDoe1");
+        assertNull(oldUser, "The old user should not exist");
+        assertEquals("John Doe", newUser.getName());
+        assertEquals("JohnDoe", newUser.getUsername());
+        assertEquals(User.hash("JohnDoe1"), newUser.getPasswordHash());
+        assertEquals("johnDoe@gmail.com", newUser.getEmail());
+    }
+
+    @Test
+    public void testEmptyPassword() {
+        lookup("#password0").queryTextInputControl().setText("test123");
+        lookup("#password1").queryTextInputControl().setText("");
+        lookup("#password2").queryTextInputControl().setText("JohnDoe1");
+        clickOn("Return");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Save changes before returning");
+    }
+
+    @Test
+    public void testReturnEmptyUsername() {
+        Platform.runLater(() -> {
+            lookup("#username").queryTextInputControl().setText("");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn("Return");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Save changes before returning");
+    }
+
+    @Test
+    public void testReturnEmptyEmail() {
+        Platform.runLater(() -> {
+            lookup("#email").queryTextInputControl().setText("");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn("Return");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Save changes before returning");
+    }
+
+    @Test
+    public void testSaveEmptyUsername() {
+        Platform.runLater(() -> {
+            lookup("#username").queryTextInputControl().setText("");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn("Save changes");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Please fill out all fields");
+    }
+
+    @Test
+    public void testSaveEmptyEmail() {
+        Platform.runLater(() -> {
+            lookup("#email").queryTextInputControl().setText("");
+        });
+        WaitForAsyncUtils.waitForFxEvents();
+        clickOn("Save changes");
+        Text errorMessage = lookup("#errorMessage").queryText();
+        assertEquals(errorMessage.getText(), "Please fill out all fields");
     }
 
     private static void deleteTestfile() {

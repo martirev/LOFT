@@ -128,7 +128,7 @@ We chose implicit saving because it makes for a natural user experience. Implici
 There are two other README files which describes the app more in depth.
 
 - [README.md](../../README.md) - This file contains information on the content, building, requirements and directory structure.
-- [gr2303/README.md](../../gr2303/README.md) - This file contains information on what the app is about and some key fetures it should offer. It also contains some user stories.
+- [gr2303/README.md](../../gr2303/README.md) - This file contains information on what the app is about and some key features it should offer. It also contains some user stories.
 
 This is the last release, and documentation for release one and two can be found in the two other folders [release1](../release1/) and [release2](../release2/) with diagrams and userData.json files.
 

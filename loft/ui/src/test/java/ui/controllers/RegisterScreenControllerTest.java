@@ -92,7 +92,7 @@ public class RegisterScreenControllerTest extends ControllerTestBase {
         clickRegister();
         Text errorMessage = lookup("#errorMessage").query();
         assertTrue(errorMessage.getText()
-                .equals("Pasword can only contain letters,"
+                .equals("Password can only contain letters,"
                         + " numbers, and the symbols _, @, # and !"));
     }
 
