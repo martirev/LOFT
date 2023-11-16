@@ -46,8 +46,8 @@ public class UserInfoScreenController extends Animation {
         email.setText(user.getEmail());
     }
 
-    /*
-     * Method for handling request from user to return to Homescreen
+    /**
+     * Method for handling request from user to return to Homescreen.
      */
     @FXML
     private void handleReturnPress() {
@@ -60,7 +60,7 @@ public class UserInfoScreenController extends Animation {
         insertPane("HomeScreen.fxml");
     }
 
-    /*
+    /**
      * Method for handling request for logging out of profile.
      */
     @FXML
@@ -152,9 +152,14 @@ public class UserInfoScreenController extends Animation {
         return false;
     }
 
-    /*
-     * Method for initializing the Userinfo screen by adding user information to the fields
-     * and starting the animation
+    /**
+     * Initializes the controller class.
+     * Populates the user information fields and starts the animations.
+     *
+     * @param location  The location used to resolve relative paths for the root
+     *                  object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if
+     *                  the root object was not localized.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

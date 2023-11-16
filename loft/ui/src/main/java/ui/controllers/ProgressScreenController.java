@@ -96,8 +96,10 @@ public class ProgressScreenController extends SceneSwitcher {
         exerciseListView.setText(sb.toString());
     }
 
-    /*
-     * Method which populate chart for choosen exercise
+    /**
+     * Populates the exercise chart with personal records per day for the given exercise.
+     *
+     * @param exercise the exercise to populate the chart with
      */
     private void populateExerciseChart(Exercise exercise) {
         XYChart.Series<String, Number> series = new XYChart.Series<>();

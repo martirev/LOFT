@@ -47,9 +47,17 @@ public class LoginScreenController extends Animation {
     private RadioButton directButton;
 
     /**
-     * Method for initializing the Login screen.
-     * It starts the animation and set up access configuration
-     * for server
+     * Initializes the LoginScreenController by starting animations and setting up
+     * the UI based on whether the application is using local or remote data.
+     * If using local data, the UI is updated accordingly and the method returns.
+     * If using remote data, the UI is updated with the remote URL and connection
+     * status.
+     * If the remote server is not online, the UI is updated to indicate this.
+     *
+     * @param location  The location used to resolve relative paths for the root
+     *                  object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if
+     *                  the root object was not localized.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

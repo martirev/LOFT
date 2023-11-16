@@ -13,7 +13,7 @@ import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 /**
- * Class for running animation on Login, Register and userInfo screen.
+ * Class for running animation on Login, Register and UserInfo screens.
  * The class has methods for animating the weightbar, weights and arms on the person
  * The class also contains methods for stopping the animations when leaving the screen
  */
@@ -61,7 +61,7 @@ public abstract class Animation extends SceneSwitcher {
     private Line lowerLeftLine2;
 
     /**
-    * Method initializing an aninmation, which moves the bar up and down indefinite.
+    * Method initializing an animation, which moves the bar up and down indefinite.
     *
     * @param bar the weight bar
     */
@@ -77,7 +77,7 @@ public abstract class Animation extends SceneSwitcher {
     }
 
     /**
-    * Method for animating the movements of the weights on the bar.  
+    * Method for starting animation of the weights on the bar.
     *
     * @param weight the weights on the bar
     */
@@ -93,7 +93,7 @@ public abstract class Animation extends SceneSwitcher {
     }
 
     /**
-     * Method for animating the movement of the arms during lifting.
+     * Method for starting animation of the arms during lifting.
      *
      * @param lowerLeft1  lower left arm top
      * @param lowerLeft2  lower left arm bottom
